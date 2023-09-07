@@ -1,12 +1,33 @@
+/* เปลี่ยนสีพื้นหลังของทุก cell ในปฏิทิน */
+.fc-daygrid-day {
+  background-color: #f4f4f4; /* หรือสีที่คุณต้องการ */
+}
+
+/* เปลี่ยนสีพื้นหลังของ header */
+.fc-header-toolbar {
+  background-color: #ffffff; /* หรือสีที่คุณต้องการ */
+}
+
+/* เปลี่ยนสีพื้นหลังของ event */
 .my-custom-event-class {
-  font-size: 14px;
+  background-color: #4caf50; /* หรือสีที่คุณต้องการ */
+}
+/* สถานะ: รอยืนยัน */
+.waiting-confirmation {
+  background-color: #fd7e14;
 }
 
-.fc-toolbar-title {
-  font-size: 24px;
+/* สถานะ: ยกเลิก */
+.cancelled {
+  background-color: red;
 }
 
-.fc-button {
-  font-size: 16px;
-  padding: 10px 20px;
+/* สถานะ: คอมเฟิม */
+.confirmed {
+  background-color: green;
+}
+
+/* สถานะ: มาตามนัด */
+.attended {
+  background-color: #3f51b5;
 }

@@ -6,7 +6,7 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  Button,
+  // Button,
   Menu,
   MenuItem,
   BottomNavigation,
@@ -68,21 +68,24 @@ export default function MenuList() {
             value="/dashboard"
           />
           <BottomNavigationAction
-            label="จองนัดหมาย"
+            label="นัดหมาย"
             icon={<EventNoteIcon />}
             component={Link}
             to="/appointments"
             value="/appointments"
           />
           <BottomNavigationAction
-            label="ประวัติการนัดหมาย"
+            label="ประวัตินัด"
             icon={<HistoryIcon />}
-            value="/history"
+            component={Link}
+            to="/bookinghistory"
+            value="/bookinghistory"
           />
           <BottomNavigationAction
             label="เพิ่มเติม"
             icon={<MoreVertIcon />}
             onClick={handleClickPopover}
+            component={Link}
           />
         </BottomNavigation>
       ) : (
@@ -95,7 +98,7 @@ export default function MenuList() {
               <Typography variant="h6" style={{ flexGrow: 1 }}>
                 Smart Appointments
               </Typography>
-              <Button color="inherit">Login</Button>
+              {/* <Button color="inherit">Login</Button> */}
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
@@ -103,12 +106,19 @@ export default function MenuList() {
               หน้าแรก
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/appointments">
-              จองนัดหมาย
+              นัดหมาย
             </MenuItem>
-            <MenuItem onClick={handleClose}>ประวัติการนัดหมาย</MenuItem>
-            <MenuItem onClick={handleClose}>ข้อมูลส่วนตัว</MenuItem>
-            <MenuItem onClick={handleClose}>ตั้งค่า</MenuItem>
-            <MenuItem onClick={handleClose}>ออกจากระบบ</MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
+              ประวัตินัดหมาย
+            </MenuItem>
+
+            <MenuItem onClick={handleClose} component={Link} to="/doctorList">
+              รายชื่อแพทย์
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/userprofile">
+              ข้อมูลส่วนตัว
+            </MenuItem>
+            <MenuItem onClick={hadleLogout}>ออกจากระบบ</MenuItem>
           </Menu>
         </>
       )}
@@ -126,11 +136,11 @@ export default function MenuList() {
           horizontal: "center",
         }}
       >
-        <MenuItem onClick={handleClosePopover} style={{ backgroundColor: "#fff" }}>
-          ข้อมูลส่วนตัว
+        <MenuItem style={{ backgroundColor: "#fff" }} component={Link} to="/doctorList">
+          รายชื่อแพทย์
         </MenuItem>
-        <MenuItem onClick={handleClosePopover} style={{ backgroundColor: "#fff" }}>
-          ตั้งค่า
+        <MenuItem component={Link} to="/userprofile" style={{ backgroundColor: "#fff" }}>
+          ข้อมูลส่วนตัว
         </MenuItem>
         <MenuItem onClick={hadleLogout} style={{ backgroundColor: "#fff" }}>
           ออกจากระบบ

@@ -19,7 +19,8 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 // Material Kit 2 React page layout routes
 import routes from "routes";
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/hospital.png";
+
 import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";

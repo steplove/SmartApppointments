@@ -33,7 +33,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import logo from "assets/images/logosmartApppointments.png"; // Adjust the path to your actual logo location
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/hospital.png";
 import Swal from "sweetalert2";
 function SignInBasic() {
   const handleSignInClick = () => {
@@ -48,7 +48,7 @@ function SignInBasic() {
     });
   };
   const handleSignUpClick = () => {
-    window.location.href = "/register";
+    window.location.href = "/agreement";
   };
   return (
     <>

@@ -11,15 +11,60 @@ import Typography from "@mui/material/Typography";
 import "./Calendar.css";
 function CalendarComponent() {
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const events = [
+    {
+      title: "นัด",
+      date: "2023-09-10",
+      description: "รอยืนยันการนัด",
+      location: "ที่ตั้งของคลินิก",
+      status: "waiting-confirmation",
+    },
+    {
+      title: "นัด",
+      date: "2023-09-11",
+      description: "ยกเลิกการนัด",
+      location: "ที่ตั้งของคลินิก",
+      status: "cancelled",
+    },
+    {
+      title: "นัด",
+      date: "2023-09-12",
+      description: "ยืนยันการนัด",
+      location: "ที่ตั้งของคลินิก",
+      status: "confirmed",
+    },
+    {
+      title: "นัด",
+      date: "2023-09-13",
+      description: "มาตามนัด",
+      location: "ที่ตั้งของคลินิก",
+      status: "attended",
+    },
+  ];
+  const eventClassNames = (eventInfo) => {
+    switch (eventInfo.event.extendedProps.status) {
+      case "waiting-confirmation":
+        return "waiting-confirmation";
+      case "cancelled":
+        return "cancelled";
+      case "confirmed":
+        return "confirmed";
+      case "attended":
+        return "attended";
+      default:
+        return "";
+    }
+  };
 
   return (
     <div style={{ maxWidth: "100%" }}>
       <FullCalendar
-        themeSystem="bootstrap"
-        contentHeight="auto"
-        eventClassNames="my-custom-event-class"
+        themeSystem="standard"
+        contentHeight="430px"
+        eventClassNames={eventClassNames}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
         initialView="dayGridMonth"
+        locale={"th"}
         headerToolbar={{
           left: "",
           center: "title",
@@ -28,15 +73,7 @@ function CalendarComponent() {
         eventClick={(info) => {
           setSelectedEvent(info.event);
         }}
-        events={[
-          {
-            title: "นัด",
-            date: "2023-09-10",
-            description: "รายละเอียดของการนัดหมาย",
-            location: "ที่ตั้งของคลินิก",
-          },
-          { title: "นัด", date: "2023-09-15" },
-        ]}
+        events={events}
       />
 
       {selectedEvent && (

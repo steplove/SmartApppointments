@@ -32,6 +32,10 @@ import MenuList from "pages/LandingPages/MenuLists";
 import Dashboard from "pages/LandingPages/Dashboard";
 import MainPage from "pages/MainPage";
 import Appointments from "pages/LandingPages/Appointments";
+import BookingHistory from "pages/LandingPages/BookingHistory";
+import UserProfile from "pages/LandingPages/UserProfile";
+import Author from "pages/LandingPages/Author";
+import DoctorList from "pages/LandingPages/DoctorList";
 // Material Kit 2 React routes
 import routes from "routes";
 
@@ -70,6 +74,10 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/mainPage" element={<MainPage />} />
         <Route path="/appointments" element={<Appointments />} />
+        <Route path="/bookinghistory" element={<BookingHistory />} />
+        <Route path="/userprofile" element={<UserProfile />} />
+        <Route path="/doctorList" element={<DoctorList />} />
+        <Route path="/author" element={<Author />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
       </Routes>
     </ThemeProvider>

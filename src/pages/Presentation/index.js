@@ -16,7 +16,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/hospital.png";
 import MKTypography from "components/MKTypography";
 function Presentation() {
   const handleLoginClick = () => {
@@ -27,20 +27,34 @@ function Presentation() {
     <>
       <DefaultNavbar routes={routes} sticky />
       <MKBox
-        position="fixed"
+        position="absolute"
         top={0}
-        right={0}
-        bottom={0}
         left={0}
+        zIndex={1}
+        width="100%"
+        minHeight="100vh"
         sx={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
           alignItems: "flex-end",
           overflowY: "auto",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            backgroundImage: `url(${bgImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.8, // คุณสามารถปรับค่าโปร่งแสงของรูปภาพที่นี่
+            filter: "blur(2px)", // คุณสามารถปรับค่าเบลอที่นี่
+            zIndex: -1,
+          },
         }}
       >
         <Container
@@ -49,13 +63,13 @@ function Presentation() {
             flexDirection: "column",
             justifyContent: "flex-end",
             height: {
-              xs: "calc(200vh - 56px)",
+              xs: "calc(115vh - 56px)",
               sm: "calc(100vh - 64px)",
               md: "calc(80vh - 64px)",
-              lg: "calc(70vh - 64px)",
+              lg: "calc(65vh - 64px)",
             },
             marginTop: {
-              xs: "calc(18vh - 56px)",
+              xs: "calc(25vh - 56px)",
               sm: "calc(30vh - 64px)",
             },
           }}
@@ -117,8 +131,8 @@ function Presentation() {
                 <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
                 <Typography variant="body1" paragraph>
                   เปิดบริการเฉพาะ ผู้ป่วยชำระเงิน ข้าราชการ/รัฐวิสาหกิจนำใบเสร็จไปเบิก
-                  ข้าราชการเบิกตรง ประกันสังคมมหาราชนครเชียงใหม่
-                  ประกันสุขภาพถ้วนหน้าโรงพยาบาลมหาราชนครเชียงใหม่
+                  ข้าราชการเบิกตรง ประกันสังคม เกษมราษฎร์ ศรีบุรินทร์
+                  ประกันสุขภาพถ้วนหน้าโรงพยาบาลมเกษมราษฎร์ ศรีบุรินทร์
                 </Typography>
               </Box>
               <Box mt={4} display="flex" justifyContent="center">
