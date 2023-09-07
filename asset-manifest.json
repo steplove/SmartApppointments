@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/SmartApppointments/static/css/main.ab842e6c.css",
+    "main.js": "/SmartApppointments/static/js/main.42e51e75.js",
+    "static/media/hospital.png": "/SmartApppointments/static/media/hospital.2ffb601f2110b19475db.png",
+    "static/media/city-profile.jpg": "/SmartApppointments/static/media/city-profile.4d64bba97c3d1757379e.jpg",
+    "static/media/doctorC.jpg": "/SmartApppointments/static/media/doctorC.de154b7bdaaf852ac15b.jpg",
+    "static/media/doctorB.jpg": "/SmartApppointments/static/media/doctorB.93a19870c9ca244f20d0.jpg",
+    "static/media/doctorA.jpg": "/SmartApppointments/static/media/doctorA.7486d9a814849af39f17.jpg",
+    "static/media/logosmartApppointments.png": "/SmartApppointments/static/media/logosmartApppointments.d05bef8ea5f201787931.png",
+    "static/media/bruce-mars.jpg": "/SmartApppointments/static/media/bruce-mars.8a606c4a6dab54c9ceff.jpg",
+    "index.html": "/SmartApppointments/index.html",
+    "main.ab842e6c.css.map": "/SmartApppointments/static/css/main.ab842e6c.css.map",
+    "main.42e51e75.js.map": "/SmartApppointments/static/js/main.42e51e75.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ab842e6c.css",
+    "static/js/main.42e51e75.js"
+  ]
+}
