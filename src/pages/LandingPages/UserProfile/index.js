@@ -201,35 +201,6 @@ function UserProfile() {
                         </>
                       )}
                     </form>
-
-                    {/* <MKTypography variant="body1" fontWeight="light" color="text">
-                        Decisions: If you can&apos;t decide, the answer is no. If two equally
-                        difficult paths, choose the one more painful in the short term (pain
-                        avoidance is creating an illusion of equality). Choose the path that leaves
-                        you more equanimous.
-                        <MKTypography
-                          component="a"
-                          href="#"
-                          variant="body1"
-                          fontWeight="light"
-                          color="info"
-                          mt={3}
-                          sx={{
-                            width: "max-content",
-                            display: "flex",
-                            alignItems: "center",
-                            "& .material-icons-round": {
-                              transform: `translateX(3px)`,
-                              transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
-                            },
-                            "&:hover .material-icons-round, &:focus .material-icons-round": {
-                              transform: `translateX(6px)`,
-                            },
-                          }}
-                        >
-                          More about me <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
-                        </MKTypography>
-                      </MKTypography> */}
                   </Grid>
                 </Grid>
               </Container>
