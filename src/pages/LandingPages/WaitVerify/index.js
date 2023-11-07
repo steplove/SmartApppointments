@@ -108,6 +108,7 @@ const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
 function ColorlibStepIcon(props) {
   const { active, completed, className } = props;
 
+  // Stepper icons
   const icons = {
     1: <CheckCircleSharpIcon />,
     2: <GroupAddIcon />,
@@ -155,6 +156,7 @@ export default function WaitVerify() {
             </Step>
           ))}
         </Stepper>
+        <h3>test</h3>
       </Stack>
     </div>
   );

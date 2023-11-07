@@ -22,7 +22,6 @@ function Presentation() {
   const handleLoginClick = () => {
     window.location.href = "/signInBasic";
   };
-
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
@@ -59,11 +58,11 @@ function Presentation() {
       >
         <Container
           sx={{
-            display: "flex",
+            display: "inline-block",
             flexDirection: "column",
-            justifyContent: "flex-end",
+            justifyContent: "center",
             height: {
-              xs: "calc(115vh - 56px)",
+              xs: "calc(110vh - 56px)",
               sm: "calc(100vh - 64px)",
               md: "calc(80vh - 64px)",
               lg: "calc(65vh - 64px)",
@@ -84,15 +83,9 @@ function Presentation() {
                 backgroundColor: "#01817a",
                 borderTopLeftRadius: "0.7rem",
                 borderTopRightRadius: "0.7rem",
-                fontSize: {
-                  xs: "17px", // for small devices
-                  sm: "20px", // for medium devices
-                  md: "22px", // for large devices
-                  lg: "25px", // for extra large devices
-                },
               }}
             >
-              <MKTypography variant="h5" style={{ color: "white" }}>
+              <MKTypography variant="h5" style={{ color: "white", fontSize: "1rem" }}>
                 ข้อกำหนดและระบบลงทะเบียนผู้ป่วยล่วงหน้า
               </MKTypography>
             </MKBox>
@@ -153,6 +146,11 @@ function Presentation() {
             </CardContent>
           </Card>
         </Container>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </MKBox>
     </>
   );

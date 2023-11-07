@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-
+import React, { useState } from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -35,18 +35,71 @@ import logo from "assets/images/logosmartApppointments.png"; // Adjust the path 
 // Images
 import bgImage from "assets/images/hospital.png";
 import Swal from "sweetalert2";
+import { BASE_URL } from "constants/constants";
+import Foots from "components/Foot";
+
 function SignInBasic() {
-  const handleSignInClick = () => {
-    Swal.fire({
-      icon: "success",
-      title: "เข้าสู่ระบบสำเร็จ",
-      text: "ยินดีต้อนรับเข้าสู่ Smart Apppointments",
-      timer: 1500,
-      showConfirmButton: false,
-    }).then(() => {
-      window.location.href = "/dashboard";
-    });
+  const [identificationInput, setIdentificationInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
+  const handleSignInClick = async () => {
+    try {
+      // สมมติว่าคุณมี state สำหรับ username และ password
+      const userData = {
+        IdenNumber: identificationInput,
+        Password: passwordInput,
+      };
+      console.log("Sending data to API:", userData);
+
+      // สมมติว่า URL ของ API endpoint สำหรับการลงชื่อเข้าใช้คือ '/api/login'
+      const response = await fetch(`${BASE_URL}/api/loginCustomer`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (response.status !== 200) {
+        throw new Error("Login failed");
+      }
+
+      const data = await response.json();
+
+      // ตรวจสอบว่ามี token หรือ response อื่น ๆ ที่ต้องการ
+      if (data.token) {
+        // บันทึก token หรือทำอะไรที่ต้องการ
+        localStorage.setItem("token", data.token);
+      }
+      console.log(data);
+      if (data.Customer_Status === 1) {
+        Swal.fire({
+          icon: "warning",
+          title: "ไม่สามารถเข้าสู่ระบบ",
+          text: "กรุณาติดต่อเวชระเบียนที่ ศูนย์การแพทย์เฉพาะทาง เพื่อทำการยืนยันตัวตน",
+          showConfirmButton: true,
+        });
+      } else {
+        Swal.fire({
+          icon: "success",
+          title: "เข้าสู่ระบบสำเร็จ",
+          text: "ยินดีต้อนรับเข้าสู่ Smart Apppointments",
+          timer: 1500,
+          showConfirmButton: false,
+        }).then(() => {
+          window.location.href = "/dashboard";
+        });
+      }
+      // แสดงข้อความแจ้งเตือนว่าลงชื่อเข้าใช้สำเร็จ
+    } catch (error) {
+      // แสดงข้อความแจ้งเตือนว่าลงชื่อเข้าใช้ไม่สำเร็จ
+      Swal.fire({
+        icon: "error",
+        title: "เข้าสู่ระบบไม่สำเร็จ",
+        text: error.message,
+      });
+    }
   };
+
   const handleSignUpClick = () => {
     window.location.href = "/agreement";
   };
@@ -88,12 +141,30 @@ function SignInBasic() {
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
                   <MKBox>
-                    <Typography style={{ color: "black" }}>Email :</Typography>
-                    <MKInput type="email" label="Email" fullWidth />
+                    <Typography className="black-text">เลขประจำตัวประชาชน/พาสปอร์ต</Typography>
+                    <MKInput
+                      type="email"
+                      label="กรอก..."
+                      id="identificationNumber"
+                      name="identificationNumber"
+                      autoComplete="identificationNumber"
+                      value={identificationInput}
+                      onChange={(e) => setIdentificationInput(e.target.value)}
+                      fullWidth
+                    />
                   </MKBox>
                   <MKBox>
-                    <Typography style={{ color: "black" }}>Password :</Typography>
-                    <MKInput type="password" label="Password" fullWidth />
+                    <Typography className="black-text">รหัสผ่าน</Typography>
+                    <MKInput
+                      type="password"
+                      label="กรอก..."
+                      name="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={passwordInput}
+                      onChange={(e) => setPasswordInput(e.target.value)}
+                      fullWidth
+                    />
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton
@@ -104,12 +175,12 @@ function SignInBasic() {
                         handleSignInClick();
                       }}
                     >
-                      sign in
+                      เข้าสู่ระบบ
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
-                    <MKTypography variant="button" color="black">
-                      Don&apos;t have an account?{" "}
+                    <MKTypography variant="button" className="black-text">
+                      ยังไม่มีบัญชี?{" "}
                       <MKTypography
                         variant="button"
                         color="info"
@@ -119,7 +190,7 @@ function SignInBasic() {
                           handleSignUpClick();
                         }}
                       >
-                        Sign up
+                        สมัครสมาชิก
                       </MKTypography>
                     </MKTypography>
                   </MKBox>
@@ -129,6 +200,7 @@ function SignInBasic() {
           </Grid>
         </Grid>
       </MKBox>
+      <Foots />
     </>
   );
 }

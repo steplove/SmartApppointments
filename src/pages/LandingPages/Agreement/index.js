@@ -40,7 +40,7 @@ function Agreement() {
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
+          justifyContent: "center",
           alignItems: "flex-end",
           overflowY: "auto",
           "&::before": {
@@ -62,14 +62,14 @@ function Agreement() {
       >
         <Container
           sx={{
-            display: "flex",
+            display: "inline-block",
             flexDirection: "column",
-            justifyContent: "flex-end",
+            justifyContent: "center",
             height: {
               xs: "calc(115vh - 56px)",
               sm: "calc(100vh - 64px)",
               md: "calc(80vh - 64px)",
-              lg: "calc(65vh - 64px)",
+              lg: "calc(80vh - 64px)",
             },
             marginTop: {
               xs: "calc(25vh - 56px)",
@@ -87,15 +87,14 @@ function Agreement() {
                 backgroundColor: "#01817a",
                 borderTopLeftRadius: "0.7rem",
                 borderTopRightRadius: "0.7rem",
-                fontSize: {
-                  xs: "14px", // for small devices
-                  sm: "20px", // for medium devices
-                  md: "22px", // for large devices
-                  lg: "25px", // for extra large devices
-                },
               }}
             >
-              <MKTypography variant="h5" style={{ color: "white" }}>
+              <MKTypography
+                style={{
+                  color: "white",
+                  fontSize: "1rem",
+                }}
+              >
                 ข้อกำหนดและเงื่อนไขการใช้บริการแอพพลิเคชั่น
               </MKTypography>
             </MKBox>

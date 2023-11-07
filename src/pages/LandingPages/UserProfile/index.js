@@ -1,213 +1,515 @@
-import React, { useState } from "react";
-import { Button, TextField, Paper, Typography, Avatar, Grid, Box } from "@mui/material";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import MenuList from "../MenuLists";
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  Avatar,
+  Grid,
+  CardContent,
+  Typography,
+  TextField,
+  IconButton,
+  InputLabel,
+  Button,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import Hidden from "@mui/material/Hidden";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
+import "./userprofile.css";
+import MenuList from "../MenuLists";
+import Img from "../../../assets/images/doctors/doctorA.jpg";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
-// Material Kit 2 React components
-import MKBox from "components/MKBox";
-// import MKTypography from "components/MKTypography";
-import Container from "@mui/material/Container";
-// import Icon from "@mui/material/Icon";
-const validationSchema = yup.object({
-  name: yup.string().required("Name is required"),
-  email: yup.string().email("Enter a valid email").required("Email is required"),
-  address: yup.string().required("Address is required"),
-  mobile: yup.string().required("Mobile Number is required"),
+import Foots from "components/Foot";
+import useTokenCheck from "hooks/useTokenCheck";
+import { BASE_URL } from "../../../constants/constants";
+import Swal from "sweetalert2";
+import useFetch from "../../../hooks/useFetch";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600, // จาก 800 เป็น 600
+      md: 960, // จาก 1280 เป็น 960
+      lg: 1280, // จาก 1920 เป็น 1280
+      xl: 1920,
+    },
+  },
+  palette: {
+    primary: {
+      main: "#6A0DAD",
+    },
+    secondary: {
+      main: "#D1C4E9",
+    },
+  },
 });
 
 function UserProfile() {
-  const [isEditing, setIsEditing] = useState(false); // 1. Add state for editing mode
+  const [IdenNumber, HN, FirstName, LastName, , ,] = useTokenCheck();
+  const { data: fetchedCustomerAddress = [] } = useFetch(
+    `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
+  );
+  console.log(fetchedCustomerAddress, "fetchedCustomerAddress");
+  // const hasData = true;
+  const [isEditing, setIsEditing] = useState(false);
+  const [fetchedCustomerAddres, setFetchedCustomerAddress] = useState({});
 
-  const toggleEditing = () => {
-    // 2. Add function to toggle editing mode
-    setIsEditing(!isEditing);
+  useEffect(() => {
+    // ดึงข้อมูลเมื่อคอมโพเนนต์โหลดครั้งแรก
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/ShowCustomer/${IdenNumber}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (data.length > 0) {
+            setFetchedCustomerAddress(data[0]);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+    fetchData();
+  }, [IdenNumber]);
+
+  const handleEdit = () => {
     setIsEditing(true);
   };
-  // จำลองข้อมูลของผู้ใช้
-  const userData = {
-    name: "พรชัย สุขสันต์",
-    congenitalDisease: "I10 : Essential (primary) hypertension",
-    drugAllergy: "-",
-    email: "porchai@example.com",
-    address: "123 ถ.เจริญ กรุงเทพ",
-    mobile: "0812345678",
-    profilePicture: "",
+
+  const handleCancel = () => {
+    setIsEditing(false);
   };
 
-  const formik = useFormik({
-    initialValues: userData,
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-    },
-  });
+  const handleSave = async () => {
+    setIsEditing(false);
+    console.log("22");
 
+    // สร้างตัวแปรสำหรับคำขอ PUT
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ IdenNumber, ...fetchedCustomerAddres }),
+    };
+    try {
+      const response = await fetch(`${BASE_URL}/api/EditCustomer/${IdenNumber}`, requestOptions);
+      const data = await response.json();
+      if (data.message === "User updated successfully!") {
+        Swal.fire({
+          title: "การอัปเดตสำเร็จ!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire("เกิดข้อผิดพลาดในการอัปเดตข้อมูล", "", "error");
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+      // จัดการข้อผิดพลาดที่เกิดขึ้น (เช่น แสดงข้อความข้อผิดพลาด)
+      Swal.fire("เกิดข้อผิดพลาดในการอัปเดตข้อมูล", "", "error");
+    }
+  };
+  const hadleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  };
+  if (!fetchedCustomerAddress) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <>
       <MenuList />
-      <div style={{ backgroundColor: "#EDE7F6", padding: "50px 0" }}>
-        <Paper
-          elevation={3}
-          style={{
-            padding: "48px",
-            maxWidth: "900px",
-            margin: "0 auto",
-            borderRadius: "20px",
-            backgroundColor: "#FFFFFF",
-          }}
-        >
-          <Grid container spacing={4}>
-            <Grid item xs={12} sm={4} style={{ display: "flex", justifyContent: "center" }}>
-              <Avatar
-                style={{
-                  width: "120px",
-                  height: "120px",
-                  backgroundColor: "#673AB7",
-                  marginBottom: "16px",
+      <ThemeProvider theme={theme}>
+        <Hidden smUp>
+          <Grid
+            container
+            spacing={2}
+            sx={{ marginBottom: "30px", marginTop: "30px", marginLeft: "0px", width: "98%" }}
+          >
+            {/* private Data  */}
+            <Grid>
+              <Card
+                sx={{
+                  borderRadius: 5,
+                  boxShadow: "none",
+                  display: "flex", // เพิ่มการใช้ flex
+                  flexDirection: "column", // จัดให้อยู่ในแนวตั้ง
+                  justifyContent: "center",
                 }}
               >
-                {/* User's profile picture */}
-                {userData.name.charAt(0)}
-              </Avatar>
+                <CardContent sx={{ paddingBottom: 0 }}>
+                  <div style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}>
+                    <Typography variant="h6">ข้อมูลส่วนตัว</Typography>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 120, height: 120 }}
+                    />
+                  </div>
+
+                  <TextField
+                    label="ชื่อ"
+                    variant="outlined"
+                    value={`${FirstName} ${LastName}`}
+                    fullWidth
+                    sx={{ marginBottom: "10px" }}
+                    disabled
+                  />
+                  <TextField
+                    label="โรคประจำตัว/แพ้ยา"
+                    variant="outlined"
+                    disabled
+                    fullWidth
+                    value={"" || "ไม่พบข้อมูล"}
+                  />
+                </CardContent>
+              </Card>
             </Grid>
-            <Grid item xs={12} sm={4} style={{ display: "flex", justifyContent: "center" }}>
-              <Barcode
-                format="CODE39"
-                value="123456"
-                style={{ width: "auto", height: "auto", marginLeft: "10px" }}
-              />
-            </Grid>
-            <MKBox component="section" py={{ xs: 6, sm: 12 }}>
-              <Container>
-                <Grid container item xs={12} justifyContent="center" mx="auto">
-                  <MKBox mt={{ xs: -16, md: -20 }} textAlign="center">
-                    {/* <MKAvatar src={profilePicture} alt="Burce Mars" size="xxl" shadow="xl" /> */}
-                  </MKBox>
-                  <Grid item xs={12} sm={8}>
-                    <Box display="flex" alignItems="center" mb={2}>
-                      <Typography
-                        variant="h5"
-                        gutterBottom
-                        style={{ color: "#673AB7", flexGrow: 1 }}
-                      >
-                        ข้อมูลส่วนตัว
-                      </Typography>
-                      <EditIcon style={{ cursor: "pointer" }} onClick={toggleEditing} />
-                    </Box>
-                    <form onSubmit={formik.handleSubmit}>
-                      <TextField
-                        disabled
-                        label="ชื่อ"
-                        fullWidth
-                        name="name"
-                        value={formik.values.name}
-                        onChange={formik.handleChange}
-                        error={formik.touched.name && Boolean(formik.errors.name)}
-                        helperText={formik.touched.name && formik.errors.name}
-                        style={{ marginBottom: "16px" }}
-                        variant="outlined"
-                      />{" "}
-                      <TextField
-                        disabled
-                        label="โรคประจำตัว"
-                        fullWidth
-                        name="congenitalDisease"
-                        value={formik.values.congenitalDisease}
-                        onChange={formik.handleChange}
-                        style={{ marginBottom: "16px" }}
-                        variant="outlined"
-                      />
-                      <TextField
-                        disabled
-                        label="แพ้ยา"
-                        fullWidth
-                        name="drugAllergy"
-                        value={formik.values.drugAllergy}
-                        onChange={formik.handleChange}
-                        style={{ marginBottom: "16px" }}
-                        variant="outlined"
-                      />
-                      <TextField
-                        disabled={!isEditing}
-                        label="อีเมล"
-                        fullWidth
-                        name="email"
-                        value={formik.values.email}
-                        onChange={formik.handleChange}
-                        error={formik.touched.email && Boolean(formik.errors.email)}
-                        helperText={formik.touched.email && formik.errors.email}
-                        style={{ marginBottom: "16px" }}
-                        variant="outlined"
-                      />
-                      <TextField
-                        disabled={!isEditing}
-                        label="ที่อยู่"
-                        fullWidth
-                        name="address"
-                        value={formik.values.address}
-                        onChange={formik.handleChange}
-                        error={formik.touched.address && Boolean(formik.errors.address)}
-                        helperText={formik.touched.address && formik.errors.address}
-                        style={{ marginBottom: "24px" }}
-                        variant="outlined"
-                      />
-                      <TextField
-                        disabled={!isEditing}
-                        label="เบอร์โทรศัพท์"
-                        fullWidth
-                        name="mobile"
-                        value={formik.values.mobile}
-                        onChange={formik.handleChange}
-                        error={formik.touched.mobile && Boolean(formik.errors.mobile)}
-                        helperText={formik.touched.mobile && formik.errors.mobile}
-                        style={{ marginBottom: "24px" }}
-                        variant="outlined"
-                      />
-                      {isEditing && (
-                        <>
-                          <Button
-                            startIcon={<SaveIcon />}
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            style={{
-                              marginRight: "16px",
-                              padding: "8px 24px",
-                              fontSize: "16px",
-                              color: "#fff",
-                              marginBottom: "16px",
-                            }}
-                          >
-                            บันทึกการเปลี่ยนแปลง
-                          </Button>
-                          <Button
-                            startIcon={<CancelIcon />}
-                            variant="contained"
-                            style={{
-                              backgroundColor: "#f44336",
-                              padding: "8px 24px",
-                              fontSize: "16px",
-                              color: "#fff",
-                              marginBottom: "16px",
-                            }}
-                            onClick={() => setIsEditing(false)}
-                          >
-                            ยกเลิก
-                          </Button>
-                        </>
-                      )}
-                    </form>
-                  </Grid>
-                </Grid>
-              </Container>
-            </MKBox>
           </Grid>
-        </Paper>
-      </div>
+          {/* barCode */}
+          <Grid>
+            <Card
+              sx={{
+                borderRadius: 5,
+                boxShadow: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "left", // จัดให้อยู่ตรงกลางแนวตั้ง
+                marginTop: "10px",
+                width: "98%",
+              }}
+            >
+              <CardContent>
+                <div
+                  style={{
+                    borderBottom: "1px solid #ccc",
+                    marginBottom: "10px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "left",
+                  }}
+                >
+                  <Typography variant="h6" style={{ marginLeft: 0 }}>
+                    Barcode HN
+                  </Typography>
+                </div>
+                <div style={{ display: "flex", justifyContent: "center", flex: "1" }}>
+                  <Barcode value={`${HN}`} />
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+          {/* </Grid> */}
+          {/* Address  */}
+          <Grid>
+            <Card
+              sx={{
+                borderRadius: 5,
+                boxShadow: "none",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
+              <CardContent sx={{ paddingBottom: 0 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "30px",
+                    borderBottom: "1px solid #ccc",
+                  }}
+                >
+                  <div>
+                    <Typography variant="h6">ที่อยู่</Typography>
+                  </div>
+                  <div>
+                    {isEditing ? (
+                      <>
+                        <IconButton
+                          aria-label="บันทึก"
+                          onClick={handleSave}
+                          style={{ color: "green" }}
+                        >
+                          <SaveIcon style={{ color: "green" }} />
+                        </IconButton>
+                        <IconButton
+                          aria-label="ยกเลิก"
+                          onClick={handleCancel}
+                          style={{ color: "red" }}
+                        >
+                          <CancelIcon style={{ color: "red" }} />
+                        </IconButton>
+                      </>
+                    ) : (
+                      <IconButton aria-label="แก้ไข" onClick={handleEdit} style={{ color: "blue" }}>
+                        <EditIcon style={{ color: "#c68e28" }} />
+                      </IconButton>
+                    )}
+                  </div>
+                </div>
+
+                {fetchedCustomerAddress && (
+                  <>
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      sx={{ marginBottom: "10px" }}
+                      disabled={!isEditing}
+                      value={fetchedCustomerAddres.Email}
+                      onChange={(e) =>
+                        setFetchedCustomerAddress({
+                          ...fetchedCustomerAddres,
+                          Email: e.target.value,
+                        })
+                      }
+                      InputProps={{
+                        startAdornment: <InputLabel>อีเมล</InputLabel>,
+                      }}
+                    />
+
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      disabled={!isEditing}
+                      sx={{ marginBottom: "10px" }}
+                      value={fetchedCustomerAddres.MobileNo}
+                      onChange={(e) =>
+                        setFetchedCustomerAddress({
+                          ...fetchedCustomerAddres,
+                          MobileNo: e.target.value,
+                        })
+                      }
+                      InputProps={{
+                        startAdornment: <InputLabel>เบอร์โทรศัพท์</InputLabel>,
+                      }}
+                    />
+                  </>
+                )}
+
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  disabled
+                  value={`บ้านเลขที่ ${fetchedCustomerAddres.Address} ม. ${fetchedCustomerAddres.Moo} ต. ${fetchedCustomerAddres.District} อ. ${fetchedCustomerAddres.Amphure} จ. ${fetchedCustomerAddres.Province}`}
+                  InputProps={{
+                    startAdornment: <InputLabel>ที่อยู่</InputLabel>,
+                  }}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Hidden>
+
+        <Hidden smDown>
+          <Grid
+            container
+            spacing={2}
+            sx={{ marginBottom: "30px", marginTop: "30px", marginLeft: "20px" }}
+          >
+            <Grid item lg={5}>
+              <Card
+                sx={{
+                  borderRadius: 5, // ทำให้มุมเป็นแบบไม่มีมุม
+                  boxShadow: "none", // ไม่มีเงา
+                }}
+              >
+                <div className="left" style={{ display: "flex", justifyContent: "center" }}>
+                  <Avatar
+                    src={Img}
+                    sx={{
+                      width: 300,
+                      height: 300,
+                      borderRadius: 0,
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+                <CardContent sx={{ paddingBottom: 0 }}>
+                  {" "}
+                  {/* ลดระยะห่างด้านล่างของCardContent */}
+                  <Typography variant="h6">ข้อมูลส่วนตัว</Typography>
+                  <TextField
+                    label="ชื่อ"
+                    variant="outlined"
+                    value={`${FirstName} ${LastName}`}
+                    fullWidth
+                    sx={{ marginBottom: "10px" }}
+                    disabled
+                  />
+                  <TextField
+                    label="โรคประจำตัว/แพ้ยา"
+                    variant="outlined"
+                    fullWidth
+                    value={"" || "ไม่พบข้อมูล"}
+                    disabled
+                  />
+                </CardContent>
+              </Card>
+            </Grid>
+
+            <Grid item lg={6} sx={{ marginRight: "0px", marginBottom: "10px" }}>
+              <div>
+                <Card
+                  sx={{
+                    borderRadius: 5, // ทำให้มุมเป็นแบบไม่มีมุม
+                    boxShadow: "none", // ไม่มีเงา
+                  }}
+                >
+                  <CardContent>
+                    <Typography variant="h6">BarCode</Typography>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <Barcode value={`${HN}`} />
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              <div style={{ marginTop: "10px" }}>
+                <Card
+                  sx={{
+                    borderRadius: 5, // ทำให้มุมเป็นแบบไม่มีมุม
+                    boxShadow: "none", // ไม่มีเงา
+                  }}
+                >
+                  <CardContent>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography variant="h6">ที่อยู่</Typography>
+                      <div>
+                        {isEditing ? (
+                          <>
+                            <IconButton
+                              aria-label="บันทึก"
+                              onClick={handleSave}
+                              style={{ color: "green" }}
+                            >
+                              <SaveIcon style={{ color: "green" }} />
+                            </IconButton>
+                            <IconButton
+                              aria-label="ยกเลิก"
+                              onClick={handleCancel}
+                              style={{ color: "red" }}
+                            >
+                              <CancelIcon style={{ color: "red" }} />
+                            </IconButton>
+                          </>
+                        ) : (
+                          <IconButton
+                            aria-label="แก้ไข"
+                            onClick={handleEdit}
+                            style={{ color: "blue" }}
+                          >
+                            <EditIcon style={{ color: "#c68e28" }} />
+                          </IconButton>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                  <Grid
+                    container
+                    spacing={2}
+                    sx={{ marginLeft: "10px", marginBottom: "10px", marginRight: "10px" }}
+                  >
+                    {fetchedCustomerAddress && (
+                      <>
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          sx={{ marginBottom: "10px" }}
+                          disabled={!isEditing}
+                          value={fetchedCustomerAddres.Email}
+                          onChange={(e) =>
+                            setFetchedCustomerAddress({
+                              ...fetchedCustomerAddres,
+                              Email: e.target.value,
+                            })
+                          }
+                          InputProps={{
+                            startAdornment: <InputLabel>อีเมล</InputLabel>,
+                          }}
+                        />
+
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          disabled={!isEditing}
+                          sx={{ marginBottom: "10px" }}
+                          value={fetchedCustomerAddres.MobileNo}
+                          onChange={(e) =>
+                            setFetchedCustomerAddress({
+                              ...fetchedCustomerAddres,
+                              MobileNo: e.target.value,
+                            })
+                          }
+                          InputProps={{
+                            startAdornment: <InputLabel>เบอร์โทรศัพท์</InputLabel>,
+                          }}
+                        />
+                      </>
+                    )}
+
+                    <TextField
+                      variant="outlined"
+                      fullWidth
+                      disabled
+                      value={`บ้านเลขที่ ${fetchedCustomerAddres.Address} ม. ${fetchedCustomerAddres.Moo} ต. ${fetchedCustomerAddres.District} อ. ${fetchedCustomerAddres.Amphure} จ. ${fetchedCustomerAddres.Province}`}
+                      InputProps={{
+                        startAdornment: <InputLabel>ที่อยู่</InputLabel>,
+                      }}
+                    />
+                  </Grid>
+                </Card>
+              </div>
+            </Grid>
+          </Grid>
+        </Hidden>
+        <Grid container justifyContent="center" alignItems="center" mt={2}>
+          <Button variant="contained" color="error" onClick={hadleLogout}>
+            ออกระบบ
+          </Button>
+        </Grid>
+      </ThemeProvider>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Foots />
     </>
   );
 }

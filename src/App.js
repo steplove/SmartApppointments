@@ -17,11 +17,9 @@ import { useEffect } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-
 // Material Kit 2 React themes
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
@@ -37,9 +35,10 @@ import UserProfile from "pages/LandingPages/UserProfile";
 import Author from "pages/LandingPages/Author";
 import DoctorList from "pages/LandingPages/DoctorList";
 import WaitVerify from "pages/LandingPages/WaitVerify";
+import Test from "pages/LandingPages/Test";
 // Material Kit 2 React routes
 import routes from "routes";
-
+import "./App.css";
 export default function App() {
   const { pathname } = useLocation();
 
@@ -56,7 +55,7 @@ export default function App() {
       }
 
       if (route.route) {
-        return <Route exact path={route.route} element={route.component} key={route.key} />;
+        return <Route key={route} exact path={route.route} element={route.component} />;
       }
 
       return null;
@@ -80,6 +79,7 @@ export default function App() {
         <Route path="/doctorList" element={<DoctorList />} />
         <Route path="/waitverify" element={<WaitVerify />} />
         <Route path="/author" element={<Author />} />
+        <Route path="/test" element={<Test />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
       </Routes>
     </ThemeProvider>

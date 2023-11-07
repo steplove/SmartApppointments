@@ -15,11 +15,14 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
+
 // import SettingsIcon from "@mui/icons-material/Settings";
 // import PersonIcon from "@mui/icons-material/Person";
 import HistoryIcon from "@mui/icons-material/History";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Popover from "@mui/material/Popover";
 // import { useLocation } from "react-router-dom";
 export default function MenuList() {
@@ -28,9 +31,9 @@ export default function MenuList() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorPopover, setAnchorPopover] = React.useState(null);
 
-  const handleClickPopover = (event) => {
-    setAnchorPopover(event.currentTarget);
-  };
+  // const handleClickPopover = (event) => {
+  //   setAnchorPopover(event.currentTarget);
+  // };
 
   const handleClosePopover = () => {
     setAnchorPopover(null);
@@ -82,11 +85,25 @@ export default function MenuList() {
             value="/bookinghistory"
           />
           <BottomNavigationAction
-            label="เพิ่มเติม"
+            label="แพทย์"
+            icon={<LocalHospitalIcon />}
+            component={Link}
+            to="/doctorList"
+            value="/doctorList"
+          />
+          <BottomNavigationAction
+            label="ตั้งค่า"
+            icon={<SettingsIcon />}
+            component={Link}
+            to="/userprofile"
+            value="/userprofile"
+          />
+          {/* <BottomNavigationAction
+            label="ตั้งค่า"
             icon={<MoreVertIcon />}
             onClick={handleClickPopover}
             component={Link}
-          />
+          /> */}
         </BottomNavigation>
       ) : (
         <>
@@ -111,7 +128,6 @@ export default function MenuList() {
             <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
               ประวัตินัดหมาย
             </MenuItem>
-
             <MenuItem onClick={handleClose} component={Link} to="/doctorList">
               รายชื่อแพทย์
             </MenuItem>
@@ -136,14 +152,8 @@ export default function MenuList() {
           horizontal: "center",
         }}
       >
-        <MenuItem style={{ backgroundColor: "#fff" }} component={Link} to="/doctorList">
-          รายชื่อแพทย์
-        </MenuItem>
         <MenuItem component={Link} to="/userprofile" style={{ backgroundColor: "#fff" }}>
           ข้อมูลส่วนตัว
-        </MenuItem>
-        <MenuItem onClick={hadleLogout} style={{ backgroundColor: "#fff" }}>
-          ออกจากระบบ
         </MenuItem>
       </Popover>
       <br />

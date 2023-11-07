@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -9,53 +9,86 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
 import "./Calendar.css";
+import { BASE_URL } from "../../constants/constants";
+import useTokenCheck from "hooks/useTokenCheck";
+import Barcode from "react-barcode";
+
 function CalendarComponent() {
+  const [IdenNumber, HN, FirstName, LastName, Customer_Status] = useTokenCheck();
+  console.log(
+    IdenNumber,
+    HN,
+    FirstName,
+    LastName,
+    useTokenCheck(),
+    Customer_Status,
+    "IdenNumber",
+    "HN"
+  );
+
   const [selectedEvent, setSelectedEvent] = useState(null);
-  const events = [
-    {
-      title: "นัด",
-      date: "2023-09-10",
-      description: "รอยืนยันการนัด",
-      location: "ที่ตั้งของคลินิก",
-      status: "waiting-confirmation",
-    },
-    {
-      title: "นัด",
-      date: "2023-09-11",
-      description: "ยกเลิกการนัด",
-      location: "ที่ตั้งของคลินิก",
-      status: "cancelled",
-    },
-    {
-      title: "นัด",
-      date: "2023-09-12",
-      description: "ยืนยันการนัด",
-      location: "ที่ตั้งของคลินิก",
-      status: "confirmed",
-    },
-    {
-      title: "นัด",
-      date: "2023-09-13",
-      description: "มาตามนัด",
-      location: "ที่ตั้งของคลินิก",
-      status: "attended",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    async function fetchAppointments(HN) {
+      try {
+        const response = await fetch(BASE_URL + `/api/AllAppointmentsWhereHN/${HN}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data, "data");
+          const formattedEvents = data.map((appointment) => ({
+            title: "นัด",
+            date: appointment.Appointment_Date.split("T")[0],
+            time: `1970-01-01T${appointment.Appointment_Time}:00.000Z`.substring(22, 27),
+            description: appointment.APM_Des,
+            StatusFlag: appointment.StatusFlag,
+            APM_No: appointment.APM_No,
+          }));
+          setEvents(formattedEvents);
+          console.log(formattedEvents, "formattedEvents");
+        } else {
+          console.error("ไม่สามารถดึงข้อมูลได้");
+        }
+      } catch (error) {
+        console.error("เกิดข้อผิดพลาดในการดึงข้อมูล:", error);
+      }
+    }
+
+    if (HN) {
+      fetchAppointments(HN);
+    }
+  }, [HN]);
+
   const eventClassNames = (eventInfo) => {
-    switch (eventInfo.event.extendedProps.status) {
-      case "waiting-confirmation":
+    switch (eventInfo.event.extendedProps.StatusFlag) {
+      case "3":
         return "waiting-confirmation";
-      case "cancelled":
+      case "5":
         return "cancelled";
-      case "confirmed":
+      case "4":
         return "confirmed";
-      case "attended":
-        return "attended";
+      case "6":
+        return "complete";
       default:
         return "";
     }
   };
 
+  const getStatusText = (statusFlag) => {
+    switch (statusFlag) {
+      case "3":
+        return "รอยืนยันการนัด";
+      case "4":
+        return "ยืนยันการนัดหมาย";
+      case "5":
+        return "cancelled";
+      case "6":
+        return "complete";
+      default:
+        return "unknown";
+    }
+  };
   return (
     <div style={{ maxWidth: "100%" }}>
       <FullCalendar
@@ -77,12 +110,61 @@ function CalendarComponent() {
       />
 
       {selectedEvent && (
-        <Dialog open={Boolean(selectedEvent)} onClose={() => setSelectedEvent(null)}>
+        <Dialog
+          open={Boolean(selectedEvent)}
+          onClose={() => setSelectedEvent(null)}
+          maxWidth="sm"
+          fullWidth
+        >
           <DialogTitle>รายละเอียดการนัดหมาย</DialogTitle>
-          <DialogContent>
-            <Typography variant="h6">{selectedEvent.title}</Typography>
-            <Typography variant="subtitle1">{selectedEvent.extendedProps.description}</Typography>
-            <Typography variant="subtitle2">{selectedEvent.extendedProps.location}</Typography>
+          <DialogContent
+            style={{ display: "flex", flexDirection: "column", textAlign: "center" }}
+            fullWidth
+          >
+            <div style={{ flex: 1 }}>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <div style={{ flex: 1 }}>
+                  <Typography
+                    variant="h6"
+                    style={{ fontSize: "20px", fontWeight: "bold", textAlign: "left" }}
+                    fullWidth
+                  >
+                    {selectedEvent.title}
+                  </Typography>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <Typography
+                    variant="h6"
+                    style={{ fontSize: "15px", fontWeight: "bold", textAlign: "left" }}
+                    fullWidth
+                  >
+                    สถานะ: {getStatusText(selectedEvent.extendedProps.StatusFlag)}
+                  </Typography>
+                </div>
+              </div>
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: "16px", textAlign: "left" }}
+                fullWidth
+              >
+                รายละเอียด : {selectedEvent.extendedProps.description}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: "16px", textAlign: "left" }}
+                fullWidth
+              >
+                เวลา : {selectedEvent.extendedProps.time} น.
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: "16px", textAlign: "left" }}
+                fullWidth
+              >
+                เลขที่นัดหมาย :
+              </Typography>
+              <Barcode value={selectedEvent.extendedProps.APM_No} fullWidth />
+            </div>
           </DialogContent>
         </Dialog>
       )}

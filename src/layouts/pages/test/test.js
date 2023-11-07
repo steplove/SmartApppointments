@@ -1,4 +1,4 @@
-/**
+/*
 =========================================================
 * Material Kit 2 React - v2.1.0
 =========================================================
@@ -7,19 +7,15 @@
 * Copyright 2023 Creative Tim (https://www.creative-tim.com)
 
 Coded by www.creative-tim.com
-
+===========================================================
+Programmer: Siwakorn Kheuewan
  =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "App";
-const root = createRoot(document.getElementById("root"));
 
-root.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-);
+// Material Kit 2 React pages
+import Test from "pages/LandingPages/Test";
+export default function Testssss() {
+  return <Test />;
+}
