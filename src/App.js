@@ -19,7 +19,7 @@ import Agree from "pages/LandingPages/Agree";
 // Material Kit 2 React routes
 import routes from "routes";
 import "./App.css";
-import LiffComponent from "./LiffComponent";
+// import LiffComponent from "./LiffComponent";
 export default function App() {
   const { pathname } = useLocation();
 
@@ -44,7 +44,7 @@ export default function App() {
 
   return (
     <>
-      <LiffComponent />
+      {/* <LiffComponent /> */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>
