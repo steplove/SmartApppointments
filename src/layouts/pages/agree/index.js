@@ -15,7 +15,7 @@ Programmer: Siwakorn Kheuewan
 */
 
 // Material Kit 2 React pages
-import MainPage from "pages/MainPage";
+import Agree from "pages/LandingPages/Agreement";
 export default function RegisterPage() {
-  return <MainPage />;
+  return <Agree />;
 }

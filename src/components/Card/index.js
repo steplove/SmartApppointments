@@ -109,7 +109,7 @@ const ReactCardSlider = () => {
             src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
             alt={selectedDoctor.Doctor_Name}
             style={{
-              width: "250px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
+              width: "80%", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
               height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
               display: "block",
               margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน

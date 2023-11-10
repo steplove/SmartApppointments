@@ -1,25 +1,19 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 import React from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
-const root = createRoot(document.getElementById("root"));
-
+import reportWebVitals from "./reportWebVitals";
+import liff from "@line/liff";
+const root = ReactDOM.createRoot(document.getElementById("root"));
+liff.init({ liffId: "2000414649-29Q1LMp4" }).then(() => {
+  // ตรวจสอบสถานะการเข้าสู่ระบบ
+  if (!liff.isLoggedIn()) {
+    liff.login();
+  }
+});
 root.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>
 );
+reportWebVitals();

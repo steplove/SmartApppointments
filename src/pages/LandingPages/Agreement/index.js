@@ -8,18 +8,17 @@ import {
   FormControlLabel,
   Card,
   CardContent,
-  Paper,
 } from "@mui/material";
 import MKBox from "components/MKBox";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import MKTypography from "components/MKTypography";
+import ListIcon from "@mui/icons-material/List";
+
 // Routes
 import routes from "routes";
 // Images
 import bgImage from "assets/images/hospital.png";
-// import DefaultFooter from "examples/Footers/DefaultFooter";
-// import footerRoutes from "footer.routes";
 
 function Agreement() {
   const [isChecked, setChecked] = useState(false);
@@ -99,34 +98,44 @@ function Agreement() {
               </MKTypography>
             </MKBox>
             <CardContent>
-              <Paper sx={{ border: "1px solid black" }}>
-                <Box
-                  display="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  alignItems="center"
-                  height="100%"
-                  p={3} // padding for some spacing around content
-                >
-                  <Typography variant="body1" paragraph>
-                    Welcome to our website. If you continue to browse and use this website, you are
-                    agreeing to comply with and be bound by the following terms and conditions of
-                    use, which together with our privacy policy govern [business name]s relationship
-                    with you in relation to this website. If you disagree with any part of these
-                    terms and conditions, please do not use our website.
-                  </Typography>
-                  <Typography variant="body1" paragraph>
-                    The term [business name] refers to the owner of the website whose registered
-                    office is [address]. Our company registration number is [company registration
-                    number and place of registration]. The term you refers to the user or viewer of
-                    our website.
-                  </Typography>
-                  <Typography variant="body1" paragraph>
-                    more agreement content
-                  </Typography>
-                </Box>
-              </Paper>
-
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <ListIcon color="primary" sx={{ marginRight: 1, fontSize: "2rem" }} />{" "}
+                {/* Adjust fontSize value as needed */}
+                <Typography variant="body1" paragraph>
+                  ท่านที่มีนัดกับทาง รพ. อยู่แล้วไม่จำเป็นต้องจองผ่านระบบนี้
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
+                <Typography variant="body1" paragraph>
+                  ระบบนี้อำนวยความสะดวกเพื่อลดขั้นตอนให้ท่านไม่ต้องไปติดต่อลงทะเบียน
+                  และติดต่อศูนย์คัดกรอง ท่านสามารถไปที่หน้าห้องตรวจได้เลย และเมื่อไปถึง
+                  หน้าห้องตรวจแล้ว ขอความกรุณาแจ้งกับพยาบาลหน้าห้องตรวจว่า
+                  ได้ทำการลงทะเบียนออนไลน์มาแล้ว
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
+                <Typography variant="body1" paragraph>
+                  ระบบนี้มิใช่การจองคิวเพื่อจัดลำดับการเข้าพบแพทย์
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
+                <Typography variant="body1" paragraph>
+                  หลังจากจองลงทะเบียนตรวจล่วงหน้าแล้ว กรุณารอรับข้อความ SMS จาก รพ.
+                  ซึ่งถ้าช่วงเวลาที่ท่านทำรายการเป็นช่วงนอกเวลาราชการ หรือวันหยุดราชการ
+                  กรุณารอรับข้อความ SMS ในวันเปิดทำการถัดไป
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
+                <Typography variant="body1" paragraph>
+                  เปิดบริการเฉพาะ ผู้ป่วยชำระเงิน ข้าราชการ/รัฐวิสาหกิจนำใบเสร็จไปเบิก
+                  ข้าราชการเบิกตรง ประกันสังคม เกษมราษฎร์ ศรีบุรินทร์
+                  ประกันสุขภาพถ้วนหน้าโรงพยาบาลมเกษมราษฎร์ ศรีบุรินทร์
+                </Typography>
+              </Box>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -136,7 +145,7 @@ function Agreement() {
                     color="primary"
                   />
                 }
-                label="I agree to the terms and conditions"
+                label="ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ"
               />
               <Box mt={2}>
                 <Button
@@ -147,7 +156,7 @@ function Agreement() {
                     handleClickRegister();
                   }}
                 >
-                  Accept
+                  สมัครสมาชิก
                 </Button>
               </Box>
             </CardContent>

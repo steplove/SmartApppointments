@@ -11,7 +11,7 @@ import ListIcon from "@mui/icons-material/List";
 import MKBox from "components/MKBox";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-
+import CookieConsent from "react-cookie-consent";
 // Routes
 import routes from "routes";
 
@@ -152,6 +152,17 @@ function Presentation() {
         <br />
         <br />
       </MKBox>
+      <CookieConsent
+        location="bottom"
+        buttonText="ยอมรับ"
+        cookieName="myAwesomeCookieName2"
+        style={{ background: "#2B373B" }}
+        buttonStyle={{ color: "#4e503b", fontSize: "13px" }}
+        expires={150}
+      >
+        เว็บไซต์นี้ใช้คุกกี้เพื่อเพิ่มประสบการณ์ของผู้ใช้.{" "}
+        <span style={{ fontSize: "10px" }}>ข้อความส่วนนี้เล็กลง :O</span>
+      </CookieConsent>
     </>
   );
 }
