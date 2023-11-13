@@ -48,8 +48,7 @@ function SignInBasic() {
         IdenNumber: identificationInput,
         Password: passwordInput,
       };
-      console.log("Sending data to API:", userData);
-
+      console.log(userData);
       // สมมติว่า URL ของ API endpoint สำหรับการลงชื่อเข้าใช้คือ '/api/login'
       const response = await fetch(`${BASE_URL}/api/loginCustomer`, {
         method: "POST",
@@ -58,19 +57,18 @@ function SignInBasic() {
         },
         body: JSON.stringify(userData),
       });
+      console.log(response, "datadata");
 
       if (response.status !== 200) {
         throw new Error("Login failed");
       }
-
       const data = await response.json();
-
       // ตรวจสอบว่ามี token หรือ response อื่น ๆ ที่ต้องการ
       if (data.token) {
         // บันทึก token หรือทำอะไรที่ต้องการ
         localStorage.setItem("token", data.token);
       }
-      console.log(data);
+      console.log(data.Customer_Status);
       if (data.Customer_Status === 1) {
         Swal.fire({
           icon: "warning",
