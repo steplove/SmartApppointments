@@ -34,7 +34,7 @@ import useTokenCheck from "../../../hooks/useTokenCheck";
 import Swal from "sweetalert2";
 import Foots from "components/Foot";
 import CircularProgress from "@mui/material/CircularProgress";
-import { format } from "date-fns";
+
 const StyledToggleButton = styled(ToggleButton)({
   borderRadius: "20px",
   margin: "5px 10px",
@@ -95,7 +95,6 @@ function Appointments() {
           Appointment_Date: formData.Date,
           Appointment_Time: formData.timeSlot,
           APM_Des: formData.symptoms,
-          EntryDatetime: format(new Date(), "yyyy-MM-dd HH:mm:ss"),
         }),
       });
 
