@@ -205,7 +205,7 @@ function Register() {
                 if (response.status === 200) {
                   // แสดง sweetalert2 เพื่อแจ้งเตือนว่าเพิ่มข้อมูลพนักงานสำเร็จ
                   Swal.fire({
-                    title: "ลงทะเบียนสำเร็จสำเร็จ!",
+                    title: "ลงทะเบียนสำเร็จ!",
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,
