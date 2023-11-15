@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
-import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material";
+import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material/styles"; // Updated import statement
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#4CAF50", // สีเขียวหลัก
+      main: "#4CAF50", // Main green color
     },
   },
 });
@@ -22,9 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     backgroundColor: theme.palette.primary.main,
-    color: "#fff", // สีข้อความ
+    color: "#fff",
     "&:hover": {
-      backgroundColor: "#388e3c", // สี hover
+      backgroundColor: "#388e3c",
     },
   },
 }));
