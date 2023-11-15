@@ -1,7 +1,36 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
+import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4CAF50", // สีเขียวหลัก
+    },
+  },
+});
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: theme.spacing(4),
+  },
+  input: {
+    marginBottom: theme.spacing(2),
+  },
+  button: {
+    backgroundColor: theme.palette.primary.main,
+    color: "#fff", // สีข้อความ
+    "&:hover": {
+      backgroundColor: "#388e3c", // สี hover
+    },
+  },
+}));
 
 function ForgotPassword() {
+  const classes = useStyles();
   const [email, setEmail] = useState("");
 
   const handleForgotPassword = async () => {
@@ -27,15 +56,21 @@ function ForgotPassword() {
   };
 
   return (
-    <div>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleForgotPassword}>Reset Password</button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className={classes.container}>
+        <TextField
+          className={classes.input}
+          type="email"
+          label="Enter your email"
+          variant="outlined"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Button className={classes.button} onClick={handleForgotPassword} variant="contained">
+          Reset Password
+        </Button>
+      </div>
+    </ThemeProvider>
   );
 }
 
