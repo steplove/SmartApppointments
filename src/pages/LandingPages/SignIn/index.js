@@ -176,22 +176,40 @@ function SignInBasic() {
                       เข้าสู่ระบบ
                     </MKButton>
                   </MKBox>
-                  <MKBox mt={3} mb={1} textAlign="center">
-                    <MKTypography variant="button" className="black-text">
-                      ยังไม่มีบัญชี?{" "}
-                      <MKTypography
-                        variant="button"
-                        color="info"
-                        fontWeight="medium"
-                        textGradient
-                        onClick={() => {
-                          handleSignUpClick();
-                        }}
-                      >
-                        สมัครสมาชิก
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <MKBox mt={0} mb={0} textAlign="center">
+                      <MKTypography variant="button" className="black-text">
+                        ยังไม่มีบัญชี?{" "}
+                        <MKTypography
+                          variant="button"
+                          color="info"
+                          fontWeight="medium"
+                          textGradient
+                          onClick={() => {
+                            handleSignUpClick();
+                          }}
+                        >
+                          สมัครสมาชิก
+                        </MKTypography>
                       </MKTypography>
-                    </MKTypography>
-                  </MKBox>
+                    </MKBox>
+                    <MKBox mt={0} mb={0} textAlign="center">
+                      <MKTypography variant="button" className="black-text">
+                        {" "}
+                        <MKTypography
+                          variant="button"
+                          color="info"
+                          fontWeight="medium"
+                          textGradient
+                          onClick={() => {
+                            window.location.href = "/ForgotPassword";
+                          }}
+                        >
+                          ลืมรหัสผ่าน
+                        </MKTypography>
+                      </MKTypography>
+                    </MKBox>
+                  </div>
                 </MKBox>
               </MKBox>
             </Card>

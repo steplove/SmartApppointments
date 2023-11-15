@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
 import { Button, TextField, Card } from "@mui/material";
+import Swal from "sweetalert2";
+
 function ForgotPassword() {
   const [email, setEmail] = useState("");
 
@@ -15,10 +17,25 @@ function ForgotPassword() {
       });
 
       if (response.ok) {
-        alert("Password reset email sent");
+        Swal.fire({
+          title: "ส่งอีเมลสำเร็จ",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log("สำเร็จ");
+        setTimeout(() => {
+          window.location = "/presentation";
+        }, 1500);
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData.message);
+        Swal.fire({
+          title: "ส่งอีเมลไม่สำเร็จ",
+          text: "",
+          icon: "error",
+          confirmButtonText: "ตกลง",
+        });
+        // const errorData = await response.json();
+        // throw new Error(errorData.message);
       }
     } catch (error) {
       console.error(error);
@@ -27,9 +44,21 @@ function ForgotPassword() {
   };
 
   return (
-    <Card sx={{ marginTop: "50%" }}>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <h2>รีเซ็ทรหัสผ่าน</h2>
+    <Card
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh", // ทำให้คอมโพเนนต์อยู่กลางหน้าจอ
+      }}
+    >
+      <div
+        style={{ marginLeft: "0%", marginRight: "0%", display: "flex", flexDirection: "column" }}
+      >
+        <h2 style={{ fontWeight: "bold", color: "#408080", textAlign: "center" }}>
+          รีเซ็ทรหัสผ่าน
+        </h2>
         <TextField
           id="outlined-basic"
           label="อีเมล"
@@ -40,13 +69,42 @@ function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
           style={{ marginBottom: "10px", width: "300px" }}
         />
-        <Button
-          variant="contained"
-          onClick={handleForgotPassword}
-          style={{ width: "150px", backgroundColor: "#4CAF50", color: "white" }}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "300px",
+            margin: "auto",
+          }}
         >
-          ส่งอีเมล
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              // ตัวอย่างการใส่ลิงค์กลับหน้าหลัก
+              window.location.href = "/presentation";
+            }}
+            style={{
+              width: "150px",
+              backgroundColor: "#0d6efd",
+              color: "white",
+              margin: "auto",
+            }}
+          >
+            กลับหน้าหลัก
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleForgotPassword}
+            style={{
+              width: "150px",
+              backgroundColor: "#01817a",
+              color: "white",
+              margin: "auto",
+            }}
+          >
+            ส่งอีเมล
+          </Button>
+        </div>
       </div>
     </Card>
   );
