@@ -1,36 +1,7 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
-import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material"; // Updated import statement
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#4CAF50", // Main green color
-    },
-  },
-});
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: theme.spacing(4),
-  },
-  input: {
-    marginBottom: theme.spacing(2),
-  },
-  button: {
-    backgroundColor: theme.palette.primary.main,
-    color: "#fff",
-    "&:hover": {
-      backgroundColor: "#388e3c",
-    },
-  },
-}));
-
+import { Button, TextField, Card } from "@mui/material";
 function ForgotPassword() {
-  const classes = useStyles();
   const [email, setEmail] = useState("");
 
   const handleForgotPassword = async () => {
@@ -56,21 +27,28 @@ function ForgotPassword() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.container}>
+    <Card sx={{ marginTop: "50%" }}>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <h2>รีเซ็ทรหัสผ่าน</h2>
         <TextField
-          className={classes.input}
-          type="email"
-          label="Enter your email"
+          id="outlined-basic"
+          label="อีเมล"
           variant="outlined"
+          type="email"
+          placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{ marginBottom: "10px", width: "300px" }}
         />
-        <Button className={classes.button} onClick={handleForgotPassword} variant="contained">
-          Reset Password
+        <Button
+          variant="contained"
+          onClick={handleForgotPassword}
+          style={{ width: "150px", backgroundColor: "#4CAF50", color: "white" }}
+        >
+          ส่งอีเมล
         </Button>
       </div>
-    </ThemeProvider>
+    </Card>
   );
 }
 
