@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
-import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material/styles"; // Updated import statement
+import { TextField, Button, makeStyles, createTheme, ThemeProvider } from "@mui/material"; // Updated import statement
 
 const theme = createTheme({
   palette: {
