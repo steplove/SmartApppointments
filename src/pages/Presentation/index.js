@@ -80,44 +80,44 @@ function Presentation() {
                 borderTopRightRadius: "0.7rem",
               }}
             >
-              <MKTypography variant="h5" style={{ color: "white", fontSize: "1rem" }}>
+              <MKTypography variant="h5" style={{ color: "white", fontSize: "0.9rem" }}>
                 ข้อกำหนดและระบบลงทะเบียนผู้ป่วยล่วงหน้า
               </MKTypography>
             </MKBox>
             <CardContent>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListIcon color="primary" sx={{ marginRight: 1, fontSize: "2rem" }} />{" "}
+                <ListIcon color="primary" sx={{ marginRight: 1, fontSize: "0.8rem" }} />{" "}
                 {/* Adjust fontSize value as needed */}
-                <Typography variant="body1" paragraph>
-                  ท่านที่มีนัดกับทาง รพ. อยู่แล้วไม่จำเป็นต้องจองผ่านระบบนี้
+                <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
+                  ท่านที่มีนัดกับทางรพ.อยู่แล้วไม่จำเป็นต้องจองผ่านระบบนี้
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "0rem" }}>
                 <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
-                <Typography variant="body1" paragraph>
+                <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   ระบบนี้อำนวยความสะดวกเพื่อลดขั้นตอนให้ท่านไม่ต้องไปติดต่อลงทะเบียน
                   และติดต่อศูนย์คัดกรอง ท่านสามารถไปที่หน้าห้องตรวจได้เลย และเมื่อไปถึง
                   หน้าห้องตรวจแล้ว ขอความกรุณาแจ้งกับพยาบาลหน้าห้องตรวจว่า
                   ได้ทำการลงทะเบียนออนไลน์มาแล้ว
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "0rem" }}>
                 <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
-                <Typography variant="body1" paragraph>
+                <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   ระบบนี้มิใช่การจองคิวเพื่อจัดลำดับการเข้าพบแพทย์
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "0rem" }}>
                 <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
-                <Typography variant="body1" paragraph>
+                <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   หลังจากจองลงทะเบียนตรวจล่วงหน้าแล้ว กรุณารอรับข้อความ SMS จาก รพ.
                   ซึ่งถ้าช่วงเวลาที่ท่านทำรายการเป็นช่วงนอกเวลาราชการ หรือวันหยุดราชการ
                   กรุณารอรับข้อความ SMS ในวันเปิดทำการถัดไป
                 </Typography>
               </Box>
-              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", marginBottom: "0rem" }}>
                 <ListIcon color="primary" sx={{ marginRight: "1rem" }} />
-                <Typography variant="body1" paragraph>
+                <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   เปิดบริการเฉพาะ ผู้ป่วยชำระเงิน ข้าราชการ/รัฐวิสาหกิจนำใบเสร็จไปเบิก
                   ข้าราชการเบิกตรง ประกันสังคม เกษมราษฎร์ ศรีบุรินทร์
                   ประกันสุขภาพถ้วนหน้าโรงพยาบาลมเกษมราษฎร์ ศรีบุรินทร์
