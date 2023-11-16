@@ -99,7 +99,7 @@ function Agreement() {
             </MKBox>
             <CardContent>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListIcon color="primary" sx={{ marginRight: 1, marginBottom: "0px" }} />{" "}
+                <ListIcon color="primary" sx={{ marginRight: "1rem", marginBottom: "0px" }} />{" "}
                 <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   ท่านที่มีนัดกับทาง รพ. อยู่แล้วไม่จำเป็นต้องจองผ่านระบบนี้
                 </Typography>

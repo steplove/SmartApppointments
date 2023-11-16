@@ -91,7 +91,7 @@ function Presentation() {
             </MKBox>
             <CardContent>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <ListIcon color="primary" sx={{ marginRight: 1, fontSize: "0.8rem" }} />{" "}
+                <ListIcon color="primary" sx={{ marginRight: "1rem", fontSize: "0.8rem" }} />{" "}
                 {/* Adjust fontSize value as needed */}
                 <Typography variant="body1" paragraph sx={{ fontSize: "0.8rem" }}>
                   ท่านที่มีนัดกับทางรพ.อยู่แล้วไม่จำเป็นต้องจองผ่านระบบนี้
