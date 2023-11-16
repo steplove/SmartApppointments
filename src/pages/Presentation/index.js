@@ -26,13 +26,18 @@ function Presentation() {
     <>
       <DefaultNavbar routes={routes} sticky />
       <MKBox
+        position="absolute"
+        top={0}
+        left={0}
         zIndex={1}
         width="100%"
+        minHeight="100vh"
         sx={{
+          position: "relative",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
+          justifyContent: "center",
+          alignItems: "flex-end",
           overflowY: "scroll",
           "&::before": {
             content: '""',
@@ -57,10 +62,10 @@ function Presentation() {
             flexDirection: "column",
             justifyContent: "center",
             height: {
-              xs: "calc(110vh - 56px)",
+              xs: "calc(115vh - 56px)",
               sm: "calc(100vh - 64px)",
               md: "calc(80vh - 64px)",
-              lg: "calc(65vh - 64px)",
+              lg: "calc(80vh - 64px)",
             },
             marginTop: {
               xs: "calc(25vh - 56px)",
@@ -141,11 +146,6 @@ function Presentation() {
             </CardContent>
           </Card>
         </Container>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
       </MKBox>
       <CookieConsent
         location="bottom"
