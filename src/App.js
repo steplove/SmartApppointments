@@ -62,7 +62,7 @@ export default function App() {
           <Route path="/doctorList" element={<DoctorList />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/resetpassword/:UID" element={<ResetPassword />} />
           <Route path="/agree" element={<Agree />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
