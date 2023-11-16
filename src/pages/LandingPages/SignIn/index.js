@@ -139,7 +139,9 @@ function SignInBasic() {
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
                   <MKBox>
-                    <Typography className="black-text">เลขประจำตัวประชาชน/พาสปอร์ต</Typography>
+                    <Typography className="black-text" sx={{ fontSize: "0.9rem" }}>
+                      เลขประจำตัวประชาชน/พาสปอร์ต
+                    </Typography>
                     <MKInput
                       type="email"
                       label="กรอก..."
@@ -152,7 +154,9 @@ function SignInBasic() {
                     />
                   </MKBox>
                   <MKBox>
-                    <Typography className="black-text">รหัสผ่าน</Typography>
+                    <Typography className="black-text" sx={{ fontSize: "0.9rem" }}>
+                      รหัสผ่าน
+                    </Typography>
                     <MKInput
                       type="password"
                       label="กรอก..."
