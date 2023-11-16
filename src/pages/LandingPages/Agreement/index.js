@@ -41,7 +41,7 @@ function Agreement() {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "flex-end",
-          overflowY: "auto",
+          overflowY: "scroll",
           "&::before": {
             content: '""',
             position: "absolute",

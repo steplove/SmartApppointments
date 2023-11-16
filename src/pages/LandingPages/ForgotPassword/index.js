@@ -15,7 +15,7 @@ function ForgotPassword() {
         },
         body: JSON.stringify({ email }),
       });
-
+      console.log(response);
       if (response.ok) {
         Swal.fire({
           title: "ส่งอีเมลสำเร็จ",
@@ -27,9 +27,9 @@ function ForgotPassword() {
         setTimeout(() => {
           window.location = "/presentation";
         }, 1500);
-      } else {
+      } else if (response.status === 404) {
         Swal.fire({
-          title: "ส่งอีเมลไม่สำเร็จ",
+          title: "ไม่พบข้อมูลอีเมลในระบบ",
           text: "",
           icon: "error",
           confirmButtonText: "ตกลง",

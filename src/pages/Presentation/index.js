@@ -26,19 +26,14 @@ function Presentation() {
     <>
       <DefaultNavbar routes={routes} sticky />
       <MKBox
-        position="absolute"
-        top={0}
-        left={0}
         zIndex={1}
         width="100%"
-        minHeight="100vh"
         sx={{
-          position: "relative",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-start",
-          alignItems: "flex-end",
-          overflowY: "auto",
+          alignItems: "flex-start",
+          overflowY: "scroll",
           "&::before": {
             content: '""',
             position: "absolute",

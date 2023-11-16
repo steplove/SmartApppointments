@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-
+import { BASE_URL } from "constants/constants";
+import { useParams } from "react-router-dom";
 function ResetPassword() {
+  const { UID } = useParams();
   const [password, setPassword] = useState("");
-
+  console.log("UIDUID");
   const handleResetPassword = async () => {
     try {
-      const response = await fetch("/api/auth/forgot-password", {
+      const response = await fetch(`${BASE_URL}/api/reset-password/${UID}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

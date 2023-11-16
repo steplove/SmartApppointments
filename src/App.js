@@ -20,6 +20,7 @@ import ForgotPassword from "pages/LandingPages/ForgotPassword";
 import ResetPassword from "pages/LandingPages/ResetPassword";
 // Material Kit 2 React routes
 import routes from "routes";
+
 import "./App.css";
 // import LiffComponent from "./LiffComponent";
 export default function App() {
