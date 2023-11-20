@@ -16,7 +16,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "./userprofile.css";
 import MenuList from "../MenuLists";
-import Img from "../../../assets/images/doctors/doctorA.jpg";
+import Img from "../../../assets/images/profile.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
 import Foots from "components/Foot";
