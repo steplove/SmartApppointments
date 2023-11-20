@@ -21,9 +21,9 @@ import routes from "routes";
 import bgImage from "assets/images/hospital.png";
 
 import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import Button from "@mui/material/Button";
 import MKTypography from "components/MKTypography";
 import Divider from "@mui/material/Divider";
@@ -411,7 +411,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <MobileDatePicker
+                            <DatePicker
                               label="วันเกิด"
                               value={formData.birthDate}
                               onAccept={(date) => {
