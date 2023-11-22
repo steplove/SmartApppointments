@@ -234,7 +234,14 @@ function Agreement() {
                 </Typography>
 
                 <FormControlLabel
-                  sx={{ fontSize: "12px", marginLeft: "10px" }}
+                  sx={{
+                    fontSize: "12px",
+                    marginLeft: "10px",
+                    color: "#2196f3", // สีน้ำเงิน
+                    "& .MuiSvgIcon-root": {
+                      color: "#2196f3", // สีน้ำเงิน
+                    },
+                  }}
                   control={
                     <Checkbox
                       checked={isChecked}
