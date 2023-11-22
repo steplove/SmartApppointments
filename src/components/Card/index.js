@@ -89,14 +89,6 @@ const ReactCardSlider = () => {
               />
               <p className="slider-card-title">{slide.Doctor_Name}</p>
               <p className="slider-card-description">{slide.Clinic_Name}</p>
-              {/* <Button
-                variant="contained"
-                color="primary"
-                style={{ borderRadius: "20px", margin: "10px 0" }}
-                onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
-              >
-                <Typography style={{ fontSize: "10px" }}>ดูรายละเอียด</Typography>
-              </Button> */}
             </div>
           ))}
         </div>
