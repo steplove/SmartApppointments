@@ -214,6 +214,7 @@ function Agreement() {
                   color: "white",
                   fontSize: "0.9rem",
                   fontWeight: "bold",
+                  marginLeft: "10px",
                 }}
               >
                 ข้อกำหนดและเงื่อนไขการใช้บริการ Smart Appointments (นัดหมายออนไลน์)
