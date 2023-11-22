@@ -225,6 +225,7 @@ function Agreement() {
                   overflowY: "auto",
                   maxHeight: "300px",
                   padding: "#808080",
+                  background: "#e2e2e2",
                 }}
               >
                 <Typography sx={{ fontWeight: "bold", fontSize: "12px", marginLeft: "10px" }}>
@@ -237,9 +238,9 @@ function Agreement() {
                   sx={{
                     fontSize: "12px",
                     marginLeft: "10px",
-                    color: "#2196f3", // สีน้ำเงิน
-                    "& .MuiSvgIcon-root": {
-                      color: "#2196f3", // สีน้ำเงิน
+                    "& .MuiCheckbox-root": {
+                      height: "20px", // ปรับความสูงตามที่คุณต้องการ
+                      width: "20px", // ปรับความกว้างตามที่คุณต้องการ
                     },
                   }}
                   control={
@@ -248,6 +249,16 @@ function Agreement() {
                       onChange={(e) => setChecked(e.target.checked)}
                       name="checked"
                       color="primary"
+                      sx={{
+                        border: "1px solid #000", // กรอบสี่เหลี่ยมสีดำ
+                        "&:hover": {
+                          border: "1px solid #000", // กรอบสี่เหลี่ยมสีดำเมื่อ hover
+                        },
+                        "&.Mui-checked": {
+                          border: "1px solid #000", // กรอบสี่เหลี่ยมสีดำเมื่อถูกเลือก
+                        },
+                        width: "0%",
+                      }}
                     />
                   }
                   label="ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ"
