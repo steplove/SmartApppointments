@@ -207,7 +207,6 @@ function Agreement() {
                 backgroundColor: "#01817a",
                 borderTopLeftRadius: "0.7rem",
                 borderTopRightRadius: "0.7rem",
-                marginLeft: "10px",
               }}
             >
               <MKTypography
@@ -235,7 +234,7 @@ function Agreement() {
                 </Typography>
 
                 <FormControlLabel
-                  sx={{ fontSize: "12px" }}
+                  sx={{ fontSize: "12px", marginLeft: "10px" }}
                   control={
                     <Checkbox
                       checked={isChecked}
