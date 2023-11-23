@@ -6,12 +6,22 @@ import Banner from "components/Banner";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
-
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+// import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+// Material Kit 2 React components
+import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
+// Images
+import bgImage from "assets/images/hospital.png";
+import MenuListHome from "./components/MenuListHome";
+import PackageListHome from "./components/PackageListHome";
 function Presentation() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
-      <MKBox
+      {/* <MKBox
         position="relative"
         top={0}
         left={0}
@@ -22,10 +32,74 @@ function Presentation() {
           backgroundColor: "#0fab84",
           filter: "blur(2px)", // คุณสามารถปรับค่าเบลอที่นี่
         }}
-      ></MKBox>
+      ></MKBox> */}
+      <MKBox component="header" position="relative">
+        <MKBox
+          display="flex"
+          alignItems="center"
+          minHeight="100vh"
+          sx={{
+            backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
+              `${linearGradient(
+                rgba(gradients.dark.main, 0.5),
+                rgba(gradients.dark.state, 0.5)
+              )}, url(${bgImage})`,
+
+            backgroundSize: "cover",
+
+            backgroundPosition: "center",
+          }}
+        >
+          <Container>
+            <Grid
+              container
+              item
+              xs={12}
+              md={7}
+              lg={6}
+              flexDirection="column"
+              justifyContent="center"
+            >
+              <MKTypography
+                variant="h1"
+                color="white"
+                mb={3}
+                sx={({ breakpoints, typography: { size } }) => ({
+                  [breakpoints.down("md")]: {
+                    fontSize: size["3xl"],
+                  },
+                })}
+              >
+                Kasemrad Sriburin
+              </MKTypography>
+
+              <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
+                Hospital You Can Trust. โรงพยาบาลที่คุณวางใจ
+              </MKTypography>
+
+              <Stack direction="row" spacing={1} mt={3}>
+                <MKButton color="white" href="/signIn">
+                  Get Started
+                </MKButton>
+
+                {/* <MKButton variant="text" color="white">
+                  Read more
+                </MKButton> */}
+              </Stack>
+            </Grid>
+          </Container>
+        </MKBox>
+      </MKBox>
+      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+        <MenuListHome />
+      </MKBox>
       <MKBox sx={{ marginBottom: "20px" }}>
         <Banner />
       </MKBox>
+      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+        <PackageListHome />
+      </MKBox>
+
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>

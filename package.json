@@ -3,8 +3,8 @@
   "name": "smart-appointments",
   "version": "2.1.0",
   "private": true,
-  "author": "Creative Tim",
-  "license": "See license in https://www.creative-tim.com/license",
+  "author": "",
+  "license": "",
   "description": "",
   "dependencies": {
     "@emotion/cache": "11.10.7",

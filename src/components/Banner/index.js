@@ -1,45 +1,69 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-
-const spanStyle = {
-  padding: "20px",
-  background: "#efefef",
-  color: "#000000",
-};
-const bannerStyles = {
-  marginTop: "0px", // ปรับค่าตามที่ต้องการ
-};
+import banner1 from "../../assets/images/banner1.jpg";
+import banner2 from "../../assets/images/banner2.jpg";
+import banner3 from "../../assets/images/banner3.jpg";
+import banner4 from "../../assets/images/banner4.jpg";
+// const spanStyle = {
+//   padding: "20px",
+//   background: "#efefef",
+//   color: "#000000",
+// };
+// const bannerStyles = {
+//   marginTop: "0px", // ปรับค่าตามที่ต้องการ
+// };
 const divStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundSize: "cover",
-  height: "400px",
+  height: "auto",
+  overflow: "hidden",
 };
+
+const imgStyle = {
+  objectFit: "cover",
+  maxWidth: "50%", // ควบคุมขนาดมากสุดในทิศทางความกว้าง
+  maxHeight: "50%", // ควบคุมขนาดมากสุดในทิศทางความสูง
+  width: "auto", // ทำให้ความกว้างของรูปภาพปรับตามความกว้างของพื้นที่ตัวกล่อง
+  height: "auto", // ทำให้ความสูงของรูปภาพปรับตามความสูงของพื้นที่ตัวกล่อง
+};
+
 const slideImages = [
   {
-    url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 1",
+    url: banner1,
   },
   {
-    url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-    caption: "Slide 2",
+    url: banner2,
   },
   {
-    url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 3",
+    url: banner3,
+  },
+  {
+    url: banner4,
   },
 ];
 
 const Slideshow = () => {
   return (
-    <div style={{ bannerStyles, zIndex: 3 }}>
-      <Slide>
+    <div
+      style={{
+        marginTop: "0px",
+        zIndex: 3,
+        width: "100%",
+      }}
+    >
+      <Slide style={{ width: "100%", height: "100%" }}>
         {slideImages.map((slideImage, index) => (
-          <div key={index}>
-            <div style={{ ...divStyle, backgroundImage: `url(${slideImage.url})` }}>
-              <span style={spanStyle}>{slideImage.caption}</span>
+          <div
+            key={index}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <div style={divStyle}>
+              <img src={slideImage.url} alt={`slide-${index}`} style={imgStyle} />
             </div>
           </div>
         ))}
