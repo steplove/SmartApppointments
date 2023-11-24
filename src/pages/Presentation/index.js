@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CookieConsent from "react-cookie-consent";
 import routes from "routes";
@@ -18,9 +18,10 @@ import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
 function Presentation() {
+  const [showNavbar] = useState(false);
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
+      {showNavbar && <DefaultNavbar routes={routes} sticky />}
       {/* <MKBox
         position="relative"
         top={0}
@@ -37,7 +38,7 @@ function Presentation() {
         <MKBox
           display="flex"
           alignItems="center"
-          minHeight="100vh"
+          minHeight="95vh"
           sx={{
             backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
               `${linearGradient(
@@ -90,7 +91,7 @@ function Presentation() {
           </Container>
         </MKBox>
       </MKBox>
-      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+      <MKBox sx={{ marginTop: "0px", marginBottom: "20px" }}>
         <MenuListHome />
       </MKBox>
       <MKBox sx={{ marginBottom: "20px" }}>

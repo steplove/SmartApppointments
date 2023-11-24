@@ -33,6 +33,7 @@ function DefaultFooter({ content }) {
   return (
     <MKBox component="footer">
       <Container>
+        {/* <MKTypography sx={{ borderBottom: "2px solid #562170", width: "100%" }}></MKTypography> */}
         <Grid container spacing={1}>
           {/* <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
             <MKBox>
@@ -56,6 +57,7 @@ function DefaultFooter({ content }) {
                 fontWeight="bold"
                 textTransform="capitalize"
                 mb={1}
+                sx={{ fontSize: "12px" }}
               >
                 {title}
 
@@ -75,7 +77,7 @@ function DefaultFooter({ content }) {
                         variant="button"
                         fontWeight="regular"
                         textTransform="capitalize"
-                        sx={{ fontSize: "12px" }}
+                        sx={{ fontSize: "10px" }}
                       >
                         {name}
                       </MKTypography>
@@ -96,7 +98,7 @@ function DefaultFooter({ content }) {
             </Grid>
           ))}
           <MKTypography sx={{ borderBottom: "4px solid #0bb288", width: "100%" }}></MKTypography>
-          <Grid item xs={12} sx={{ textAlign: "center", my: 3 }}>
+          <Grid item xs={12} sx={{ textAlign: "center", my: 1 }}>
             {copyright}
             <MKBox alignItems="center" mt={0}>
               {socials.map(({ icon, link }, key) => (
