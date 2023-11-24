@@ -127,11 +127,11 @@ function PackageListHome() {
       </Grid>
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <Button
+          xs={12}
           sx={{
             color: "#FFFFFF",
             background: "#0bb288",
             fontSize: "9px",
-            width: "9%", // ปรับขนาดตามที่คุณต้องการ
             minHeight: "20px", // ปรับขนาดตามที่คุณต้องการ
           }}
         >

@@ -38,7 +38,7 @@ function Presentation() {
         <MKBox
           display="flex"
           alignItems="center"
-          minHeight="95vh"
+          minHeight="94vh"
           sx={{
             backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
               `${linearGradient(
