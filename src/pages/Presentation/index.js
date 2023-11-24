@@ -75,7 +75,10 @@ function Presentation() {
               </MKTypography>
 
               <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
-                Hospital You Can Trust. โรงพยาบาลที่คุณวางใจ
+                Hospital You Can Trust.
+              </MKTypography>
+              <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
+                โรงพยาบาลที่คุณวางใจ
               </MKTypography>
 
               <Stack direction="row" spacing={1} mt={3}>
