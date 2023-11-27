@@ -53,6 +53,7 @@ function PackageListHome() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          fontSize: "25px",
         }}
       >
         แพ็กเกจแนะนำ
@@ -76,22 +77,26 @@ function PackageListHome() {
             key={packageItem.id}
             sx={{
               width: "100%", // ทำให้ Card มีความกว้างเต็มตาม container
-              maxWidth: 250, // หากต้องการกำหนดขนาดมากสุดสำหรับ Card
+              height: "100%",
+              display: "flex", // ทำให้ Card เป็น flex container
+              flexDirection: "column", // ให้ข้อมูลภายใน Card เรียงตั้งฉาก
+              maxWidth: 450, // หากต้องการกำหนดขนาดมากสุดสำหรับ Card
+              minHeight: 400,
               margin: "0 5px",
               marginBottom: "20px", // เพิ่มขีดเส้นระหว่าง Card
             }}
           >
             <CardMedia
               component="img"
-              height="80"
+              height="150"
               image={packageItem.image}
               alt="รายละเอียดรูปภาพ"
             />
             <CardContent>
-              <MKTypography sx={{ color: "#0bb288", fontSize: "15px" }}>
+              <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                 {packageItem.title}
               </MKTypography>
-              <MKTypography sx={{ color: "#0bb288", fontSize: "15px" }}>
+              <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                 {packageItem.subtitle}
               </MKTypography>
               <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
@@ -131,7 +136,7 @@ function PackageListHome() {
           sx={{
             color: "#FFFFFF",
             background: "#0bb288",
-            fontSize: "9px",
+            fontSize: "12px",
             minHeight: "20px", // ปรับขนาดตามที่คุณต้องการ
           }}
         >

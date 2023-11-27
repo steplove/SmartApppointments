@@ -5,70 +5,46 @@ import banner1 from "../../assets/images/banner1.jpg";
 import banner2 from "../../assets/images/banner2.jpg";
 import banner3 from "../../assets/images/banner3.jpg";
 import banner4 from "../../assets/images/banner4.jpg";
-// const spanStyle = {
-//   padding: "20px",
-//   background: "#efefef",
-//   color: "#000000",
-// };
-// const bannerStyles = {
-//   marginTop: "0px", // ปรับค่าตามที่ต้องการ
-// };
+import "./banner.css";
 const divStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  height: "auto",
+  height: "100%",
+  maxHeight: "600px",
+  maxWidth: "1200px",
   overflow: "hidden",
+  width: "100%",
+  margin: "0 auto",
 };
 
 const imgStyle = {
   objectFit: "cover",
-  maxWidth: "50%", // ควบคุมขนาดมากสุดในทิศทางความกว้าง
-  maxHeight: "50%", // ควบคุมขนาดมากสุดในทิศทางความสูง
-  width: "auto", // ทำให้ความกว้างของรูปภาพปรับตามความกว้างของพื้นที่ตัวกล่อง
-  height: "auto", // ทำให้ความสูงของรูปภาพปรับตามความสูงของพื้นที่ตัวกล่อง
+  width: "100%",
+  height: "100%",
 };
 
-const slideImages = [
-  {
-    url: banner1,
-  },
-  {
-    url: banner2,
-  },
-  {
-    url: banner3,
-  },
-  {
-    url: banner4,
-  },
-];
+const slideImages = [banner1, banner2, banner3, banner4];
 
 const Slideshow = () => {
+  const properties = {
+    duration: 5000,
+    transitionDuration: 500,
+    infinite: true,
+    indicators: true,
+  };
+
   return (
-    <div
-      style={{
-        marginTop: "0px",
-        zIndex: 3,
-        width: "100%",
-      }}
-    >
-      <Slide style={{ width: "100%", height: "100%" }}>
-        {slideImages.map((slideImage, index) => (
-          <div
-            key={index}
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-          >
-            <div style={divStyle}>
-              <img src={slideImage.url} alt={`slide-${index}`} style={imgStyle} />
-            </div>
+    <Slide {...properties}>
+      {slideImages.map((image, index) => (
+        <div key={index}>
+          <div style={divStyle}>
+            <img src={image} alt={`slide-${index}`} style={imgStyle} />
           </div>
-        ))}
-      </Slide>
-    </div>
+        </div>
+      ))}
+    </Slide>
   );
 };
+
 export default Slideshow;

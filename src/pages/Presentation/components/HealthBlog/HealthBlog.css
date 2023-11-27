@@ -1,20 +1,19 @@
-#main-slider-container1 {
+#main-slider-container {
   width: 100%;
   height: 360px;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
-#slider1 {
+#slider {
   width: 100%;
-  height: 100%;
+  height: 360px;
   white-space: nowrap;
   overflow-x: scroll;
   scrollbar-width: none;
   scroll-behavior: smooth;
 }
-#main-slider-container1 {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
+
 .slider-icon.left,
 .slider-icon.right {
   background: rgb(255, 255, 255);
@@ -48,9 +47,9 @@
 .slider-icon.right:hover {
   opacity: 1;
 }
-.slider-card1 {
-  width: 100%;
-  height: 100%;
+.slider-card {
+  width: 270px;
+  height: 320px;
   background: white;
   border-radius: 10px;
   display: inline-block;
@@ -58,15 +57,13 @@
   margin-right: 5px;
   cursor: pointer;
   margin-top: 10px;
-  flex-shrink: 0;
 }
-.slider-card-image1 {
+.slider-card-image {
   width: 100%;
-  height: 100%;
+  height: 220px;
   background: rgb(240, 240, 240);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  margin: 0;
 }
 .link-list-doctor {
   left: 0;
@@ -87,11 +84,11 @@
 .title-name-doctor a {
   margin-left: auto;
 }
-
-/* .react-slideshow-container .each-slide .each-indicator {
-  width: 50px;
-  height: 50px;
-  margin: 0 5px; 
-  background-color: #112882;
-  border-radius: 50%; 
-} */
+.read-more-link {
+  color: #0bb288; /* สีลิงก์ */
+  text-decoration: none; /* ไม่ให้มีขีดเส้นใต้ลิงก์ */
+  font-weight: bold;
+  display: block;
+  margin-top: 10px; /* กำหนดระยะห่างด้านบนของลิงก์ */
+  font-size: "10px";
+}

@@ -17,6 +17,7 @@ import MKTypography from "components/MKTypography";
 import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
+import HealthBlog from "./components/HealthBlog";
 function Presentation() {
   const [showNavbar] = useState(false);
   return (
@@ -94,7 +95,7 @@ function Presentation() {
           </Container>
         </MKBox>
       </MKBox>
-      <MKBox sx={{ marginTop: "0px", marginBottom: "20px" }}>
+      <MKBox sx={{ marginBottom: "20px" }}>
         <MenuListHome />
       </MKBox>
       <MKBox sx={{ marginBottom: "20px" }}>
@@ -103,7 +104,9 @@ function Presentation() {
       <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <PackageListHome />
       </MKBox>
-
+      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+        <HealthBlog />
+      </MKBox>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>

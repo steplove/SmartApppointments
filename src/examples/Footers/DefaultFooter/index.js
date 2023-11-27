@@ -57,7 +57,7 @@ function DefaultFooter({ content }) {
                 fontWeight="bold"
                 textTransform="capitalize"
                 mb={1}
-                sx={{ fontSize: "12px" }}
+                sx={{ fontSize: "16px" }}
               >
                 {title}
 
@@ -77,7 +77,7 @@ function DefaultFooter({ content }) {
                         variant="button"
                         fontWeight="regular"
                         textTransform="capitalize"
-                        sx={{ fontSize: "10px" }}
+                        sx={{ fontSize: "14px" }}
                       >
                         {name}
                       </MKTypography>
