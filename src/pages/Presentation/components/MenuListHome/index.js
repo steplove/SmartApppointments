@@ -21,7 +21,7 @@ function MenuListHome() {
             style={{
               backgroundColor: "#af976d",
               padding: 2,
-              borderRadius: "0%",
+              borderRadius: "10px",
               margin: "0 auto",
               display: "flex",
               flexDirection: "column",
@@ -55,7 +55,7 @@ function MenuListHome() {
             style={{
               backgroundColor: "#0bb288",
               padding: 2,
-              borderRadius: "0%",
+              borderRadius: "10px",
               margin: "0 auto",
               display: "flex",
               flexDirection: "column",
@@ -89,7 +89,7 @@ function MenuListHome() {
             style={{
               backgroundColor: "#646569",
               padding: 2,
-              borderRadius: "0%",
+              borderRadius: "10px",
               margin: "0 auto",
               display: "flex",
               flexDirection: "column",

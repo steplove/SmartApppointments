@@ -93,7 +93,13 @@ function PackageListHome() {
               alt="รายละเอียดรูปภาพ"
             />
             <CardContent>
-              <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
+              <MKTypography
+                sx={{
+                  color: "#0bb288",
+                  fontSize: "17px",
+                  fontWeight: "bold",
+                }}
+              >
                 {packageItem.title}
               </MKTypography>
               <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
