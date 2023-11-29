@@ -1,11 +1,12 @@
 import React from "react";
-import { Card, CardContent, Grid, CardMedia, Button } from "@mui/material";
-import "./HealthBlog.css";
-import Blog1 from "../../../../assets/images/Blog1.png";
-import Blog2 from "../../../../assets/images/Blog2.jpg";
+import { Card, CardContent, Grid, CardMedia } from "@mui/material";
+import Blog1 from "../../../assets/images/Blog1.png";
+import Blog2 from "../../../assets/images/Blog2.jpg";
 import MKTypography from "components/MKTypography";
-
-const HealthBlog = () => {
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import MKBox from "components/MKBox";
+import footerRoutes from "footer.routes";
+function HealthBlogList() {
   const Blog = [
     {
       Blog_Name: "ทำความรู้จักกับโรคทางพันธุกรรรมที่ถ่ายทอดสู่ลูกได้",
@@ -27,24 +28,8 @@ const HealthBlog = () => {
     },
     // เพิ่มบทความต่อไปตามต้องการ
   ];
-
   return (
     <>
-      <p
-        style={{
-          variant: "button",
-          fontWeight: "bold",
-          textTransform: "capitalize",
-          marginBottom: "1",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          fontSize: "25px",
-        }}
-      >
-        บทความเกษมราษฎร์
-        <p style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></p>
-      </p>
       <Grid
         container
         xs={12}
@@ -102,21 +87,11 @@ const HealthBlog = () => {
           </Card>
         ))}
       </Grid>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <Button
-          xs={12}
-          sx={{
-            color: "#FFFFFF",
-            background: "#0bb288",
-            fontSize: "12px",
-            minHeight: "20px", // ปรับขนาดตามที่คุณต้องการ
-          }}
-        >
-          ดูบทความทั้งหมด
-        </Button>
-      </div>
+      <MKBox pt={6} px={1} mt={6}>
+        <DefaultFooter content={footerRoutes} />
+      </MKBox>
     </>
   );
-};
+}
 
-export default HealthBlog;
+export default HealthBlogList;

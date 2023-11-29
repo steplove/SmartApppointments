@@ -42,6 +42,12 @@ const packageData = [
 ];
 
 function PackageListHome() {
+  const packagesAll = () => {
+    window.location.href = "/packages";
+  };
+  const packagesDetail = () => {
+    window.location.href = "/packagesdetail";
+  };
   return (
     <>
       <p
@@ -129,6 +135,7 @@ function PackageListHome() {
                   textAlign: "center",
                   textDecoration: "underline",
                 }}
+                onClick={packagesDetail}
               >
                 ดูรายละเอียด
               </MKTypography>
@@ -145,6 +152,7 @@ function PackageListHome() {
             fontSize: "12px",
             minHeight: "20px", // ปรับขนาดตามที่คุณต้องการ
           }}
+          onClick={packagesAll}
         >
           ดูแพ็กเกจทั้งหมด
         </Button>

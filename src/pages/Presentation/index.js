@@ -17,7 +17,7 @@ import MKTypography from "components/MKTypography";
 import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
-import HealthBlog from "./components/HealthBlog";
+import HealthBlog from "./components/HealthBlogListHome";
 function Presentation() {
   const [showNavbar] = useState(false);
   return (

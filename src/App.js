@@ -18,7 +18,9 @@ import Main from "pages/LandingPages/Main";
 import Agree from "pages/LandingPages/Agree";
 import ForgotPassword from "pages/LandingPages/ForgotPassword";
 import Packages from "pages/LandingPages/Packages";
+import PackagesDetail from "pages/LandingPages/Packages/PackagesDetail";
 import ResetPassword from "pages/LandingPages/ResetPassword";
+import HealthBlogList from "pages/LandingPages/HealthBlogList";
 // Material Kit 2 React routes
 import routes from "routes";
 
@@ -62,6 +64,8 @@ export default function App() {
           <Route path="/bookinghistory" element={<BookingHistory />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/packages" element={<Packages />} />
+          <Route path="/packagesdetail" element={<PackagesDetail />} />
+          <Route path="/healthblogList" element={<HealthBlogList />} />
           <Route path="/doctorList" element={<DoctorList />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
