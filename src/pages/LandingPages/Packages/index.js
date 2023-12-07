@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Container, Typography, Card, CardContent, CardMedia, Grid } from "@mui/material";
-// import PackageImage from "../../../../assets/images/550.jpg"; // เพิ่ม path ของรูปภาพ
 import MKTypography from "components/MKTypography";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
@@ -103,10 +102,10 @@ function Packages() {
             </Grid>
           ))}
         </Grid>
+        <MKBox pt={6} px={1} mt={6}>
+          <DefaultFooter content={footerRoutes} />
+        </MKBox>
       </Container>
-      <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox>
     </>
   );
 }

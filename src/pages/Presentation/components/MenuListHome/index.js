@@ -9,7 +9,12 @@ function MenuListHome() {
   const handleClickAppointment = () => {
     window.location.href = "/signIn";
   };
-
+  const handleClickSearchDoctor = () => {
+    window.location.href = "/doctorListHome"; // หรือ URL ที่คุณต้องการ
+  };
+  const handleClickContactUs = () => {
+    window.location.href = "/";
+  };
   const menuStyles = [
     {
       backgroundColor: "#af976d",
@@ -61,7 +66,15 @@ function MenuListHome() {
           <Grid item key={index}>
             <div
               id={`menu-item-${index}`}
-              onClick={() => handleClickAppointment()}
+              onClick={
+                index === 0
+                  ? handleClickAppointment
+                  : index === 1
+                  ? handleClickSearchDoctor
+                  : index === 2
+                  ? handleClickContactUs
+                  : ""
+              }
               style={{ ...menuStyle, ...style }}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}

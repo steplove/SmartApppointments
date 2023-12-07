@@ -14,6 +14,7 @@ import Appointments from "pages/LandingPages/Appointments";
 import BookingHistory from "pages/LandingPages/BookingHistory";
 import UserProfile from "pages/LandingPages/UserProfile";
 import DoctorList from "pages/LandingPages/DoctorList";
+import DoctorListHome from "pages/LandingPages/DoctorListHome";
 import Main from "pages/LandingPages/Main";
 import Agree from "pages/LandingPages/Agree";
 import ForgotPassword from "pages/LandingPages/ForgotPassword";
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="/packagesdetail/:code" element={<PackagesDetail />} />
           <Route path="/healthblogList" element={<HealthBlogList />} />
           <Route path="/doctorList" element={<DoctorList />} />
+          <Route path="/doctorListHome" element={<DoctorListHome />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword/:UID" element={<ResetPassword />} />

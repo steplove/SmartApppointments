@@ -33,7 +33,7 @@ const HealthBlog = () => {
 
   return (
     <>
-      <p
+      <span
         style={{
           variant: "button",
           fontWeight: "bold",
@@ -46,8 +46,8 @@ const HealthBlog = () => {
         }}
       >
         บทความเกษมราษฎร์
-        <p style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></p>
-      </p>
+        <span style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></span>
+      </span>
       <Grid
         container
         xs={12}

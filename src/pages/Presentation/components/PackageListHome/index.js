@@ -4,14 +4,12 @@ import MKTypography from "components/MKTypography";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 
-// CYwxCOLztPCHU82SN4NkNTNbYs2aRje7zZllEAHTpfn
 function PackageListHome() {
   const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showRandomPackages`);
   const [packageData, setPackageData] = useState([]);
   useEffect(() => {
     if (fetchedPackages && Array.isArray(fetchedPackages)) {
       setPackageData(fetchedPackages);
-      console.log(setPackageData(fetchedPackages), "setPackageDatasetPackageData");
     } else {
       console.log("error");
     }
@@ -25,12 +23,12 @@ function PackageListHome() {
 
   return (
     <>
-      <p
+      <span
         style={{
           variant: "button",
           fontWeight: "bold",
           textTransform: "capitalize",
-          mb: "1",
+          marginBottom: "1px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -38,10 +36,12 @@ function PackageListHome() {
         }}
       >
         แพ็กเกจแนะนำ
-        <p style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></p>
-      </p>
+        <span style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></span>
+      </span>
+
       <Grid
         container
+        item
         xs={12}
         md={6}
         lg={12}

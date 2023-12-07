@@ -86,10 +86,6 @@ function Presentation() {
                 <MKButton color="white" href="/signIn">
                   Get Started
                 </MKButton>
-
-                {/* <MKButton variant="text" color="white">
-                  Read more
-                </MKButton> */}
               </Stack>
             </Grid>
           </Container>

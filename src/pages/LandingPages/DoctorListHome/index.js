@@ -16,18 +16,15 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-// import { getStatusColor } from "components/StatusColor/getStatusColor";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import MenuList from "../MenuLists";
-// import HomeIcon from "@mui/icons-material/Home";
-// import PersonIcon from "@mui/icons-material/Person";
 import { BASE_URL } from "../../../constants/constants";
 import Pagination from "@mui/material/Pagination";
-import Foots from "components/Foot";
-
-// import PaginationItem from "@mui/material/PaginationItem";
+import MKBox from "components/MKBox";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import routes from "routes";
 import useFetch from "../../../hooks/useFetch";
 const theme = createTheme({
   breakpoints: {
@@ -49,7 +46,7 @@ const theme = createTheme({
   },
 });
 
-function DoctorList() {
+function DoctorListHome() {
   const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/doctors`);
   const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   const [doctors, setDoctors] = useState([]);
@@ -136,12 +133,17 @@ function DoctorList() {
   }
   return (
     <>
-      <MenuList />
+      <DefaultNavbar routes={routes} sticky />
       <ThemeProvider theme={theme}>
         <Typography
           variant="h5"
           gutterBottom
-          style={{ color: theme.palette.primary.main, marginBottom: "20px", textAlign: "center" }}
+          style={{
+            color: theme.palette.primary.main,
+            marginBottom: "20px",
+            textAlign: "center",
+            paddingTop: "10%", // ปรับตามความเหมาะสม
+          }}
         >
           รายชื่อแพทย์
         </Typography>
@@ -328,13 +330,11 @@ function DoctorList() {
           />
         </div>
       </ThemeProvider>
-      <br />
-      <br />
-      <br />
-      <br />
-      <Foots />
+      <MKBox pt={6} px={1} mt={6}>
+        <DefaultFooter content={footerRoutes} />
+      </MKBox>
     </>
   );
 }
 
-export default DoctorList;
+export default DoctorListHome;

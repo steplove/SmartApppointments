@@ -165,9 +165,15 @@ function Dashboard() {
                                   }}
                                 >
                                   {notification.EntryDatetime
-                                    ? notification.EntryDatetime.split("T")[0]
+                                    ? new Date(notification.EntryDatetime).toLocaleDateString(
+                                        "th-TH",
+                                        {
+                                          year: "numeric",
+                                          month: "long",
+                                          day: "numeric",
+                                        }
+                                      )
                                     : ""}
-                                  {notification.FinishStatus}
                                 </span>
                                 <span
                                   style={{
@@ -200,9 +206,15 @@ function Dashboard() {
                                   }}
                                 >
                                   {notification.EntryDatetime
-                                    ? notification.EntryDatetime.split("T")[0]
+                                    ? new Date(notification.EntryDatetime).toLocaleDateString(
+                                        "th-TH",
+                                        {
+                                          year: "numeric",
+                                          month: "long",
+                                          day: "numeric",
+                                        }
+                                      )
                                     : ""}
-                                  {notification.FinishStatus}
                                 </span>
                                 <span
                                   style={{
@@ -235,9 +247,15 @@ function Dashboard() {
                                   }}
                                 >
                                   {notification.EntryDatetime
-                                    ? notification.EntryDatetime.split("T")[0]
+                                    ? new Date(notification.EntryDatetime).toLocaleDateString(
+                                        "th-TH",
+                                        {
+                                          year: "numeric",
+                                          month: "long",
+                                          day: "numeric",
+                                        }
+                                      )
                                     : ""}
-                                  {notification.FinishStatus}
                                 </span>
                                 <span
                                   style={{
@@ -273,9 +291,15 @@ function Dashboard() {
                                 }}
                               >
                                 {notification.EntryDatetime
-                                  ? notification.EntryDatetime.split("T")[0]
+                                  ? new Date(notification.EntryDatetime).toLocaleDateString(
+                                      "th-TH",
+                                      {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                      }
+                                    )
                                   : ""}
-                                {notification.FinishStatus}
                               </span>
                               <span
                                 style={{

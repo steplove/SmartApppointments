@@ -13,9 +13,7 @@ function PackagesDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("1");
         const response = await fetch(`${BASE_URL}/api/searchPackageDetail/${code}`);
-        console.log("2");
         if (!response.ok) {
           throw new Error("Error fetching data");
         }

@@ -329,6 +329,7 @@ function Appointments() {
                           Date: newDate,
                         }));
                       }}
+                      format="D/MM/YYYY"
                       renderInput={(params) => <TextField {...params} fullWidth />}
                     />
                   </LocalizationProvider>
