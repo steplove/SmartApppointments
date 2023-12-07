@@ -64,7 +64,7 @@ export default function App() {
           <Route path="/bookinghistory" element={<BookingHistory />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/packages" element={<Packages />} />
-          <Route path="/packagesdetail" element={<PackagesDetail />} />
+          <Route path="/packagesdetail/:code" element={<PackagesDetail />} />
           <Route path="/healthblogList" element={<HealthBlogList />} />
           <Route path="/doctorList" element={<DoctorList />} />
           <Route path="/main" element={<Main />} />

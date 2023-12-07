@@ -1,53 +1,28 @@
 import { Card, CardContent, CardMedia, Grid, Button } from "@mui/material";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MKTypography from "components/MKTypography";
-import banner1 from "../../../../assets/images/550.jpg";
-import banner2 from "../../../../assets/images/Annual-Check.jpg";
-import banner3 from "../../../../assets/images/Pre-Marriage.jpg";
+import useFetch from "hooks/useFetch";
+import { BASE_URL } from "constants/constants";
 
-const packageData = [
-  {
-    id: 1,
-    image: banner1,
-    title: "วัคซีนไข้หวัดใหญ่ 4 สายพันธ์ุ",
-    subtitle: "Quadrivalent Influenza vaccine",
-    details: "ศูนย์สุขภาพเด็ก, ศูนย์การแพทย์ฉุกเฉิน",
-    contact:
-      "✅ติดต่อสอบถามเพิ่มเติมศูนย์สุขภาพโรงพยาบาลเกษมราษฎร ศรีบุรินทร์ ☎️053-910-999 ต่อ 621,167,168",
-    price: "550 บาท",
-    promoDuration: " 31 ธันวาคม 2566",
-  },
-  {
-    id: 2,
-    image: banner2,
-    title: "โปรแกรมตรวจสุขภาพ",
-    subtitle: "Program Annual-Check up",
-    details: "ศูนย์สุขภาพ ",
-    contact:
-      "✅ติดต่อสอบถามเพิ่มเติมศูนย์สุขภาพโรงพยาบาลเกษมราษฎร ศรีบุรินทร์ ☎️053-910-999 ต่อ 621,167,168",
-    price: "2,000 - 14,000 บาท",
-    promoDuration: " 31 ธันวาคม 2566",
-  },
-  {
-    id: 3,
-    image: banner3,
-    title: "ตรวจสุขภาพก่อนแต่งงาน ",
-    subtitle: "Pre-Marriage Program",
-    details: "ศูนย์สุขภาพ ",
-    contact:
-      "✅ติดต่อสอบถามเพิ่มเติมศูนย์สุขภาพโรงพยาบาลเกษมราษฎร ศรีบุรินทร์ ☎️053-910-999 ต่อ 621,167,168",
-    price: " 2,800-5,200 บาท",
-    promoDuration: " 31 ธันวาคม 2566",
-  },
-];
-
+// CYwxCOLztPCHU82SN4NkNTNbYs2aRje7zZllEAHTpfn
 function PackageListHome() {
+  const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showRandomPackages`);
+  const [packageData, setPackageData] = useState([]);
+  useEffect(() => {
+    if (fetchedPackages && Array.isArray(fetchedPackages)) {
+      setPackageData(fetchedPackages);
+      console.log(setPackageData(fetchedPackages), "setPackageDatasetPackageData");
+    } else {
+      console.log("error");
+    }
+  }, [fetchedPackages]);
   const packagesAll = () => {
     window.location.href = "/packages";
   };
-  const packagesDetail = () => {
-    window.location.href = "/packagesdetail";
+  const packagesDetail = (code) => {
+    window.location.href = `/packagesdetail/${code}`;
   };
+
   return (
     <>
       <p
@@ -80,7 +55,7 @@ function PackageListHome() {
       >
         {packageData.map((packageItem) => (
           <Card
-            key={packageItem.id}
+            key={packageItem.packageCode}
             sx={{
               width: "100%", // ทำให้ Card มีความกว้างเต็มตาม container
               height: "100%",
@@ -95,7 +70,7 @@ function PackageListHome() {
             <CardMedia
               component="img"
               height="150"
-              image={packageItem.image}
+              image={`${BASE_URL}/${packageItem.packageImgBanner}`}
               alt="รายละเอียดรูปภาพ"
             />
             <CardContent>
@@ -106,26 +81,28 @@ function PackageListHome() {
                   fontWeight: "bold",
                 }}
               >
-                {packageItem.title}
+                {packageItem.packageName}
               </MKTypography>
               <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                {packageItem.subtitle}
+                {packageItem.packageNameEN}
               </MKTypography>
               <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
               <MKTypography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
-                {packageItem.details}
+                {packageItem.packagesDetail}
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                {packageItem.contact}
+                {packageItem.packageContact}
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 ราคา:{" "}
-                <span style={{ color: "#ff0000", fontSize: "14px" }}>{packageItem.price}</span>
+                <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                  {packageItem.packagePrice}
+                </span>
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
                 ระยะเวลาโปรโมชั่น:
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                  {packageItem.promoDuration}
+                  {new Date(packageItem.promoEndDate).toLocaleDateString()}
                 </span>
               </MKTypography>
               <MKTypography
@@ -134,8 +111,9 @@ function PackageListHome() {
                   fontSize: "15px",
                   textAlign: "center",
                   textDecoration: "underline",
+                  cursor: "pointer",
                 }}
-                onClick={packagesDetail}
+                onClick={() => packagesDetail(packageItem.packageCode)}
               >
                 ดูรายละเอียด
               </MKTypography>

@@ -1,42 +1,88 @@
-import React from "react";
-import { Container, Typography, Card, CardContent, CardMedia, Button } from "@mui/material";
-import PackageImage from "../../../../assets/images/550.jpg"; // เพิ่ม path ของรูปภาพ
+import React, { useEffect, useState } from "react";
+import { Container, Typography, Card, CardContent, CardMedia, Grid } from "@mui/material";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
+import MKBox from "components/MKBox";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "constants/constants";
 
 function PackagesDetail() {
+  const { code } = useParams();
+  const [selectedPackage, setSelectedPackage] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("1");
+        const response = await fetch(`${BASE_URL}/api/searchPackageDetail/${code}`);
+        console.log("2");
+        if (!response.ok) {
+          throw new Error("Error fetching data");
+        }
+        const data = await response.json();
+
+        const promoEndDate = new Date(data.promoEndDate).toLocaleDateString();
+
+        // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
+        setSelectedPackage({ ...data, promoEndDate });
+      } catch (error) {
+        console.error("Error:", error.message);
+      }
+    };
+
+    fetchData();
+  }, [code]);
+
   return (
-    <Container maxWidth="md" sx={{ paddingTop: 4, paddingBottom: 4 }}>
-      <Typography variant="h4" sx={{ marginBottom: 2 }}>
-        รายละเอียดแพ็คเกจ
-      </Typography>
-
-      <Card>
-        <CardMedia component="img" height="300" image={PackageImage} alt="รูปภาพแพ็คเกจ" />{" "}
-        {/* เพิ่มรูปภาพ */}
-        <CardContent>
-          <Typography variant="h5" sx={{ marginBottom: 2 }}>
-            ชื่อแพ็คเกจ
-          </Typography>
-          <Typography variant="subtitle1" sx={{ marginBottom: 2, color: "#0bb288" }}>
-            ชื่อย่อแพ็คเกจ
-          </Typography>
-          <Typography variant="body1" sx={{ marginBottom: 2 }}>
-            คำอธิบายแพ็คเกจ ที่นี่คือส่วนที่บอกถึงสิ่งที่รวมอยู่ในแพ็คเกจ
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ marginBottom: 2 }}>
-            ข้อมูลเพิ่มเติมหรือรายละเอียดเพิ่มเติมเกี่ยวกับแพ็คเกจสามารถเพิ่มที่นี่
-          </Typography>
-          <Typography variant="body1" sx={{ color: "#ff0000" }}>
-            ราคา: 550 บาท
-          </Typography>
-
-          {/* เพิ่มข้อมูลหรือปุ่มอื่น ๆ ตามที่คุณต้องการที่นี่ */}
-
-          <Button variant="contained" color="primary" sx={{ marginTop: 2 }}>
-            จองเดี๋ยวนี้
-          </Button>
-        </CardContent>
-      </Card>
-    </Container>
+    <>
+      <Container maxWidth="md" sx={{ paddingTop: 4, paddingBottom: 4 }}>
+        {selectedPackage ? (
+          <>
+            <Typography variant="h4" sx={{ marginBottom: 2 }}>
+              {selectedPackage.packageName}
+            </Typography>
+            <Grid container justifyContent="center">
+              <Grid item lg={12}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="auto"
+                    image={`${BASE_URL}/${selectedPackage.packageImage}`}
+                    alt="รูปภาพแพ็คเกจ"
+                  />
+                  <CardContent>
+                    <Grid container spacing={2}>
+                      <Grid item lg={6}>
+                        <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                          {selectedPackage.packageName}
+                        </Typography>
+                        <Typography variant="subtitle1" sx={{ marginBottom: 2, color: "#808080" }}>
+                          {selectedPackage.packageDetails}
+                        </Typography>
+                        <Typography variant="body1" sx={{ color: "#ff0000" }}>
+                          ราคา: {selectedPackage.packagePrice} บาท
+                        </Typography>
+                        <Typography variant="body1">
+                          วันหยุดอายุ: {selectedPackage.promoEndDate}
+                        </Typography>
+                      </Grid>
+                      <Grid item lg={6}>
+                        {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
+                      </Grid>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
+          </>
+        ) : (
+          <Typography variant="h4">Loading...</Typography>
+        )}
+      </Container>
+      <MKBox pt={6} px={1} mt={6}>
+        <DefaultFooter content={footerRoutes} />
+      </MKBox>
+    </>
   );
 }
 
