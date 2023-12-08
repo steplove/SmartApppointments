@@ -35,34 +35,63 @@ export default {
     {
       name: "เกี่ยวกับเรา",
       items: [
-        { name: "ผู้บริหาร", href: "#" },
-        { name: "สาส์นจากประธานกรรมการ", href: "#" },
-        { name: "สาส์นจากผู้อำนวยการโรงพยาบาล", href: "#" },
-        { name: "ประวัติโรงพยาบาล", href: "#" },
-        { name: "วิสัยทัศน์และพันธกิจ", href: "#" },
-        { name: "รางวัลแห่งความสำเร็จ", href: "#" },
+        { name: "ผู้บริหาร", href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/ceo" },
+        {
+          name: "สาส์นจากประธานกรรมการ",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/message_from_ceo",
+        },
+        {
+          name: "สาส์นจากผู้อำนวยการโรงพยาบาล",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/message_from_hospital_director",
+        },
+        {
+          name: "ประวัติโรงพยาบาล",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/history",
+        },
+        {
+          name: "วิสัยทัศน์และพันธกิจ",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/vision_and_mission",
+        },
+        {
+          name: "รางวัลแห่งความสำเร็จ",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/accreditation",
+        },
       ],
     },
     {
       name: "ศูนย์บริการทางการแพทย์",
-      items: [{ name: "", href: "#" }],
+      items: [
+        {
+          name: "ศูนย์บริการทางการแพทย์",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/clinics_and_centers",
+        },
+      ],
     },
     {
       name: "บริการของเรา",
       items: [
-        { name: "บริการห้องพัก/สิ่งอำนวยความสะดวก", href: "#" },
-        { name: "แพ็คเกจ&โปรโมชั่น", href: "#" },
-        { name: "บทความเพื่อสุขภาพ", href: "#" },
-        { name: "ข่าวสาร", href: "#" },
+        {
+          name: "บริการห้องพัก/สิ่งอำนวยความสะดวก",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/services",
+        },
+        {
+          name: "แพ็คเกจ&โปรโมชั่น",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/packages_and_promotions",
+        },
+        {
+          name: "บทความเพื่อสุขภาพ",
+          href: "https://www.kasemrad.co.th/Sriburin/th/site/health_articles",
+        },
+        { name: "ข่าวสาร", href: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
       ],
     },
     {
       name: "ค้นหาแพทย์",
-      items: [{ name: "", href: "#" }],
+      items: [{ name: "แพทย์", href: "/doctorListHome" }],
     },
     {
       name: "ติดต่อ/สมัครงาน",
-      items: [{ name: "", href: "#" }],
+      items: [{ name: "ติดต่อ", href: "https://www.kasemrad.co.th/Sriburin/th/site/contact_us" }],
     },
   ],
   copyright: (

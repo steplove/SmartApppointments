@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
-import banner1 from "../../assets/images/banner1.jpg";
-import banner2 from "../../assets/images/banner2.jpg";
-import banner3 from "../../assets/images/banner3.jpg";
-import banner4 from "../../assets/images/banner4.jpg";
 import "./banner.css";
+import { BASE_URL } from "../../constants/constants";
+import useFetch from "../../hooks/useFetch";
+
 const divStyle = {
   display: "flex",
   alignItems: "center",
@@ -24,9 +23,16 @@ const imgStyle = {
   height: "100%",
 };
 
-const slideImages = [banner1, banner2, banner3, banner4];
-
 const Slideshow = () => {
+  const { data: fetchedBanner = [] } = useFetch(`${BASE_URL}/api/showBanners`);
+  const [imgBanner, setImgBanner] = useState();
+
+  useEffect(() => {
+    if (fetchedBanner && Array.isArray(fetchedBanner) && fetchedBanner.length > 0) {
+      setImgBanner(fetchedBanner);
+    }
+  }, [fetchedBanner]);
+
   const properties = {
     duration: 5000,
     transitionDuration: 500,
@@ -36,13 +42,14 @@ const Slideshow = () => {
 
   return (
     <Slide {...properties}>
-      {slideImages.map((image, index) => (
-        <div key={index}>
-          <div style={divStyle}>
-            <img src={image} alt={`slide-${index}`} style={imgStyle} />
+      {imgBanner &&
+        imgBanner.map((image, index) => (
+          <div key={index}>
+            <div style={divStyle}>
+              <img src={`${BASE_URL}/${image.ImageName}`} alt={""} style={imgStyle} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </Slide>
   );
 };
