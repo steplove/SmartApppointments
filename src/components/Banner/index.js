@@ -1,61 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
-import "./banner.css";
-import { BASE_URL } from "../../constants/constants";
-import useFetch from "../../hooks/useFetch";
-
-const divStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: "100%",
-  maxHeight: "600px",
-  maxWidth: "1200px",
-  overflow: "hidden",
-  width: "100%",
-  margin: "0 auto",
-};
-
-const imgStyle = {
-  objectFit: "cover",
-  width: "100%",
-  height: "100%",
-};
-
-const Slideshow = () => {
-  const { data: fetchedBanner = [] } = useFetch(`${BASE_URL}/api/showBanners`);
-  const [imgBanner, setImgBanner] = useState();
-
-  useEffect(() => {
-    if (fetchedBanner && Array.isArray(fetchedBanner)) {
-      setImgBanner(fetchedBanner);
-    }
-  }, [fetchedBanner]);
-
-  const properties = {
-    duration: 5000,
-    transitionDuration: 500,
-    infinite: true,
-    indicators: true,
-  };
-
+import React from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import banner1 from "../../assets/images/banner1.jpg";
+import banner2 from "../../assets/images/banner2.jpg";
+import banner3 from "../../assets/images/banner3.jpg";
+function Banners() {
+  
   return (
-    <Slide {...properties}>
-      {imgBanner &&
-        imgBanner.map((image) => {
-          const imageUrl = `${BASE_URL}/${image.ImageName}`;
-          console.log(imageUrl);
-          return (
-            <div key={image.BannerID}>
-              <div style={divStyle}>
-                <img src={imageUrl} alt="" style={imgStyle} />
-              </div>
-            </div>
-          );
-        })}
-    </Slide>
+    <Carousel>
+      <div>
+        <img src={banner1} />
+        <p className="legend">Legend 1</p>
+      </div>
+      <div>
+        <img src={banner2} />
+        <p className="legend">Legend 2</p>
+      </div>
+      <div>
+        <img src={banner3} />
+        <p className="legend">Legend 3</p>
+      </div>
+    </Carousel>
   );
-};
+}
 
-export default Slideshow;
+export default Banners;
