@@ -5,13 +5,13 @@ import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 
 function PackageListHome() {
-  const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showRandomPackages`);
+  const { data: fetchedPackages = [], error } = useFetch(`${BASE_URL}/api/showRandomPackages`);
   const [packageData, setPackageData] = useState([]);
   useEffect(() => {
     if (fetchedPackages && Array.isArray(fetchedPackages)) {
       setPackageData(fetchedPackages);
     } else {
-      console.log("error");
+      console.log("error", error);
     }
   }, [fetchedPackages]);
   const packagesAll = () => {

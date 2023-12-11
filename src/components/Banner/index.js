@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import "./banner.css";
-import { BASE_URL } from "../../constants/constants";
 import useFetch from "../../hooks/useFetch";
+import { BASE_URL } from "../../constants/constants";
 
 const divStyle = {
   display: "flex",
@@ -28,7 +28,7 @@ const Slideshow = () => {
   const [imgBanner, setImgBanner] = useState();
 
   useEffect(() => {
-    if (fetchedBanner && Array.isArray(fetchedBanner) && fetchedBanner.length > 0) {
+    if (fetchedBanner && Array.isArray(fetchedBanner)) {
       setImgBanner(fetchedBanner);
     }
   }, [fetchedBanner]);
@@ -43,10 +43,10 @@ const Slideshow = () => {
   return (
     <Slide {...properties}>
       {imgBanner &&
-        imgBanner.map((image, index) => (
-          <div key={index}>
+        imgBanner.map((image) => (
+          <div key={image.BannerID}>
             <div style={divStyle}>
-              <img src={`${BASE_URL}/${image.ImageName}`} alt={""} style={imgStyle} />
+              <img src={`${BASE_URL}/${image.ImageName}`} alt="" style={imgStyle} />
             </div>
           </div>
         ))}
