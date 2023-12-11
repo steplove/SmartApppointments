@@ -20,6 +20,7 @@ import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
 function Presentation() {
   const [showNavbar] = useState(false);
+  const slides = [];
   return (
     <>
       {showNavbar && <DefaultNavbar routes={routes} sticky />}
@@ -95,7 +96,7 @@ function Presentation() {
         <MenuListHome />
       </MKBox>
       <MKBox sx={{ marginBottom: "20px" }}>
-        <Banner />
+        <Banner slides={slides} />
       </MKBox>
       <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <PackageListHome />

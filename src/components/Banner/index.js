@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import banner1 from "../../assets/images/banner1.jpg";
-import banner2 from "../../assets/images/banner2.jpg";
-import banner3 from "../../assets/images/banner3.jpg";
+import { BASE_URL } from "../../constants/constants";
+import useFetch from "../../hooks/useFetch";
+
 function Banners() {
-  
+  const { data: fetchedBanner = [] } = useFetch(`${BASE_URL}/api/showBanners`);
+  const [imgBanner, setImgBanner] = useState([]);
+
+  useEffect(() => {
+    if (fetchedBanner && Array.isArray(fetchedBanner)) {
+      setImgBanner(fetchedBanner);
+    }
+  }, [fetchedBanner]);
+
   return (
-    <Carousel>
-      <div>
-        <img src={banner1} />
-        <p className="legend">Legend 1</p>
-      </div>
-      <div>
-        <img src={banner2} />
-        <p className="legend">Legend 2</p>
-      </div>
-      <div>
-        <img src={banner3} />
-        <p className="legend">Legend 3</p>
-      </div>
+    <Carousel
+      interval={3000}
+      autoPlay={true}
+      showArrows={true}
+      showThumbs={false}
+      centerMode={false}
+      infiniteLoop={true}
+      showStatus={false}
+    >
+      {imgBanner.map((image) => (
+        <div key={image.BannerID}>
+          <img src={`${BASE_URL}/${image.ImageName}`} alt="" />
+        </div>
+      ))}
     </Carousel>
   );
 }
