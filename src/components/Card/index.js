@@ -11,7 +11,28 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Hidden,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 800,
+      md: 1280,
+      lg: 1920,
+      xl: 2560,
+    },
+  },
+  palette: {
+    primary: {
+      main: "#6A0DAD", // สีม่วงเข้ม
+    },
+    secondary: {
+      main: "#D1C4E9", // สีม่วงอ่อน
+    },
+  },
+});
 const ReactCardSlider = () => {
   const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/randomDoctors`);
   const [doctors, setDoctors] = useState([]);
@@ -67,33 +88,69 @@ const ReactCardSlider = () => {
   }
   return (
     <>
-      <div className="link-list-doctor">
-        <p className="title-name-doctor">รายชื่อแพทย์</p>
-        <a href="/doctorList" className="title-name-doctor">
-          ดูทั้งหมด
-        </a>
-      </div>
-      <div id="main-slider-container">
-        <MdChevronLeft className="slider-icon left" size={50} onClick={slideLeft} />
-        <div id="slider">
-          {doctors.map((slide, index) => (
-            <div
-              key={index}
-              className="slider-card"
-              onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
-            >
-              <img
-                src={`${BASE_URL}/${slide.Doctor_IMG}`}
-                alt={slide.Doctor_Name}
-                className="slider-card-image"
-              />
-              <p className="slider-card-title">{slide.Doctor_Name}</p>
-              <p className="slider-card-description">{slide.Clinic_Name}</p>
+      <ThemeProvider theme={theme}>
+        {/* Desktop/Tablet View */}
+        <Hidden smDown>
+          <div className="link-list-doctor">
+            <p className="title-name-doctor">รายชื่อแพทย์</p>
+            <a href="/doctorList" className="title-name-doctor">
+              ดูทั้งหมด
+            </a>
+          </div>
+          <div id="main-slider-container">
+            <MdChevronLeft className="slider-icon left" size={50} onClick={slideLeft} />
+            <div id="slider">
+              {doctors.map((slide, index) => (
+                <div
+                  key={index}
+                  className="slider-card"
+                  onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
+                >
+                  <img
+                    src={`${BASE_URL}/${slide.Doctor_IMG}`}
+                    alt={slide.Doctor_Name}
+                    className="slider-card-image"
+                  />
+                  <p className="slider-card-title">{slide.Doctor_Name}</p>
+                  <p className="slider-card-description">{slide.Clinic_Name}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <MdChevronRight className="slider-icon right" size={50} onClick={slideRight} />
-      </div>
+            <MdChevronRight className="slider-icon right" size={50} onClick={slideRight} />
+          </div>
+        </Hidden>
+
+        {/* Mobile View */}
+        <Hidden smUp>
+          <div className="link-list-doctor">
+            <p className="title-name-doctor">รายชื่อแพทย์</p>
+            <a href="/doctorList" className="title-name-doctor">
+              ดูทั้งหมด
+            </a>
+          </div>
+          <div id="main-slider-container">
+            <MdChevronLeft className="slider-icon left" size={50} onClick={slideLeft} />
+            <div id="slider">
+              {doctors.map((slide, index) => (
+                <div
+                  key={index}
+                  className="slider-card"
+                  onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
+                >
+                  <img
+                    src={`${BASE_URL}/${slide.Doctor_IMG}`}
+                    alt={slide.Doctor_Name}
+                    className="slider-card-image"
+                  />
+                  <p className="slider-card-title">{slide.Doctor_Name}</p>
+                  <p className="slider-card-description">{slide.Clinic_Name}</p>
+                </div>
+              ))}
+            </div>
+            <MdChevronRight className="slider-icon right" size={50} onClick={slideRight} />
+          </div>
+        </Hidden>
+      </ThemeProvider>
       <Dialog open={openDialog} onClose={handleDialogClose}>
         <DialogTitle>รายละเอียดแพทย์</DialogTitle>
         <DialogContent>

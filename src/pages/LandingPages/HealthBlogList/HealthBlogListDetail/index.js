@@ -27,23 +27,22 @@ const theme = createTheme({
     },
   },
 });
-function PackagesDetail() {
+function HealthBlogListDetail() {
   const { code } = useParams();
-  const [selectedPackage, setSelectedPackage] = useState(null);
-
+  const [selectedBlog, setSelectedBlog] = useState(null);
+  console.log(code);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/searchPackageDetail/${code}`);
+        const response = await fetch(`${BASE_URL}/api/searchBlogsDetail/${code}`);
         if (!response.ok) {
           throw new Error("Error fetching data");
         }
         const data = await response.json();
 
-        const promoEndDate = new Date(data.promoEndDate).toLocaleDateString();
-
         // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
-        setSelectedPackage({ ...data, promoEndDate });
+        setSelectedBlog(data);
+        console.log(data, "fdaaaaaaa");
       } catch (error) {
         console.error("Error:", error.message);
       }
@@ -59,10 +58,10 @@ function PackagesDetail() {
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "8%", paddingBottom: 4 }}>
-            {selectedPackage ? (
+            {selectedBlog ? (
               <>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}>
-                  {selectedPackage.packageName}
+                  {selectedBlog.Blog_Name}
                 </Typography>
                 <Grid container justifyContent="center">
                   <Grid item lg={12}>
@@ -70,26 +69,20 @@ function PackagesDetail() {
                       <CardMedia
                         component="img"
                         height="auto"
-                        image={`${BASE_URL}/${selectedPackage.packageImage}`}
+                        image={`${BASE_URL}/${selectedBlog.Blog_Image}`}
                         alt="รูปภาพแพ็คเกจ"
                       />
                       <CardContent>
                         <Grid container spacing={2}>
-                          <Grid item lg={6}>
+                          <Grid item lg={12}>
                             <Typography variant="h5" sx={{ marginBottom: 2 }}>
-                              {selectedPackage.packageName}
+                              {selectedBlog.Blog_Name}
                             </Typography>
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              {selectedPackage.packageDetails}
-                            </Typography>
-                            <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              ราคา: {selectedPackage.packagePrice} บาท
-                            </Typography>
-                            <Typography variant="body1">
-                              วันหยุดอายุ: {selectedPackage.promoEndDate}
+                              {selectedBlog.Blog_Detail}
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -110,10 +103,10 @@ function PackagesDetail() {
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "25%", paddingBottom: 4 }}>
-            {selectedPackage ? (
+            {selectedBlog ? (
               <>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>
-                  {selectedPackage.packageName}
+                  {selectedBlog.Blog_Name}
                 </Typography>
                 <Grid container justifyContent="center">
                   <Grid item lg={12}>
@@ -121,26 +114,20 @@ function PackagesDetail() {
                       <CardMedia
                         component="img"
                         height="auto"
-                        image={`${BASE_URL}/${selectedPackage.packageImage}`}
+                        image={`${BASE_URL}/${selectedBlog.Blog_Image}`}
                         alt="รูปภาพแพ็คเกจ"
                       />
                       <CardContent>
                         <Grid container spacing={2}>
                           <Grid item lg={6}>
                             <Typography variant="h5" sx={{ marginBottom: 2 }}>
-                              {selectedPackage.packageName}
+                              {selectedBlog.Blog_Name}
                             </Typography>
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              {selectedPackage.packageDetails}
-                            </Typography>
-                            <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              ราคา: {selectedPackage.packagePrice} บาท
-                            </Typography>
-                            <Typography variant="body1">
-                              วันหยุดอายุ: {selectedPackage.promoEndDate}
+                              {selectedBlog.Blog_Detail}
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -165,4 +152,4 @@ function PackagesDetail() {
   );
 }
 
-export default PackagesDetail;
+export default HealthBlogListDetail;

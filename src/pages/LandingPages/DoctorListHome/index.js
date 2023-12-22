@@ -106,7 +106,7 @@ function DoctorListHome() {
     setOpenDialog(false);
   };
   const [currentPage, setCurrentPage] = useState(0);
-  const perPage = 5; // จำนวนรายการต่อหน้า
+  const perPage = 8; // จำนวนรายการต่อหน้า
   const defaultDoctor = ["12943", "เเพทย์หญิงกชกร สันติมาลาพงษ์", "KOTCHAKORN SANTIMALAPONG"];
   let dataToPaginate = doctors || defaultDoctor; // กำหนดตัวแปรเริ่มต้นให้มีข้อมูลจาก doctors
   const paginatedData = dataToPaginate.slice(currentPage * perPage, (currentPage + 1) * perPage);
@@ -134,120 +134,166 @@ function DoctorListHome() {
   return (
     <>
       <DefaultNavbar routes={routes} sticky />
+      <Grid style={{ paddingTop: "5%" }}></Grid>
       <ThemeProvider theme={theme}>
-        <Typography
-          variant="h5"
-          gutterBottom
-          style={{
-            color: theme.palette.primary.main,
-            marginBottom: "20px",
-            textAlign: "center",
-            paddingTop: "10%", // ปรับตามความเหมาะสม
-          }}
-        >
-          รายชื่อแพทย์
-        </Typography>
-        <Grid
-          container
-          spacing={2}
-          alignItems="center"
-          justifyContent="center"
-          item
-          lg={8}
-          md={8}
-          xs={8}
-          sx={{ marginBottom: "20px", marginInline: "20%" }}
-        >
-          {/* คลินิก */}
-          <FormControl fullWidth variant="outlined">
-            <InputLabel>คลินิก</InputLabel>
-            <Select
-              label="คลินิก"
-              name="Clinic"
-              value={formData.Clinic}
-              style={{ height: "40px" }}
-              onChange={handleInputChange}
-            >
-              {clinics &&
-                clinics.length > 0 &&
-                clinics.map((clinicName) => (
-                  <MenuItem key={clinicName.Clinic_ID} value={clinicName.Clinic_ID}>
-                    {clinicName.Clinic_Name}{" "}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-          {/* แพทย์ */}
-        </Grid>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
+          <Typography
+            variant="h5"
+            gutterBottom
+            style={{
+              color: theme.palette.primary.main,
+              marginBottom: "20px",
+              textAlign: "center",
+            }}
+          >
+            รายชื่อแพทย์
+          </Typography>
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
+            item
+            lg={8}
+            md={8}
+            xs={8}
+            sx={{ marginBottom: "20px", marginInline: "20%" }}
+          >
+            {/* คลินิก */}
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>คลินิก</InputLabel>
+              <Select
+                label="คลินิก"
+                name="Clinic"
+                value={formData.Clinic}
+                style={{ height: "40px" }}
+                onChange={handleInputChange}
+              >
+                {clinics &&
+                  clinics.length > 0 &&
+                  clinics.map((clinicName) => (
+                    <MenuItem key={clinicName.Clinic_ID} value={clinicName.Clinic_ID}>
+                      {clinicName.Clinic_Name}{" "}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+            {/* แพทย์ */}
+          </Grid>
           {doctors.length === 0 ? (
             <Typography variant="h6" color="textSecondary" align="center">
               ไม่พบข้อมูลแพทย์ในรายการ
             </Typography>
           ) : (
-            paginatedData.map((doctor) => (
-              <Card
-                key={doctor.DoctorID}
-                spacing={2}
-                sx={{
-                  textAlign: "center",
-                  marginBottom: "50px",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  width: "400px",
-                  height: "700px",
-                  marginInline: "40%",
-                }}
-              >
-                <Avatar
-                  src={`${BASE_URL}/${doctor.Doctor_IMG}`}
-                  alt={doctor.Doctor_Name}
-                  style={{
-                    width: "300px",
-                    height: "500px",
-                    objectFit: "cover",
-                    objectPosition: "center center",
-                    borderRadius: "10px",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-                    display: "flex",
-                    marginLeft: "15%",
-                    marginTop: "10px",
-                  }}
-                />
-
-                <Grid item>
-                  <Typography variant="h6">{doctor.Doctor_Name}</Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1" color="textSecondary">
-                    {doctor.Clinic_Name}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="body1" color="textSecondary">
-                    ความชำนาญ: {doctor.Doctor_Specialty}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Button
-                    onClick={() =>
-                      handleDialogOpen(doctor.DoctorID, `${BASE_URL}/${doctor.Doctor_IMG}`)
-                    }
-                    variant="contained"
-                    color="primary"
-                    style={{ borderRadius: "20px" }}
+            <Grid container spacing={0} justifyContent="center">
+              {paginatedData.map((doctor) => (
+                <Grid item key={doctor.DoctorID} xs={12} sm={6} md={4} lg={3}>
+                  <Card
+                    sx={{
+                      textAlign: "center",
+                      marginBottom: "20px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      width: "400px",
+                      height: "700px",
+                      marginInline: "10%",
+                    }}
                   >
-                    ดูรายละเอียด
-                  </Button>
+                    <Avatar
+                      src={`${BASE_URL}/${doctor.Doctor_IMG}`}
+                      alt={doctor.Doctor_Name}
+                      style={{
+                        width: "300px",
+                        height: "500px",
+                        objectFit: "cover",
+                        objectPosition: "center center",
+                        borderRadius: "10px",
+                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                        display: "flex",
+                        marginLeft: "15%",
+                        marginTop: "10px",
+                      }}
+                    />
+
+                    <Grid item>
+                      <Typography variant="h6">{doctor.Doctor_Name}</Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1" color="textSecondary">
+                        {doctor.Clinic_Name}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Typography variant="body1" color="textSecondary">
+                        ความชำนาญ: {doctor.Doctor_Specialty}
+                      </Typography>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        onClick={() =>
+                          handleDialogOpen(doctor.DoctorID, `${BASE_URL}/${doctor.Doctor_IMG}`)
+                        }
+                        variant="contained"
+                        color="primary"
+                        style={{ borderRadius: "20px" }}
+                      >
+                        ดูรายละเอียด
+                      </Button>
+                    </Grid>
+                  </Card>
                 </Grid>
-              </Card>
-            ))
+              ))}
+            </Grid>
           )}
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
+          <Typography
+            variant="h5"
+            gutterBottom
+            style={{
+              color: theme.palette.primary.main,
+              marginBottom: "20px",
+              textAlign: "center",
+              marginTop: "18%",
+            }}
+          >
+            รายชื่อแพทย์
+          </Typography>
+          <Grid
+            container
+            spacing={2}
+            alignItems="center"
+            justifyContent="center"
+            item
+            lg={8}
+            md={8}
+            xs={8}
+            sx={{ marginBottom: "20px", marginInline: "20%" }}
+          >
+            {/* คลินิก */}
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>คลินิก</InputLabel>
+              <Select
+                label="คลินิก"
+                name="Clinic"
+                value={formData.Clinic}
+                style={{ height: "40px" }}
+                onChange={handleInputChange}
+              >
+                {clinics &&
+                  clinics.length > 0 &&
+                  clinics.map((clinicName) => (
+                    <MenuItem key={clinicName.Clinic_ID} value={clinicName.Clinic_ID}>
+                      {clinicName.Clinic_Name}{" "}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+            {/* แพทย์ */}
+          </Grid>
           {doctors.length === 0 ? (
             <Typography variant="h6" color="textSecondary" align="center">
               ไม่พบข้อมูลแพทย์ในรายการ

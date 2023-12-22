@@ -287,8 +287,8 @@ function Register() {
                             row
                             aria-labelledby="id-passport-label"
                             name="identificationType"
-                            value={formData.identificationType}
                             onChange={handleInputChange}
+                            defaultValue={"IDCard"}
                           >
                             <FormControlLabel
                               value="IDCard"
@@ -307,9 +307,9 @@ function Register() {
                         <TextField
                           fullWidth
                           label={
-                            formData.identificationType === "IDCard"
-                              ? "เลขประจำตัวประชาชน"
-                              : "พาสปอร์ต"
+                            formData.identificationType === "passport"
+                              ? "พาสปอร์ต"
+                              : "เลขประจำตัวประชาชน"
                           }
                           name="identificationNumber"
                           variant="outlined"

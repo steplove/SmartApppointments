@@ -24,9 +24,11 @@ import PersonIcon from "@mui/icons-material/Person";
 import { BASE_URL } from "constants/constants";
 import useFetch from "hooks/useFetch";
 import Barcode from "react-barcode";
-import Foots from "components/Foot";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
+import MKBox from "components/MKBox";
 
 const theme = createTheme({
   breakpoints: {
@@ -95,17 +97,28 @@ function BookingHistory() {
     <>
       <MenuList />
       <ThemeProvider theme={theme}>
-        <Paper elevation={3} style={{ padding: "16px", marginTop: "16px", overflowX: "auto" }}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            style={{ color: theme.palette.primary.main, marginBottom: "20px" }}
+        {/* Desktop/Tablet View */}
+        <Hidden smDown>
+          <Paper
+            style={{
+              padding: "16px",
+              marginTop: "16px",
+              overflowX: "auto",
+              maxWidth: "70%",
+              margin: "auto",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            ประวัตินัดหมาย
-          </Typography>
-
-          {/* Desktop/Tablet View */}
-          <Hidden smDown>
+            <Typography
+              variant="h5"
+              gutterBottom
+              style={{ color: theme.palette.primary.main, marginBottom: "20px" }}
+            >
+              ประวัตินัดหมาย
+            </Typography>
             <Table>
               <TableHead style={{ backgroundColor: theme.palette.secondary.main }}>
                 <TableRow>
@@ -136,7 +149,7 @@ function BookingHistory() {
                         textAlign: "center",
                       }}
                     >
-                      <h3 className={`status-${booking.StatusFlag}`}>
+                      <h6 className={`status-${booking.StatusFlag}`}>
                         {booking.StatusFlag === "3"
                           ? "pending"
                           : booking.StatusFlag === "4"
@@ -146,7 +159,7 @@ function BookingHistory() {
                           : booking.StatusFlag === "6"
                           ? "complete"
                           : "unknown"}{" "}
-                      </h3>
+                      </h6>
                     </TableCell>
                     <TableCell style={{ textAlign: "center" }}>
                       <Button onClick={() => handleOpenDialog(booking.UID)}>ดูรายละเอียด</Button>
@@ -175,130 +188,128 @@ function BookingHistory() {
                 ))}
               </TableBody>
             </Table>
-          </Hidden>
+          </Paper>
 
-          {/* Mobile View */}
-          <Hidden smUp>
-            <div>
-              {allAppointments.length > 0 ? (
-                allAppointments.map((booking) => (
-                  <Box
-                    key={booking.UID}
-                    sx={{
-                      marginBottom: "20px",
-                      border: `1px solid ${theme.palette.primary.main}`,
-                      borderRadius: "8px",
-                      padding: "12px",
-                      boxShadow: "0 4px 8px rgba(106, 13, 173, 0.1)",
-                    }}
-                  >
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
-                          {new Date(booking.Appointment_Date).toLocaleDateString()}{" "}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography variant="body2">
-                          <HomeIcon
-                            fontSize="small"
-                            color="primary"
-                            style={{ verticalAlign: "middle" }}
-                          />{" "}
-                          คลินิก: {booking.Clinic_Name}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography variant="body2">
-                          <PersonIcon
-                            fontSize="small"
-                            color="primary"
-                            style={{ verticalAlign: "middle" }}
-                          />{" "}
-                          แพทย์: {booking.Doctor_Name}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <Typography
-                          variant="body2"
-                          style={{
-                            color: "white",
-                            fontWeight: 300,
-                            textAlign: "center",
-                          }}
-                          className={`status-${booking.StatusFlag}`}
-                        >
-                          {" "}
-                          สถานะ:{" "}
-                          {booking.StatusFlag === "3"
-                            ? "รอยืนยัน"
-                            : booking.StatusFlag === "4"
-                            ? "ยืนยันนัดหมาย"
-                            : booking.StatusFlag === "5"
-                            ? "ยกเลิกนัดหมาย"
-                            : booking.StatusFlag === "6"
-                            ? "เสร็จสมบูรณ์"
-                            : "unknown"}{" "}
-                        </Typography>
-                      </Grid>
+          <MKBox pt={6} px={1} mt={25}>
+            <DefaultFooter content={footerRoutes} stiky />
+          </MKBox>
+        </Hidden>
 
-                      <Grid item xs={6}>
-                        <Button onClick={() => handleOpenDialog(booking.UID)}>ดูรายละเอียด</Button>
-                        <Dialog
-                          open={openDialog}
-                          onClose={handleCloseDialog}
-                          maxWidth="sm"
-                          fullWidth
-                        >
-                          <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
-                          <DialogContent style={{ textAlign: "center" }}>
-                            <p>
-                              ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
-                            </p>
-                            <p>
-                              วันที่นัด:{" "}
-                              {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                            </p>
-                            <p>
-                              เวลา:{" "}
-                              {dialogShow.Appointment_Time
-                                ? dialogShow.Appointment_Time.substring(11, 16)
-                                : ""}
-                            </p>
-                            <p>รายละเอียดการนัด : {dialogShow.Apm_Des}</p>
-                            {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
-                            {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
-                          </DialogContent>
-
-                          <DialogActions>
-                            <Button onClick={handleCloseDialog} color="primary">
-                              ปิด
-                            </Button>
-                          </DialogActions>
-                        </Dialog>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                ))
-              ) : (
-                <Typography
-                  variant="body1"
-                  style={{ fontWeight: 600, color: "#999", textAlign: "center" }}
+        {/* Mobile View */}
+        <Hidden smUp>
+          <div>
+            {allAppointments.length > 0 ? (
+              allAppointments.map((booking) => (
+                <Box
+                  key={booking.UID}
+                  sx={{
+                    marginBottom: "20px",
+                    border: `1px solid ${theme.palette.primary.main}`,
+                    borderRadius: "8px",
+                    padding: "12px",
+                    boxShadow: "0 4px 8px rgba(106, 13, 173, 0.1)",
+                  }}
                 >
-                  ไม่มีประวัตินัดหมาย
-                </Typography>
-              )}
-            </div>
-          </Hidden>
-        </Paper>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Typography variant="subtitle1" style={{ fontWeight: 600 }}>
+                        {new Date(booking.Appointment_Date).toLocaleDateString()}{" "}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2">
+                        <HomeIcon
+                          fontSize="small"
+                          color="primary"
+                          style={{ verticalAlign: "middle" }}
+                        />{" "}
+                        คลินิก: {booking.Clinic_Name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography variant="body2">
+                        <PersonIcon
+                          fontSize="small"
+                          color="primary"
+                          style={{ verticalAlign: "middle" }}
+                        />{" "}
+                        แพทย์: {booking.Doctor_Name}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography
+                        variant="body2"
+                        style={{
+                          color: "white",
+                          fontWeight: 300,
+                          textAlign: "center",
+                        }}
+                        className={`status-${booking.StatusFlag}`}
+                      >
+                        {" "}
+                        สถานะ:{" "}
+                        {booking.StatusFlag === "3"
+                          ? "รอยืนยัน"
+                          : booking.StatusFlag === "4"
+                          ? "ยืนยันนัดหมาย"
+                          : booking.StatusFlag === "5"
+                          ? "ยกเลิกนัดหมาย"
+                          : booking.StatusFlag === "6"
+                          ? "เสร็จสมบูรณ์"
+                          : "unknown"}{" "}
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={6}>
+                      <Button onClick={() => handleOpenDialog(booking.UID)}>ดูรายละเอียด</Button>
+                      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
+                        <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
+                        <DialogContent style={{ textAlign: "center" }}>
+                          <p>
+                            ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
+                          </p>
+                          <p>
+                            วันที่นัด: {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
+                          </p>
+                          <p>
+                            เวลา:{" "}
+                            {dialogShow.Appointment_Time
+                              ? dialogShow.Appointment_Time.substring(11, 16)
+                              : ""}
+                          </p>
+                          <p>รายละเอียดการนัด : {dialogShow.Apm_Des}</p>
+                          {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
+                          {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
+                        </DialogContent>
+
+                        <DialogActions>
+                          <Button onClick={handleCloseDialog} color="primary">
+                            ปิด
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
+                    </Grid>
+                  </Grid>
+                </Box>
+              ))
+            ) : (
+              <Typography
+                variant="body1"
+                style={{ fontWeight: 600, color: "#999", textAlign: "center" }}
+              >
+                ไม่มีประวัตินัดหมาย
+              </Typography>
+            )}
+          </div>
+        </Hidden>
       </ThemeProvider>
+      {/* <br />
       <br />
       <br />
       <br />
       <br />
       <br />
-      <br />
-      <Foots />
+      <Foots /> */}
     </>
   );
 }

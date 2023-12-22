@@ -19,13 +19,12 @@ import MenuList from "../MenuLists";
 import Img from "../../../assets/images/profile.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
-import Foots from "components/Foot";
+// import Foots from "components/Foot";
 import useTokenCheck from "hooks/useTokenCheck";
 import { BASE_URL } from "../../../constants/constants";
 import Swal from "sweetalert2";
 import useFetch from "../../../hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
-
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -503,13 +502,13 @@ function UserProfile() {
           </Button>
         </Grid>
       </ThemeProvider>
+      {/* <br />
       <br />
       <br />
       <br />
       <br />
       <br />
-      <br />
-      <Foots />
+      <Foots /> */}
     </>
   );
 }

@@ -1,36 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, Grid, CardMedia, Button } from "@mui/material";
 import "./HealthBlog.css";
-import Blog1 from "../../../../assets/images/Blog1.png";
-import Blog2 from "../../../../assets/images/Blog2.jpg";
+import useFetch from "hooks/useFetch";
+import { BASE_URL } from "constants/constants";
 import MKTypography from "components/MKTypography";
 
 const HealthBlog = () => {
   const HealthBlogAll = () => {
     window.location.href = "/HealthBlogList";
   };
-  const Blog = [
-    {
-      Blog_Name: "ทำความรู้จักกับโรคทางพันธุกรรรมที่ถ่ายทอดสู่ลูกได้",
-      Blog_Detail:
-        "ในแต่ละปี มีผู้ป่วยจำนวนมากมายที่ได้รับการวินิจฉัยว่าเป็นโรคเรื้อรัง รวมถึงโรคหายากอื่นๆ โรคเหล่านี้อาจเป็นโรคที่ถ่ายทอดทางพันธุกรรม ที่บางครั้งพ่อแม่ไม่มีอาการ แต่มียีนผิดปกติแฝงอยู่ในร่างกายและเป็น “พาหะ” ถ่ายทอดไปยังลูก ทำให้ลูกสามารถเป็นโรคได้",
-      Blog_Image: Blog1,
-    },
-    {
-      Blog_Name: "โรคพันธุกรรมของกล้ามเนื้อ หนึ่งในโรคที่เกิดจากพันธุกรรม",
-      Blog_Detail:
-        "ในการศึกษาวิจัยพบว่าคนประมาณ 22 คนใน 100,000 คนทั่วโลกเป็นโรคกล้ามเนื้อที่มาจากพันธุกรรม ถึงแม้เป็นโรคที่หายากแต่หากนับจำนวนผู้ป่วยทั่วโลกก็ถือว่าไม่น้อยเลย โรคพันธุกรรมของกล้ามเนื้อมีหลากหลายชนิด หลายร้อยโรค โดยแบ่งออกได้ เป็น 4 กลุ่มใหญ่ๆ",
-      Blog_Image: Blog2,
-    },
-    {
-      Blog_Name: "Pharmacogenomics ในผู้ป่วยลมชัก",
-      Blog_Detail:
-        "ในผู้ป่วยโรคลมชักการใช้ยากันชักเพื่อคุมอาการเป็นวิธีการรักษาที่สะดวกและได้ผลลัพธ์ที่อย่างไรก็ตามแม้จะมีการใช้ยากันชักที่มีประสิทธิภาพดีแล้ว แต่ผู้ป่วยโรคลมชักบางรายอาจไม่ตอบสนองต่อการรักษาเลยและจำเป็นต้องเปลี่ยนไปใช้ยาตัวอื่นแทน",
-      Blog_Image: Blog2,
-    },
-    // เพิ่มบทความต่อไปตามต้องการ
-  ];
+  const { data: fetchedBlogs = [] } = useFetch(`${BASE_URL}/api/showRandomBlogs`);
+  const [BlogData, setBlogData] = useState([]);
 
+  useEffect(() => {
+    if (fetchedBlogs && Array.isArray(fetchedBlogs)) {
+      setBlogData(fetchedBlogs);
+    } else {
+      console.error("Error fetching packages");
+    }
+  }, [fetchedBlogs]);
+  const BlogsDetail = (codeID) => {
+    window.location.href = `/HealthBlogListDetail/${codeID}`;
+  };
   return (
     <>
       <span
@@ -61,9 +52,9 @@ const HealthBlog = () => {
           margin: "0 auto",
         }}
       >
-        {Blog.map((blog) => (
+        {BlogData.map((blog) => (
           <Card
-            key={blog.id}
+            key={blog.Blog_ID}
             sx={{
               width: "100%", // ทำให้ Card มีความกว้างเต็มตาม container
               height: "80%",
@@ -81,15 +72,28 @@ const HealthBlog = () => {
                 height: "100%", // กำหนดความสูงของรูป
                 objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
               }}
-              image={blog.Blog_Image}
+              image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
             />
             <CardContent>
               <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                 {blog.Blog_Name}
               </MKTypography>
-              <MKTypography sx={{ color: "#808080", fontSize: "15px" }}>
+              <MKTypography
+                sx={{
+                  color: "#808080",
+                  fontSize: "15px",
+                  overflow: "hidden",
+                  display: "-webkit-box",
+                  WebkitBoxOrient: "vertical",
+                  WebkitLineClamp: 4, // จำนวนบรรทัดที่ต้องการแสดง
+                  textOverflow: "ellipsis",
+                  whiteSpace: "normal",
+                  maxWidth: "100%",
+                }}
+              >
                 {blog.Blog_Detail}
               </MKTypography>
+
               <MKTypography
                 sx={{
                   color: "#0bb288",
@@ -98,6 +102,7 @@ const HealthBlog = () => {
                   textDecoration: "underline",
                   alignSelf: "flex-end", // ทำให้อยู่ล่าง
                 }}
+                onClick={() => BlogsDetail(blog.Blog_ID)}
               >
                 อ่านเพิ่มเพิม
               </MKTypography>

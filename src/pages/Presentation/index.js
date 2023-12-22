@@ -85,7 +85,7 @@ function Presentation() {
 
               <Stack direction="row" spacing={1} mt={3}>
                 <MKButton color="white" href="/signIn">
-                  Get Started
+                  นัดหมาย
                 </MKButton>
               </Stack>
             </Grid>
