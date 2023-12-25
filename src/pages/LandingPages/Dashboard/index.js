@@ -144,14 +144,14 @@ function Dashboard() {
                         <Divider style={{ margin: "10px 0" }} />
                         <List style={{ padding: 0 }}>
                           {fetchNotify.length > 0 ? (
-                            fetchNotify.slice(0, 3).map((notification, index) => {
+                            fetchNotify.slice(0, 3).map((notification) => {
                               let content;
                               if (notification.FinishStatus === 0) {
                                 if (notification.StatusFlag === "3") {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={index}
+                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -191,7 +191,7 @@ function Dashboard() {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={index}
+                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -231,7 +231,7 @@ function Dashboard() {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={index}
+                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -274,7 +274,7 @@ function Dashboard() {
                                 content = (
                                   <>
                                     <ListItem
-                                      key={index}
+                                      key={notification.UID}
                                       style={{
                                         display: "flex",
                                         flexDirection: "column",
@@ -527,14 +527,14 @@ function Dashboard() {
                     <Divider style={{ margin: "10px 0" }} />
                     <List style={{ padding: 0 }}>
                       {fetchNotify.length > 0 ? (
-                        fetchNotify.slice(0, 3).map((notification, index) => {
+                        fetchNotify.slice(0, 3).map((notification) => {
                           let content;
                           if (notification.FinishStatus === 0) {
                             if (notification.StatusFlag === "3") {
                               content = (
                                 <>
                                   <ListItem
-                                    key={index}
+                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -575,7 +575,7 @@ function Dashboard() {
                               content = (
                                 <>
                                   <ListItem
-                                    key={index}
+                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -616,7 +616,7 @@ function Dashboard() {
                               content = (
                                 <>
                                   <ListItem
-                                    key={index}
+                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -660,7 +660,7 @@ function Dashboard() {
                             content = (
                               <>
                                 <ListItem
-                                  key={index}
+                                  key={notification.UID}
                                   style={{
                                     display: "flex",
                                     flexDirection: "column",
