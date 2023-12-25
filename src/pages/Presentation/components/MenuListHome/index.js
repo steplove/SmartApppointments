@@ -62,7 +62,7 @@ function MenuListHome() {
 
   return (
     <>
-      <Grid container justifyContent="center" alignItems="center" spacing={2} mt={1}>
+      <Grid item container justifyContent="center" alignItems="center" spacing={2} mt={1}>
         {menuStyles.map((style, index) => (
           <Grid item key={index}>
             <div

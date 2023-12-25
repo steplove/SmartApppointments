@@ -24,18 +24,6 @@ function Presentation() {
   return (
     <>
       {showNavbar && <DefaultNavbar routes={routes} sticky />}
-      {/* <MKBox
-        position="relative"
-        top={0}
-        left={0}
-        zIndex={2}
-        width="100%"
-        minHeight="10vh"
-        sx={{
-          backgroundColor: "#0fab84",
-          filter: "blur(2px)", // คุณสามารถปรับค่าเบลอที่นี่
-        }}
-      ></MKBox> */}
       <MKBox component="header" position="relative">
         <MKBox
           display="flex"
@@ -75,7 +63,6 @@ function Presentation() {
               >
                 Kasemrad Sriburin
               </MKTypography>
-
               <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
                 Hospital You Can Trust.
               </MKTypography>

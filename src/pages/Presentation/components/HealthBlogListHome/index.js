@@ -40,6 +40,7 @@ const HealthBlog = () => {
         <span style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></span>
       </span>
       <Grid
+        item
         container
         xs={12}
         md={6}
