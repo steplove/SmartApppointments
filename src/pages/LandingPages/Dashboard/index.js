@@ -151,7 +151,6 @@ function Dashboard() {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -191,7 +190,6 @@ function Dashboard() {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -231,7 +229,6 @@ function Dashboard() {
                                   content = (
                                     <>
                                       <ListItem
-                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -274,7 +271,6 @@ function Dashboard() {
                                 content = (
                                   <>
                                     <ListItem
-                                      key={notification.UID}
                                       style={{
                                         display: "flex",
                                         flexDirection: "column",
@@ -534,7 +530,6 @@ function Dashboard() {
                               content = (
                                 <>
                                   <ListItem
-                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -575,7 +570,6 @@ function Dashboard() {
                               content = (
                                 <>
                                   <ListItem
-                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -616,7 +610,6 @@ function Dashboard() {
                               content = (
                                 <>
                                   <ListItem
-                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -660,7 +653,6 @@ function Dashboard() {
                             content = (
                               <>
                                 <ListItem
-                                  key={notification.UID}
                                   style={{
                                     display: "flex",
                                     flexDirection: "column",
