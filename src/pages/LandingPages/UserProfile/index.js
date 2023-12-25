@@ -280,6 +280,7 @@ function UserProfile() {
                 {fetchedCustomerAddress && (
                   <>
                     <TextField
+                      label="อีเมล"
                       variant="outlined"
                       fullWidth
                       sx={{ marginBottom: "10px" }}
@@ -291,12 +292,10 @@ function UserProfile() {
                           Email: e.target.value,
                         })
                       }
-                      InputProps={{
-                        startAdornment: <InputLabel>อีเมล</InputLabel>,
-                      }}
                     />
 
                     <TextField
+                      label="เบอร์โทรศัพท์"
                       variant="outlined"
                       fullWidth
                       disabled={!isEditing}
@@ -308,21 +307,16 @@ function UserProfile() {
                           MobileNo: e.target.value,
                         })
                       }
-                      InputProps={{
-                        startAdornment: <InputLabel>เบอร์โทรศัพท์</InputLabel>,
-                      }}
                     />
                   </>
                 )}
 
                 <TextField
+                  label="ที่อยู่"
                   variant="outlined"
                   fullWidth
                   disabled
                   value={`บ้านเลขที่ ${fetchedCustomerAddres.Address} ม. ${fetchedCustomerAddres.Moo} ต. ${fetchedCustomerAddres.District} อ. ${fetchedCustomerAddres.Amphure} จ. ${fetchedCustomerAddres.Province}`}
-                  InputProps={{
-                    startAdornment: <InputLabel>ที่อยู่</InputLabel>,
-                  }}
                 />
               </CardContent>
             </Card>
