@@ -118,7 +118,7 @@ function Dashboard() {
             }}
           >
             <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}></Typography>
-            <Grid container spacing={2} mt={2}>
+            <Grid item container spacing={2} mt={2}>
               <Card sx={{ marginBottom: "0px", maxWidth: "70%", mx: "auto" }}>
                 <MKBox>
                   <Banner slides={slides} />
@@ -126,6 +126,7 @@ function Dashboard() {
               </Card>
               <Card sx={{ maxWidth: "70%", mx: "auto", marginTop: "10px" }}>
                 <Grid
+                  item
                   sx={{
                     maxWidth: "100%",
                     mx: "auto",
@@ -507,7 +508,7 @@ function Dashboard() {
             }}
           >
             <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}></Typography>
-            <Grid container spacing={2} mt={2}>
+            <Grid item container spacing={2} mt={2}>
               <Card>
                 <MKBox sx={{ marginBottom: "0px", maxWidth: "100%", mx: "auto" }}>
                   <Banner slides={slides} />
