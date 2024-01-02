@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Hidden } from "@mui/material";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CookieConsent from "react-cookie-consent";
 import routes from "routes";
@@ -19,6 +20,26 @@ import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
 import { Card } from "@material-ui/core";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 800,
+      md: 1280,
+      lg: 1920,
+      xl: 2560,
+    },
+  },
+  palette: {
+    primary: {
+      main: "#6A0DAD", // สีม่วงเข้ม
+    },
+    secondary: {
+      main: "#D1C4E9", // สีม่วงอ่อน
+    },
+  },
+});
 function Presentation() {
   const [showNavbar] = useState(false);
   const slides = [];
@@ -83,12 +104,24 @@ function Presentation() {
       <MKBox sx={{ marginBottom: "20px" }}>
         <MenuListHome />
       </MKBox>
-      <Card style={{ maxWidth: "70%", margin: "auto" }}>
-        <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
-          <Banner slides={slides} />
-        </MKBox>
-      </Card>
-
+      <ThemeProvider theme={theme}>
+        {/* Desktop/Tablet View */}
+        <Hidden smDown>
+          <Card style={{ maxWidth: "70%", margin: "auto" }}>
+            <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+              <Banner slides={slides} />
+            </MKBox>
+          </Card>
+        </Hidden>
+        {/* Mobile View */}
+        <Hidden smUp>
+          <Card style={{ maxWidth: "100%", margin: "auto" }}>
+            <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+              <Banner slides={slides} />
+            </MKBox>
+          </Card>
+        </Hidden>
+      </ThemeProvider>
       <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <PackageListHome />
       </MKBox>
