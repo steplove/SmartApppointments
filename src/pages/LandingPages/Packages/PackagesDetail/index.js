@@ -42,8 +42,6 @@ function PackagesDetail() {
 
         const promoEndDate = new Date(data.promoEndDate).toLocaleDateString();
         const packagePriceInt = parseInt(data.packagePrice, 10);
-
-        // ใช้ toLocaleString() กับ integer
         const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
 
         // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
