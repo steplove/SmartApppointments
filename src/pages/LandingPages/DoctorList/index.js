@@ -297,6 +297,7 @@ function DoctorList() {
                 color: theme.palette.primary.main,
                 marginBottom: "20px",
                 textAlign: "center",
+                marginTop: "-30px",
               }}
             >
               รายชื่อแพทย์
@@ -362,10 +363,12 @@ function DoctorList() {
                     />
 
                     <Box flexGrow={1} style={{ marginLeft: "10px" }}>
-                      <Typography variant="h6" style={{ fontSize: "15px" }}>
-                        {doctor.Doctor_Name}
-                      </Typography>
-                      <Typography variant="body1" color="textSecondary">
+                      <Typography style={{ fontSize: "15px" }}>{doctor.Doctor_Name}</Typography>
+                      <Typography
+                        variant="body1"
+                        color="textSecondary"
+                        style={{ fontSize: "12px" }}
+                      >
                         {doctor.Clinic_Name}
                       </Typography>
                       <Button
