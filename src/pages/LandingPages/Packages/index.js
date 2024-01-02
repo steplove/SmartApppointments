@@ -34,7 +34,17 @@ function Packages() {
 
   useEffect(() => {
     if (fetchedPackages && Array.isArray(fetchedPackages)) {
-      setPackageData(fetchedPackages);
+      const updatedPackageData = fetchedPackages.map((packageItem) => {
+        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+        const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
+
+        return {
+          ...packageItem,
+          formattedPackagePrice: formattedPackagePrice,
+        };
+      });
+
+      setPackageData(updatedPackageData);
     } else {
       console.error("Error fetching packages");
     }
@@ -101,9 +111,10 @@ function Packages() {
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         ราคา:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.packagePrice}
+                          {packageItem.formattedPackagePrice}
                         </span>
                       </MKTypography>
+
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
                         ระยะเวลาโปรโมชั่น:
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
@@ -187,7 +198,7 @@ function Packages() {
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         ราคา:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.packagePrice}
+                          {packageItem.formattedPackagePrice}
                         </span>
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>

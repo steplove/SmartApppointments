@@ -41,9 +41,13 @@ function PackagesDetail() {
         const data = await response.json();
 
         const promoEndDate = new Date(data.promoEndDate).toLocaleDateString();
+        const packagePriceInt = parseInt(data.packagePrice, 10);
+
+        // ใช้ toLocaleString() กับ integer
+        const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
 
         // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
-        setSelectedPackage({ ...data, promoEndDate });
+        setSelectedPackage({ ...data, promoEndDate, formattedPackagePrice });
       } catch (error) {
         console.error("Error:", error.message);
       }
@@ -86,8 +90,9 @@ function PackagesDetail() {
                               {selectedPackage.packageDetails}
                             </Typography>
                             <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              ราคา: {selectedPackage.packagePrice} บาท
+                              ราคา: {selectedPackage.formattedPackagePrice} บาท
                             </Typography>
+
                             <Typography variant="body1">
                               วันหยุดอายุ: {selectedPackage.promoEndDate}
                             </Typography>

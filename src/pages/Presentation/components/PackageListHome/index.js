@@ -9,9 +9,19 @@ function PackageListHome() {
   const [packageData, setPackageData] = useState([]);
   useEffect(() => {
     if (fetchedPackages && Array.isArray(fetchedPackages)) {
-      setPackageData(fetchedPackages);
+      const updatedPackageData = fetchedPackages.map((packageItem) => {
+        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+        const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
+
+        return {
+          ...packageItem,
+          formattedPackagePrice: formattedPackagePrice,
+        };
+      });
+
+      setPackageData(updatedPackageData);
     } else {
-      console.log("error", error);
+      console.error("Error fetching packages", error);
     }
   }, [fetchedPackages]);
   const packagesAll = () => {
@@ -96,7 +106,7 @@ function PackageListHome() {
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 ราคา:{" "}
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                  {packageItem.packagePrice}
+                  {packageItem.formattedPackagePrice}
                 </span>
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
