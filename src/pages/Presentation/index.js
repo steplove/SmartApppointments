@@ -18,6 +18,7 @@ import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
+import { Card } from "@material-ui/core";
 function Presentation() {
   const [showNavbar] = useState(false);
   const slides = [];
@@ -82,9 +83,12 @@ function Presentation() {
       <MKBox sx={{ marginBottom: "20px" }}>
         <MenuListHome />
       </MKBox>
-      <MKBox sx={{ marginBottom: "20px" }}>
-        <Banner slides={slides} />
-      </MKBox>
+      <Card style={{ maxWidth: "70%", margin: "auto" }}>
+        <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+          <Banner slides={slides} />
+        </MKBox>
+      </Card>
+
       <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <PackageListHome />
       </MKBox>

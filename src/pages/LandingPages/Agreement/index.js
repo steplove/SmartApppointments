@@ -230,7 +230,10 @@ function Agreement() {
               >
                 <Typography sx={{ fontWeight: "bold", fontSize: "12px", marginLeft: "10px" }}>
                   {data.map((item, index) => (
-                    <p key={index}>{item.replace(/ /g, "\u00a0")}</p>
+                    <React.Fragment key={index}>
+                      <span style={{ display: "block" }}>{item.replace(/ /g, "\u00a0")}</span>
+                      <br />
+                    </React.Fragment>
                   ))}
                 </Typography>
 

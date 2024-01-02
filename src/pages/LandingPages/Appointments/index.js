@@ -636,8 +636,7 @@ function Appointments() {
                       </LocalizationProvider>
                     </FormControl>
                   </Box>
-
-                  <FormControl fullWidth>
+                  <FormControl>
                     <ToggleButtonGroup
                       color="primary"
                       value={formData.timeSlot}

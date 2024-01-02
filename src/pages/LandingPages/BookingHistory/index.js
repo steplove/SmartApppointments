@@ -197,6 +197,18 @@ function BookingHistory() {
 
         {/* Mobile View */}
         <Hidden smUp>
+          <Typography
+            variant="h5"
+            gutterBottom
+            style={{
+              color: theme.palette.primary.main,
+              alignContent: "center",
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            ประวัตินัดหมาย
+          </Typography>
           <div>
             {allAppointments.length > 0 ? (
               allAppointments.map((booking) => (

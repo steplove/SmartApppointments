@@ -297,7 +297,6 @@ function DoctorList() {
                 color: theme.palette.primary.main,
                 marginBottom: "20px",
                 textAlign: "center",
-                marginTop: "18%",
               }}
             >
               รายชื่อแพทย์
@@ -369,15 +368,15 @@ function DoctorList() {
                       <Typography variant="body1" color="textSecondary">
                         {doctor.Clinic_Name}
                       </Typography>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        style={{ borderRadius: "20px", margin: "10px 0" }}
+                        onClick={() => handleDialogOpen(doctor.DoctorID, `${doctor.Doctor_IMG}`)}
+                      >
+                        <Typography style={{ fontSize: "10px" }}>ดูรายละเอียด</Typography>
+                      </Button>
                     </Box>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ borderRadius: "20px", margin: "10px 0" }}
-                      onClick={() => handleDialogOpen(doctor.DoctorID, `${doctor.Doctor_IMG}`)}
-                    >
-                      <Typography style={{ fontSize: "10px" }}>ดูรายละเอียด</Typography>
-                    </Button>
                   </Box>
                 </Card>
               ))
