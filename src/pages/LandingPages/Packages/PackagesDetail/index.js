@@ -60,7 +60,7 @@ function PackagesDetail() {
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Container maxWidth="md" sx={{ paddingTop: "8%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
             {selectedPackage ? (
               <>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}>
@@ -112,7 +112,7 @@ function PackagesDetail() {
 
         {/* Mobile View */}
         <Hidden smUp>
-          <Container maxWidth="md" sx={{ paddingTop: "25%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "15%", paddingBottom: 4 }}>
             {selectedPackage ? (
               <>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>

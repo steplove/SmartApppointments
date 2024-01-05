@@ -23,9 +23,11 @@ import PackagesDetail from "pages/LandingPages/Packages/PackagesDetail";
 import HealthBlogListDetail from "pages/LandingPages/HealthBlogList/HealthBlogListDetail";
 import ResetPassword from "pages/LandingPages/ResetPassword";
 import HealthBlogList from "pages/LandingPages/HealthBlogList";
+import CEO from "pages/AboutUs/CEO";
+import History from "pages/AboutUs/History";
+
 // Material Kit 2 React routes
 import routes from "routes";
-
 import "./App.css";
 // import LiffComponent from "./LiffComponent";
 export default function App() {
@@ -75,6 +77,8 @@ export default function App() {
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword/:UID" element={<ResetPassword />} />
           <Route path="/agree" element={<Agree />} />
+          <Route path="/CEO" element={<CEO />} />
+          <Route path="/History" element={<History />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>

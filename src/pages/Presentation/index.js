@@ -45,7 +45,7 @@ function Presentation() {
   const slides = [];
   return (
     <>
-      {showNavbar && <DefaultNavbar routes={routes} sticky />}
+      {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
       <MKBox component="header" position="relative">
         <MKBox
           display="flex"

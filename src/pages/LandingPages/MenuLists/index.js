@@ -98,12 +98,6 @@ export default function MenuList() {
             to="/userprofile"
             value="/userprofile"
           />
-          {/* <BottomNavigationAction
-            label="ตั้งค่า"
-            icon={<MoreVertIcon />}
-            onClick={handleClickPopover}
-            component={Link}
-          /> */}
         </BottomNavigation>
       ) : (
         <>
@@ -115,7 +109,6 @@ export default function MenuList() {
               <Typography variant="h6" style={{ flexGrow: 1 }}>
                 Smart Appointments
               </Typography>
-              {/* <Button color="inherit">Login</Button> */}
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>

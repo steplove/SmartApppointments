@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Grid, CardMedia, Container, Typography, Hidden } from "@mui/material";
+import { Card, CardContent, Grid, CardMedia, Container, Hidden } from "@mui/material";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 import MKTypography from "components/MKTypography";
@@ -44,22 +44,21 @@ function HealthBlogList() {
   };
   return (
     <>
-      <DefaultNavbar routes={routes} />
+      <DefaultNavbar routes={routes} sticky relative />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "1.2rem" }}>
+                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   หน้าแรก/
                 </a>
-                <a href="/" style={{ color: "#0bb288", fontSize: "1.2rem" }}>
+                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
                   บทความทั้งหมด
                 </a>
               </Grid>
             </Grid>
-            <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>รายละเอียดบทความ</Typography>
 
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
               {BlogData.map((blog) => {
@@ -128,18 +127,17 @@ function HealthBlogList() {
 
         {/* Mobile View */}
         <Hidden smUp>
-          <Container maxWidth="md" sx={{ paddingTop: "25%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
             <Grid item container spacing={2}>
               <Grid item xs={6}>
                 <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
                   หน้าแรก/
                 </a>
-                <a href="/" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
+                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
                   บทความทั้งหมด
                 </a>
               </Grid>
             </Grid>
-            <Typography sx={{ marginBottom: 2, fontSize: "0.8rem" }}>รายละเอียดบทความ</Typography>
 
             <Grid
               item
@@ -171,11 +169,11 @@ function HealthBlogList() {
                   <CardMedia
                     component="img"
                     sx={{
-                      width: "93%", // กำหนดความกว้างของรูป
+                      width: "100%", // กำหนดความกว้างของรูป
                       height: "100%", // กำหนดความสูงของรูป
                       objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
                     }}
-                    image={blog.Blog_Image}
+                    image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
                   />
                   <CardContent>
                     <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>

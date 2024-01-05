@@ -35,7 +35,7 @@ export default {
     {
       name: "เกี่ยวกับเรา",
       items: [
-        { name: "ผู้บริหาร", href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/ceo" },
+        { name: "ผู้บริหาร", href: "/CEO" },
         {
           name: "สาส์นจากประธานกรรมการ",
           href: "https://www.kasemrad.co.th/Sriburin/th/site/about_us/message_from_ceo",

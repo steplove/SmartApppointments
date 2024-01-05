@@ -133,7 +133,7 @@ function DoctorListHome() {
   }
   return (
     <>
-      <DefaultNavbar routes={routes} sticky />
+      <DefaultNavbar routes={routes} sticky relative />
       <Grid style={{ paddingTop: "5%" }}></Grid>
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}

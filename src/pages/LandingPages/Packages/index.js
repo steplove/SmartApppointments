@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Card, CardContent, CardMedia, Grid, Hidden } from "@mui/material";
+import { Container, Card, CardContent, CardMedia, Grid, Hidden } from "@mui/material";
 import MKTypography from "components/MKTypography";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
@@ -54,24 +54,24 @@ function Packages() {
   };
   return (
     <>
-      <DefaultNavbar routes={routes} />
+      <DefaultNavbar routes={routes} sticky relative />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080" }}>
+                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   หน้าแรก/
                 </a>
-                <a href="/" style={{ color: "#0bb288" }}>
+                <a href="/packages" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
                   แพ็คเกจทั้งหมด
                 </a>
               </Grid>
             </Grid>
-            <Typography variant="h4" sx={{ marginBottom: 2 }}>
+            {/* <Typography variant="h4" sx={{ marginBottom: 2 }}>
               รายละเอียดแพ็คเกจ
-            </Typography>
+            </Typography> */}
 
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
               {packageData.map((packageItem) => (
@@ -145,20 +145,17 @@ function Packages() {
         </Hidden>
         {/* Mobile View */}
         <Hidden smUp>
-          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
-            <Grid container spacing={2} sx={{ marginTop: "15%" }}>
+          <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
                 <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
                   หน้าแรก/
                 </a>
-                <a href="/" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
+                <a href="/packages" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
                   แพ็คเกจทั้งหมด
                 </a>
               </Grid>
             </Grid>
-            <Typography variant="h4" sx={{ marginBottom: 2, fontSize: "1rem" }}>
-              รายละเอียดแพ็คเกจ
-            </Typography>
 
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
               {packageData.map((packageItem) => (
