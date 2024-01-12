@@ -9,6 +9,8 @@ import footerRoutes from "footer.routes";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -29,6 +31,8 @@ const theme = createTheme({
   },
 });
 function HealthBlogList() {
+  const { t } = useTranslation();
+
   const { data: fetchedBlogs = [] } = useFetch(`${BASE_URL}/api/blogShow`);
   const [BlogData, setBlogData] = useState([]);
 
@@ -52,10 +56,10 @@ function HealthBlogList() {
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
-                  หน้าแรก/
+                  {t("home")} /
                 </a>
                 <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
-                  บทความทั้งหมด
+                  {t("all_articles")}
                 </a>
               </Grid>
             </Grid>
@@ -114,7 +118,7 @@ function HealthBlogList() {
                           }}
                           onClick={() => blogDetail(blog.Blog_ID)}
                         >
-                          อ่านเพิ่มเพิม
+                          {t("read_more")}
                         </MKTypography>
                       </CardContent>
                     </Card>
@@ -130,11 +134,11 @@ function HealthBlogList() {
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
             <Grid item container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
-                  หน้าแรก/
+                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
+                  {t("home")} /
                 </a>
-                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
-                  บทความทั้งหมด
+                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
+                  {t("all_articles")}
                 </a>
               </Grid>
             </Grid>
@@ -193,7 +197,7 @@ function HealthBlogList() {
                       }}
                       onClick={() => blogDetail(blog.packageCode)}
                     >
-                      อ่านเพิ่มเพิม
+                      {t("read_more")}
                     </MKTypography>
                   </CardContent>
                 </Card>

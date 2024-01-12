@@ -25,7 +25,12 @@ import HistoryIcon from "@mui/icons-material/History";
 // import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Popover from "@mui/material/Popover";
 // import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "LanguageSelector";
+
 export default function MenuList() {
+  const { t } = useTranslation();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -64,35 +69,35 @@ export default function MenuList() {
           value={location.pathname}
         >
           <BottomNavigationAction
-            label="หน้าแรก"
+            label={`${t("home")}`}
             icon={<HomeIcon />}
             component={Link}
             to="/dashboard"
             value="/dashboard"
           />
           <BottomNavigationAction
-            label="นัดหมาย"
+            label={`${t("appointment")}`}
             icon={<EventNoteIcon />}
             component={Link}
             to="/appointments"
             value="/appointments"
           />
           <BottomNavigationAction
-            label="ประวัตินัด"
+            label={`${t("history")}`}
             icon={<HistoryIcon />}
             component={Link}
             to="/bookinghistory"
             value="/bookinghistory"
           />
           <BottomNavigationAction
-            label="แพทย์"
+            label={`${t("doctor")}`}
             icon={<LocalHospitalIcon />}
             component={Link}
             to="/doctorList"
             value="/doctorList"
           />
           <BottomNavigationAction
-            label="ตั้งค่า"
+            label={`${t("setting")}`}
             icon={<SettingsIcon />}
             component={Link}
             to="/userprofile"
@@ -109,25 +114,27 @@ export default function MenuList() {
               <Typography variant="h6" style={{ flexGrow: 1 }}>
                 Smart Appointments
               </Typography>
+              <LanguageSelector />
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose} component={Link} to="/dashboard">
-              หน้าแรก
+              {t("home")}
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/appointments">
-              นัดหมาย
+              {t("appointment")}
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
-              ประวัตินัดหมาย
+              {t("history")}
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/doctorList">
-              รายชื่อแพทย์
+              {t("doctor_list")}
             </MenuItem>
+
             <MenuItem onClick={handleClose} component={Link} to="/userprofile">
-              ข้อมูลส่วนตัว
+              {t("personal_information")}
             </MenuItem>
-            <MenuItem onClick={hadleLogout}>ออกจากระบบ</MenuItem>
+            <MenuItem onClick={hadleLogout}>{t("logout")}</MenuItem>
           </Menu>
         </>
       )}
@@ -146,7 +153,7 @@ export default function MenuList() {
         }}
       >
         <MenuItem component={Link} to="/userprofile" style={{ backgroundColor: "#fff" }}>
-          ข้อมูลส่วนตัว
+          {t("personal_information")}
         </MenuItem>
       </Popover>
       <br />

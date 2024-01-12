@@ -38,6 +38,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -68,6 +70,7 @@ const StyledToggleButton = styled(ToggleButton)({
   },
 });
 function Appointments() {
+  const { t } = useTranslation();
   const [IdenNumber, HN, FirstName, LastName, Customer_Status] = useTokenCheck();
   const nameCustomer = `${FirstName} ${LastName}`;
   const HNCustomer = `${HN} `;
@@ -250,7 +253,8 @@ function Appointments() {
                   }}
                 >
                   <MKTypography variant="h5" style={{ color: "white" }}>
-                    <AddCircleOutlineIcon sx={{ marginRight: 1 }} /> ลงทะเบียนนัดหมาย
+                    <AddCircleOutlineIcon sx={{ marginRight: 1 }} /> {t("register")}{" "}
+                    {t("appointment")}
                   </MKTypography>
                 </MKBox>
                 <Card
@@ -263,19 +267,16 @@ function Appointments() {
                   }}
                 >
                   <div style={{ fontSize: "15px", fontWeight: "bold" }}>
-                    <p>โปรดทราบ</p>
+                    <p>{t("please_note")}</p>
                   </div>
                   <div style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
-                    <p>การลงทะเบียนนี้จะมีการบันทึกข้อมูลส่วนตัว </p>
+                    <p>{t("this_registration_will_record")} </p>
                   </div>
                   <div style={{ fontSize: "12px", color: "#49494a" }}>
-                    <p>
-                      และข้อมูลในการลงทะเบียนของท่าน เพื่อบันทึกเป็นประวัติไว้กับทางโรงพยาบาลฯ
-                      โปรดระบุตามความเป็นจริง
-                    </p>
+                    <p>{t("and_information_in_your")}</p>
                   </div>
                   <TextField
-                    label="HN"
+                    label={`${t("hospital_number")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -284,7 +285,7 @@ function Appointments() {
                     disabled
                   />
                   <TextField
-                    label="ชื่อ"
+                    label={`${t("name")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -294,7 +295,7 @@ function Appointments() {
                   />
                   {/* คลินิก */}
                   <FormControl fullWidth variant="outlined">
-                    <InputLabel>คลินิก</InputLabel>
+                    <InputLabel>{t("clinic")}</InputLabel>
                     <Select
                       label="คลินิก"
                       name="Clinic"
@@ -313,7 +314,7 @@ function Appointments() {
                   </FormControl>
                   {/* แพทย์ */}
                   <FormControl fullWidth variant="outlined" style={{ marginTop: "1rem" }}>
-                    <InputLabel>แพทย์</InputLabel>
+                    <InputLabel>{t("doctor")}</InputLabel>
                     <Select
                       label="แพทย์"
                       name="Doctor"
@@ -334,7 +335,7 @@ function Appointments() {
                     <FormControl fullWidth>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <MobileDatePicker
-                          label="วันที่นัด"
+                          label={`${t("appointment_date")}`}
                           name="Date"
                           value={formData.Date}
                           minDate={dayjs().add(1, "day")}
@@ -420,7 +421,7 @@ function Appointments() {
                     </ToggleButtonGroup>
                   </FormControl>
                   <TextField
-                    label="อาการเบื้องต้น"
+                    label={`${t("initial_symptoms")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -440,7 +441,7 @@ function Appointments() {
                             color: "#8a6d3b",
                           }}
                         >
-                          ข้อกำหนด และเงื่อนไขการใช้บริการ
+                          {t("terms_and_conditions_of_service")}
                         </p>
                         <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           ข้าพเจ้าได้รับทราบข้อมูลเกี่ยวกับการรับบริการ Smart Appointments
@@ -470,7 +471,7 @@ function Appointments() {
                           color="primary"
                         />
                       }
-                      label="ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ"
+                      label={`${t("read_and_agreed_to_the_terms")}`}
                     />
                   </Grid>
 
@@ -486,7 +487,7 @@ function Appointments() {
                       boxShadow: "0px 3px 5px rgba(0,0,0,0.2)",
                     }}
                   >
-                    ยืนยันการจอง
+                    {t("confirm_appointment")}
                   </Button>
 
                   <Button
@@ -502,11 +503,11 @@ function Appointments() {
                     }}
                     onClick={resetForm}
                   >
-                    Reset
+                    {t("reset")}
                   </Button>
 
                   <div style={{ fontSize: "12px", color: "#8a6d3b" }}>
-                    <p>*หลังจากลงทะเบียนนัดเสร็จแล้วจะมีเจ้าหน้าที่ติดต่อกลับ</p>
+                    <p>*{t("after_registering")}</p>
                   </div>
                 </Card>
               </Grid>
@@ -552,7 +553,7 @@ function Appointments() {
                     <p>โปรดทราบ</p>
                   </div>
                   <div style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
-                    <p>การลงทะเบียนนี้จะมีการบันทึกข้อมูลส่วนตัว </p>
+                    <p>{t("this_registration_will_record")} </p>
                   </div>
                   <div style={{ fontSize: "12px", color: "#49494a" }}>
                     <p>
@@ -561,7 +562,7 @@ function Appointments() {
                     </p>
                   </div>
                   <TextField
-                    label="HN"
+                    label={`${t("hospital_number")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -570,7 +571,7 @@ function Appointments() {
                     disabled
                   />
                   <TextField
-                    label="ชื่อ"
+                    label={`${t("name")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -580,7 +581,7 @@ function Appointments() {
                   />
                   {/* คลินิก */}
                   <FormControl fullWidth variant="outlined">
-                    <InputLabel>คลินิก</InputLabel>
+                    <InputLabel>{t("clinic")}</InputLabel>
                     <Select
                       label="คลินิก"
                       name="Clinic"
@@ -599,7 +600,7 @@ function Appointments() {
                   </FormControl>
                   {/* แพทย์ */}
                   <FormControl fullWidth variant="outlined" style={{ marginTop: "1rem" }}>
-                    <InputLabel>แพทย์</InputLabel>
+                    <InputLabel>{t("doctor")}</InputLabel>
                     <Select
                       label="แพทย์"
                       name="Doctor"
@@ -620,7 +621,7 @@ function Appointments() {
                     <FormControl fullWidth>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <MobileDatePicker
-                          label="วันที่นัด"
+                          label={`${t("appointment_date")}`}
                           name="Date"
                           value={formData.Date}
                           minDate={dayjs().add(1, "day")}
@@ -705,7 +706,7 @@ function Appointments() {
                     </ToggleButtonGroup>
                   </FormControl>
                   <TextField
-                    label="อาการเบื้องต้น"
+                    label={`${t("initial_symptoms")}`}
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -755,7 +756,7 @@ function Appointments() {
                           color="primary"
                         />
                       }
-                      label="ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ"
+                      label={`${t("read_and_agreed_to_the_terms")}`}
                     />
                   </Grid>
 
@@ -771,7 +772,7 @@ function Appointments() {
                       boxShadow: "0px 3px 5px rgba(0,0,0,0.2)",
                     }}
                   >
-                    ยืนยันการจอง
+                    {t("confirm_appointment")}
                   </Button>
 
                   <Button
@@ -787,10 +788,10 @@ function Appointments() {
                     }}
                     onClick={resetForm}
                   >
-                    Reset
+                    {t("reset")}
                   </Button>
                   <div style={{ fontSize: "12px", color: "#8a6d3b" }}>
-                    <p>*หลังจากลงทะเบียนนัดเสร็จแล้วจะมีเจ้าหน้าที่ติดต่อกลับ</p>
+                    <p>*{t("after_registering")}</p>
                   </div>
                 </Card>
               </Grid>

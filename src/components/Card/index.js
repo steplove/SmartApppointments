@@ -14,6 +14,8 @@ import {
   Hidden,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -34,6 +36,7 @@ const theme = createTheme({
   },
 });
 const ReactCardSlider = () => {
+  const { t } = useTranslation();
   const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/randomDoctors`);
   const [doctors, setDoctors] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
@@ -92,9 +95,9 @@ const ReactCardSlider = () => {
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <div className="link-list-doctor">
-            <p className="title-name-doctor">รายชื่อแพทย์</p>
+            <p className="title-name-doctor">{t("doctor_list")}</p>
             <a href="/doctorList" className="title-name-doctor">
-              ดูทั้งหมด
+              {t("view_all")}
             </a>
           </div>
           <div id="main-slider-container">
@@ -123,9 +126,9 @@ const ReactCardSlider = () => {
         {/* Mobile View */}
         <Hidden smUp>
           <div className="link-list-doctor">
-            <p className="title-name-doctor">รายชื่อแพทย์</p>
+            <p className="title-name-doctor">{t("doctor_list")}</p>
             <a href="/doctorList" className="title-name-doctor">
-              ดูทั้งหมด
+              {t("view_all")}
             </a>
           </div>
           <div id="main-slider-container">
@@ -152,7 +155,7 @@ const ReactCardSlider = () => {
         </Hidden>
       </ThemeProvider>
       <Dialog open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>รายละเอียดแพทย์</DialogTitle>
+        <DialogTitle>{t("doctor_details")}</DialogTitle>
         <DialogContent>
           <img
             src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
@@ -165,12 +168,16 @@ const ReactCardSlider = () => {
             }}
           />
 
-          <p>ชื่อ: {selectedDoctor.Doctor_Name}</p>
-          <p>ความชำนาญ: {selectedDoctor.Doctor_Specialty}</p>
+          <p>
+            {t("name")}: {selectedDoctor.Doctor_Name}
+          </p>
+          <p>
+            {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
+          </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">
-            ปิด
+            {t("close")}
           </Button>
         </DialogActions>
       </Dialog>

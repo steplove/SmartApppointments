@@ -6,10 +6,9 @@ import MKBox from "components/MKBox";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import image from "assets/images/CEO-Message(TH)_edit01(1).png";
-// import NavbarsAboutUs from "../Navbars";
+import image from "assets/images/TH Board Director 66 .jpg";
 import { useTranslation } from "react-i18next";
-
+// import NavbarsAboutUs from "../Navbars";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -29,9 +28,8 @@ const theme = createTheme({
     },
   },
 });
-function Message_From_Ceo() {
+function ServicesRoom() {
   const { t } = useTranslation();
-
   return (
     <>
       <DefaultNavbar routes={routes} sticky relative />
@@ -45,10 +43,10 @@ function Message_From_Ceo() {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
-                    {t("home")}/
+                    หน้าแรก/
                   </a>
-                  <a href="/Message_From_Ceo" style={{ color: "#0bb288", fontSize: "1rem" }}>
-                    {t("message_from_the_director")}
+                  <a href="/ServicesRooms" style={{ color: "#0bb288", fontSize: "1rem" }}>
+                    <p>{t("hello")}</p>
                   </a>
                 </Grid>
               </Grid>
@@ -69,11 +67,11 @@ function Message_From_Ceo() {
                   >
                     <span style={{ borderBottom: "2px solid #d1c398" }}>
                       {" "}
-                      {t("message_from_the_director")}{" "}
+                      บริการห้องพัก/สิ่งอำนวยความสะดวก
                     </span>
                   </Typography>
                   <Card>
-                    <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" />
+                    {/* <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" /> */}
                     <CardContent>
                       <Grid container spacing={2}>
                         <Grid item lg={6}></Grid>
@@ -109,10 +107,7 @@ function Message_From_Ceo() {
                       color: "#562170",
                     }}
                   >
-                    <span style={{ borderBottom: "2px solid #d1c398" }}>
-                      {" "}
-                      {t("message_from_the_director")}
-                    </span>
+                    <span style={{ borderBottom: "2px solid #d1c398" }}> ผู้บริหาร</span>
                   </Typography>
                   <Card>
                     <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" />
@@ -138,4 +133,4 @@ function Message_From_Ceo() {
   );
 }
 
-export default Message_From_Ceo;
+export default ServicesRoom;

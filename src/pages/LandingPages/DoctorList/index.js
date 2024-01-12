@@ -31,6 +31,8 @@ import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import useFetch from "../../../hooks/useFetch";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -52,6 +54,8 @@ const theme = createTheme({
 });
 
 function DoctorList() {
+  const { t } = useTranslation();
+
   const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/doctors`);
   const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   const [doctors, setDoctors] = useState([]);
@@ -139,7 +143,7 @@ function DoctorList() {
   return (
     <>
       <MenuList />
-      <Grid style={{ paddingTop: "5%" }}>
+      <Grid>
         <ThemeProvider theme={theme}>
           {/* Desktop/Tablet View */}
           <Hidden smDown>
@@ -150,9 +154,10 @@ function DoctorList() {
                 color: theme.palette.primary.main,
                 marginBottom: "20px",
                 textAlign: "center",
+                paddingTop: "0%",
               }}
             >
-              รายชื่อแพทย์
+              {t("doctor_list")}
             </Typography>
             <Grid
               container
@@ -167,7 +172,7 @@ function DoctorList() {
             >
               {/* คลินิก */}
               <FormControl fullWidth variant="outlined">
-                <InputLabel>คลินิก</InputLabel>
+                <InputLabel>{t("clinic")}</InputLabel>
                 <Select
                   label="คลินิก"
                   name="Clinic"
@@ -188,7 +193,7 @@ function DoctorList() {
             </Grid>
             {doctors.length === 0 ? (
               <Typography variant="h6" color="textSecondary" align="center">
-                ไม่พบข้อมูลแพทย์ในรายการ
+                {t("no_information_found")}
               </Typography>
             ) : (
               <Grid container spacing={0} justifyContent="center">
@@ -231,7 +236,7 @@ function DoctorList() {
                       </Grid>
                       <Grid item>
                         <Typography variant="body1" color="textSecondary">
-                          ความชำนาญ: {doctor.Doctor_Specialty}
+                          {t("doctor_expertise")}: {doctor.Doctor_Specialty}
                         </Typography>
                       </Grid>
                       <Grid item>
@@ -243,7 +248,7 @@ function DoctorList() {
                           color="primary"
                           style={{ borderRadius: "20px" }}
                         >
-                          ดูรายละเอียด
+                          {t("view_details")}
                         </Button>
                       </Grid>
                     </Card>
@@ -252,7 +257,7 @@ function DoctorList() {
               </Grid>
             )}
             <Dialog open={openDialog} onClose={handleDialogClose}>
-              <DialogTitle>รายละเอียดแพทย์</DialogTitle>
+              <DialogTitle>{t("doctor_details")}</DialogTitle>
               <DialogContent>
                 <img
                   src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
@@ -265,12 +270,17 @@ function DoctorList() {
                   }}
                 />
 
-                <p>ชื่อ: {selectedDoctor.Doctor_Name}</p>
-                <p>ความชำนาญ: {selectedDoctor.Doctor_Specialty}</p>
+                <p>
+                  {t("name")}: {selectedDoctor.Doctor_Name}
+                </p>
+                <p>
+                  {" "}
+                  {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
+                </p>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleDialogClose} color="primary">
-                  ปิด
+                  {t("close")}
                 </Button>
               </DialogActions>
             </Dialog>
@@ -298,9 +308,10 @@ function DoctorList() {
                 marginBottom: "20px",
                 textAlign: "center",
                 marginTop: "-30px",
+                paddingTop: "5%",
               }}
             >
-              รายชื่อแพทย์
+              {t("doctor_list")}
             </Typography>
             <Grid
               container
@@ -315,7 +326,7 @@ function DoctorList() {
             >
               {/* คลินิก */}
               <FormControl fullWidth variant="outlined">
-                <InputLabel>คลินิก</InputLabel>
+                <InputLabel>{t("clinic")}</InputLabel>
                 <Select
                   label="คลินิก"
                   name="Clinic"
@@ -336,7 +347,7 @@ function DoctorList() {
             </Grid>
             {doctors.length === 0 ? (
               <Typography variant="h6" color="textSecondary" align="center">
-                ไม่พบข้อมูลแพทย์ในรายการ
+                {t("no_information_found")}
               </Typography>
             ) : (
               paginatedData.map((doctor) => (
@@ -377,7 +388,7 @@ function DoctorList() {
                         style={{ borderRadius: "20px", margin: "10px 0" }}
                         onClick={() => handleDialogOpen(doctor.DoctorID, `${doctor.Doctor_IMG}`)}
                       >
-                        <Typography style={{ fontSize: "10px" }}>ดูรายละเอียด</Typography>
+                        <Typography style={{ fontSize: "10px" }}>{t("view_details")}</Typography>
                       </Button>
                     </Box>
                   </Box>
@@ -385,7 +396,7 @@ function DoctorList() {
               ))
             )}
             <Dialog open={openDialog} onClose={handleDialogClose}>
-              <DialogTitle>รายละเอียดแพทย์</DialogTitle>
+              <DialogTitle>{t("doctor_details")}</DialogTitle>
               <DialogContent>
                 <img
                   src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
@@ -398,12 +409,16 @@ function DoctorList() {
                   }}
                 />
 
-                <p>ชื่อ: {selectedDoctor.Doctor_Name}</p>
-                <p>ความชำนาญ: {selectedDoctor.Doctor_Specialty}</p>
+                <p>
+                  {t("name")}: {selectedDoctor.Doctor_Name}
+                </p>
+                <p>
+                  {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
+                </p>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleDialogClose} color="primary">
-                  ปิด
+                  {t("close")}
                 </Button>
               </DialogActions>
             </Dialog>

@@ -8,6 +8,7 @@ import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
+import { useTranslation } from "react-i18next";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   breakpoints: {
@@ -29,6 +30,7 @@ const theme = createTheme({
   },
 });
 function Packages() {
+  const { t } = useTranslation();
   const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showPackages`);
   const [packageData, setPackageData] = useState([]);
 
@@ -62,10 +64,10 @@ function Packages() {
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
-                  หน้าแรก/
+                  {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
-                  แพ็คเกจทั้งหมด
+                  {t("all_packages")}
                 </a>
               </Grid>
             </Grid>
@@ -109,14 +111,14 @@ function Packages() {
                         {packageItem.packageContact}
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        ราคา:{" "}
+                        {t("price")}:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
                           {packageItem.formattedPackagePrice}
                         </span>
                       </MKTypography>
 
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                        ระยะเวลาโปรโมชั่น:
+                        {t("expiration_date")}:
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
                           {new Date(packageItem.promoEndDate).toLocaleDateString()}
                         </span>
@@ -131,7 +133,7 @@ function Packages() {
                         }}
                         onClick={() => packagesDetail(packageItem.packageCode)}
                       >
-                        ดูรายละเอียด
+                        {t("view_details")}
                       </MKTypography>
                     </CardContent>
                   </Card>
@@ -149,10 +151,10 @@ function Packages() {
             <Grid container spacing={2}>
               <Grid item xs={6}>
                 <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
-                  หน้าแรก/
+                  {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
-                  แพ็คเกจทั้งหมด
+                  {t("all_packages")}
                 </a>
               </Grid>
             </Grid>
@@ -193,13 +195,13 @@ function Packages() {
                         {packageItem.packageContact}
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        ราคา:{" "}
+                        {t("price")}:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
                           {packageItem.formattedPackagePrice}
                         </span>
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                        ระยะเวลาโปรโมชั่น:
+                        {t("expiration_date")}:
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
                           {new Date(packageItem.promoEndDate).toLocaleDateString()}
                         </span>
@@ -214,7 +216,7 @@ function Packages() {
                         }}
                         onClick={() => packagesDetail(packageItem.packageCode)}
                       >
-                        ดูรายละเอียด
+                        {t("view_details")}
                       </MKTypography>
                     </CardContent>
                   </Card>

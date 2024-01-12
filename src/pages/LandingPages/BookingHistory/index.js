@@ -29,6 +29,7 @@ import footerRoutes from "footer.routes";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import MKBox from "components/MKBox";
+import { useTranslation } from "react-i18next";
 
 const theme = createTheme({
   breakpoints: {
@@ -51,6 +52,7 @@ const theme = createTheme({
 });
 
 function BookingHistory() {
+  const { t } = useTranslation();
   const [, HN] = useTokenCheck();
   const [allAppointments, setAllAppointment] = useState([]);
   const [dialogShow, setDialogShow] = useState([]);
@@ -117,17 +119,17 @@ function BookingHistory() {
               gutterBottom
               style={{ color: theme.palette.primary.main, marginBottom: "20px" }}
             >
-              ประวัตินัดหมาย
+              {t("appointment_history")}
             </Typography>
             <Table>
               <TableHead style={{ backgroundColor: theme.palette.secondary.main }}>
                 <TableRow>
-                  <TableCell style={{ textAlign: "center" }}>วันที่</TableCell>
-                  <TableCell style={{ textAlign: "center" }}>เวลา</TableCell>
-                  <TableCell style={{ textAlign: "center" }}>คลินิก</TableCell>
-                  <TableCell style={{ textAlign: "center" }}>แพทย์</TableCell>
-                  <TableCell style={{ textAlign: "center" }}>สถานะ</TableCell>
-                  <TableCell style={{ textAlign: "center" }}>เครื่องมือ</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("date")}</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("time")}</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("clinic")}</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("doctor")}</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("status")}</TableCell>
+                  <TableCell style={{ textAlign: "center" }}>{t("tool")}</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -150,36 +152,43 @@ function BookingHistory() {
                       }}
                     >
                       <h6 className={`status-${booking.StatusFlag}`}>
+                        {" "}
                         {booking.StatusFlag === "3"
-                          ? "pending"
+                          ? t("waiting_for_confirmation")
                           : booking.StatusFlag === "4"
-                          ? "confirmed"
+                          ? t("confirm_appointment")
                           : booking.StatusFlag === "5"
-                          ? "cancelled"
+                          ? t("cancel_appointment")
                           : booking.StatusFlag === "6"
-                          ? "complete"
-                          : "unknown"}{" "}
+                          ? t("completed")
+                          : t("unknown_status")}{" "}
                       </h6>
                     </TableCell>
                     <TableCell style={{ textAlign: "center" }}>
-                      <Button onClick={() => handleOpenDialog(booking.UID)}>ดูรายละเอียด</Button>
+                      <Button onClick={() => handleOpenDialog(booking.UID)}>
+                        {t("view_details")}
+                      </Button>
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-                        <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
+                        <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
                           <p>
-                            ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
+                            {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
                           </p>
                           <p>
-                            วันที่นัด: {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
+                            {t("appointment_date")}:{" "}
+                            {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
                           </p>
-                          <p>เวลา: {new Date(dialogShow.Appointment_Time).toLocaleTimeString()}</p>
+                          <p>
+                            {t("time")}:{" "}
+                            {new Date(dialogShow.Appointment_Time).toLocaleTimeString()}
+                          </p>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
                           {dialogShow.APM_No && <Barcode value={dialogShow.APM_No} />}
                         </DialogContent>
 
                         <DialogActions>
                           <Button onClick={handleCloseDialog} color="primary">
-                            ปิด
+                            {t("close")}
                           </Button>
                         </DialogActions>
                       </Dialog>
@@ -207,7 +216,7 @@ function BookingHistory() {
               textAlign: "center",
             }}
           >
-            ประวัตินัดหมาย
+            {t("appointment_history")}
           </Typography>
           <div>
             {allAppointments.length > 0 ? (
@@ -259,44 +268,49 @@ function BookingHistory() {
                         className={`status-${booking.StatusFlag}`}
                       >
                         {" "}
-                        สถานะ:{" "}
+                        {t("status")}:{" "}
                         {booking.StatusFlag === "3"
-                          ? "รอยืนยัน"
+                          ? t("waiting_for_confirmation")
                           : booking.StatusFlag === "4"
-                          ? "ยืนยันนัดหมาย"
+                          ? t("confirm_appointment")
                           : booking.StatusFlag === "5"
-                          ? "ยกเลิกนัดหมาย"
+                          ? t("cancel_appointment")
                           : booking.StatusFlag === "6"
-                          ? "เสร็จสมบูรณ์"
-                          : "unknown"}{" "}
+                          ? t("completed")
+                          : t("unknown_status")}{" "}
                       </Typography>
                     </Grid>
 
                     <Grid item xs={6}>
-                      <Button onClick={() => handleOpenDialog(booking.UID)}>ดูรายละเอียด</Button>
+                      <Button onClick={() => handleOpenDialog(booking.UID)}>
+                        {t("view_details")}
+                      </Button>
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
-                        <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
+                        <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
                           <p>
-                            ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
+                            {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
                           </p>
                           <p>
-                            วันที่นัด: {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
+                            {t("appointment_date")}:{" "}
+                            {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
                           </p>
                           <p>
-                            เวลา:{" "}
+                            {t("time")}:{" "}
                             {dialogShow.Appointment_Time
                               ? dialogShow.Appointment_Time.substring(11, 16)
                               : ""}
                           </p>
-                          <p>รายละเอียดการนัด : {dialogShow.Apm_Des}</p>
+                          <p>
+                            {t("appointment_details")} : {dialogShow.Apm_Des}
+                          </p>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
                           {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
                         </DialogContent>
 
                         <DialogActions>
                           <Button onClick={handleCloseDialog} color="primary">
-                            ปิด
+                            {t("close")}
                           </Button>
                         </DialogActions>
                       </Dialog>
@@ -309,7 +323,8 @@ function BookingHistory() {
                 variant="body1"
                 style={{ fontWeight: 600, color: "#999", textAlign: "center" }}
               >
-                ไม่มีประวัตินัดหมาย
+                {t("no_information_found")}
+                {t("appointment_history")}
               </Typography>
             )}
           </div>

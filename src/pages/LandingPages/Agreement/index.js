@@ -19,8 +19,11 @@ import MKTypography from "components/MKTypography";
 import routes from "routes";
 // Images
 import bgImage from "assets/images/hospital.png";
+import { useTranslation } from "react-i18next";
 
 function Agreement() {
+  const { t } = useTranslation();
+
   const [isChecked, setChecked] = useState(false);
   const [data] = useState([
     " 1. บริการ",
@@ -216,7 +219,7 @@ function Agreement() {
                   fontWeight: "bold",
                 }}
               >
-                ข้อกำหนดและเงื่อนไขการใช้บริการ Smart Appointments (นัดหมายออนไลน์)
+                {t("terms_and_conditions_of_service")}
               </MKTypography>
             </MKBox>
             <CardContent>
@@ -264,7 +267,7 @@ function Agreement() {
                       }}
                     />
                   }
-                  label="ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ"
+                  label={t("read_and_agreed_to_the_terms")}
                 />
               </Paper>
 
@@ -277,7 +280,7 @@ function Agreement() {
                     handleClickRegister();
                   }}
                 >
-                  สมัครสมาชิก
+                  {t("register")}
                 </Button>
               </Box>
             </CardContent>

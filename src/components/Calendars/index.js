@@ -10,6 +10,8 @@ import {
   Button,
 } from "@mui/material";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
+
 const appointments = {
   "2023-09-10": "นัดหมายกับ Dr.Smith",
   "2023-09-11": "นัดหมายกับ Dr.Smith2",
@@ -17,6 +19,7 @@ const appointments = {
 };
 
 function AppointmentsCalendar() {
+  const { t } = useTranslation();
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -45,13 +48,13 @@ function AppointmentsCalendar() {
         tileContent={tileContent}
       />
       <Dialog open={showDialog} onClose={() => setShowDialog(false)}>
-        <DialogTitle>รายละเอียดการนัดหมาย</DialogTitle>
+        <DialogTitle>{t("appointment_details")}</DialogTitle>
         <DialogContent>
           <DialogContentText>{selectedAppointment}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setShowDialog(false)} color="primary">
-            ปิด
+            {t("close")}
           </Button>
         </DialogActions>
       </Dialog>

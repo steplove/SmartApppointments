@@ -4,8 +4,11 @@ import "./HealthBlog.css";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 import MKTypography from "components/MKTypography";
+import { useTranslation } from "react-i18next";
 
 const HealthBlog = () => {
+  const { t } = useTranslation();
+
   const HealthBlogAll = () => {
     window.location.href = "/HealthBlogList";
   };
@@ -36,7 +39,7 @@ const HealthBlog = () => {
           fontSize: "25px",
         }}
       >
-        บทความเกษมราษฎร์
+        {t("kasemrad_article")}
         <span style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></span>
       </span>
       <Grid
@@ -105,7 +108,7 @@ const HealthBlog = () => {
                 }}
                 onClick={() => BlogsDetail(blog.Blog_ID)}
               >
-                อ่านเพิ่มเพิม
+                {t("read_more")}
               </MKTypography>
             </CardContent>
           </Card>
@@ -122,7 +125,7 @@ const HealthBlog = () => {
           }}
           onClick={HealthBlogAll}
         >
-          ดูบทความทั้งหมด
+          {t("view_all_articles")}
         </Button>
       </div>
     </>

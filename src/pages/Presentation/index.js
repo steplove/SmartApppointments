@@ -21,6 +21,9 @@ import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
 import { Card } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import LanguageSelector from "LanguageSelector";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -43,10 +46,27 @@ const theme = createTheme({
 function Presentation() {
   const [showNavbar] = useState(false);
   const slides = [];
+  const { t } = useTranslation();
+
   return (
     <>
       {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
       <MKBox component="header" position="relative">
+        <div
+          style={{
+            position: "absolute",
+            right: 25,
+            textAlign: "center",
+            alignItems: "center",
+            marginTop: 10,
+            backgroundColor: "whitesmoke",
+            borderRadius: 10,
+            padding: 10,
+            height: "6%",
+          }}
+        >
+          <LanguageSelector />
+        </div>
         <MKBox
           display="flex"
           alignItems="center"
@@ -83,18 +103,18 @@ function Presentation() {
                   },
                 })}
               >
-                Kasemrad Sriburin
+                {t("kasemrad_sriburin")}
               </MKTypography>
               <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
                 Hospital You Can Trust.
               </MKTypography>
               <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
-                โรงพยาบาลที่คุณวางใจ
+                {t("hospital_you_trust")}
               </MKTypography>
 
               <Stack direction="row" spacing={1} mt={3}>
                 <MKButton color="white" href="/signIn">
-                  นัดหมาย
+                  {t("appointment")}
                 </MKButton>
               </Stack>
             </Grid>
@@ -133,21 +153,13 @@ function Presentation() {
       </MKBox>
       <CookieConsent
         location="bottom"
-        buttonText="อนุญาตคุกกี้ทั้งหมด"
+        buttonText={t("allow_all_cookies")}
         cookieName="myAwesomeCookieName2"
         style={{ background: "#FFFFFF" }}
         buttonStyle={{ color: "#FFFFFF", fontSize: "13px", background: "#0bb288" }}
         expires={150}
       >
-        <p style={{ fontSize: ".813rem", color: "#808080" }}>
-          {" "}
-          เมื่อคลิก “อนุญาตคุกกี้ทั้งหมด”
-          หมายความว่าผู้ใช้งานยอมรับที่จะเปิดการใช้งานคุกกี้เพื่อวัตถุประสงค์ต่าง ๆ ดังต่อไปนี้
-          เพื่อให้เว็บไซต์สามารถทำงานได้อย่างถูกต้องและเต็มประสิทธิภาพ
-          เพื่อเปิดใช้คุณสมบัติของโซเชียลมีเดีย
-          และเพื่อวิเคราะห์การเข้าใช้งานเพื่อนำข้อมูลไปใช้ในการทำการตลาดและการโฆษณา
-          รวมถึงการแบ่งปันข้อมูลการใช้งานกับพาร์ทเนอร์โซเชียลมีเดีย
-        </p>
+        <p style={{ fontSize: ".813rem", color: "#808080" }}>{t("cookies")}</p>
       </CookieConsent>
     </>
   );

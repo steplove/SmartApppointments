@@ -12,23 +12,17 @@ import Grid from "@mui/material/Grid";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
+import { useTranslation } from "react-i18next";
+
 function DefaultFooter({ content }) {
   const { socials = [], menus = [], copyright = "" } = content || {};
+  const { t } = useTranslation();
 
   // brand,
   return (
     <MKBox component="footer">
       <Container>
-        {/* <MKTypography sx={{ borderBottom: "2px solid #562170", width: "100%" }}></MKTypography> */}
         <Grid container spacing={1}>
-          {/* <Grid item xs={12} md={3} sx={{ ml: "auto", mb: 3 }}>
-            <MKBox>
-              <Link to={brand.route}>
-                <MKBox component="img" src={brand.image} alt={brand.name} maxWidth="2rem" mb={2} />
-              </Link>
-              <MKTypography variant="h6">{brand.name}</MKTypography>
-            </MKBox>
-          </Grid> */}
           {menus.map(({ name: title, items }) => (
             <Grid
               key={title}
@@ -45,7 +39,7 @@ function DefaultFooter({ content }) {
                 mb={1}
                 sx={{ fontSize: "16px" }}
               >
-                {title}
+                {t(title)}
 
                 <MKTypography
                   sx={{ borderBottom: "2px solid #562170", width: "40px" }}
@@ -65,7 +59,7 @@ function DefaultFooter({ content }) {
                         textTransform="capitalize"
                         sx={{ fontSize: "14px" }}
                       >
-                        {name}
+                        {t(name)}
                       </MKTypography>
                     ) : (
                       <MKTypography
@@ -75,7 +69,7 @@ function DefaultFooter({ content }) {
                         fontWeight="regular"
                         textTransform="capitalize"
                       >
-                        {name}
+                        {t(name)}
                       </MKTypography>
                     )}
                   </MKBox>

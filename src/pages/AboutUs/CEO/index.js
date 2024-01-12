@@ -7,7 +7,9 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import image from "assets/images/TH Board Director 66 .jpg";
-import NavbarsAboutUs from "../Navbars";
+// import NavbarsAboutUs from "../Navbars";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -28,16 +30,28 @@ const theme = createTheme({
   },
 });
 function CEO() {
+  const { t } = useTranslation();
+
   return (
     <>
       <DefaultNavbar routes={routes} sticky relative />
-      <NavbarsAboutUs />
+      {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
             <>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
+                    {t("home")}/
+                  </a>
+                  <a href="/CEO" style={{ color: "#0bb288", fontSize: "1rem" }}>
+                    {t("director")}
+                  </a>
+                </Grid>
+              </Grid>
               <Grid container justifyContent="center">
                 <Grid item lg={12}>
                   <Typography
@@ -53,7 +67,7 @@ function CEO() {
                       color: "#562170",
                     }}
                   >
-                    <span style={{ borderBottom: "2px solid #d1c398" }}> ผู้บริหาร</span>
+                    <span style={{ borderBottom: "2px solid #d1c398" }}> {t("director")}</span>
                   </Typography>
                   <Card>
                     <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" />
@@ -74,7 +88,7 @@ function CEO() {
 
         {/* Mobile View */}
         <Hidden smUp>
-          <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
+          <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
             <>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
@@ -88,11 +102,11 @@ function CEO() {
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
-                      fontSize: "45px",
+                      fontSize: "30px",
                       color: "#562170",
                     }}
                   >
-                    <span style={{ borderBottom: "2px solid #d1c398" }}> ผู้บริหาร</span>
+                    <span style={{ borderBottom: "2px solid #d1c398" }}> {t("director")}</span>
                   </Typography>
                   <Card>
                     <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" />

@@ -24,14 +24,20 @@ import HealthBlogListDetail from "pages/LandingPages/HealthBlogList/HealthBlogLi
 import ResetPassword from "pages/LandingPages/ResetPassword";
 import HealthBlogList from "pages/LandingPages/HealthBlogList";
 import CEO from "pages/AboutUs/CEO";
+import Message_From_Ceo from "pages/AboutUs/Message_From_Ceo";
+import Message_From_Hospital_Director from "pages/AboutUs/Message_From_Hospital_Director";
 import History from "pages/AboutUs/History";
-
+import Vision_And_Mission from "pages/AboutUs/Vision_And_Mission";
+import Accreditation from "pages/AboutUs/Accreditation";
+import ServicesRooms from "pages/OurServices/ServicesRooms";
+import "./i18n";
 // Material Kit 2 React routes
 import routes from "routes";
 import "./App.css";
 // import LiffComponent from "./LiffComponent";
 export default function App() {
   const { pathname } = useLocation();
+  // ตรวจสอบและอัปเดตภาษาเมื่อแอปโหลด
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
@@ -78,7 +84,15 @@ export default function App() {
           <Route path="/resetpassword/:UID" element={<ResetPassword />} />
           <Route path="/agree" element={<Agree />} />
           <Route path="/CEO" element={<CEO />} />
-          <Route path="/History" element={<History />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/Message_From_Ceo" element={<Message_From_Ceo />} />
+          <Route
+            path="/Message_From_Hospital_Director"
+            element={<Message_From_Hospital_Director />}
+          />
+          <Route path="/Vision_And_Mission" element={<Vision_And_Mission />} />
+          <Route path="/Accreditation" element={<Accreditation />} />
+          <Route path="/ServicesRooms" element={<ServicesRooms />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>

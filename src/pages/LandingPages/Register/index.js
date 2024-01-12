@@ -30,8 +30,11 @@ import Divider from "@mui/material/Divider";
 import { BASE_URL } from "constants/constants";
 import Swal from "sweetalert2";
 import Foots from "components/Foot";
+import { useTranslation } from "react-i18next";
 
 function Register() {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     identificationType: "",
     identificationNumber: "",
@@ -127,10 +130,10 @@ function Register() {
         if (!formData[key]) {
           console.log(`Field ${key} is missing`);
           Swal.fire({
-            title: "ข้อมูลไม่ครบถ้วน!",
-            text: `กรุณากรอก ${key} ให้ครบถ้วน`,
+            title: t("incomplete_information"),
+            text: `${t("please_fill_in")} ${key} ${t("completely")}`,
             icon: "warning",
-            confirmButtonText: "ตกลง",
+            confirmButtonText: `${t("ok")}`,
           });
           return;
         }
@@ -139,20 +142,20 @@ function Register() {
       const emailRegex = /\S+@\S+\.\S+/;
       if (!emailRegex.test(formData.email)) {
         Swal.fire({
-          title: "รูปแบบอีเมลไม่ถูกต้อง!",
-          text: "กรุณากรอกอีเมลให้ถูกต้อง",
+          title: `${t("invalid_email_format")}!`,
+          text: `${t("please_enter_your_email_address_correctly")}!`,
           icon: "warning",
-          confirmButtonText: "ตกลง",
+          confirmButtonText: `${t("ok")}`,
         });
         return;
       }
 
       if (formData.password !== formData.confirmPassword) {
         Swal.fire({
-          title: "รหัสผ่านไม่ตรงกัน!",
-          text: "กรุณายืนยันรหัสผ่านให้ตรงกัน",
+          title: `${t("passwords_dont_match")}!`,
+          text: `${t("please_confirm_your_passwords_match")}!`,
           icon: "warning",
-          confirmButtonText: "ตกลง",
+          confirmButtonText: `${t("ok")}`,
         });
         return;
       }
@@ -168,10 +171,10 @@ function Register() {
         .then((data) => {
           if (data.length > 0) {
             Swal.fire({
-              title: "พบข้อมูลซ้ำ!",
-              text: "ข้อมูลนี้ถูกใช้งานแล้ว",
+              title: `${t("found_duplicate_information")}!`,
+              text: `${t("this_information_is_already_in_use")}!`,
               icon: "warning",
-              confirmButtonText: "ตกลง",
+              confirmButtonText: `${t("ok")}`,
             });
           } else {
             // ไม่พบข้อมูลที่ซ้ำ สามารถดำเนินการ insert ข้อมูลได้
@@ -205,12 +208,11 @@ function Register() {
                 if (response.status === 200) {
                   // แสดง sweetalert2 เพื่อแจ้งเตือนว่าเพิ่มข้อมูลพนักงานสำเร็จ
                   Swal.fire({
-                    title: "ลงทะเบียนสำเร็จ!",
+                    title: `${t("successfully_registered")}!`,
                     icon: "success",
                     showConfirmButton: false,
                     timer: 1500,
                   });
-                  console.log("สำเร็จ");
                   setTimeout(() => {
                     window.location = "/signIn";
                   }, 1500);
@@ -225,19 +227,17 @@ function Register() {
                 }
               })
               .catch((error) => {
-                console.log("ไม่สำเร็จ", formData);
                 console.error(error);
               });
           }
         });
     } catch (error) {
-      console.log("ไม่สำเร็จ", formData);
       console.error(error);
     }
   };
   return (
     <>
-      <DefaultNavbar routes={routes} transparent light />
+      <DefaultNavbar routes={routes} sticky />
       <MKBox
         position="absolute"
         top={0}
@@ -273,7 +273,7 @@ function Register() {
                   }}
                 >
                   <MKTypography variant="h5" style={{ color: "white" }}>
-                    ลงทะเบียน
+                    {t("register")}
                   </MKTypography>
                 </MKBox>
 
@@ -293,12 +293,12 @@ function Register() {
                             <FormControlLabel
                               value="IDCard"
                               control={<Radio />}
-                              label="เลขประจำตัวประชาชน"
+                              label={`${t("national_identification_number")}`}
                             />
                             <FormControlLabel
                               value="passport"
                               control={<Radio />}
-                              label="พาสปอร์ต"
+                              label={`${t("passport")}`}
                             />
                           </RadioGroup>
                         </FormControl>
@@ -308,8 +308,8 @@ function Register() {
                           fullWidth
                           label={
                             formData.identificationType === "passport"
-                              ? "พาสปอร์ต"
-                              : "เลขประจำตัวประชาชน"
+                              ? `${t("passport")}`
+                              : `${t("national_identification_number")}`
                           }
                           name="identificationNumber"
                           variant="outlined"
@@ -320,12 +320,12 @@ function Register() {
                         />
                       </Grid>
                       <Grid item xs={12} md={6}>
-                        <InputLabel sx={{ color: "red", marginBottom: "10px" }}>
-                          * ไม่ทราบให้กรอก - *
+                        <InputLabel sx={{ color: "red", marginBottom: "10px", marginTop: "-22px" }}>
+                          {t("unknown")}
                         </InputLabel>
                         <TextField
                           fullWidth
-                          label="เลขที่โรงพยาบาล (HN)"
+                          label={`${t("hospital_number")}`}
                           name="hospitalNumber"
                           variant="outlined"
                           value={formData.hospitalNumber}
@@ -336,7 +336,7 @@ function Register() {
 
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth>
-                          <InputLabel id="prefix-label">คำนำหน้า</InputLabel>
+                          <InputLabel id="prefix-label">{t("prefix")}</InputLabel>
                           <Select
                             label="คำนำหน้า"
                             name="prefix"
@@ -359,13 +359,13 @@ function Register() {
                             }}
                           >
                             <MenuItem key="นาย" value="นาย">
-                              นาย
+                              {t("mr")}
                             </MenuItem>
                             <MenuItem key="นาง" value="นาง">
-                              นาง
+                              {t("mrs")}
                             </MenuItem>
                             <MenuItem key="นางสาว" value="นางสาว">
-                              นางสาว
+                              {t("miss")}
                             </MenuItem>
                           </Select>
                         </FormControl>
@@ -379,8 +379,16 @@ function Register() {
                             value={formData.gender}
                             onChange={handleInputChange}
                           >
-                            <FormControlLabel value="2" control={<Radio />} label="ชาย" />
-                            <FormControlLabel value="1" control={<Radio />} label="หญิง" />
+                            <FormControlLabel
+                              value="2"
+                              control={<Radio />}
+                              label={`${t("male")}`}
+                            />
+                            <FormControlLabel
+                              value="1"
+                              control={<Radio />}
+                              label={`${t("female")}`}
+                            />
                           </RadioGroup>
                         </FormControl>
                       </Grid>
@@ -388,7 +396,7 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
                             fullWidth
-                            label="ชื่อ"
+                            label={`${t("name")}`}
                             variant="outlined"
                             name="firstName"
                             value={formData.firstName}
@@ -400,7 +408,7 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
                             fullWidth
-                            label="นามสกุล"
+                            label={`${t("last_name")}`}
                             variant="outlined"
                             name="lastName"
                             value={formData.lastName}
@@ -412,7 +420,7 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <MobileDatePicker
-                              label="วันเกิด"
+                              label={`${t("birthday")}`}
                               value={formData.birthDate}
                               onAccept={(date) => {
                                 setFormData((prevState) => ({
@@ -432,7 +440,7 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
                             fullWidth
-                            label="บ้านเลขที่"
+                            label={`${t("house_numbe")}`}
                             variant="outlined"
                             name="Address"
                             value={formData.Address}
@@ -444,7 +452,7 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
                             fullWidth
-                            label="หมู่"
+                            label={`${t("village_no")}`}
                             variant="outlined"
                             name="villageNumber"
                             value={formData.villageNumber}
@@ -454,7 +462,7 @@ function Register() {
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="province-label">จังหวัด</InputLabel>
+                          <InputLabel id="province-label">{t("province")}</InputLabel>
                           <Select
                             labelId="province-label"
                             name="province"
@@ -474,7 +482,7 @@ function Register() {
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="district-label">อำเภอ</InputLabel>
+                          <InputLabel id="district-label">{t("district")}</InputLabel>
                           <Select
                             labelId="amphure-label"
                             name="amphure"
@@ -494,7 +502,7 @@ function Register() {
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="district-label">ตำบล</InputLabel>
+                          <InputLabel id="district-label">{t("sub_district")}</InputLabel>
                           <Select
                             labelId="district-label"
                             name="district"
@@ -517,13 +525,13 @@ function Register() {
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           {formData.postalCode !== "" && formData.postalCode !== "0" ? ( // เช็ครหัสไปรษณีย์เท่ากับ "0"
                             <TextField
-                              label="รหัสไปรษณีย์"
+                              label={`${t("postal_code")}`}
                               value={formData.postalCode || ""}
                               disabled
                             />
                           ) : (
                             <TextField
-                              label="รหัสไปรษณีย์"
+                              label={`${t("postal_code")}`}
                               value={formData.postalCode || ""}
                               // อื่น ๆ ที่คุณต้องการใส่ที่นี่
                             />
@@ -534,7 +542,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
-                            label="เบอร์โทรศัพท์"
+                            label={`${t("telephone_numbe")}`}
                             variant="outlined"
                             name="mobileNo"
                             value={formData.mobileNo}
@@ -551,7 +559,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
-                            label="อีเมล"
+                            label={`${t("email")}`}
                             variant="outlined"
                             name="email"
                             value={formData.email}
@@ -563,7 +571,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
-                            label="รหัสผ่าน"
+                            label={`${t("password")}`}
                             variant="outlined"
                             name="password"
                             type="password"
@@ -575,7 +583,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <TextField
-                            label="ยืนยันรหัสผ่าน"
+                            label={`${t("confirm_password")}`}
                             variant="outlined"
                             name="confirmPassword"
                             type="password"
@@ -585,7 +593,7 @@ function Register() {
                           {formData.confirmPassword !== "" &&
                             formData.password !== formData.confirmPassword && (
                               <span style={{ color: "red" }}>
-                                <h6>รหัสผ่านไม่ตรงกัน</h6>
+                                <h6>{t("passwords_dont_match")}</h6>
                               </span>
                             )}
                         </FormControl>
@@ -599,7 +607,7 @@ function Register() {
                       onClick={handleSubmit}
                       style={{ color: "white" }}
                     >
-                      บันทึก
+                      {t("save")}
                     </Button>
                   </MKBox>
                 </MKBox>

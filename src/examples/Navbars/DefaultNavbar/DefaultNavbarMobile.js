@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-// import { useState } from "react";
+import { useState } from "react";
 
 // react-router components
 import { Link } from "react-router-dom";
@@ -31,11 +31,13 @@ import MKTypography from "components/MKTypography";
 
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
-
+import LanguageSelector from "LanguageSelector";
+import { useTranslation } from "react-i18next";
 function DefaultNavbarMobile({ routes, open }) {
-  // const [collapse, setCollapse] = useState("");
+  const [collapse, setCollapse] = useState("");
+  const { t } = useTranslation();
 
-  //const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
+  const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
 
   const renderNavbarItems = routes.map(
     ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
@@ -43,8 +45,8 @@ function DefaultNavbarMobile({ routes, open }) {
         key={name}
         name={name}
         icon={icon}
-        // collapseStatus={name === collapse}
-        //onClick={() => handleSetCollapse(name)}
+        collapseStatus={name === collapse}
+        onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}
         collapse={Boolean(navCollapse)}
@@ -63,7 +65,7 @@ function DefaultNavbarMobile({ routes, open }) {
                       py={1}
                       px={0.5}
                     >
-                      {item.name}
+                      {t(item.name)}
                     </MKTypography>
                     {item.collapse.map((el) => (
                       <MKTypography
@@ -92,7 +94,7 @@ function DefaultNavbarMobile({ routes, open }) {
                           },
                         })}
                       >
-                        {el.name}
+                        {t(el.name)}
                       </MKTypography>
                     ))}
                   </>
@@ -137,7 +139,7 @@ function DefaultNavbarMobile({ routes, open }) {
                       fontWeight="regular"
                       sx={{ transition: "all 300ms linear" }}
                     >
-                      {item.description}
+                      {t(item.description)}
                     </MKTypography>
                   </MKBox>
                 )}
@@ -152,6 +154,9 @@ function DefaultNavbarMobile({ routes, open }) {
     <Collapse in={Boolean(open)} timeout="auto" unmountOnExit>
       <MKBox width="calc(100% + 1.625rem)" my={2} ml={-2}>
         {renderNavbarItems}
+        <MKBox ml={{ xs: 2, lg: 0 }} mt={1}>
+          <LanguageSelector color="#344767" />
+        </MKBox>
       </MKBox>
     </Collapse>
   );

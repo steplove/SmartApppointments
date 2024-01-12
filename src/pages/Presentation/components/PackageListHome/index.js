@@ -3,8 +3,10 @@ import React, { useState, useEffect } from "react";
 import MKTypography from "components/MKTypography";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
+import { useTranslation } from "react-i18next";
 
 function PackageListHome() {
+  const { t } = useTranslation();
   const { data: fetchedPackages = [], error } = useFetch(`${BASE_URL}/api/showRandomPackages`);
   const [packageData, setPackageData] = useState([]);
   useEffect(() => {
@@ -45,7 +47,7 @@ function PackageListHome() {
           fontSize: "25px",
         }}
       >
-        แพ็กเกจแนะนำ
+        {t("recommended_package")}
         <span style={{ borderBottom: "2px solid #0bb288", width: "40px" }}></span>
       </span>
 
@@ -104,13 +106,13 @@ function PackageListHome() {
                 {packageItem.packageContact}
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                ราคา:{" "}
+                {t("price")}:{" "}
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
                   {packageItem.formattedPackagePrice}
                 </span>
               </MKTypography>
               <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                ระยะเวลาโปรโมชั่น:
+                {t("expiration_date")}:
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
                   {new Date(packageItem.promoEndDate).toLocaleDateString()}
                 </span>
@@ -125,7 +127,7 @@ function PackageListHome() {
                 }}
                 onClick={() => packagesDetail(packageItem.packageCode)}
               >
-                ดูรายละเอียด
+                {t("view_details")}
               </MKTypography>
             </CardContent>
           </Card>
@@ -142,7 +144,7 @@ function PackageListHome() {
           }}
           onClick={packagesAll}
         >
-          ดูแพ็กเกจทั้งหมด
+          {t("view_all_packages")}
         </Button>
       </div>
     </>

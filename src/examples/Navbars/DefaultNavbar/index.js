@@ -1,3 +1,19 @@
+/* eslint-disable no-param-reassign */
+/**
+=========================================================
+* Material Kit 2 React - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-kit-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
+
 import { Fragment, useState, useEffect } from "react";
 
 // react-router components
@@ -26,8 +42,12 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Material Kit 2 React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import LanguageSelector from "LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 function DefaultNavbar({ brand, routes, transparent, light, action, sticky, relative, center }) {
+  const { t } = useTranslation();
+
   const [dropdown, setDropdown] = useState("");
   const [dropdownEl, setDropdownEl] = useState("");
   const [dropdownName, setDropdownName] = useState("");
@@ -67,8 +87,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
   const renderNavbarItems = routes.map(({ name, icon, href, route, collapse }) => (
     <DefaultNavbarDropdown
-      key={name}
-      name={name}
+      key={t(name)}
+      name={t(name)}
       icon={icon}
       href={href}
       route={route}
@@ -77,7 +97,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         if (collapse) {
           setDropdown(currentTarget);
           setDropdownEl(currentTarget);
-          setDropdownName(name);
+          setDropdownName(t(name));
         }
       }}
       onMouseLeave={() => collapse && setDropdown(null)}
@@ -90,7 +110,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
     let template;
 
     // Render the dropdown menu that should be display as columns
-    if (collapse && columns && name === dropdownName) {
+    if (collapse && columns && t(name) === dropdownName) {
       const calculateColumns = collapse.reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / rowsPerColumn);
 
@@ -104,7 +124,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
       }, []);
 
       template = (
-        <Grid key={name} container spacing={3} py={1} px={1.5}>
+        <Grid key={t(name)} container spacing={3} py={1} px={1.5}>
           {calculateColumns.map((cols, key) => {
             const gridKey = `grid-${key}`;
             const dividerKey = `divider-${key}`;
@@ -112,7 +132,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             return (
               <Grid key={gridKey} item xs={12 / columns} sx={{ position: "relative" }}>
                 {cols.map((col, index) => (
-                  <Fragment key={col.name}>
+                  <Fragment key={col.t(name)}>
                     <MKTypography
                       display="block"
                       variant="button"
@@ -122,7 +142,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       px={0.5}
                       mt={index !== 0 ? 2 : 0}
                     >
-                      {col.name}
+                      {col.t(name)}
                     </MKTypography>
                     {col.collapse.map((item) => (
                       <MKTypography
@@ -176,7 +196,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
       );
 
       // Render the dropdown menu that should be display as list items
-    } else if (collapse && name === dropdownName) {
+    } else if (collapse && t(name) === dropdownName) {
       template = collapse.map((item) => {
         const linkComponent = {
           component: MuiLink,
@@ -233,7 +253,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           >
             {item.description ? (
               <MKBox>
-                {item.name}
+                {t(item.name)}
                 <MKTypography
                   display="block"
                   variant="button"
@@ -241,7 +261,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                   fontWeight="regular"
                   sx={{ transition: "all 300ms linear" }}
                 >
-                  {item.description}
+                  {t(item.description)}
                 </MKTypography>
               </MKBox>
             ) : (
@@ -365,7 +385,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                   >
                     {item.description ? (
                       <MKBox>
-                        {item.name}
+                        {t(item.name)}
                         <MKTypography
                           display="block"
                           variant="button"
@@ -377,7 +397,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                         </MKTypography>
                       </MKBox>
                     ) : (
-                      item.name
+                      t(item.name)
                     )}
                     {item.collapse && (
                       <Icon
@@ -442,7 +462,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
         mx={relative ? 0 : 3}
         width={relative ? "100%" : "calc(100% - 48px)"}
         borderRadius="xl"
-        shadow={transparent ? "none" : "none"} //md
+        shadow={transparent ? "none" : "md"}
         color={light ? "white" : "dark"}
         position={relative ? "relative" : "absolute"}
         left={0}
@@ -461,7 +481,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
             pl={relative || transparent ? 0 : { xs: 0, lg: 1 }}
           >
             <MKTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-              {brand}
+              {t(brand)}
             </MKTypography>
           </MKBox>
           <MKBox
@@ -472,6 +492,10 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           >
             {renderNavbarItems}
           </MKBox>
+          <MKBox mt={2} display={{ xs: "none", lg: "block" }}>
+            <LanguageSelector />
+          </MKBox>
+
           <MKBox ml={{ xs: "auto", lg: 0 }}>
             {action &&
               (action.type === "internal" ? (
@@ -524,7 +548,11 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           borderRadius="xl"
           px={transparent ? 2 : 0}
         >
-          {mobileView && <DefaultNavbarMobile routes={routes} open={mobileNavbar} />}
+          {mobileView && (
+            <>
+              <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
+            </>
+          )}
         </MKBox>
       </MKBox>
       {dropdownMenu}
@@ -535,7 +563,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
 
 // Setting default values for the props of DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "Kasemrad Sriburin",
+  brand: "kasemrad_sriburin",
   transparent: false,
   light: false,
   action: false,

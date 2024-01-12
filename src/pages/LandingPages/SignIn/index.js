@@ -22,8 +22,10 @@ import bgImage from "assets/images/hospital.png";
 import Swal from "sweetalert2";
 import { BASE_URL } from "constants/constants";
 import Foots from "components/Foot";
+import { useTranslation } from "react-i18next";
 
 function SignInBasic() {
+  const { t } = useTranslation();
   const [identificationInput, setIdentificationInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const handleSignInClick = async () => {
@@ -57,15 +59,15 @@ function SignInBasic() {
       if (data.Customer_Status === 1) {
         Swal.fire({
           icon: "warning",
-          title: "ไม่สามารถเข้าสู่ระบบ",
-          text: "กรุณาติดต่อเวชระเบียนที่ ศูนย์การแพทย์เฉพาะทาง เพื่อทำการยืนยันตัวตน",
+          title: `${t("unable_to_login")}`,
+          text: `${t("please_contact_medical")}`,
           showConfirmButton: true,
         });
       } else {
         Swal.fire({
           icon: "success",
-          title: "เข้าสู่ระบบสำเร็จ",
-          text: "ยินดีต้อนรับเข้าสู่ Smart Apppointments",
+          title: `${t("login_successful")}`,
+          text: `${t("welcome_to")}`,
           timer: 1500,
           showConfirmButton: false,
         }).then(() => {
@@ -77,7 +79,7 @@ function SignInBasic() {
       // แสดงข้อความแจ้งเตือนว่าลงชื่อเข้าใช้ไม่สำเร็จ
       Swal.fire({
         icon: "error",
-        title: "เข้าสู่ระบบไม่สำเร็จ",
+        title: `${t("login_failed")}`,
         text: error.message,
       });
     }
@@ -125,11 +127,11 @@ function SignInBasic() {
                 <MKBox component="form" role="form">
                   <MKBox>
                     <Typography className="black-text" sx={{ fontSize: "0.9rem" }}>
-                      เลขประจำตัวประชาชน/พาสปอร์ต
+                      {t("national_identification_number")}/{t("passport")}
                     </Typography>
                     <MKInput
                       type="email"
-                      label="กรอก..."
+                      label={`${t("national_identification_number")}/${t("passport")}`}
                       id="identificationNumber"
                       name="identificationNumber"
                       autoComplete="identificationNumber"
@@ -140,11 +142,11 @@ function SignInBasic() {
                   </MKBox>
                   <MKBox>
                     <Typography className="black-text" sx={{ fontSize: "0.9rem" }}>
-                      รหัสผ่าน
+                      {t("password")}
                     </Typography>
                     <MKInput
                       type="password"
-                      label="กรอก..."
+                      label={`${t("password")}`}
                       name="password"
                       id="password"
                       autoComplete="current-password"
@@ -162,23 +164,24 @@ function SignInBasic() {
                         handleSignInClick();
                       }}
                     >
-                      เข้าสู่ระบบ
+                      {t("login")}
                     </MKButton>
                   </MKBox>
                   <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <MKBox mt={0} mb={0} textAlign="center">
                       <MKTypography variant="button" className="black-text">
-                        ยังไม่มีบัญชี?{" "}
+                        {t("no_account")}?{" "}
                         <MKTypography
                           variant="button"
                           color="info"
                           fontWeight="medium"
                           textGradient
+                          style={{ cursor: "pointer" }}
                           onClick={() => {
                             handleSignUpClick();
                           }}
                         >
-                          สมัครสมาชิก
+                          {t("register")}
                         </MKTypography>
                       </MKTypography>
                     </MKBox>
@@ -190,11 +193,12 @@ function SignInBasic() {
                           color="info"
                           fontWeight="medium"
                           textGradient
+                          style={{ cursor: "pointer" }}
                           onClick={() => {
                             window.location.href = "/ForgotPassword";
                           }}
                         >
-                          ลืมรหัสผ่าน
+                          {t("forgot_password")}
                         </MKTypography>
                       </MKTypography>
                     </MKBox>

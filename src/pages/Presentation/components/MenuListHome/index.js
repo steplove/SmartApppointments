@@ -4,8 +4,11 @@ import Grid from "@mui/material/Grid";
 import MKTypography from "components/MKTypography";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import { useTranslation } from "react-i18next";
 
 function MenuListHome() {
+  const { t } = useTranslation();
+
   const handleClickAppointment = () => {
     window.location.href = "/signIn";
   };
@@ -93,17 +96,17 @@ function MenuListHome() {
                 variant="caption"
                 sx={{ color: "white !important", marginTop: 1, fontSize: "14px" }}
               >
-                {index === 0 && "นัดหมายแพทย์"}
-                {index === 1 && "ค้นหาแพทย์"}
-                {index === 2 && "ติดต่อสอบถาม"}
+                {index === 0 && t("appointment_with_doctor")}
+                {index === 1 && t("search_for_a_doctor")}
+                {index === 2 && t("contact_us")}
               </MKTypography>
               <MKTypography
                 variant="caption"
                 sx={{ color: "white !important", marginTop: 1, fontSize: "12px" }}
               >
-                {index === 0 && "จองนัดหมายผ่านทางออน์ไลน์"}
-                {index === 1 && "ค้นหาด้วยชื่อ ความเชี่ยวชาญ และ อื่นๆ"}
-                {index === 2 && "สอบถามข้อมูล การรักษา และ บริการ"}
+                {index === 0 && t("book_an_appointment_online")}
+                {index === 1 && t("search_by_name_expertise_and_others")}
+                {index === 2 && t("ask_for_information_on_treatment_and_services")}
               </MKTypography>
             </div>
           </Grid>

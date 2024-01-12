@@ -24,6 +24,9 @@ import { BASE_URL } from "../../../constants/constants";
 import Swal from "sweetalert2";
 import useFetch from "../../../hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useTranslation } from "react-i18next";
+import LanguageSelector from "LanguageSelector";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -45,6 +48,8 @@ const theme = createTheme({
 });
 
 function UserProfile() {
+  const { t } = useTranslation();
+
   const [IdenNumber, HN, FirstName, LastName, , ,] = useTokenCheck();
   const { data: fetchedCustomerAddress = [] } = useFetch(
     `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
@@ -95,18 +100,18 @@ function UserProfile() {
       const data = await response.json();
       if (data.message === "User updated successfully!") {
         Swal.fire({
-          title: "การอัปเดตสำเร็จ!",
+          title: `${t("update_successful")}`,
           icon: "success",
           showConfirmButton: false,
           timer: 1500,
         });
       } else {
-        Swal.fire("เกิดข้อผิดพลาดในการอัปเดตข้อมูล", "", "error");
+        Swal.fire(`${t("error_updating_information")}`, "", "error");
       }
     } catch (error) {
       console.error("Error updating user:", error);
       // จัดการข้อผิดพลาดที่เกิดขึ้น (เช่น แสดงข้อความข้อผิดพลาด)
-      Swal.fire("เกิดข้อผิดพลาดในการอัปเดตข้อมูล", "", "error");
+      Swal.fire(`${t("error_updating_information")}`, "", "error");
     }
   };
   const hadleLogout = () => {
@@ -137,6 +142,19 @@ function UserProfile() {
       <MenuList />
       <ThemeProvider theme={theme}>
         <Hidden smUp>
+          <div
+            style={{
+              position: "absolute",
+              right: 25,
+              textAlign: "center",
+              alignItems: "center",
+              backgroundColor: "whitesmoke",
+              borderRadius: 10,
+              height: "2%",
+            }}
+          >
+            <LanguageSelector />
+          </div>
           <Grid
             container
             spacing={2}
@@ -155,7 +173,7 @@ function UserProfile() {
               >
                 <CardContent sx={{ paddingBottom: 0 }}>
                   <div style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}>
-                    <Typography variant="h6">ข้อมูลส่วนตัว</Typography>
+                    <Typography variant="h6">{t("personal_information")}</Typography>
                   </div>
                   <div
                     style={{
@@ -171,21 +189,23 @@ function UserProfile() {
                       sx={{ width: 120, height: 120 }}
                     />
                   </div>
-
                   <TextField
-                    label="ชื่อ"
+                    label={`${t("name")}`}
                     variant="outlined"
                     value={`${FirstName} ${LastName}`}
                     fullWidth
-                    sx={{ marginBottom: "10px" }}
+                    sx={{
+                      marginBottom: "10px",
+                    }}
                     disabled
                   />
+
                   <TextField
-                    label="โรคประจำตัว/แพ้ยา"
+                    label={`${t("congenital_disease")}`}
                     variant="outlined"
                     disabled
                     fullWidth
-                    value={"" || "ไม่พบข้อมูล"}
+                    value={"" || t("no_information_found")}
                   />
                 </CardContent>
               </Card>
@@ -248,7 +268,7 @@ function UserProfile() {
                   }}
                 >
                   <div>
-                    <Typography variant="h6">ที่อยู่</Typography>
+                    <Typography variant="h6">{t("address")}</Typography>
                   </div>
                   <div>
                     {isEditing ? (
@@ -279,7 +299,7 @@ function UserProfile() {
                 {fetchedCustomerAddress && (
                   <>
                     <TextField
-                      label="อีเมล"
+                      label={`${t("email")}`}
                       variant="outlined"
                       fullWidth
                       sx={{ marginBottom: "10px" }}
@@ -294,7 +314,7 @@ function UserProfile() {
                     />
 
                     <TextField
-                      label="เบอร์โทรศัพท์"
+                      label={`${t("telephone_numbe")}`}
                       variant="outlined"
                       fullWidth
                       disabled={!isEditing}
@@ -311,7 +331,7 @@ function UserProfile() {
                 )}
 
                 <TextField
-                  label="ที่อยู่"
+                  label={`${t("address")}`}
                   variant="outlined"
                   fullWidth
                   disabled
@@ -349,9 +369,9 @@ function UserProfile() {
                 <CardContent sx={{ paddingBottom: 0 }}>
                   {" "}
                   {/* ลดระยะห่างด้านล่างของCardContent */}
-                  <Typography variant="h6">ข้อมูลส่วนตัว</Typography>
+                  <Typography variant="h6">{t("personal_information")}</Typography>
                   <TextField
-                    label="ชื่อ"
+                    label={`${t("name")}`}
                     variant="outlined"
                     value={`${FirstName} ${LastName}`}
                     fullWidth
@@ -359,10 +379,10 @@ function UserProfile() {
                     disabled
                   />
                   <TextField
-                    label="โรคประจำตัว/แพ้ยา"
+                    label={`${t("congenital_disease")}`}
                     variant="outlined"
                     fullWidth
-                    value={"" || "ไม่พบข้อมูล"}
+                    value={"" || t("no_information_found")}
                     disabled
                   />
                 </CardContent>
@@ -400,7 +420,7 @@ function UserProfile() {
                         alignItems: "center",
                       }}
                     >
-                      <Typography variant="h6">ที่อยู่</Typography>
+                      <Typography variant="h6">{t("address")}</Typography>
                       <div>
                         {isEditing ? (
                           <>
@@ -439,7 +459,7 @@ function UserProfile() {
                     {fetchedCustomerAddress && (
                       <>
                         <TextField
-                          label="อีเมล"
+                          label={`${t("email")}`}
                           variant="outlined"
                           fullWidth
                           sx={{ marginBottom: "10px" }}
@@ -454,7 +474,7 @@ function UserProfile() {
                         />
 
                         <TextField
-                          label="เบอร์โทรศัพท์"
+                          label={`${t("telephone_numbe")}`}
                           variant="outlined"
                           fullWidth
                           disabled={!isEditing}
@@ -471,7 +491,7 @@ function UserProfile() {
                     )}
 
                     <TextField
-                      label="ที่อยู่"
+                      label={`${t("address")}`}
                       variant="outlined"
                       fullWidth
                       disabled
@@ -485,7 +505,7 @@ function UserProfile() {
         </Hidden>
         <Grid container justifyContent="center" alignItems="center" mt={2}>
           <Button variant="contained" color="error" onClick={hadleLogout}>
-            ออกระบบ
+            {t("logout")}
           </Button>
         </Grid>
       </ThemeProvider>

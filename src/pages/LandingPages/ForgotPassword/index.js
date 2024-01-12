@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { BASE_URL } from "constants/constants";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+
+// Material Kit 2 React page layout routes
+import routes from "routes";
 import { Card } from "@mui/material";
 import Swal from "sweetalert2";
 import MKBox from "components/MKBox";
@@ -12,8 +16,11 @@ import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import SendIcon from "@mui/icons-material/Send";
+import { useTranslation } from "react-i18next";
 
 function ForgotPassword() {
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState("");
   const handleSignUpClick = () => {
     window.location.href = "/agreement";
@@ -57,6 +64,7 @@ function ForgotPassword() {
 
   return (
     <>
+      <DefaultNavbar routes={routes} />
       <MKBox
         position="absolute"
         top={0}
@@ -101,19 +109,19 @@ function ForgotPassword() {
                     </Typography>
                   </Box>
                   <Typography style={{ fontWeight: "bold", color: "#408080", textAlign: "center" }}>
-                    ลืมรหัสผ่าน
+                    {t("forgot_password")}
                   </Typography>
                   <Typography
                     className="black-text"
                     sx={{ fontSize: "0.8rem", textAlign: "center" }}
                   >
-                    รีเซ็ตรหัสผ่านด้วยอีเมลที่ลงทะเบียนไว้
+                    {t("reset_your_password_with_your_registered_email")}
                   </Typography>
                 </MKBox>
                 <MKBox mt={2}>
                   <MKInput
                     type="email"
-                    label="กรอกอีเมล..."
+                    label={`${t("email")}`}
                     id="identificationNumber"
                     name="identificationNumber"
                     autoComplete="identificationNumber"
@@ -129,12 +137,12 @@ function ForgotPassword() {
                     sx={{ background: "#2596be", color: "#ffffff" }}
                     onClick={handleForgotPassword}
                   >
-                    <SendIcon style={{ marginRight: "8px" }} /> รีเซ็ตรหัสผ่าน
+                    <SendIcon style={{ marginRight: "8px" }} /> {t("reset_password")}
                   </MKButton>
                 </MKBox>
                 <MKBox mt={0} mb={0} textAlign="center">
                   <MKTypography variant="button" className="black-text">
-                    ยังไม่มีบัญชี?{" "}
+                    {t("no_account")}?{" "}
                     <MKTypography
                       variant="button"
                       color="info"
@@ -144,7 +152,7 @@ function ForgotPassword() {
                         handleSignUpClick();
                       }}
                     >
-                      สมัครสมาชิก
+                      {t("register")}
                     </MKTypography>
                   </MKTypography>
                 </MKBox>

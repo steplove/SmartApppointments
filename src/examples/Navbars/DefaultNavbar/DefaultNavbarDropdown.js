@@ -27,6 +27,8 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
+import { useTranslation } from "react-i18next";
+
 function DefaultNavbarDropdown({
   name,
   icon,
@@ -38,6 +40,7 @@ function DefaultNavbarDropdown({
   collapse,
   ...rest
 }) {
+  const { t } = useTranslation();
   const linkComponent = {
     component: "a",
     href,
@@ -79,7 +82,7 @@ function DefaultNavbarDropdown({
           color={light ? "white" : "dark"}
           sx={{ fontWeight: "100%", ml: 1, mr: 0.25 }}
         >
-          {name}
+          {t(name)}
         </MKTypography>
         <MKTypography variant="body2" color={light ? "white" : "dark"} ml="auto">
           <Icon sx={{ fontWeight: "normal", verticalAlign: "middle" }}>

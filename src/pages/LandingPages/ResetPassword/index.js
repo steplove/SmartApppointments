@@ -12,7 +12,11 @@ import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import { BASE_URL } from "constants/constants";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 function ResetPassword() {
+  const { t } = useTranslation();
+
   const { UID } = useParams();
   const [password, setPassword] = useState("");
   console.log("UIDUID");
@@ -30,12 +34,11 @@ function ResetPassword() {
       });
       if (response.ok) {
         Swal.fire({
-          title: "รีเซ็ตรหัสผ่านสำเร็จ",
+          title: `${t("password_reset_successful")}`,
           icon: "success",
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("สำเร็จ");
         setTimeout(() => {
           window.location = "/presentation";
         }, 1500);
@@ -94,7 +97,7 @@ function ResetPassword() {
                     </Typography>
                   </Box>
                   <Typography style={{ fontWeight: "bold", color: "#408080", textAlign: "center" }}>
-                    รีเซ็ตรหัสผ่าน
+                    {t("reset_password")}
                   </Typography>
                 </MKBox>
                 <MKBox mt={2}>
@@ -117,12 +120,12 @@ function ResetPassword() {
                     sx={{ background: "#2596be", color: "#ffffff" }}
                     onClick={handleResetPassword}
                   >
-                    รีเซ็ตรหัสผ่าน
+                    {t("reset_password")}
                   </MKButton>
                 </MKBox>
                 <MKBox mt={0} mb={0} textAlign="center">
                   <MKTypography variant="button" className="black-text">
-                    ยังไม่มีบัญชี?{" "}
+                    {t("no_account")}?{" "}
                     <MKTypography
                       variant="button"
                       color="info"
@@ -132,7 +135,7 @@ function ResetPassword() {
                         handleSignUpClick();
                       }}
                     >
-                      สมัครสมาชิก
+                      {t("register")}
                     </MKTypography>
                   </MKTypography>
                 </MKBox>

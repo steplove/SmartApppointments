@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
+import { useTranslation } from "react-i18next";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   breakpoints: {
@@ -28,6 +29,7 @@ const theme = createTheme({
   },
 });
 function PackagesDetail() {
+  const { t } = useTranslation();
   const { code } = useParams();
   const [selectedPackage, setSelectedPackage] = useState(null);
 
@@ -88,11 +90,11 @@ function PackagesDetail() {
                               {selectedPackage.packageDetails}
                             </Typography>
                             <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              ราคา: {selectedPackage.formattedPackagePrice} บาท
+                              {t("price")}: {selectedPackage.formattedPackagePrice} บาท
                             </Typography>
 
                             <Typography variant="body1">
-                              วันหยุดอายุ: {selectedPackage.promoEndDate}
+                              {t("expiration_date")}: {selectedPackage.promoEndDate}
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -140,10 +142,10 @@ function PackagesDetail() {
                               {selectedPackage.packageDetails}
                             </Typography>
                             <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              ราคา: {selectedPackage.packagePrice} บาท
+                              {t("price")}: {selectedPackage.packagePrice} บาท
                             </Typography>
                             <Typography variant="body1">
-                              วันหยุดอายุ: {selectedPackage.promoEndDate}
+                              {t("expiration_date")}: {selectedPackage.promoEndDate}
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>

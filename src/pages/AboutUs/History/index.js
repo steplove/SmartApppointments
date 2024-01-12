@@ -1,17 +1,15 @@
-import React, { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Grid,
-  Button,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Hidden,
-} from "@mui/material";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Container, Typography, Card, CardContent, CardMedia, Grid, Hidden } from "@mui/material";
+import DefaultFooter from "examples/Footers/DefaultFooter";
+import footerRoutes from "footer.routes";
+import MKBox from "components/MKBox";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import image from "assets/images/hospital.png";
+// import NavbarsAboutUs from "../Navbars";
+import { useTranslation } from "react-i18next";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -32,70 +30,172 @@ const theme = createTheme({
   },
 });
 function History() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-
-  const toggleDrawer = (open) => (event) => {
-    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-      return;
-    }
-
-    setDrawerOpen(open);
-  };
-
-  const menuItems = [
-    { label: "เกี่ยวกับเรา", link: "/CEO" },
-    { label: "ศูนย์บริการทางการแพทย์", link: "/History" },
-    { label: "บริการของเรา", link: "/our-services" },
-    { label: "ค้นหาแพทย์", link: "/find-doctor" },
-    { label: "ติดต่อ/สมัครงาน", link: "/contact-us" },
-  ];
+  const { t } = useTranslation();
 
   return (
     <>
+      <DefaultNavbar routes={routes} sticky relative />
+      {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <AppBar position="static" style={{ padding: "10px 0" }}>
-            <Toolbar>
-              <Grid container justify="space-between" alignItems="center">
-                {/* Row 1 */}
-                <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
-                  {menuItems.map((item) => (
-                    <Grid item key={item.label}>
-                      <Button color="inherit" component={Link} to={item.link}>
-                        {item.label}
-                      </Button>
-                    </Grid>
-                  ))}
+          <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
+            <>
+              <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
+                    {t("home")}/
+                  </a>
+                  <a href="/History" style={{ color: "#0bb288", fontSize: "1rem" }}>
+                    {t("hospital_history")}
+                  </a>
                 </Grid>
               </Grid>
-            </Toolbar>
-          </AppBar>
+              <Grid container justifyContent="center">
+                <Grid item lg={12}>
+                  <Typography
+                    style={{
+                      variant: "button",
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                      marginBottom: "10px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "30px",
+                      color: "#562170",
+                    }}
+                  >
+                    <span style={{ borderBottom: "2px solid #d1c398" }}>
+                      {" "}
+                      {t("hospital_history")}{" "}
+                    </span>
+                  </Typography>
+                  <Card>
+                    <CardContent>
+                      <Grid container spacing={2}>
+                        <Grid item lg={12}>
+                          <Typography paragraph>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
+                              โรงพยาบาลเกษมราษฎร ศรีบุรินทร์
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                                {"    "}
+                                ได้เริ่มก่อตั้งขึ้นเมื่อปี พ.ศ. 2537 โดยได้จดทะเบียนเป็นบริษัท
+                                “โรงพยาบาลศรีบุรินทร์ จำกัด” ด้วยทุนจดทะเบียน 170 ล้านบาท
+                                ประกอบด้วยแพทย์ กลุ่มพยาบาลและนักธุรกิจ เป็นผู้ถือหุ้นร่วมกับ
+                                บริษัทบางกอกฮอสปิตอล ในเครือโรงพยาบาลเกษมราษฎร์ โดย...
+                              </span>
+                            </span>
+                          </Typography>
+
+                          <CardMedia
+                            component="img"
+                            height="auto"
+                            src={image}
+                            alt="รูปภาพแพ็คเกจ"
+                          />
+                          <br />
+                          <span style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                            ปัจจุบันโรงพยาบาลเกษมราษฎร์ ศรีบุรินทร์
+                            เปิดให้บริการทางการแพทย์ทั่วไปและเฉพาะทาง มีขนาด 200 เตียง
+                            และมีพื้นที่ทั้งหมด 14 ไร่เศษ เปิดให้บริการผู้ป่วยในจังหวัดเชียงราย
+                            และจังหวัดใกล้เคียง
+                          </span>
+                          <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                            Hospital you can trust.....โรงพยาบาลที่คุณวางใจ
+                          </p>
+                        </Grid>
+                        <Grid item lg={6}>
+                          {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </>
+          </Container>
         </Hidden>
+
         {/* Mobile View */}
         <Hidden smUp>
-          {/* Hamburger icon for mobile */}
-          <Button color="inherit" onClick={toggleDrawer(true)}>
-            ☰
-          </Button>
-          {/* Drawer for mobile */}
-          <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-            <List>
-              {menuItems.map((item) => (
-                <ListItem
-                  button
-                  key={item.label}
-                  component={Link}
-                  to={item.link}
-                  onClick={toggleDrawer(false)}
-                >
-                  <ListItemText primary={item.label} />
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
+          <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
+            <>
+              <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
+              <Grid container justifyContent="center">
+                <Grid item lg={12}>
+                  <Typography
+                    style={{
+                      variant: "button",
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                      marginBottom: "10px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "25px",
+                      color: "#562170",
+                    }}
+                  >
+                    <span style={{ borderBottom: "2px solid #d1c398" }}>
+                      {" "}
+                      {t("hospital_history")}
+                    </span>
+                  </Typography>
+                  <Card>
+                    <CardContent>
+                      <Grid container spacing={2}>
+                        <Grid item lg={12}>
+                          <Typography paragraph>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
+                              โรงพยาบาลเกษมราษฎร ศรีบุรินทร์
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                                {"    "}
+                                ได้เริ่มก่อตั้งขึ้นเมื่อปี พ.ศ. 2537 โดยได้จดทะเบียนเป็นบริษัท
+                                “โรงพยาบาลศรีบุรินทร์ จำกัด” ด้วยทุนจดทะเบียน 170 ล้านบาท
+                                ประกอบด้วยแพทย์ กลุ่มพยาบาลและนักธุรกิจ เป็นผู้ถือหุ้นร่วมกับ
+                                บริษัทบางกอกฮอสปิตอล ในเครือโรงพยาบาลเกษมราษฎร์ โดย...
+                              </span>
+                            </span>
+                          </Typography>
+
+                          <CardMedia
+                            component="img"
+                            height="auto"
+                            src={image}
+                            alt="รูปภาพแพ็คเกจ"
+                          />
+                          <br />
+                          <span style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                            ปัจจุบันโรงพยาบาลเกษมราษฎร์ ศรีบุรินทร์
+                            เปิดให้บริการทางการแพทย์ทั่วไปและเฉพาะทาง มีขนาด 200 เตียง
+                            และมีพื้นที่ทั้งหมด 14 ไร่เศษ เปิดให้บริการผู้ป่วยในจังหวัดเชียงราย
+                            และจังหวัดใกล้เคียง
+                          </span>
+                          <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                            Hospital you can trust.....โรงพยาบาลที่คุณวางใจ
+                          </p>
+                        </Grid>
+                        <Grid item lg={6}>
+                          {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
+                        </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </>
+          </Container>
         </Hidden>
       </ThemeProvider>
+      <MKBox pt={6} px={1} mt={6}>
+        <DefaultFooter content={footerRoutes} />
+      </MKBox>
     </>
   );
 }

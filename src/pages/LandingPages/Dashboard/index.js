@@ -37,6 +37,7 @@ import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import Banner from "components/Banner";
 import MKTypography from "components/MKTypography";
+import { useTranslation } from "react-i18next";
 
 const theme = createTheme({
   breakpoints: {
@@ -59,6 +60,8 @@ const theme = createTheme({
 });
 const slides = [];
 function Dashboard() {
+  const { t } = useTranslation();
+
   const [, HN] = useTokenCheck();
   console.log(HN, "IdenNumber", "HN");
   const { data: fetchAllAppointment = [] } = useFetch(
@@ -140,7 +143,7 @@ function Dashboard() {
                       <CardContent>
                         <Typography variant="h6" color="primary">
                           <NotificationsIcon style={{ verticalAlign: "middle", marginRight: 10 }} />
-                          การแจ้งเตือน
+                          {t("notifications")}
                         </Typography>
                         <Divider style={{ margin: "10px 0" }} />
                         <List style={{ padding: 0 }}>
@@ -181,9 +184,11 @@ function Dashboard() {
                                             fontSize: "16px",
                                           }}
                                         >
-                                          นัดหมายกับ {notification.Doctor_Name}
+                                          {t("make_an_appointment_with")} {notification.Doctor_Name}
                                         </span>
-                                        <span style={{ color: "#d0b134" }}>รอยืนยัน</span>
+                                        <span style={{ color: "#d0b134" }}>
+                                          {t("waiting_for_confirmation")}
+                                        </span>
                                       </ListItem>
                                     </>
                                   );
@@ -220,9 +225,9 @@ function Dashboard() {
                                             fontSize: "16px",
                                           }}
                                         >
-                                          นัดหมายกับ {notification.Doctor_Name}
+                                          {t("make_an_appointment_with")} {notification.Doctor_Name}
                                         </span>
-                                        <span style={{ color: "green" }}>ถูกยืนยัน</span>
+                                        <span style={{ color: "green" }}>{t("confirmed")}</span>
                                       </ListItem>
                                     </>
                                   );
@@ -259,7 +264,7 @@ function Dashboard() {
                                             fontSize: "16px",
                                           }}
                                         >
-                                          นัดหมายกับ {notification.Doctor_Name}
+                                          {t("make_an_appointment_with")} {notification.Doctor_Name}
                                         </span>
                                         <span style={{ color: "red" }}>ถูกยกเลิก</span>
                                       </ListItem>
@@ -302,9 +307,9 @@ function Dashboard() {
                                           fontSize: "16px",
                                         }}
                                       >
-                                        นัดหมายกับ {notification.Doctor_Name}
+                                        {t("make_an_appointment_with")} {notification.Doctor_Name}
                                       </span>
-                                      <span style={{ color: "blue" }}>เสร็จสมบูรณ์</span>
+                                      <span style={{ color: "blue" }}>{t("completed")}</span>
                                     </ListItem>
                                   </>
                                 );
@@ -342,7 +347,7 @@ function Dashboard() {
                       <CardContent>
                         <Typography variant="h6" color="primary">
                           <ListAltIcon style={{ verticalAlign: "middle", marginRight: 10 }} />
-                          รายการนัดหมายล่าสุด
+                          {t("latest_appointment_list")}
                         </Typography>
                         <Divider style={{ margin: "10px 0" }} />
                         <div>
@@ -400,14 +405,14 @@ function Dashboard() {
                                         {" "}
                                         สถานะ:{" "}
                                         {booking.StatusFlag === "3"
-                                          ? "รอยืนยัน"
+                                          ? t("waiting_for_confirmation")
                                           : booking.StatusFlag === "4"
-                                          ? "ยืนยันนัดหมาย"
+                                          ? t("confirm_appointment")
                                           : booking.StatusFlag === "5"
-                                          ? "ยกเลิกนัดหมาย"
+                                          ? t("cancel_appointment")
                                           : booking.StatusFlag === "6"
-                                          ? "เสร็จสมบูรณ์"
-                                          : "unknown"}{" "}
+                                          ? t("completed")
+                                          : t("unknown_status")}{" "}
                                       </div>
                                     </Typography>
                                   </Grid>
@@ -450,7 +455,7 @@ function Dashboard() {
 
                                       <DialogActions>
                                         <Button onClick={handleCloseDialog} color="primary">
-                                          ปิด
+                                          {t("close")}
                                         </Button>
                                       </DialogActions>
                                     </Dialog>
@@ -474,7 +479,7 @@ function Dashboard() {
                                   fontWeight: 600, // ทำให้ข้อความหนาขึ้น
                                 }}
                               >
-                                ยังไม่มีรายการนัดหมาย
+                                {t("no_appointment_made")}
                               </span>
                             </ListItem>
                           )}
@@ -519,7 +524,7 @@ function Dashboard() {
                   <CardContent>
                     <Typography variant="h6" color="primary">
                       <NotificationsIcon style={{ verticalAlign: "middle", marginRight: 10 }} />
-                      การแจ้งเตือน
+                      {t("notifications")}
                     </Typography>
                     <Divider style={{ margin: "10px 0" }} />
                     <List style={{ padding: 0 }}>
@@ -561,9 +566,11 @@ function Dashboard() {
                                         fontSize: "16px",
                                       }}
                                     >
-                                      นัดหมายกับ {notification.Doctor_Name}
+                                      {t("make_an_appointment_with")} {notification.Doctor_Name}
                                     </span>
-                                    <span style={{ color: "#d0b134" }}>รอยืนยัน</span>
+                                    <span style={{ color: "#d0b134" }}>
+                                      {t("waiting_for_confirmation")}
+                                    </span>
                                   </ListItem>
                                 </>
                               );
@@ -601,9 +608,9 @@ function Dashboard() {
                                         fontSize: "16px",
                                       }}
                                     >
-                                      นัดหมายกับ {notification.Doctor_Name}
+                                      {t("make_an_appointment_with")} {notification.Doctor_Name}
                                     </span>
-                                    <span style={{ color: "green" }}>ถูกยืนยัน</span>
+                                    <span style={{ color: "green" }}>{t("confirmed")}</span>
                                   </ListItem>
                                 </>
                               );
@@ -641,7 +648,7 @@ function Dashboard() {
                                         fontSize: "16px",
                                       }}
                                     >
-                                      นัดหมายกับ {notification.Doctor_Name}
+                                      {t("make_an_appointment_with")} {notification.Doctor_Name}
                                     </span>
                                     <span style={{ color: "red" }}>ถูกยกเลิก</span>
                                   </ListItem>
@@ -684,9 +691,9 @@ function Dashboard() {
                                       fontSize: "16px",
                                     }}
                                   >
-                                    นัดหมายกับ {notification.Doctor_Name}
+                                    {t("make_an_appointment_with")} {notification.Doctor_Name}
                                   </span>
-                                  <span style={{ color: "blue" }}>เสร็จสมบูรณ์</span>
+                                  <span style={{ color: "blue" }}>{t("completed")}</span>
                                 </ListItem>
                               </>
                             );
@@ -724,7 +731,7 @@ function Dashboard() {
                   <CardContent>
                     <Typography variant="h6" color="primary">
                       <ListAltIcon style={{ verticalAlign: "middle", marginRight: 10 }} />
-                      รายการนัดหมายล่าสุด
+                      {t("latest_appointment_list")}
                     </Typography>
                     <Divider style={{ margin: "10px 0" }} />
                     <ThemeProvider theme={theme}>
@@ -754,7 +761,7 @@ function Dashboard() {
                                       color="primary"
                                       style={{ verticalAlign: "middle" }}
                                     />{" "}
-                                    คลินิก: {booking.Clinic_Name}
+                                    {t("clinic")}: {booking.Clinic_Name}
                                   </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -764,7 +771,7 @@ function Dashboard() {
                                       color="primary"
                                       style={{ verticalAlign: "middle" }}
                                     />{" "}
-                                    แพทย์: {booking.Doctor_Name}
+                                    {t("doctor")}: {booking.Doctor_Name}
                                   </Typography>
                                 </Grid>
                                 <Grid item xs={6}>
@@ -783,13 +790,13 @@ function Dashboard() {
                                       {" "}
                                       สถานะ:{" "}
                                       {booking.StatusFlag === "3"
-                                        ? "รอยืนยัน"
+                                        ? t("waiting_for_confirmation")
                                         : booking.StatusFlag === "4"
-                                        ? "ยืนยันนัดหมาย"
+                                        ? t("confirm_appointment")
                                         : booking.StatusFlag === "5"
-                                        ? "ยกเลิกนัดหมาย"
+                                        ? t("cancel_appointment")
                                         : booking.StatusFlag === "6"
-                                        ? "เสร็จสมบูรณ์"
+                                        ? t("completed")
                                         : "unknown"}{" "}
                                     </div>
                                   </Typography>
@@ -829,7 +836,7 @@ function Dashboard() {
 
                                     <DialogActions>
                                       <Button onClick={handleCloseDialog} color="primary">
-                                        ปิด
+                                        {t("close")}
                                       </Button>
                                     </DialogActions>
                                   </Dialog>
@@ -847,7 +854,7 @@ function Dashboard() {
                               textAlign: "center",
                             }}
                           >
-                            ยังไม่มีรายการนัดหมาย
+                            {t("no_appointment_made")}
                           </Typography>
                         )}
                       </div>
