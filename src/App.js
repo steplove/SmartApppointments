@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Route, Navigate, useLocation, BrowserRouter, Switch } from "react-router-dom";
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -63,38 +63,40 @@ export default function App() {
       {/* <LiffComponent /> */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="/presentation" element={<Presentation />} />
-          <Route path="/signInBasic" element={<SignInBasic />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/agreement" element={<Agreement />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/bookinghistory" element={<BookingHistory />} />
-          <Route path="/userprofile" element={<UserProfile />} />
-          <Route path="/packages" element={<Packages />} />
-          <Route path="/packagesdetail/:code" element={<PackagesDetail />} />
-          <Route path="/HealthBlogListDetail/:code" element={<HealthBlogListDetail />} />
-          <Route path="/healthblogList" element={<HealthBlogList />} />
-          <Route path="/doctorList" element={<DoctorList />} />
-          <Route path="/doctorListHome" element={<DoctorListHome />} />
-          <Route path="/main" element={<Main />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword/:UID" element={<ResetPassword />} />
-          <Route path="/agree" element={<Agree />} />
-          <Route path="/CEO" element={<CEO />} />
-          <Route path="/history" element={<History />} />
-          <Route path="/Message_From_Ceo" element={<Message_From_Ceo />} />
-          <Route
-            path="/Message_From_Hospital_Director"
-            element={<Message_From_Hospital_Director />}
-          />
-          <Route path="/Vision_And_Mission" element={<Vision_And_Mission />} />
-          <Route path="/Accreditation" element={<Accreditation />} />
-          <Route path="/ServicesRooms" element={<ServicesRooms />} />
-          <Route path="*" element={<Navigate to="/presentation" />} />
-        </Routes>
+        <BrowserRouter>
+          <Switch>
+            {getRoutes(routes)}
+            <Route path="/presentation" element={<Presentation />} />
+            <Route path="/signInBasic" element={<SignInBasic />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/agreement" element={<Agreement />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route path="/bookinghistory" element={<BookingHistory />} />
+            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/packages" element={<Packages />} />
+            <Route path="/packagesdetail/:code" element={<PackagesDetail />} />
+            <Route path="/HealthBlogListDetail/:code" element={<HealthBlogListDetail />} />
+            <Route path="/healthblogList" element={<HealthBlogList />} />
+            <Route path="/doctorList" element={<DoctorList />} />
+            <Route path="/doctorListHome" element={<DoctorListHome />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="/resetpassword/:UID" element={<ResetPassword />} />
+            <Route path="/agree" element={<Agree />} />
+            <Route path="/CEO" element={<CEO />} />
+            <Route path="/history" element={<History />} />
+            <Route path="/Message_From_Ceo" element={<Message_From_Ceo />} />
+            <Route
+              path="/Message_From_Hospital_Director"
+              element={<Message_From_Hospital_Director />}
+            />
+            <Route path="/Vision_And_Mission" element={<Vision_And_Mission />} />
+            <Route path="/Accreditation" element={<Accreditation />} />
+            <Route path="/ServicesRooms" element={<ServicesRooms />} />
+            <Route path="*" element={<Navigate to="/presentation" />} />
+          </Switch>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );
