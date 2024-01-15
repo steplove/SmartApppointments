@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Navigate, useLocation, BrowserRouter } from "react-router-dom";
+import { Route, Navigate, useLocation, Routes } from "react-router-dom";
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -63,7 +63,7 @@ export default function App() {
       {/* <LiffComponent /> */}
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
+        <Routes>
           {getRoutes(routes)}
           <Route path="/presentation" element={<Presentation />} />
           <Route path="/signInBasic" element={<SignInBasic />} />
@@ -94,7 +94,7 @@ export default function App() {
           <Route path="/Accreditation" element={<Accreditation />} />
           <Route path="/ServicesRooms" element={<ServicesRooms />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
-        </BrowserRouter>
+        </Routes>
       </ThemeProvider>
     </>
   );
