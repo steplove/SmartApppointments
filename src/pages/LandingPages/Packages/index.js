@@ -74,7 +74,6 @@ function Packages() {
             {/* <Typography variant="h4" sx={{ marginBottom: 2 }}>
               รายละเอียดแพ็คเกจ
             </Typography> */}
-
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
               {packageData.map((packageItem) => (
                 <Grid item key={packageItem.id} xs={12} md={4}>

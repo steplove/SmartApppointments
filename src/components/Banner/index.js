@@ -9,7 +9,9 @@ function Banners() {
   const [imgBanner, setImgBanner] = useState([]);
 
   useEffect(() => {
-    if (fetchedBanner && Array.isArray(fetchedBanner)) {
+    if (!fetchedBanner || !Array.isArray(fetchedBanner)) {
+      console.warn("Invalid or missing data in fetchedBanner:", fetchedBanner);
+    } else {
       setImgBanner(fetchedBanner);
     }
   }, [fetchedBanner]);
