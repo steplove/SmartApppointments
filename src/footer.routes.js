@@ -63,7 +63,7 @@ export default {
       items: [
         {
           name: "medical_service_center",
-          href: "https://www.kasemrad.co.th/Sriburin/th/site/clinics_and_centers",
+          href: "/MedicalServiceCenter",
         },
       ],
     },
