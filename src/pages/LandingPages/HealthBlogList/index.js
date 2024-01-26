@@ -184,7 +184,7 @@ function HealthBlogList() {
                       {blog.Blog_Name}
                     </MKTypography>
                     <MKTypography sx={{ color: "#808080", fontSize: "15px" }}>
-                      {blog.Blog_Detail}
+                      <div dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
                     </MKTypography>
                     <MKTypography
                       sx={{
