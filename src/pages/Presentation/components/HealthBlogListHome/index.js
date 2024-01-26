@@ -95,7 +95,7 @@ const HealthBlog = () => {
                   maxWidth: "100%",
                 }}
               >
-                {blog.Blog_Detail}
+                <div dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
               </MKTypography>
 
               <MKTypography

@@ -42,7 +42,6 @@ function HealthBlogListDetail() {
 
         // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
         setSelectedBlog(data);
-        console.log(data, "fdaaaaaaa");
       } catch (error) {
         console.error("Error:", error.message);
       }
@@ -82,7 +81,7 @@ function HealthBlogListDetail() {
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              {selectedBlog.Blog_Detail}
+                              <div dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }} />
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -127,7 +126,7 @@ function HealthBlogListDetail() {
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              {selectedBlog.Blog_Detail}
+                              <div dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }} />
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>

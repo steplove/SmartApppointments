@@ -76,11 +76,11 @@ export default {
         },
         {
           name: "packages",
-          href: "https://www.kasemrad.co.th/Sriburin/th/site/packages_and_promotions",
+          href: "/packages",
         },
         {
           name: "health_articles",
-          href: "https://www.kasemrad.co.th/Sriburin/th/site/health_articles",
+          href: "/HealthBlogList",
         },
         { name: "news", href: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
       ],
@@ -91,7 +91,7 @@ export default {
     },
     {
       name: "contact",
-      items: [{ name: "contact", href: "https://www.kasemrad.co.th/Sriburin/th/site/contact_us" }],
+      items: [{ name: "contact", href: "/Contact" }],
     },
   ],
   copyright: (

@@ -30,7 +30,9 @@ import History from "pages/AboutUs/History";
 import Vision_And_Mission from "pages/AboutUs/Vision_And_Mission";
 import Accreditation from "pages/AboutUs/Accreditation";
 import ServicesRooms from "pages/OurServices/ServicesRooms";
+import ServicesRoomsDetail from "pages/OurServices/ServicesRooms/ServicesRoomsDetail";
 import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
+import Contact from "pages/Contact";
 import "./i18n";
 // Material Kit 2 React routes
 import routes from "routes";
@@ -94,7 +96,9 @@ export default function App() {
           <Route path="/Vision_And_Mission" element={<Vision_And_Mission />} />
           <Route path="/Accreditation" element={<Accreditation />} />
           <Route path="/ServicesRooms" element={<ServicesRooms />} />
+          <Route path="/ServicesRoomsDetail/:code" element={<ServicesRoomsDetail />} />
           <Route path="/MedicalServiceCenter" element={<MedicalServiceCenter />} />
+          <Route path="/Contact" element={<Contact />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>

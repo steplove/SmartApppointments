@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Typography, Card, CardContent, CardMedia, Grid, Hidden } from "@mui/material";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import MKTypography from "components/MKTypography";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import image from "assets/images/TH Board Director 66 .jpg";
 import { useTranslation } from "react-i18next";
 // import NavbarsAboutUs from "../Navbars";
+import { BASE_URL } from "constants/constants";
+import useFetch from "hooks/useFetch";
+
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -30,6 +33,37 @@ const theme = createTheme({
 });
 function ServicesRoom() {
   const { t } = useTranslation();
+  const { data: fetchedTypeRoom = [] } = useFetch(`${BASE_URL}/api/showBannerTypeRoom`);
+  const [typeRoomData, setTypeRoomData] = useState([]);
+
+  useEffect(() => {
+    if (fetchedTypeRoom && Array.isArray(fetchedTypeRoom)) {
+      // กรอง Room_Type ที่ไม่มีค่าว่าง
+      const filteredTypeRoomData = fetchedTypeRoom.filter(
+        (packageItem) =>
+          packageItem.Image_Room_Type !== null &&
+          packageItem.Image_Room_Type !== undefined &&
+          packageItem.Image_Room_Type !== ""
+      );
+
+      const updatedTypeRoomData = filteredTypeRoomData.map((packageItem) => {
+        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+        const formattedTypeRoomPrice = packagePriceInt.toLocaleString("th-TH");
+
+        return {
+          ...packageItem,
+          formattedTypeRoomPrice: formattedTypeRoomPrice,
+        };
+      });
+
+      setTypeRoomData(updatedTypeRoomData);
+    } else {
+      console.error("Error fetching packages");
+    }
+  }, [fetchedTypeRoom]);
+  const servicesDetail = (code) => {
+    window.location.href = `/ServicesRoomsDetail/${code}`;
+  };
   return (
     <>
       <DefaultNavbar routes={routes} sticky relative />
@@ -46,7 +80,7 @@ function ServicesRoom() {
                     หน้าแรก/
                   </a>
                   <a href="/ServicesRooms" style={{ color: "#0bb288", fontSize: "1rem" }}>
-                    <p>{t("hello")}</p>
+                    <p>{t("room_services")}</p>
                   </a>
                 </Grid>
               </Grid>
@@ -65,22 +99,62 @@ function ServicesRoom() {
                       color: "#562170",
                     }}
                   >
-                    <span style={{ borderBottom: "2px solid #d1c398" }}>
-                      {" "}
-                      บริการห้องพัก/สิ่งอำนวยความสะดวก
-                    </span>
+                    <span style={{ borderBottom: "2px solid #d1c398" }}> {t("room_services")}</span>
                   </Typography>
-                  <Card>
-                    {/* <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" /> */}
-                    <CardContent>
-                      <Grid container spacing={2}>
-                        <Grid item lg={6}></Grid>
-                        <Grid item lg={6}>
-                          {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
-                        </Grid>
+                  <Grid container spacing={2} style={{ margin: "0 auto" }}>
+                    {typeRoomData.map((typeItem) => (
+                      <Grid item key={typeItem.Image_UID} xs={12} md={4}>
+                        <Card
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            maxWidth: 450,
+                            minHeight: 400,
+                            margin: "0 5px",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          <CardMedia
+                            component="img"
+                            height="150"
+                            alt="รายละเอียดรูปภาพ"
+                            image={`${BASE_URL}/${typeItem.image}`}
+                          />
+                          <CardContent>
+                            <MKTypography
+                              sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                            >
+                              <div dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
+                            </MKTypography>
+                            <MKTypography
+                              sx={{
+                                color: "#808080",
+                                fontSize: "12px",
+                                lineHeight: 0.5,
+                                marginTop: "10px",
+                              }}
+                            >
+                              <div dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
+                            </MKTypography>
+                            <MKTypography
+                              sx={{
+                                color: "#0bb288",
+                                fontSize: "15px",
+                                textAlign: "center",
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => servicesDetail(typeItem.Image_Room_Type)}
+                            >
+                              {t("view_details")}
+                            </MKTypography>
+                          </CardContent>
+                        </Card>
                       </Grid>
-                    </CardContent>
-                  </Card>
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
             </>
@@ -93,34 +167,58 @@ function ServicesRoom() {
             <>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
-                <Grid item lg={12}>
-                  <Typography
-                    style={{
-                      variant: "button",
-                      fontWeight: "bold",
-                      textTransform: "capitalize",
-                      marginBottom: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      fontSize: "30px",
-                      color: "#562170",
-                    }}
-                  >
-                    <span style={{ borderBottom: "2px solid #d1c398" }}> ผู้บริหาร</span>
-                  </Typography>
-                  <Card>
-                    <CardMedia component="img" height="auto" src={image} alt="รูปภาพแพ็คเกจ" />
-                    <CardContent>
-                      <Grid container spacing={2}>
-                        <Grid item lg={6}></Grid>
-                        <Grid item lg={6}>
-                          {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                  </Card>
-                </Grid>
+                {typeRoomData.map((typeItem) => (
+                  <Grid item key={typeItem.Image_UID} lg={12}>
+                    <Typography
+                      style={{
+                        variant: "button",
+                        fontWeight: "bold",
+                        textTransform: "capitalize",
+                        marginBottom: "10px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        fontSize: "30px",
+                        color: "#562170",
+                      }}
+                    >
+                      <span style={{ borderBottom: "2px solid #d1c398" }}>
+                        {" "}
+                        {t("room_services")}
+                      </span>
+                    </Typography>
+                    <Card>
+                      <CardMedia
+                        component="img"
+                        height="150"
+                        alt="รายละเอียดรูปภาพ"
+                        image={`${BASE_URL}/${typeItem.image}`}
+                      />
+                      <CardContent>
+                        <MKTypography
+                          sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                        >
+                          <div dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
+                        </MKTypography>
+                        <MKTypography sx={{ color: "#808080", fontSize: "12px" }}>
+                          <div dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
+                        </MKTypography>
+                        <MKTypography
+                          sx={{
+                            color: "#0bb288",
+                            fontSize: "15px",
+                            textAlign: "center",
+                            textDecoration: "underline",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => servicesDetail(typeItem.Image_Room_Type)}
+                        >
+                          {t("view_details")}
+                        </MKTypography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
             </>
           </Container>
