@@ -44,7 +44,7 @@ function HealthBlogList() {
     }
   }, [fetchedBlogs]);
   const blogDetail = (code) => {
-    window.location.href = `/packagesdetail/${code}`;
+    window.location.href = `/HealthBlogListDetail/${code}`;
   };
   return (
     <>

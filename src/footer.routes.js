@@ -82,7 +82,7 @@ export default {
           name: "health_articles",
           href: "/HealthBlogList",
         },
-        { name: "news", href: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
+        // { name: "news", href: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
       ],
     },
     {

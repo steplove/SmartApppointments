@@ -16,7 +16,7 @@ function MenuListHome() {
     window.location.href = "/doctorListHome"; // หรือ URL ที่คุณต้องการ
   };
   const handleClickContactUs = () => {
-    window.open("https://www.kasemrad.co.th/Sriburin/th/site/contact_us", "_blank");
+    window.location.href = "/Contact";
   };
 
   const menuStyles = [

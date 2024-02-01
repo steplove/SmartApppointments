@@ -19,6 +19,9 @@ import ContactJobIcon from "@material-ui/icons/Work";
 import PackageAll from "pages/LandingPages/Packages";
 import HealthBlogList from "pages/LandingPages/HealthBlogList";
 import SignIn from "pages/LandingPages/SignIn";
+import DoctorListHome from "pages/LandingPages/DoctorListHome";
+import Contact from "pages/Contact";
+import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
 
 const routes = [
   {
@@ -98,11 +101,11 @@ const routes = [
             route: "/HealthBlogList",
             component: <HealthBlogList />,
           },
-          {
-            name: "news",
-            route: "/sections/input-areas/inputs",
-            component: <CEO />,
-          },
+          // {
+          //   name: "news",
+          //   route: "/sections/input-areas/inputs",
+          //   component: <CEO />,
+          // },
         ],
       },
       {
@@ -113,8 +116,8 @@ const routes = [
         collapse: [
           {
             name: "medical_service_center",
-            route: "/sections/input-areas/inputs",
-            component: <CEO />,
+            route: "/MedicalServiceCenter",
+            component: <MedicalServiceCenter />,
           },
         ],
       },
@@ -126,8 +129,8 @@ const routes = [
         collapse: [
           {
             name: "search_for_a_doctor",
-            route: "/sections/input-areas/inputs",
-            component: <CEO />,
+            route: "/doctorListHome",
+            component: <DoctorListHome />,
           },
         ],
       },
@@ -139,8 +142,8 @@ const routes = [
         collapse: [
           {
             name: "contact",
-            route: "/sections/input-areas/inputs",
-            component: <CEO />,
+            route: "/Contact",
+            component: <Contact />,
           },
         ],
       },
