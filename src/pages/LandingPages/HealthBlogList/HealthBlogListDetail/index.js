@@ -51,14 +51,14 @@ function HealthBlogListDetail() {
   }, [code]);
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
             {selectedBlog ? (
-              <>
+              <Grid>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}>
                   {selectedBlog.Blog_Name}
                 </Typography>
@@ -81,7 +81,9 @@ function HealthBlogListDetail() {
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              <div dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }} />
+                              <Grid
+                                dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
+                              />
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -92,7 +94,7 @@ function HealthBlogListDetail() {
                     </Card>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="h4">Loading...</Typography>
             )}
@@ -103,7 +105,7 @@ function HealthBlogListDetail() {
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "25%", paddingBottom: 4 }}>
             {selectedBlog ? (
-              <>
+              <Grid>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>
                   {selectedBlog.Blog_Name}
                 </Typography>
@@ -126,7 +128,9 @@ function HealthBlogListDetail() {
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
                             >
-                              <div dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }} />
+                              <Grid
+                                dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
+                              />
                             </Typography>
                           </Grid>
                           <Grid item lg={6}>
@@ -137,7 +141,7 @@ function HealthBlogListDetail() {
                     </Card>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="h4">Loading...</Typography>
             )}
@@ -147,7 +151,7 @@ function HealthBlogListDetail() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

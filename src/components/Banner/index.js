@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { BASE_URL } from "../../constants/constants";
 import useFetch from "../../hooks/useFetch";
+import { Grid } from "@mui/material";
 
 function Banners() {
   const { data: fetchedBanner = [] } = useFetch(`${BASE_URL}/api/showBanners`);
@@ -27,9 +28,9 @@ function Banners() {
       showStatus={false}
     >
       {imgBanner.map((image) => (
-        <div key={image.BannerID}>
+        <Grid key={image.BannerID}>
           <img src={`${BASE_URL}/${image.ImageName}`} alt="" />
-        </div>
+        </Grid>
       ))}
     </Carousel>
   );

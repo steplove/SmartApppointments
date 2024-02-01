@@ -57,14 +57,14 @@ function PackagesDetail() {
   }, [code]);
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
             {selectedPackage ? (
-              <>
+              <Grid>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}>
                   {selectedPackage.packageName}
                 </Typography>
@@ -105,7 +105,7 @@ function PackagesDetail() {
                     </Card>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="h4">Loading...</Typography>
             )}
@@ -116,7 +116,7 @@ function PackagesDetail() {
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "25%", paddingBottom: 4 }}>
             {selectedPackage ? (
-              <>
+              <Grid>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>
                   {selectedPackage.packageName}
                 </Typography>
@@ -156,7 +156,7 @@ function PackagesDetail() {
                     </Card>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="h4">Loading...</Typography>
             )}
@@ -166,7 +166,7 @@ function PackagesDetail() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

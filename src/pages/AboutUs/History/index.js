@@ -33,14 +33,14 @@ function History() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -104,9 +104,9 @@ function History() {
                             และมีพื้นที่ทั้งหมด 14 ไร่เศษ เปิดให้บริการผู้ป่วยในจังหวัดเชียงราย
                             และจังหวัดใกล้เคียง
                           </span>
-                          <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                          <span style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
                             Hospital you can trust.....โรงพยาบาลที่คุณวางใจ
-                          </p>
+                          </span>
                         </Grid>
                         <Grid item lg={6}>
                           {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
@@ -116,14 +116,14 @@ function History() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
                 <Grid item lg={12}>
@@ -177,9 +177,9 @@ function History() {
                             และมีพื้นที่ทั้งหมด 14 ไร่เศษ เปิดให้บริการผู้ป่วยในจังหวัดเชียงราย
                             และจังหวัดใกล้เคียง
                           </span>
-                          <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
+                          <span style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1rem" }}>
                             Hospital you can trust.....โรงพยาบาลที่คุณวางใจ
-                          </p>
+                          </span>
                         </Grid>
                         <Grid item lg={6}>
                           {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
@@ -189,14 +189,14 @@ function History() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

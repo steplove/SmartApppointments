@@ -32,14 +32,14 @@ function Contact() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -101,14 +101,14 @@ function Contact() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
                 <Grid item lg={12}>
@@ -139,14 +139,14 @@ function Contact() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

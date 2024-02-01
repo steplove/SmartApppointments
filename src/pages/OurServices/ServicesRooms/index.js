@@ -65,14 +65,14 @@ function ServicesRoom() {
     window.location.href = `/ServicesRoomsDetail/${code}`;
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -80,7 +80,7 @@ function ServicesRoom() {
                     หน้าแรก/
                   </a>
                   <a href="/ServicesRooms" style={{ color: "#0bb288", fontSize: "1rem" }}>
-                    <p>{t("room_services")}</p>
+                    <span>{t("room_services")}</span>
                   </a>
                 </Grid>
               </Grid>
@@ -126,7 +126,9 @@ function ServicesRoom() {
                             <MKTypography
                               sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
                             >
-                              <div dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
+                              <Grid
+                                dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }}
+                              />
                             </MKTypography>
                             <MKTypography
                               sx={{
@@ -136,7 +138,7 @@ function ServicesRoom() {
                                 marginTop: "10px",
                               }}
                             >
-                              <div dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
+                              <Grid dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
                             </MKTypography>
                             <MKTypography
                               sx={{
@@ -157,14 +159,14 @@ function ServicesRoom() {
                   </Grid>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
                 {typeRoomData.map((typeItem) => (
@@ -198,10 +200,10 @@ function ServicesRoom() {
                         <MKTypography
                           sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
                         >
-                          <div dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
+                          <Grid dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
                         </MKTypography>
                         <MKTypography sx={{ color: "#808080", fontSize: "12px" }}>
-                          <div dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
+                          <Grid dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
                         </MKTypography>
                         <MKTypography
                           sx={{
@@ -220,14 +222,14 @@ function ServicesRoom() {
                   </Grid>
                 ))}
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

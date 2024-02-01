@@ -549,9 +549,9 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           px={transparent ? 2 : 0}
         >
           {mobileView && (
-            <>
+            <Grid>
               <DefaultNavbarMobile routes={routes} open={mobileNavbar} />
-            </>
+            </Grid>
           )}
         </MKBox>
       </MKBox>

@@ -33,14 +33,14 @@ function Vision_And_Mission() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -78,17 +78,21 @@ function Vision_And_Mission() {
                         <Grid item lg={0.3}></Grid>
                         <Grid item lg={11}>
                           <Typography paragraph>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               วิสัยทัศน์
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 เราจะเป็นโรงพยาบาลเอกชนชั้นนำที่มุ่งมั่นให้การรักษาพยาบาลระดับตติยภูมิ
                                 มอบความมั่นใจและไว้วางใจแก่ผู้รับบริการและบุคลากรทุกระดับ
-                              </p>
-                            </p>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                              </span>
+                            </span>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               พันธกิจ
-                              <p
+                              <span
                                 style={{ color: "#5f5f5f", fontSize: "1rem", paddingLeft: "20px" }}
                               >
                                 1. การพัฒนาภาพลักษณ์ โดยยึดหลัก &quot;โรงพยาบาลที่คุณวางใจ&quot;{" "}
@@ -107,21 +111,25 @@ function Vision_And_Mission() {
                                 <br />
                                 2. พัฒนาประสิทธิภาพในการบริหารต้นทุน <br />
                                 3. สร้างความพึงพอใจสูงสุด ของผู้ให้บริการและผู้รับบริการ
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               ค่านิยม
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 มีความรู้ คู่วินัย ให้ความรัก ( ผู้รับบริการ เพื่อนร่วมงาน ตัวเอง
                                 องค์กร ) ทักษะเยี่ยม
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               เข็มมุ่ง International patient safety goals
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 IPSG 1 : PatientIdentifications <br />
                                 IPSG 2 : Improve Effective Communication <br />
@@ -129,16 +137,18 @@ function Vision_And_Mission() {
                                 IPSG 4 : Ensure CorrectSiteCorrect-Patient SurgeryCorrect-Procedure
                                 IPSG 5 : Reduce the Risk of Health Care-Associated Infections <br />
                                 IPSG 6 : Reduce the Risk of Patient Harm Resulting from Falls
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               สโลแกน
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 Hospital You Can Trust. โรงพยาบาลที่คุณวางใจ
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                           </Typography>
                         </Grid>
                         <Grid item lg={6}>
@@ -149,14 +159,14 @@ function Vision_And_Mission() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
                 <Grid item lg={12}>
@@ -184,17 +194,21 @@ function Vision_And_Mission() {
                         <Grid item lg={0.3}></Grid>
                         <Grid item lg={11}>
                           <Typography paragraph>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               วิสัยทัศน์
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 เราจะเป็นโรงพยาบาลเอกชนชั้นนำที่มุ่งมั่นให้การรักษาพยาบาลระดับตติยภูมิ
                                 มอบความมั่นใจและไว้วางใจแก่ผู้รับบริการและบุคลากรทุกระดับ
-                              </p>
-                            </p>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                              </span>
+                            </span>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               พันธกิจ
-                              <p
+                              <span
                                 style={{ color: "#5f5f5f", fontSize: "1rem", paddingLeft: "20px" }}
                               >
                                 1. การพัฒนาภาพลักษณ์ โดยยึดหลัก &quot;โรงพยาบาลที่คุณวางใจ&quot;{" "}
@@ -213,21 +227,25 @@ function Vision_And_Mission() {
                                 <br />
                                 2. พัฒนาประสิทธิภาพในการบริหารต้นทุน <br />
                                 3. สร้างความพึงพอใจสูงสุด ของผู้ให้บริการและผู้รับบริการ
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               ค่านิยม
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 มีความรู้ คู่วินัย ให้ความรัก ( ผู้รับบริการ เพื่อนร่วมงาน ตัวเอง
                                 องค์กร ) ทักษะเยี่ยม
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               เข็มมุ่ง International patient safety goals
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 IPSG 1 : PatientIdentifications <br />
                                 IPSG 2 : Improve Effective Communication <br />
@@ -235,16 +253,18 @@ function Vision_And_Mission() {
                                 IPSG 4 : Ensure CorrectSiteCorrect-Patient SurgeryCorrect-Procedure
                                 IPSG 5 : Reduce the Risk of Health Care-Associated Infections <br />
                                 IPSG 6 : Reduce the Risk of Patient Harm Resulting from Falls
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                             <br />
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               สโลแกน
-                              <p style={{ color: "#5f5f5f", fontSize: "1rem" }}>
+                              <span style={{ color: "#5f5f5f", fontSize: "1rem" }}>
                                 {"    "}
                                 Hospital You Can Trust. โรงพยาบาลที่คุณวางใจ
-                              </p>
-                            </p>
+                              </span>
+                            </span>
                           </Typography>
                         </Grid>
                         <Grid item lg={6}>
@@ -255,14 +275,14 @@ function Vision_And_Mission() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

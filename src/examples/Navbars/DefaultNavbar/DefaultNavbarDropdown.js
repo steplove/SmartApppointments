@@ -28,6 +28,7 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
 import { useTranslation } from "react-i18next";
+import { Grid } from "@mui/material";
 
 function DefaultNavbarDropdown({
   name,
@@ -54,7 +55,7 @@ function DefaultNavbarDropdown({
   };
 
   return (
-    <>
+    <Grid>
       <MKBox
         {...rest}
         mx={1}
@@ -95,7 +96,7 @@ function DefaultNavbarDropdown({
           {children}
         </Collapse>
       )}
-    </>
+    </Grid>
   );
 }
 

@@ -9,13 +9,14 @@ import bgImage from "assets/images/hospital.png";
 // import Nav from "react-bootstrap/Nav";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { Grid } from "@mui/material";
 function Agree() {
   const handleLoginClick = () => {
     window.location.href = "/signInBasic";
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    <Grid style={{ position: "relative" }}>
       <Image
         src={bgImage}
         style={{
@@ -32,7 +33,7 @@ function Agree() {
         }}
       />
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
+        <Grid className="container-fluid">
           <a className="navbar-brand" href="#">
             Navbar
           </a>
@@ -47,7 +48,7 @@ function Agree() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
+          <Grid className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/main">
@@ -65,8 +66,8 @@ function Agree() {
                 </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </Grid>
+        </Grid>
       </nav>
       <Container
         style={{
@@ -144,7 +145,7 @@ function Agree() {
           </Card.Body>
         </Card>
       </Container>
-    </div>
+    </Grid>
   );
 }
 

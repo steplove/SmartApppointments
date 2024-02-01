@@ -35,7 +35,7 @@ function AppointmentsCalendar() {
   const tileContent = ({ date, view }) => {
     const localDateString = dayjs(date).format("YYYY-MM-DD");
     if (view === "month" && appointments[localDateString]) {
-      return <p style={{ color: "red" }}>•</p>; // เครื่องหมายสำหรับวันที่มีนัดหมาย
+      return <span style={{ color: "red" }}>•</span>; // เครื่องหมายสำหรับวันที่มีนัดหมาย
     }
   };
 

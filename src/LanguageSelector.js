@@ -5,6 +5,7 @@ import { FaGlobe } from "react-icons/fa";
 // import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { Grid } from "@mui/material";
 
 const LanguageSelector = () => {
   const { i18n, t } = useTranslation();
@@ -28,8 +29,8 @@ const LanguageSelector = () => {
   };
 
   return (
-    <div>
-      <p
+    <Grid>
+      <span
         onClick={handleClick}
         style={{
           cursor: "pointer",
@@ -39,7 +40,7 @@ const LanguageSelector = () => {
         }}
       >
         <FaGlobe style={{ marginRight: "8px", fill: "#344767" }} /> {t("changeLanguage")}
-      </p>
+      </span>
 
       <Menu
         anchorEl={anchorEl}
@@ -74,7 +75,7 @@ const LanguageSelector = () => {
         </MenuItem>
         {/* Add more MenuItem components for other languages */}
       </Menu>
-    </div>
+    </Grid>
   );
 };
 

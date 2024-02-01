@@ -9,6 +9,7 @@ import {
   Card,
   CardContent,
   Paper,
+  Grid,
 } from "@mui/material";
 import MKBox from "components/MKBox";
 // Material Kit 2 React examples
@@ -150,7 +151,7 @@ function Agreement() {
     window.location.href = "/register";
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky />
       <MKBox
         position="absolute"
@@ -287,7 +288,7 @@ function Agreement() {
           </Card>
         </Container>
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

@@ -65,7 +65,7 @@ function NavbarsAboutUs() {
     { label: "สาส์นจากประธานกรรมการ", link: "/" },
   ];
   return (
-    <>
+    <Grid>
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
@@ -225,7 +225,7 @@ function NavbarsAboutUs() {
             </List>
           </Drawer> */}
       </ThemeProvider>
-    </>
+    </Grid>
   );
 }
 

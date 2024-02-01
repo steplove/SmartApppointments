@@ -1,6 +1,5 @@
-import { Card, CardContent, CardMedia, Grid, Button } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Button, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import MKTypography from "components/MKTypography";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 import { useTranslation } from "react-i18next";
@@ -34,7 +33,7 @@ function PackageListHome() {
   };
 
   return (
-    <>
+    <Grid>
       <span
         style={{
           variant: "button",
@@ -86,38 +85,39 @@ function PackageListHome() {
               alt="รายละเอียดรูปภาพ"
             />
             <CardContent>
-              <MKTypography
+              <Typography
                 sx={{
                   color: "#0bb288",
                   fontSize: "17px",
                   fontWeight: "bold",
                 }}
+                body1="span"
               >
                 {packageItem.packageName}
-              </MKTypography>
-              <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
+              </Typography>
+              <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                 {packageItem.packageNameEN}
-              </MKTypography>
-              <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-              <MKTypography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
+              </Typography>
+              <Typography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
+              <Typography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
                 {packageItem.packagesDetail}
-              </MKTypography>
-              <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+              </Typography>
+              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 {packageItem.packageContact}
-              </MKTypography>
-              <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+              </Typography>
+              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 {t("price")}:{" "}
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
                   {packageItem.formattedPackagePrice}
                 </span>
-              </MKTypography>
-              <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
+              </Typography>
+              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
                 {t("expiration_date")}:
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
                   {new Date(packageItem.promoEndDate).toLocaleDateString()}
                 </span>
-              </MKTypography>
-              <MKTypography
+              </Typography>
+              <Typography
                 sx={{
                   color: "#0bb288",
                   fontSize: "15px",
@@ -128,12 +128,12 @@ function PackageListHome() {
                 onClick={() => packagesDetail(packageItem.packageCode)}
               >
                 {t("view_details")}
-              </MKTypography>
+              </Typography>
             </CardContent>
           </Card>
         ))}
       </Grid>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <Grid style={{ textAlign: "center", marginTop: "20px" }}>
         <Button
           xs={12}
           sx={{
@@ -146,8 +146,8 @@ function PackageListHome() {
         >
           {t("view_all_packages")}
         </Button>
-      </div>
-    </>
+      </Grid>
+    </Grid>
   );
 }
 

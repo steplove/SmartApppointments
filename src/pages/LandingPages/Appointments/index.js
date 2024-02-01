@@ -215,7 +215,7 @@ function Appointments() {
   // Add this function inside your component
   if (!fetchedClinics) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -223,17 +223,17 @@ function Appointments() {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
-    <>
+    <Grid>
       <MenuList />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -266,15 +266,15 @@ function Appointments() {
                     boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
                   }}
                 >
-                  <div style={{ fontSize: "15px", fontWeight: "bold" }}>
-                    <p>{t("please_note")}</p>
-                  </div>
-                  <div style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
-                    <p>{t("this_registration_will_record")} </p>
-                  </div>
-                  <div style={{ fontSize: "12px", color: "#49494a" }}>
-                    <p>{t("and_information_in_your")}</p>
-                  </div>
+                  <Grid style={{ fontSize: "15px", fontWeight: "bold" }}>
+                    <span>{t("please_note")}</span>
+                  </Grid>
+                  <Grid style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
+                    <span>{t("this_registration_will_record")} </span>
+                  </Grid>
+                  <Grid style={{ fontSize: "12px", color: "#49494a" }}>
+                    <span>{t("and_information_in_your")}</span>
+                  </Grid>
                   <TextField
                     label={`${t("hospital_number")}`}
                     variant="outlined"
@@ -431,10 +431,10 @@ function Appointments() {
                     multiline
                     rows={4}
                   />
-                  <div>
+                  <Grid>
                     <Card style={{ backgroundColor: "#fcf8e3" }}>
-                      <div style={{ fontSize: "14px" }}>
-                        <p
+                      <Grid style={{ fontSize: "14px" }}>
+                        <span
                           style={{
                             textDecoration: "underline",
                             textAlign: "center",
@@ -442,24 +442,24 @@ function Appointments() {
                           }}
                         >
                           {t("terms_and_conditions_of_service")}
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           ข้าพเจ้าได้รับทราบข้อมูลเกี่ยวกับการรับบริการ Smart Appointments
                           (นัดหมายออนไลน์)
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           การรับบริการเป็นการใช้เทคโนโลยีช่วยให้ผู้ป่วยและบุคลากร
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           ข้อดีคือเพิ่มประสิทธิภาพในการเข้าถึงการรักษา ผู้ป่วยที่อยู่ห่างไกล
                           ไม่จําเป็นต้องเดินทางมาที่โรงพยาบาล สามารถเข้าถึงการตรวจรักษา
                           การปรึกษาและได้รับการวินิจฉัยจากแพทย์ผู้เชี่ยวชาญได้ทันท่วงที
                           และสามารถติดตามการรักษาผู้ป่วยโรคเรื้อรังที่อยู่ห่างไกลจากโรงพยาบาล
                           ช่วยลดระยะเวลาในการรักษาพยาบาลโดยรวม
-                        </p>
-                      </div>
+                        </span>
+                      </Grid>
                     </Card>
-                  </div>
+                  </Grid>
                   <Grid item lg={12}>
                     <FormControlLabel
                       sx={{ fontSize: "10px" }}
@@ -506,9 +506,9 @@ function Appointments() {
                     {t("reset")}
                   </Button>
 
-                  <div style={{ fontSize: "12px", color: "#8a6d3b" }}>
-                    <p>*{t("after_registering")}</p>
-                  </div>
+                  <Grid style={{ fontSize: "12px", color: "#8a6d3b" }}>
+                    <span>*{t("after_registering")}</span>
+                  </Grid>
                 </Card>
               </Grid>
             </Grid>
@@ -549,18 +549,18 @@ function Appointments() {
                     boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
                   }}
                 >
-                  <div style={{ fontSize: "15px", fontWeight: "bold" }}>
-                    <p>โปรดทราบ</p>
-                  </div>
-                  <div style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
-                    <p>{t("this_registration_will_record")} </p>
-                  </div>
-                  <div style={{ fontSize: "12px", color: "#49494a" }}>
-                    <p>
+                  <Grid style={{ fontSize: "15px", fontWeight: "bold" }}>
+                    <span>โปรดทราบ</span>
+                  </Grid>
+                  <Grid style={{ fontSize: "13px", marginLeft: "12px", color: "#49494a" }}>
+                    <span>{t("this_registration_will_record")} </span>
+                  </Grid>
+                  <Grid style={{ fontSize: "12px", color: "#49494a" }}>
+                    <span>
                       และข้อมูลในการลงทะเบียนของท่าน เพื่อบันทึกเป็นประวัติไว้กับทางโรงพยาบาลฯ
                       โปรดระบุตามความเป็นจริง
-                    </p>
-                  </div>
+                    </span>
+                  </Grid>
                   <TextField
                     label={`${t("hospital_number")}`}
                     variant="outlined"
@@ -716,10 +716,10 @@ function Appointments() {
                     multiline
                     rows={4}
                   />
-                  <div>
+                  <Grid>
                     <Card style={{ backgroundColor: "#fcf8e3" }}>
-                      <div style={{ fontSize: "14px" }}>
-                        <p
+                      <Grid style={{ fontSize: "14px" }}>
+                        <span
                           style={{
                             textDecoration: "underline",
                             textAlign: "center",
@@ -727,24 +727,24 @@ function Appointments() {
                           }}
                         >
                           ข้อกำหนด และเงื่อนไขการใช้บริการ
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           ข้าพเจ้าได้รับทราบข้อมูลเกี่ยวกับการรับบริการ Smart Appointments
                           (นัดหมายออนไลน์)
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           การรับบริการเป็นการใช้เทคโนโลยีช่วยให้ผู้ป่วยและบุคลากร
-                        </p>
-                        <p style={{ marginLeft: "10px", color: "#8a6d3b" }}>
+                        </span>
+                        <span style={{ marginLeft: "10px", color: "#8a6d3b" }}>
                           ข้อดีคือเพิ่มประสิทธิภาพในการเข้าถึงการรักษา ผู้ป่วยที่อยู่ห่างไกล
                           ไม่จําเป็นต้องเดินทางมาที่โรงพยาบาล สามารถเข้าถึงการตรวจรักษา
                           การปรึกษาและได้รับการวินิจฉัยจากแพทย์ผู้เชี่ยวชาญได้ทันท่วงที
                           และสามารถติดตามการรักษาผู้ป่วยโรคเรื้อรังที่อยู่ห่างไกลจากโรงพยาบาล
                           ช่วยลดระยะเวลาในการรักษาพยาบาลโดยรวม
-                        </p>
-                      </div>
+                        </span>
+                      </Grid>
                     </Card>
-                  </div>
+                  </Grid>
                   <Grid item lg={12}>
                     <FormControlLabel
                       sx={{ fontSize: "10px" }}
@@ -790,9 +790,9 @@ function Appointments() {
                   >
                     {t("reset")}
                   </Button>
-                  <div style={{ fontSize: "12px", color: "#8a6d3b" }}>
-                    <p>*{t("after_registering")}</p>
-                  </div>
+                  <Grid style={{ fontSize: "12px", color: "#8a6d3b" }}>
+                    <span>*{t("after_registering")}</span>
+                  </Grid>
                 </Card>
               </Grid>
             </Grid>
@@ -808,7 +808,7 @@ function Appointments() {
       <br />
       <br />
       <Foots /> */}
-    </>
+    </Grid>
   );
 }
 

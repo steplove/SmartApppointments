@@ -47,7 +47,7 @@ function HealthBlogList() {
     window.location.href = `/HealthBlogListDetail/${code}`;
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -105,7 +105,7 @@ function HealthBlogList() {
                             maxWidth: "100%",
                           }}
                         >
-                          <div dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
+                          <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
                         </MKTypography>
 
                         <MKTypography
@@ -184,7 +184,7 @@ function HealthBlogList() {
                       {blog.Blog_Name}
                     </MKTypography>
                     <MKTypography sx={{ color: "#808080", fontSize: "15px" }}>
-                      <div dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
+                      <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
                     </MKTypography>
                     <MKTypography
                       sx={{
@@ -210,7 +210,7 @@ function HealthBlogList() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

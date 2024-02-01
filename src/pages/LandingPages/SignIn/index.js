@@ -35,7 +35,6 @@ function SignInBasic() {
         IdenNumber: identificationInput,
         Password: passwordInput,
       };
-      console.log(userData);
       // สมมติว่า URL ของ API endpoint สำหรับการลงชื่อเข้าใช้คือ '/api/login'
       const response = await fetch(`${BASE_URL}/api/loginCustomer`, {
         method: "POST",
@@ -44,7 +43,6 @@ function SignInBasic() {
         },
         body: JSON.stringify(userData),
       });
-      console.log(response, "datadata");
 
       if (response.status !== 200) {
         throw new Error("Login failed");
@@ -55,7 +53,6 @@ function SignInBasic() {
         // บันทึก token หรือทำอะไรที่ต้องการ
         localStorage.setItem("token", data.token);
       }
-      console.log(data.Customer_Status);
       if (data.Customer_Status === 1) {
         Swal.fire({
           icon: "warning",
@@ -89,7 +86,7 @@ function SignInBasic() {
     window.location.href = "/agreement";
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} />
       <MKBox
         position="absolute"
@@ -167,7 +164,7 @@ function SignInBasic() {
                       {t("login")}
                     </MKButton>
                   </MKBox>
-                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <Grid style={{ display: "flex", justifyContent: "space-between" }}>
                     <MKBox mt={0} mb={0} textAlign="center">
                       <MKTypography variant="button" className="black-text">
                         {t("no_account")}?{" "}
@@ -202,7 +199,7 @@ function SignInBasic() {
                         </MKTypography>
                       </MKTypography>
                     </MKBox>
-                  </div>
+                  </Grid>
                 </MKBox>
               </MKBox>
             </Card>
@@ -210,7 +207,7 @@ function SignInBasic() {
         </Grid>
       </MKBox>
       <Foots />
-    </>
+    </Grid>
   );
 }
 

@@ -143,6 +143,16 @@ i18n.use(initReactI18next).init({
         and_information_in_your:
           " และข้อมูลในการลงทะเบียนของท่าน เพื่อบันทึกเป็นประวัติไว้กับทางโรงพยาบาลฯ โปรดระบุตามความเป็นจริง",
         address: "ที่อยู่",
+        identificationType: "ประเภทบัตรประจำตัว",
+        identificationNumber: "เลขบัตรประชาชน/พาสปอร์ต",
+        hospitalNumber: "HN",
+        gender: "คำนำหน้า/เพศ",
+        firstName: "ชื่อ",
+        lastName: "นามสกุล",
+        birthDate: "วันเกิด",
+        Address: "บ้านเลขที่",
+        villageNumber: "หมู่",
+        mobileNo: "เบอร์โทรศัพท์",
       },
     },
     en: {
@@ -287,6 +297,16 @@ i18n.use(initReactI18next).init({
         and_information_in_your:
           "and information in your registration To record as a history with the hospital. Please specify truthfully.",
         address: "Address",
+        identificationType: "Identification Type",
+        identificationNumber: "ID card/passport number",
+        hospitalNumber: "HN",
+        gender: "Prefix/Gender",
+        firstName: "First Name",
+        lastName: "Last Name",
+        birthDate: "Birth Day",
+        Address: "Address",
+        villageNumber: "Village Number",
+        mobileNo: "Telephone Number",
       },
     },
     lo: {

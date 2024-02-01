@@ -11,6 +11,7 @@ import {
   MenuItem,
   BottomNavigation,
   BottomNavigationAction,
+  Grid,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
@@ -61,7 +62,7 @@ export default function MenuList() {
 
   // const isCurrentPage = (path) => location.pathname === path; // <-- ฟังก์ชันนี้จะเป็น true เมื่ออยู่ที่หน้านั้น
   return (
-    <div>
+    <Grid>
       {isMobile ? (
         <BottomNavigation
           showLabels
@@ -105,7 +106,7 @@ export default function MenuList() {
           />
         </BottomNavigation>
       ) : (
-        <>
+        <Grid>
           <AppBar position="static">
             <Toolbar>
               <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleClick}>
@@ -136,7 +137,7 @@ export default function MenuList() {
             </MenuItem>
             <MenuItem onClick={hadleLogout}>{t("logout")}</MenuItem>
           </Menu>
-        </>
+        </Grid>
       )}
       <Popover
         id={id}
@@ -157,6 +158,6 @@ export default function MenuList() {
         </MenuItem>
       </Popover>
       <br />
-    </div>
+    </Grid>
   );
 }

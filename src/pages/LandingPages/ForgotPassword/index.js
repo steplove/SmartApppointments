@@ -63,7 +63,7 @@ function ForgotPassword() {
   };
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} />
       <MKBox
         position="absolute"
@@ -228,7 +228,7 @@ function ForgotPassword() {
           </div>
         </Card>
       </div> */}
-    </>
+    </Grid>
   );
 }
 

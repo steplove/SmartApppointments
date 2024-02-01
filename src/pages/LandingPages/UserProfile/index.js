@@ -120,7 +120,7 @@ function UserProfile() {
   };
   if (!fetchedCustomerAddress) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -128,21 +128,21 @@ function UserProfile() {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
-    <>
+    <Grid>
       <MenuList />
       <ThemeProvider theme={theme}>
         <Hidden smUp>
-          <div
+          <Grid
             style={{
               position: "absolute",
               right: 25,
@@ -154,7 +154,7 @@ function UserProfile() {
             }}
           >
             <LanguageSelector />
-          </div>
+          </Grid>
           <Grid
             container
             spacing={2}
@@ -172,10 +172,10 @@ function UserProfile() {
                 }}
               >
                 <CardContent sx={{ paddingBottom: 0 }}>
-                  <div style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}>
+                  <Grid style={{ borderBottom: "1px solid #ccc", marginBottom: "10px" }}>
                     <Typography variant="h6">{t("personal_information")}</Typography>
-                  </div>
-                  <div
+                  </Grid>
+                  <Grid
                     style={{
                       display: "flex",
                       justifyContent: "center",
@@ -188,7 +188,7 @@ function UserProfile() {
                       src="/static/images/avatar/1.jpg"
                       sx={{ width: 120, height: 120 }}
                     />
-                  </div>
+                  </Grid>
                   <TextField
                     label={`${t("name")}`}
                     variant="outlined"
@@ -225,7 +225,7 @@ function UserProfile() {
               }}
             >
               <CardContent>
-                <div
+                <Grid
                   style={{
                     borderBottom: "1px solid #ccc",
                     marginBottom: "10px",
@@ -237,10 +237,10 @@ function UserProfile() {
                   <Typography variant="h6" style={{ marginLeft: 0 }}>
                     Barcode HN
                   </Typography>
-                </div>
-                <div style={{ display: "flex", justifyContent: "center", flex: "1" }}>
+                </Grid>
+                <Grid style={{ display: "flex", justifyContent: "center", flex: "1" }}>
                   <Barcode value={`${HN}`} />
-                </div>
+                </Grid>
               </CardContent>
             </Card>
           </Grid>
@@ -258,7 +258,7 @@ function UserProfile() {
               }}
             >
               <CardContent sx={{ paddingBottom: 0 }}>
-                <div
+                <Grid
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -267,12 +267,12 @@ function UserProfile() {
                     borderBottom: "1px solid #ccc",
                   }}
                 >
-                  <div>
+                  <Grid>
                     <Typography variant="h6">{t("address")}</Typography>
-                  </div>
-                  <div>
+                  </Grid>
+                  <Grid>
                     {isEditing ? (
-                      <>
+                      <Grid>
                         <IconButton
                           aria-label="บันทึก"
                           onClick={handleSave}
@@ -287,17 +287,17 @@ function UserProfile() {
                         >
                           <CancelIcon style={{ color: "red" }} />
                         </IconButton>
-                      </>
+                      </Grid>
                     ) : (
                       <IconButton aria-label="แก้ไข" onClick={handleEdit} style={{ color: "blue" }}>
                         <EditIcon style={{ color: "#c68e28" }} />
                       </IconButton>
                     )}
-                  </div>
-                </div>
+                  </Grid>
+                </Grid>
 
                 {fetchedCustomerAddress && (
-                  <>
+                  <Grid>
                     <TextField
                       label={`${t("email")}`}
                       variant="outlined"
@@ -327,7 +327,7 @@ function UserProfile() {
                         })
                       }
                     />
-                  </>
+                  </Grid>
                 )}
 
                 <TextField
@@ -355,7 +355,7 @@ function UserProfile() {
                   boxShadow: "none", // ไม่มีเงา
                 }}
               >
-                <div className="left" style={{ display: "flex", justifyContent: "center" }}>
+                <Grid className="left" style={{ display: "flex", justifyContent: "center" }}>
                   <Avatar
                     src={Img}
                     sx={{
@@ -365,7 +365,7 @@ function UserProfile() {
                       objectFit: "cover",
                     }}
                   />
-                </div>
+                </Grid>
                 <CardContent sx={{ paddingBottom: 0 }}>
                   {" "}
                   {/* ลดระยะห่างด้านล่างของCardContent */}
@@ -390,7 +390,7 @@ function UserProfile() {
             </Grid>
 
             <Grid item lg={6} sx={{ marginRight: "0px", marginBottom: "10px" }}>
-              <div>
+              <Grid>
                 <Card
                   sx={{
                     borderRadius: 5, // ทำให้มุมเป็นแบบไม่มีมุม
@@ -399,13 +399,13 @@ function UserProfile() {
                 >
                   <CardContent>
                     <Typography variant="h6">BarCode</Typography>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Grid style={{ display: "flex", justifyContent: "center" }}>
                       <Barcode value={`${HN}`} />
-                    </div>
+                    </Grid>
                   </CardContent>
                 </Card>
-              </div>
-              <div style={{ marginTop: "10px" }}>
+              </Grid>
+              <Grid style={{ marginTop: "10px" }}>
                 <Card
                   sx={{
                     borderRadius: 5, // ทำให้มุมเป็นแบบไม่มีมุม
@@ -413,7 +413,7 @@ function UserProfile() {
                   }}
                 >
                   <CardContent>
-                    <div
+                    <Grid
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -421,9 +421,9 @@ function UserProfile() {
                       }}
                     >
                       <Typography variant="h6">{t("address")}</Typography>
-                      <div>
+                      <Grid>
                         {isEditing ? (
-                          <>
+                          <Grid>
                             <IconButton
                               aria-label="บันทึก"
                               onClick={handleSave}
@@ -438,7 +438,7 @@ function UserProfile() {
                             >
                               <CancelIcon style={{ color: "red" }} />
                             </IconButton>
-                          </>
+                          </Grid>
                         ) : (
                           <IconButton
                             aria-label="แก้ไข"
@@ -448,8 +448,8 @@ function UserProfile() {
                             <EditIcon style={{ color: "#c68e28" }} />
                           </IconButton>
                         )}
-                      </div>
-                    </div>
+                      </Grid>
+                    </Grid>
                   </CardContent>
                   <Grid
                     container
@@ -457,7 +457,7 @@ function UserProfile() {
                     sx={{ marginLeft: "10px", marginBottom: "10px", marginRight: "10px" }}
                   >
                     {fetchedCustomerAddress && (
-                      <>
+                      <Grid>
                         <TextField
                           label={`${t("email")}`}
                           variant="outlined"
@@ -487,7 +487,7 @@ function UserProfile() {
                             })
                           }
                         />
-                      </>
+                      </Grid>
                     )}
 
                     <TextField
@@ -499,7 +499,7 @@ function UserProfile() {
                     />
                   </Grid>
                 </Card>
-              </div>
+              </Grid>
             </Grid>
           </Grid>
         </Hidden>
@@ -516,7 +516,7 @@ function UserProfile() {
       <br />
       <br /> */}
       {/* <Foots /> */}
-    </>
+    </Grid>
   );
 }
 

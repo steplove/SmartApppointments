@@ -4,16 +4,11 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import CookieConsent from "react-cookie-consent";
 import routes from "routes";
 import Banner from "components/Banner";
-import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import { Button, Stack, Container, Grid, Typography, Box } from "@mui/material";
 // import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
 // Material Kit 2 React components
-import MKButton from "components/MKButton";
-import MKTypography from "components/MKTypography";
 // Images
 import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
@@ -49,10 +44,10 @@ function Presentation() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Grid>
       {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
-      <MKBox component="header" position="relative">
-        <div
+      <Box component="header" position="relative">
+        <Grid
           style={{
             position: "absolute",
             right: 25,
@@ -66,8 +61,8 @@ function Presentation() {
           }}
         >
           <LanguageSelector />
-        </div>
-        <MKBox
+        </Grid>
+        <Box
           display="flex"
           alignItems="center"
           minHeight="85vh"
@@ -93,9 +88,9 @@ function Presentation() {
               flexDirection="column"
               justifyContent="center"
             >
-              <MKTypography
+              <Typography
                 variant="h1"
-                color="white"
+                color="#FFFFFF"
                 mb={3}
                 sx={({ breakpoints, typography: { size } }) => ({
                   [breakpoints.down("md")]: {
@@ -104,53 +99,53 @@ function Presentation() {
                 })}
               >
                 {t("kasemrad_sriburin")}
-              </MKTypography>
-              <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
+              </Typography>
+              <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
                 Hospital You Can Trust.
-              </MKTypography>
-              <MKTypography variant="body1" color="white" opacity={0.8} pr={6} mr={6}>
+              </Typography>
+              <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
                 {t("hospital_you_trust")}
-              </MKTypography>
+              </Typography>
 
               <Stack direction="row" spacing={1} mt={3}>
-                <MKButton color="white" href="/signIn">
+                <Button color="white" href="/signIn">
                   {t("appointment")}
-                </MKButton>
+                </Button>
               </Stack>
             </Grid>
           </Container>
-        </MKBox>
-      </MKBox>
-      <MKBox sx={{ marginBottom: "20px" }}>
+        </Box>
+      </Box>
+      <Box sx={{ marginBottom: "20px" }}>
         <MenuListHome />
-      </MKBox>
+      </Box>
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Card style={{ maxWidth: "70%", margin: "auto" }}>
-            <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+            <Box sx={{ marginBottom: "20px", maxWidth: "100%" }}>
               <Banner slides={slides} />
-            </MKBox>
+            </Box>
           </Card>
         </Hidden>
         {/* Mobile View */}
         <Hidden smUp>
           <Card style={{ maxWidth: "100%", margin: "auto" }}>
-            <MKBox sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+            <Box sx={{ marginBottom: "20px", maxWidth: "100%" }}>
               <Banner slides={slides} />
-            </MKBox>
+            </Box>
           </Card>
         </Hidden>
       </ThemeProvider>
-      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+      <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <PackageListHome />
-      </MKBox>
-      <MKBox sx={{ marginTop: "20px", marginBottom: "20px" }}>
+      </Box>
+      <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
         <HealthBlog />
-      </MKBox>
-      <MKBox pt={6} px={1} mt={6}>
+      </Box>
+      <Box pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
-      </MKBox>
+      </Box>
       <CookieConsent
         location="bottom"
         buttonText={t("allow_all_cookies")}
@@ -159,9 +154,9 @@ function Presentation() {
         buttonStyle={{ color: "#FFFFFF", fontSize: "13px", background: "#0bb288" }}
         expires={150}
       >
-        <p style={{ fontSize: ".813rem", color: "#808080" }}>{t("cookies")}</p>
+        <span style={{ fontSize: ".813rem", color: "#808080" }}>{t("cookies")}</span>
       </CookieConsent>
-    </>
+    </Grid>
   );
 }
 

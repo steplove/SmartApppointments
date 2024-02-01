@@ -52,7 +52,7 @@ function ResetPassword() {
     }
   };
   return (
-    <>
+    <Grid>
       <MKBox
         position="absolute"
         top={0}
@@ -144,7 +144,7 @@ function ResetPassword() {
           </Grid>
         </Grid>
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

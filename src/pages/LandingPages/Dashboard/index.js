@@ -89,7 +89,7 @@ function Dashboard() {
   // ตรวจสอบว่า fetchNotify มีข้อมูลหรือไม่
   if (!fetchNotify || !fetchAllAppointment) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -97,17 +97,17 @@ function Dashboard() {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading HomePage...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading HomePage...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
-    <>
+    <Grid>
       <MenuList />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -153,7 +153,7 @@ function Dashboard() {
                               if (notification.FinishStatus === 0) {
                                 if (notification.StatusFlag === "3") {
                                   content = (
-                                    <>
+                                    <Grid>
                                       <ListItem
                                         style={{
                                           display: "flex",
@@ -190,11 +190,11 @@ function Dashboard() {
                                           {t("waiting_for_confirmation")}
                                         </span>
                                       </ListItem>
-                                    </>
+                                    </Grid>
                                   );
                                 } else if (notification.StatusFlag === "4") {
                                   content = (
-                                    <>
+                                    <Grid>
                                       <ListItem
                                         style={{
                                           display: "flex",
@@ -229,11 +229,11 @@ function Dashboard() {
                                         </span>
                                         <span style={{ color: "green" }}>{t("confirmed")}</span>
                                       </ListItem>
-                                    </>
+                                    </Grid>
                                   );
                                 } else if (notification.StatusFlag === "5") {
                                   content = (
-                                    <>
+                                    <Grid>
                                       <ListItem
                                         style={{
                                           display: "flex",
@@ -268,14 +268,14 @@ function Dashboard() {
                                         </span>
                                         <span style={{ color: "red" }}>ถูกยกเลิก</span>
                                       </ListItem>
-                                    </>
+                                    </Grid>
                                   );
                                 } else {
                                   content = "";
                                 }
                               } else if (notification.StatusFlag === "6") {
                                 content = (
-                                  <>
+                                  <Grid>
                                     <ListItem
                                       style={{
                                         display: "flex",
@@ -311,7 +311,7 @@ function Dashboard() {
                                       </span>
                                       <span style={{ color: "blue" }}>{t("completed")}</span>
                                     </ListItem>
-                                  </>
+                                  </Grid>
                                 );
                               } else {
                                 content = "";
@@ -350,7 +350,7 @@ function Dashboard() {
                           {t("latest_appointment_list")}
                         </Typography>
                         <Divider style={{ margin: "10px 0" }} />
-                        <div>
+                        <Grid>
                           {allAppointments.length > 0 ? (
                             allAppointments.map((booking) => (
                               <Box
@@ -398,7 +398,7 @@ function Dashboard() {
                                         textAlign: "center",
                                       }}
                                     >
-                                      <div
+                                      <Grid
                                         className={`status-${booking.StatusFlag}`}
                                         style={{ justifyItems: "center", alignItems: "center" }}
                                       >
@@ -413,7 +413,7 @@ function Dashboard() {
                                           : booking.StatusFlag === "6"
                                           ? t("completed")
                                           : t("unknown_status")}{" "}
-                                      </div>
+                                      </Grid>
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={6} sx={{ textAlign: "center" }}>
@@ -428,21 +428,21 @@ function Dashboard() {
                                     >
                                       <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
                                       <DialogContent style={{ textAlign: "center" }}>
-                                        <div>
+                                        <Grid>
                                           ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
-                                        </div>
-                                        <div>
+                                        </Grid>
+                                        <Grid>
                                           วันที่นัด:{" "}
                                           {new Date(
                                             dialogShow.Appointment_Date
                                           ).toLocaleDateString()}
-                                        </div>
+                                        </Grid>
                                         {dialogShow.Appointment_Time ? (
-                                          <p>
+                                          <span>
                                             เวลา: {dialogShow.Appointment_Time.substring(11, 16)}
-                                          </p>
+                                          </span>
                                         ) : (
-                                          <p>ไม่มีข้อมูลเวลาการนัดหมาย</p>
+                                          <span>ไม่มีข้อมูลเวลาการนัดหมาย</span>
                                         )}
 
                                         {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
@@ -483,7 +483,7 @@ function Dashboard() {
                               </span>
                             </ListItem>
                           )}
-                        </div>
+                        </Grid>
                       </CardContent>
                     </Card>
                   </Grid>
@@ -534,7 +534,7 @@ function Dashboard() {
                           if (notification.FinishStatus === 0) {
                             if (notification.StatusFlag === "3") {
                               content = (
-                                <>
+                                <Grid>
                                   <ListItem
                                     style={{
                                       display: "flex",
@@ -572,11 +572,11 @@ function Dashboard() {
                                       {t("waiting_for_confirmation")}
                                     </span>
                                   </ListItem>
-                                </>
+                                </Grid>
                               );
                             } else if (notification.StatusFlag === "4") {
                               content = (
-                                <>
+                                <Grid>
                                   <ListItem
                                     style={{
                                       display: "flex",
@@ -612,11 +612,11 @@ function Dashboard() {
                                     </span>
                                     <span style={{ color: "green" }}>{t("confirmed")}</span>
                                   </ListItem>
-                                </>
+                                </Grid>
                               );
                             } else if (notification.StatusFlag === "5") {
                               content = (
-                                <>
+                                <Grid>
                                   <ListItem
                                     style={{
                                       display: "flex",
@@ -652,14 +652,14 @@ function Dashboard() {
                                     </span>
                                     <span style={{ color: "red" }}>ถูกยกเลิก</span>
                                   </ListItem>
-                                </>
+                                </Grid>
                               );
                             } else {
                               content = "";
                             }
                           } else if (notification.StatusFlag === "6") {
                             content = (
-                              <>
+                              <Grid>
                                 <ListItem
                                   style={{
                                     display: "flex",
@@ -695,7 +695,7 @@ function Dashboard() {
                                   </span>
                                   <span style={{ color: "blue" }}>{t("completed")}</span>
                                 </ListItem>
-                              </>
+                              </Grid>
                             );
                           } else {
                             content = "";
@@ -735,7 +735,7 @@ function Dashboard() {
                     </Typography>
                     <Divider style={{ margin: "10px 0" }} />
                     <ThemeProvider theme={theme}>
-                      <div>
+                      <Grid>
                         {allAppointments.length > 0 ? (
                           allAppointments.map((booking) => (
                             <Box
@@ -783,7 +783,7 @@ function Dashboard() {
                                       textAlign: "center",
                                     }}
                                   >
-                                    <div
+                                    <Grid
                                       className={`status-${booking.StatusFlag}`}
                                       style={{ justifyItems: "center", alignItems: "center" }}
                                     >
@@ -798,7 +798,7 @@ function Dashboard() {
                                         : booking.StatusFlag === "6"
                                         ? t("completed")
                                         : "unknown"}{" "}
-                                    </div>
+                                    </Grid>
                                   </Typography>
                                 </Grid>
                                 <Grid item xs={6} sx={{ textAlign: "center" }}>
@@ -813,17 +813,19 @@ function Dashboard() {
                                   >
                                     <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
                                     <DialogContent style={{ textAlign: "center" }}>
-                                      <div>
+                                      <Grid>
                                         ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
-                                      </div>
-                                      <div>
+                                      </Grid>
+                                      <Grid>
                                         วันที่นัด:{" "}
                                         {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                                      </div>
+                                      </Grid>
                                       {dialogShow.Appointment_Time ? (
-                                        <p>เวลา: {dialogShow.Appointment_Time.substring(11, 16)}</p>
+                                        <span>
+                                          เวลา: {dialogShow.Appointment_Time.substring(11, 16)}
+                                        </span>
                                       ) : (
-                                        <p>ไม่มีข้อมูลเวลาการนัดหมาย</p>
+                                        <span>ไม่มีข้อมูลเวลาการนัดหมาย</span>
                                       )}
 
                                       {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
@@ -857,7 +859,7 @@ function Dashboard() {
                             {t("no_appointment_made")}
                           </Typography>
                         )}
-                      </div>
+                      </Grid>
                     </ThemeProvider>
                   </CardContent>
                 </Card>
@@ -869,7 +871,7 @@ function Dashboard() {
       </ThemeProvider>
 
       {/* <Foots /> */}
-    </>
+    </Grid>
   );
 }
 

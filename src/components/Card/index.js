@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogActions,
   Hidden,
+  Grid,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
@@ -72,7 +73,7 @@ const ReactCardSlider = () => {
   };
   if (!fetchedDoctor) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -80,13 +81,13 @@ const ReactCardSlider = () => {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading Doctor...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading Doctor...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
@@ -94,17 +95,17 @@ const ReactCardSlider = () => {
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <div className="link-list-doctor">
-            <p className="title-name-doctor">{t("doctor_list")}</p>
+          <Grid className="link-list-doctor">
+            <span className="title-name-doctor">{t("doctor_list")}</span>
             <a href="/doctorList" className="title-name-doctor">
               {t("view_all")}
             </a>
-          </div>
-          <div id="main-slider-container">
+          </Grid>
+          <Grid id="main-slider-container">
             <MdChevronLeft className="slider-icon left" size={50} onClick={slideLeft} />
-            <div id="slider">
+            <Grid id="slider">
               {doctors.map((slide, index) => (
-                <div
+                <Grid
                   key={index}
                   className="slider-card"
                   onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
@@ -114,28 +115,28 @@ const ReactCardSlider = () => {
                     alt={slide.Doctor_Name}
                     className="slider-card-image"
                   />
-                  <p className="slider-card-title">{slide.Doctor_Name}</p>
-                  <p className="slider-card-description">{slide.Clinic_Name}</p>
-                </div>
+                  <span className="slider-card-title">{slide.Doctor_Name}</span>
+                  <span className="slider-card-description">{slide.Clinic_Name}</span>
+                </Grid>
               ))}
-            </div>
+            </Grid>
             <MdChevronRight className="slider-icon right" size={50} onClick={slideRight} />
-          </div>
+          </Grid>
         </Hidden>
 
         {/* Mobile View */}
-        <Hidden smUp>
-          <div className="link-list-doctor">
-            <p className="title-name-doctor">{t("doctor_list")}</p>
+        <Hidden smUspan>
+          <Grid className="link-list-doctor">
+            <span className="title-name-doctor">{t("doctor_list")}</span>
             <a href="/doctorList" className="title-name-doctor">
               {t("view_all")}
             </a>
-          </div>
-          <div id="main-slider-container">
+          </Grid>
+          <Grid id="main-slider-container">
             <MdChevronLeft className="slider-icon left" size={50} onClick={slideLeft} />
-            <div id="slider">
+            <Grid id="slider">
               {doctors.map((slide, index) => (
-                <div
+                <Grid
                   key={index}
                   className="slider-card"
                   onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
@@ -145,13 +146,13 @@ const ReactCardSlider = () => {
                     alt={slide.Doctor_Name}
                     className="slider-card-image"
                   />
-                  <p className="slider-card-title">{slide.Doctor_Name}</p>
-                  <p className="slider-card-description">{slide.Clinic_Name}</p>
-                </div>
+                  <span className="slider-card-title">{slide.Doctor_Name}</span>
+                  <span className="slider-card-description">{slide.Clinic_Name}</span>
+                </Grid>
               ))}
-            </div>
+            </Grid>
             <MdChevronRight className="slider-icon right" size={50} onClick={slideRight} />
-          </div>
+          </Grid>
         </Hidden>
       </ThemeProvider>
       <Dialog open={openDialog} onClose={handleDialogClose}>
@@ -168,12 +169,12 @@ const ReactCardSlider = () => {
             }}
           />
 
-          <p>
+          <span>
             {t("name")}: {selectedDoctor.Doctor_Name}
-          </p>
-          <p>
+          </span>
+          <span>
             {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
-          </p>
+          </span>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">

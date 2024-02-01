@@ -61,14 +61,14 @@ function ServicesRoomsDetail() {
   }, [code]);
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "5%", paddingBottom: 4 }}>
             {selectedService && selectedService.length > 0 ? (
-              <>
+              <Grid>
                 <Typography
                   sx={{ marginBottom: 2, color: "#6b2a8b", fontWeight: "bold", fontSize: "1.5rem" }}
                 >
@@ -94,9 +94,9 @@ function ServicesRoomsDetail() {
                           height={600}
                         >
                           {selectedService.map((service) => (
-                            <div key={service.UID}>
+                            <Grid key={service.UID}>
                               <img src={`${BASE_URL}/${service.image}`} alt="" />
-                            </div>
+                            </Grid>
                           ))}
                         </Carousel>
                       </Grid>
@@ -113,7 +113,7 @@ function ServicesRoomsDetail() {
                               variant="subtitle1"
                               sx={{ marginBottom: 2, lineHeight: 0.8 }}
                             >
-                              <div
+                              <Grid
                                 dangerouslySetInnerHTML={{
                                   __html: selectedService[0].Room_Detail,
                                 }}
@@ -128,7 +128,7 @@ function ServicesRoomsDetail() {
                               อาหาร
                             </Typography>
                             <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
-                              <div
+                              <Grid
                                 dangerouslySetInnerHTML={{
                                   __html: selectedService[0].Food_Detail,
                                 }}
@@ -143,7 +143,7 @@ function ServicesRoomsDetail() {
                               สิ่งอำนวยความสะดวก
                             </Typography>
                             <Typography variant="subtitle1" sx={{ lineHeight: 0.8 }}>
-                              <div
+                              <Grid
                                 dangerouslySetInnerHTML={{ __html: selectedService[0].Property }}
                               />
                             </Typography>
@@ -157,7 +157,7 @@ function ServicesRoomsDetail() {
                     </Card>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="body1">No data available</Typography>
             )}
@@ -168,7 +168,7 @@ function ServicesRoomsDetail() {
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "15%", paddingBottom: 4 }}>
             {selectedService ? (
-              <>
+              <Grid>
                 <Typography sx={{ marginBottom: 2, fontSize: "1.2rem" }}>
                   {selectedService.Room_Type}
                 </Typography>
@@ -188,9 +188,9 @@ function ServicesRoomsDetail() {
                       emulateTouch={true}
                     >
                       {selectedService.map((service) => (
-                        <div key={service.UID}>
+                        <Grid key={service.UID}>
                           <img src={`${BASE_URL}/${service.image}`} alt="" />
-                        </div>
+                        </Grid>
                       ))}
                     </Carousel>
                     <CardContent>
@@ -217,7 +217,7 @@ function ServicesRoomsDetail() {
                     </CardContent>
                   </Grid>
                 </Grid>
-              </>
+              </Grid>
             ) : (
               <Typography variant="h4">Loading...</Typography>
             )}
@@ -227,7 +227,7 @@ function ServicesRoomsDetail() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

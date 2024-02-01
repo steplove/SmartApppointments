@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardContent, Grid, CardMedia, Button } from "@mui/material";
+import { Card, CardContent, Grid, CardMedia, Button, Typography } from "@mui/material";
 import "./HealthBlog.css";
 import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
-import MKTypography from "components/MKTypography";
 import { useTranslation } from "react-i18next";
 
 const HealthBlog = () => {
@@ -26,7 +25,7 @@ const HealthBlog = () => {
     window.location.href = `/HealthBlogListDetail/${codeID}`;
   };
   return (
-    <>
+    <Grid>
       <span
         style={{
           variant: "button",
@@ -79,10 +78,10 @@ const HealthBlog = () => {
               image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
             />
             <CardContent>
-              <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
+              <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                 {blog.Blog_Name}
-              </MKTypography>
-              <MKTypography
+              </Typography>
+              <Typography
                 sx={{
                   color: "#808080",
                   fontSize: "15px",
@@ -95,10 +94,10 @@ const HealthBlog = () => {
                   maxWidth: "100%",
                 }}
               >
-                <div dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
-              </MKTypography>
+                <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
+              </Typography>
 
-              <MKTypography
+              <Typography
                 sx={{
                   color: "#0bb288",
                   fontSize: "15px",
@@ -109,12 +108,12 @@ const HealthBlog = () => {
                 onClick={() => BlogsDetail(blog.Blog_ID)}
               >
                 {t("read_more")}
-              </MKTypography>
+              </Typography>
             </CardContent>
           </Card>
         ))}
       </Grid>
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <Grid style={{ textAlign: "center", marginTop: "20px" }}>
         <Button
           xs={12}
           sx={{
@@ -127,8 +126,8 @@ const HealthBlog = () => {
         >
           {t("view_all_articles")}
         </Button>
-      </div>
-    </>
+      </Grid>
+    </Grid>
   );
 };
 

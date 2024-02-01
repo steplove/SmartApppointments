@@ -35,7 +35,7 @@ import bgImage from "assets/images/illustrations/illustration-reset.jpg";
 
 function ContactUs() {
   return (
-    <>
+    <Grid>
       <MKBox position="fixed" top="0.5rem" width="100%">
         <DefaultNavbar
           routes={routes}
@@ -142,7 +142,7 @@ function ContactUs() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

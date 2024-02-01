@@ -1,7 +1,6 @@
 import React from "react";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import Grid from "@mui/material/Grid";
-import MKTypography from "components/MKTypography";
+import { Grid, Typography } from "@mui/material";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import { useTranslation } from "react-i18next";
@@ -50,25 +49,25 @@ function MenuListHome() {
   };
 
   const handleMouseEnter = (index) => {
-    const div = document.getElementById(`menu-item-${index}`);
-    if (div) {
-      div.style.backgroundColor = "#7b6a50"; // Change color on hover
+    const Grid = document.getElementById(`menu-item-${index}`);
+    if (Grid) {
+      Grid.style.backgroundColor = "#7b6a50"; // Change color on hover
     }
   };
 
   const handleMouseLeave = (index) => {
-    const div = document.getElementById(`menu-item-${index}`);
-    if (div) {
-      div.style.backgroundColor = menuStyles[index].backgroundColor; // Reset color on leave
+    const Grid = document.getElementById(`menu-item-${index}`);
+    if (Grid) {
+      Grid.style.backgroundColor = menuStyles[index].backgroundColor; // Reset color on leave
     }
   };
 
   return (
-    <>
+    <Grid>
       <Grid item container justifyContent="center" alignItems="center" spacing={2} mt={1}>
         {menuStyles.map((style, index) => (
           <Grid item key={index}>
-            <div
+            <Grid
               id={`menu-item-${index}`}
               onClick={
                 index === 0
@@ -92,27 +91,27 @@ function MenuListHome() {
               {index === 2 && (
                 <LocalHospitalIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
-              <MKTypography
+              <Typography
                 variant="caption"
                 sx={{ color: "white !important", marginTop: 1, fontSize: "14px" }}
               >
                 {index === 0 && t("appointment_with_doctor")}
                 {index === 1 && t("search_for_a_doctor")}
                 {index === 2 && t("contact_us")}
-              </MKTypography>
-              <MKTypography
+              </Typography>
+              <Typography
                 variant="caption"
                 sx={{ color: "white !important", marginTop: 1, fontSize: "12px" }}
               >
                 {index === 0 && t("book_an_appointment_online")}
                 {index === 1 && t("search_by_name_expertise_and_others")}
                 {index === 2 && t("ask_for_information_on_treatment_and_services")}
-              </MKTypography>
-            </div>
+              </Typography>
+            </Grid>
           </Grid>
         ))}
       </Grid>
-    </>
+    </Grid>
   );
 }
 

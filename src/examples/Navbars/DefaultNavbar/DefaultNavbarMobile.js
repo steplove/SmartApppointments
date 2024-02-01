@@ -33,6 +33,7 @@ import MKTypography from "components/MKTypography";
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 import LanguageSelector from "LanguageSelector";
 import { useTranslation } from "react-i18next";
+import { Grid } from "@mui/material";
 function DefaultNavbarMobile({ routes, open }) {
   const [collapse, setCollapse] = useState("");
   const { t } = useTranslation();
@@ -56,7 +57,7 @@ function DefaultNavbarMobile({ routes, open }) {
             routeCollapses.map((item) => (
               <MKBox key={item.name} px={2}>
                 {item.collapse ? (
-                  <>
+                  <Grid>
                     <MKTypography
                       display="block"
                       variant="button"
@@ -97,7 +98,7 @@ function DefaultNavbarMobile({ routes, open }) {
                         {t(el.name)}
                       </MKTypography>
                     ))}
-                  </>
+                  </Grid>
                 ) : (
                   <MKBox
                     key={item.key}

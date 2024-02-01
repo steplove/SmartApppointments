@@ -118,7 +118,7 @@ function DoctorListHome() {
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!fetchedDoctor || !fetchedClinics) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -126,17 +126,17 @@ function DoctorListHome() {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       <Grid style={{ paddingTop: "1%" }}></Grid>
       <ThemeProvider theme={theme}>
@@ -361,12 +361,12 @@ function DoctorListHome() {
               }}
             />
 
-            <p>
+            <span>
               {t("name")}: {selectedDoctor.Doctor_Name}
-            </p>
-            <p>
+            </span>
+            <span>
               {t("expertise")}: {selectedDoctor.Doctor_Specialty}
-            </p>
+            </span>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleDialogClose} color="primary">
@@ -375,19 +375,19 @@ function DoctorListHome() {
           </DialogActions>
         </Dialog>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <Grid style={{ display: "flex", justifyContent: "center" }}>
           <Pagination
             count={Math.ceil(doctors.length / perPage)}
             page={currentPage + 1}
             onChange={(event, page) => setCurrentPage(page - 1)}
             style={{ color: "red" }} // Change the color to red
           />
-        </div>
+        </Grid>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

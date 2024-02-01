@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import liff from "@line/liff";
+import { Grid } from "@mui/material";
 
 function LiffComponent() {
   const [profile, setProfile] = useState(null);
@@ -11,17 +12,17 @@ function LiffComponent() {
   }, []);
 
   return (
-    <div>
+    <Grid>
       {profile ? (
-        <div>
+        <Grid>
           <img src={profile.pictureUrl} alt="Profile" />
-          <p>Name: {profile.displayName}</p>
-          <p>Status: {liff.isLoggedIn() ? "Logged In" : "Logged Out"}</p>
-        </div>
+          <span>Name: {profile.displayName}</span>
+          <span>Status: {liff.isLoggedIn() ? "Logged In" : "Logged Out"}</span>
+        </Grid>
       ) : (
-        <p>Loading...</p>
+        <span>Loading...</span>
       )}
-    </div>
+    </Grid>
   );
 }
 

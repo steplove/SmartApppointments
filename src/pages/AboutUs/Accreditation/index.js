@@ -33,14 +33,14 @@ function Accreditation() {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
@@ -78,7 +78,9 @@ function Accreditation() {
                         <Grid item lg={0.3}></Grid>
                         <Grid item lg={11}>
                           <Typography paragraph>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               1. ผ่านการรับรองมาตรฐานคุณภาพของสถานพยาบาล HA <br />
                               <br />
                               2. รางวัลผลประกอบการยอดเยี่ยม ของเครือโรงพยาบาลเกษมราษฎร์ ทั้ง 7 สาขา
@@ -91,7 +93,7 @@ function Accreditation() {
                               4. รางวัลความเป็นเลิศระดับเพชร ประจำปี 2556
                               ประเภทห้องปฏิบัติการตรวจสุขภาพคนหางาน ที่จะไปทำงานต่างประเทศ
                               จากกรมวิทยาศาสตร์การแพทย์ กระทรวงสาธารณสุข
-                            </p>
+                            </span>
                           </Typography>
                         </Grid>
                         <Grid item lg={6}>
@@ -102,14 +104,14 @@ function Accreditation() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
 
         {/* Mobile View */}
         <Hidden smUp>
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
-            <>
+            <Grid>
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container justifyContent="center">
                 <Grid item lg={12}>
@@ -137,7 +139,9 @@ function Accreditation() {
                         <Grid item lg={0.3}></Grid>
                         <Grid item lg={11}>
                           <Typography paragraph>
-                            <p style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}>
+                            <span
+                              style={{ color: "#5f5f5f", fontWeight: "bold", fontSize: "1.2rem" }}
+                            >
                               1. ผ่านการรับรองมาตรฐานคุณภาพของสถานพยาบาล HA <br />
                               <br />
                               2. รางวัลผลประกอบการยอดเยี่ยม ของเครือโรงพยาบาลเกษมราษฎร์ ทั้ง 7 สาขา
@@ -150,7 +154,7 @@ function Accreditation() {
                               4. รางวัลความเป็นเลิศระดับเพชร ประจำปี 2556
                               ประเภทห้องปฏิบัติการตรวจสุขภาพคนหางาน ที่จะไปทำงานต่างประเทศ
                               จากกรมวิทยาศาสตร์การแพทย์ กระทรวงสาธารณสุข
-                            </p>
+                            </span>
                           </Typography>
                         </Grid>
                         <Grid item lg={6}>
@@ -161,14 +165,14 @@ function Accreditation() {
                   </Card>
                 </Grid>
               </Grid>
-            </>
+            </Grid>
           </Container>
         </Hidden>
       </ThemeProvider>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </>
+    </Grid>
   );
 }
 

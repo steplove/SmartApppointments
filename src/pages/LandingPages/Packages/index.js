@@ -55,7 +55,7 @@ function Packages() {
     window.location.href = `/packagesdetail/${code}`;
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky relative />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -228,7 +228,7 @@ function Packages() {
           </Container>
         </Hidden>
       </ThemeProvider>
-    </>
+    </Grid>
   );
 }
 

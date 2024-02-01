@@ -98,7 +98,6 @@ function Register() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     // 1. ถ้าเปลี่ยน "จังหวัด", รีเซ็ท "อำเภอ" และ "ตำบล"
     if (name === "province") {
       setFormData((prev) => ({
@@ -121,6 +120,20 @@ function Register() {
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
+
+    if (name === "prefix") {
+      let selectedGender = "";
+      if (value === "นาย") {
+        selectedGender = "2";
+      } else if (value === "นาง" || value === "นางสาว") {
+        selectedGender = "1";
+      }
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+        gender: selectedGender,
+      }));
+    }
   };
 
   const handleSubmit = async () => {
@@ -128,10 +141,9 @@ function Register() {
       // ทำการส่งข้อมูลที่ป้อนจาก form เข้าไปใน API
       for (let key in formData) {
         if (!formData[key]) {
-          console.log(`Field ${key} is missing`);
           Swal.fire({
             title: t("incomplete_information"),
-            text: `${t("please_fill_in")} ${key} ${t("completely")}`,
+            text: `${t("please_fill_in")} ${t(key)} ${t("completely")}`,
             icon: "warning",
             confirmButtonText: `${t("ok")}`,
           });
@@ -236,7 +248,7 @@ function Register() {
     }
   };
   return (
-    <>
+    <Grid>
       <DefaultNavbar routes={routes} sticky />
       <MKBox
         position="absolute"
@@ -355,7 +367,6 @@ function Register() {
                                 vertical: "top",
                                 horizontal: "left",
                               },
-                              getContentAnchorEl: null,
                             }}
                           >
                             <MenuItem key="นาย" value="นาย">
@@ -617,7 +628,7 @@ function Register() {
         </MKBox>
       </MKBox>
       <Foots />
-    </>
+    </Grid>
   );
 }
 

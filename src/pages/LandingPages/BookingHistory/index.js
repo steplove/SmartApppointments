@@ -78,7 +78,7 @@ function BookingHistory() {
   };
   if (!fetchAllAppointment) {
     return (
-      <div
+      <Grid
         style={{
           display: "flex",
           alignItems: "center",
@@ -86,17 +86,17 @@ function BookingHistory() {
           height: "100vh",
         }}
       >
-        <div>
-          <div style={{ textAlign: "center" }}>
+        <Grid>
+          <Grid style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </div>
-          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
-        </div>
-      </div>
+          </Grid>
+          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
+        </Grid>
+      </Grid>
     );
   }
   return (
-    <>
+    <Grid>
       <MenuList />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -171,17 +171,17 @@ function BookingHistory() {
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
                         <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
-                          <p>
+                          <span>
                             {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
-                          </p>
-                          <p>
+                          </span>
+                          <span>
                             {t("appointment_date")}:{" "}
                             {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                          </p>
-                          <p>
+                          </span>
+                          <span>
                             {t("time")}:{" "}
                             {new Date(dialogShow.Appointment_Time).toLocaleTimeString()}
-                          </p>
+                          </span>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
                           {dialogShow.APM_No && <Barcode value={dialogShow.APM_No} />}
                         </DialogContent>
@@ -218,7 +218,7 @@ function BookingHistory() {
           >
             {t("appointment_history")}
           </Typography>
-          <div>
+          <Grid>
             {allAppointments.length > 0 ? (
               allAppointments.map((booking) => (
                 <Box
@@ -288,22 +288,22 @@ function BookingHistory() {
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
                         <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
-                          <p>
+                          <span>
                             {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
-                          </p>
-                          <p>
+                          </span>
+                          <span>
                             {t("appointment_date")}:{" "}
                             {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                          </p>
-                          <p>
+                          </span>
+                          <span>
                             {t("time")}:{" "}
                             {dialogShow.Appointment_Time
                               ? dialogShow.Appointment_Time.substring(11, 16)
                               : ""}
-                          </p>
-                          <p>
+                          </span>
+                          <span>
                             {t("appointment_details")} : {dialogShow.Apm_Des}
-                          </p>
+                          </span>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
                           {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
                         </DialogContent>
@@ -327,7 +327,7 @@ function BookingHistory() {
                 {t("appointment_history")}
               </Typography>
             )}
-          </div>
+          </Grid>
         </Hidden>
       </ThemeProvider>
       {/* <br />
@@ -337,7 +337,7 @@ function BookingHistory() {
       <br />
       <br />
       <Foots /> */}
-    </>
+    </Grid>
   );
 }
 
