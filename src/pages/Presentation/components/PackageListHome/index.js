@@ -22,7 +22,7 @@ function PackageListHome() {
 
       setPackageData(updatedPackageData);
     } else {
-      console.error("Error fetching packages", error);
+      console.error(error);
     }
   }, [fetchedPackages]);
   const packagesAll = () => {
