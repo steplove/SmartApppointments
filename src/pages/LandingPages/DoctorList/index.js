@@ -16,16 +16,10 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-// import { getStatusColor } from "components/StatusColor/getStatusColor";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuList from "../MenuLists";
-// import HomeIcon from "@mui/icons-material/Home";
-// import PersonIcon from "@mui/icons-material/Person";
 import { BASE_URL } from "../../../constants/constants";
 import Pagination from "@mui/material/Pagination";
-// import Foots from "components/Foot";
-
-// import PaginationItem from "@mui/material/PaginationItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -214,8 +208,8 @@ function DoctorList() {
                         src={`${BASE_URL}/${doctor.Doctor_IMG}`}
                         alt={doctor.Doctor_Name}
                         style={{
-                          width: "300px",
-                          height: "500px",
+                          width: "100%", // ปรับขนาดให้เป็น 100% ของ container
+                          height: "100%", // ปรับขนาดให้เป็น 100% ของ container
                           objectFit: "cover",
                           objectPosition: "center center",
                           borderRadius: "10px",
@@ -224,6 +218,7 @@ function DoctorList() {
                           marginLeft: "15%",
                           marginTop: "10px",
                         }}
+                        loading="lazy"
                       />
 
                       <Grid item>
@@ -437,11 +432,6 @@ function DoctorList() {
           </Hidden>
         </ThemeProvider>
       </Grid>
-      {/* <br />
-      <br />
-      <br />
-      <br />
-      <Foots /> */}
     </Grid>
   );
 }
