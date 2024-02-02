@@ -13,7 +13,7 @@ function LiffComponent() {
 
   return (
     <Grid>
-      {profile ? (
+      {/* {profile ? (
         <Grid>
           <img src={profile.pictureUrl} alt="Profile" />
           <span>Name: {profile.displayName}</span>
@@ -21,7 +21,7 @@ function LiffComponent() {
         </Grid>
       ) : (
         <span>Loading...</span>
-      )}
+      )} */}
     </Grid>
   );
 }
