@@ -15,7 +15,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "./userprofile.css";
 import MenuList from "../MenuLists";
-import Img from "../../../assets/images/profile.png";
+// import Img from "../../../assets/images/profile.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
 // import Foots from "components/Foot";
@@ -26,6 +26,7 @@ import useFetch from "../../../hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "LanguageSelector";
+import liff from "@line/liff";
 
 const theme = createTheme({
   breakpoints: {
@@ -49,7 +50,13 @@ const theme = createTheme({
 
 function UserProfile() {
   const { t } = useTranslation();
-
+  const [profile, setProfile] = useState(null);
+  console.log(profile);
+  useEffect(() => {
+    if (liff.isLoggedIn()) {
+      liff.getProfile().then((data) => setProfile(data));
+    }
+  }, []);
   const [IdenNumber, HN, FirstName, LastName, , ,] = useTokenCheck();
   const { data: fetchedCustomerAddress = [] } = useFetch(
     `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
@@ -183,11 +190,26 @@ function UserProfile() {
                       marginBottom: "20px",
                     }}
                   >
-                    <Avatar
+                    {/* <Avatar
                       alt="Remy Sharp"
                       src="/static/images/avatar/1.jpg"
                       sx={{ width: 120, height: 120 }}
-                    />
+                    /> */}
+                    {profile ? (
+                      <Grid>
+                        <img
+                          src={profile.pictureUrl}
+                          alt="Profile"
+                          style={{ width: 120, height: "120" }}
+                        />
+                      </Grid>
+                    ) : (
+                      <Avatar
+                        alt="Remy Sharp"
+                        src="/static/images/avatar/1.jpg"
+                        sx={{ width: 120, height: 120 }}
+                      />
+                    )}
                   </Grid>
                   <TextField
                     label={`${t("name")}`}
@@ -356,7 +378,7 @@ function UserProfile() {
                 }}
               >
                 <Grid className="left" style={{ display: "flex", justifyContent: "center" }}>
-                  <Avatar
+                  {/* <Avatar
                     src={Img}
                     sx={{
                       width: 300,
@@ -364,7 +386,22 @@ function UserProfile() {
                       borderRadius: 0,
                       objectFit: "cover",
                     }}
-                  />
+                  /> */}
+                  {profile ? (
+                    <Grid>
+                      <img
+                        src={profile.pictureUrl}
+                        alt="Profile"
+                        style={{ width: 300, height: 300, borderRadius: 0, objectFit: "cover" }}
+                      />
+                    </Grid>
+                  ) : (
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/1.jpg"
+                      sx={{ width: 300, height: 300, borderRadius: 0, objectFit: "cover" }}
+                    />
+                  )}
                 </Grid>
                 <CardContent sx={{ paddingBottom: 0 }}>
                   {" "}
