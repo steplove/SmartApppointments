@@ -37,7 +37,7 @@ import "./i18n";
 // Material Kit 2 React routes
 import routes from "routes";
 import "./App.css";
-// import LiffComponent from "./LiffComponent";
+import LiffComponent from "./LiffComponent";
 export default function App() {
   const { pathname } = useLocation();
   // ตรวจสอบและอัปเดตภาษาเมื่อแอปโหลด
@@ -63,7 +63,7 @@ export default function App() {
 
   return (
     <>
-      {/* <LiffComponent /> */}
+      <LiffComponent />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Routes>

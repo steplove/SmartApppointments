@@ -16,10 +16,16 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
+// import { getStatusColor } from "components/StatusColor/getStatusColor";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuList from "../MenuLists";
+// import HomeIcon from "@mui/icons-material/Home";
+// import PersonIcon from "@mui/icons-material/Person";
 import { BASE_URL } from "../../../constants/constants";
 import Pagination from "@mui/material/Pagination";
+// import Foots from "components/Foot";
+
+// import PaginationItem from "@mui/material/PaginationItem";
 import CircularProgress from "@mui/material/CircularProgress";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -117,7 +123,7 @@ function DoctorList() {
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!fetchedDoctor || !fetchedClinics) {
     return (
-      <Grid
+      <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -125,17 +131,17 @@ function DoctorList() {
           height: "100vh",
         }}
       >
-        <Grid>
-          <Grid style={{ textAlign: "center" }}>
+        <div>
+          <div style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </Grid>
-          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
-        </Grid>
-      </Grid>
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
     );
   }
   return (
-    <Grid>
+    <>
       <MenuList />
       <Grid>
         <ThemeProvider theme={theme}>
@@ -208,8 +214,8 @@ function DoctorList() {
                         src={`${BASE_URL}/${doctor.Doctor_IMG}`}
                         alt={doctor.Doctor_Name}
                         style={{
-                          width: "100%", // ปรับขนาดให้เป็น 100% ของ container
-                          height: "100%", // ปรับขนาดให้เป็น 100% ของ container
+                          width: "300px",
+                          height: "500px",
                           objectFit: "cover",
                           objectPosition: "center center",
                           borderRadius: "10px",
@@ -218,7 +224,6 @@ function DoctorList() {
                           marginLeft: "15%",
                           marginTop: "10px",
                         }}
-                        loading="lazy"
                       />
 
                       <Grid item>
@@ -265,13 +270,13 @@ function DoctorList() {
                   }}
                 />
 
-                <span>
+                <p>
                   {t("name")}: {selectedDoctor.Doctor_Name}
-                </span>
-                <span>
+                </p>
+                <p>
                   {" "}
                   {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
-                </span>
+                </p>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleDialogClose} color="primary">
@@ -280,14 +285,14 @@ function DoctorList() {
               </DialogActions>
             </Dialog>
 
-            <Grid style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Pagination
                 count={Math.ceil(doctors.length / perPage)}
                 page={currentPage + 1}
                 onChange={(event, page) => setCurrentPage(page - 1)}
                 style={{ color: "red" }} // Change the color to red
               />
-            </Grid>
+            </div>
             <MKBox pt={6} px={1} mt={6}>
               <DefaultFooter content={footerRoutes} />
             </MKBox>
@@ -404,12 +409,12 @@ function DoctorList() {
                   }}
                 />
 
-                <span>
+                <p>
                   {t("name")}: {selectedDoctor.Doctor_Name}
-                </span>
-                <span>
+                </p>
+                <p>
                   {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
-                </span>
+                </p>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleDialogClose} color="primary">
@@ -418,21 +423,26 @@ function DoctorList() {
               </DialogActions>
             </Dialog>
 
-            <Grid style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Pagination
                 count={Math.ceil(doctors.length / perPage)}
                 page={currentPage + 1}
                 onChange={(event, page) => setCurrentPage(page - 1)}
                 style={{ color: "red" }} // Change the color to red
               />
-            </Grid>
+            </div>
             <br />
             <br />
             <br />
           </Hidden>
         </ThemeProvider>
       </Grid>
-    </Grid>
+      {/* <br />
+      <br />
+      <br />
+      <br />
+      <Foots /> */}
+    </>
   );
 }
 

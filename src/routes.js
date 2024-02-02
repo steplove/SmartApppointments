@@ -21,7 +21,7 @@ import HealthBlogList from "pages/LandingPages/HealthBlogList";
 import SignIn from "pages/LandingPages/SignIn";
 import DoctorListHome from "pages/LandingPages/DoctorListHome";
 import Contact from "pages/Contact";
-import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
+// import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
 
 const routes = [
   {
@@ -114,11 +114,11 @@ const routes = [
         icon: <MedicalServicesIcon />,
         dropdown: true,
         collapse: [
-          {
-            name: "medical_service_center",
-            route: "/MedicalServiceCenter",
-            component: <MedicalServiceCenter />,
-          },
+          // {
+          //   name: "medical_service_center",
+          //   route: "/MedicalServiceCenter",
+          //   component: <MedicalServiceCenter />,
+          // },
         ],
       },
       {

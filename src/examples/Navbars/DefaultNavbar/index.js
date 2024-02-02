@@ -492,7 +492,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
           >
             {renderNavbarItems}
           </MKBox>
-          <MKBox mt={2} display={{ xs: "none", lg: "block" }}>
+          <MKBox mt={0} display={{ xs: "none", lg: "block" }}>
             <LanguageSelector />
           </MKBox>
 

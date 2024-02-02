@@ -108,7 +108,7 @@ function Presentation() {
               </Typography>
 
               <Stack direction="row" spacing={1} mt={3}>
-                <Button color="white" href="/signIn">
+                <Button style={{ backgroundColor: "white" }} href="/signIn">
                   {t("appointment")}
                 </Button>
               </Stack>

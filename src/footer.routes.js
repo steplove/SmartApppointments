@@ -61,10 +61,10 @@ export default {
     {
       name: "medical_service_center",
       items: [
-        {
-          name: "medical_service_center",
-          href: "/MedicalServiceCenter",
-        },
+        // {
+        //   name: "medical_service_center",
+        //   href: "/MedicalServiceCenter",
+        // },
       ],
     },
     {

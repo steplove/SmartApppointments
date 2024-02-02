@@ -85,6 +85,12 @@ function SignInBasic() {
   const handleSignUpClick = () => {
     window.location.href = "/agreement";
   };
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      // เมื่อกด Enter ให้ทำงานที่นี่
+      handleSignInClick();
+    }
+  };
   return (
     <Grid>
       <DefaultNavbar routes={routes} />
@@ -150,6 +156,7 @@ function SignInBasic() {
                       value={passwordInput}
                       onChange={(e) => setPasswordInput(e.target.value)}
                       fullWidth
+                      onKeyPress={handleKeyPress}
                     />
                   </MKBox>
                   <MKBox mt={4} mb={1}>
