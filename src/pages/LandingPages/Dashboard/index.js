@@ -405,7 +405,6 @@ function Dashboard() {
                                         style={{ justifyItems: "center", alignItems: "center" }}
                                       >
                                         {" "}
-                                        สถานะ:{" "}
                                         {booking.StatusFlag === "3"
                                           ? t("waiting_for_confirmation")
                                           : booking.StatusFlag === "4"
@@ -790,7 +789,7 @@ function Dashboard() {
                                       style={{ justifyItems: "center", alignItems: "center" }}
                                     >
                                       {" "}
-                                      สถานะ:{" "}
+                                      {t("cancel_appointment")}:{" "}
                                       {booking.StatusFlag === "3"
                                         ? t("waiting_for_confirmation")
                                         : booking.StatusFlag === "4"
