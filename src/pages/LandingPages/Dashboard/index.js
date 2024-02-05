@@ -266,7 +266,9 @@ function Dashboard() {
                                         >
                                           {t("make_an_appointment_with")} {notification.Doctor_Name}
                                         </span>
-                                        <span style={{ color: "red" }}>ถูกยกเลิก</span>
+                                        <span style={{ color: "red" }}>
+                                          {t("cancel_appointment")}
+                                        </span>
                                       </ListItem>
                                     </Grid>
                                   );
@@ -650,7 +652,7 @@ function Dashboard() {
                                     >
                                       {t("make_an_appointment_with")} {notification.Doctor_Name}
                                     </span>
-                                    <span style={{ color: "red" }}>ถูกยกเลิก</span>
+                                    <span style={{ color: "red" }}> {t("cancel_appointment")}</span>
                                   </ListItem>
                                 </Grid>
                               );

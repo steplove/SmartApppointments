@@ -202,6 +202,7 @@ function UserProfile() {
                           alt="Profile"
                           style={{ width: 120, height: "120" }}
                         />
+                        <span>userLineID{profile.userId}</span>
                       </Grid>
                     ) : (
                       <Avatar
@@ -394,6 +395,7 @@ function UserProfile() {
                         alt="Profile"
                         style={{ width: 300, height: 300, borderRadius: 0, objectFit: "cover" }}
                       />
+                      <span>userLineID{profile.userId}</span>
                     </Grid>
                   ) : (
                     <Avatar
