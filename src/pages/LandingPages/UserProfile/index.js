@@ -196,13 +196,23 @@ function UserProfile() {
                       sx={{ width: 120, height: 120 }}
                     /> */}
                     {profile ? (
-                      <Grid>
+                      <Grid
+                        style={{
+                          width: 120,
+                          height: 120,
+                          borderRadius: "50%",
+                          overflow: "hidden",
+                        }}
+                      >
                         <img
                           src={profile.pictureUrl}
                           alt="Profile"
-                          style={{ width: 120, height: "120" }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
                         />
-                        <span>userLineID{profile.userId}</span>
                       </Grid>
                     ) : (
                       <Avatar
@@ -389,13 +399,22 @@ function UserProfile() {
                     }}
                   /> */}
                   {profile ? (
-                    <Grid>
+                    <Grid
+                      style={{
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                      }}
+                    >
                       <img
                         src={profile.pictureUrl}
                         alt="Profile"
-                        style={{ width: 300, height: 300, borderRadius: 0, objectFit: "cover" }}
+                        style={{
+                          width: 300,
+                          height: 300,
+                          borderRadius: 0,
+                          overflow: "hidden",
+                        }}
                       />
-                      <span>userLineID{profile.userId}</span>
                     </Grid>
                   ) : (
                     <Avatar
