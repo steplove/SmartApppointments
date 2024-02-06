@@ -30,7 +30,7 @@ const theme = createTheme({
 function HealthBlogListDetail() {
   const { code } = useParams();
   const [selectedBlog, setSelectedBlog] = useState(null);
-  console.log(code);
+
   useEffect(() => {
     const fetchData = async () => {
       try {

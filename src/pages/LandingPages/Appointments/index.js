@@ -71,10 +71,9 @@ const StyledToggleButton = styled(ToggleButton)({
 });
 function Appointments() {
   const { t } = useTranslation();
-  const [IdenNumber, HN, FirstName, LastName, Customer_Status] = useTokenCheck();
+  const [, HN, FirstName, LastName] = useTokenCheck();
   const nameCustomer = `${FirstName} ${LastName}`;
   const HNCustomer = `${HN} `;
-  console.log(IdenNumber, HN, useTokenCheck(), Customer_Status, "IdenNumber", "HN");
   const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   //stateเก็บข้อมูลจากฐานข้อมูลเอามาแสดง
   const [clinics, setClinics] = useState([]);
@@ -95,7 +94,7 @@ function Appointments() {
     try {
       for (let key in formData) {
         if (!formData[key]) {
-          console.log(`Field ${key} is missing`);
+          // console.log(`Field ${key} is missing`);
           Swal.fire({
             title: "ข้อมูลไม่ครบถ้วน!",
             text: `กรุณากรอก ${key} ให้ครบถ้วน`,
@@ -131,7 +130,7 @@ function Appointments() {
           showConfirmButton: false,
           timer: 1500,
         });
-        console.log("สำเร็จ");
+        // console.log("สำเร็จ");
         setTimeout(() => {
           window.location = "/dashboard";
         }, 1500);
@@ -150,7 +149,7 @@ function Appointments() {
         confirmButtonText: "ตกลง",
       });
     }
-    console.log(formData, "formData"); // ตัวอย่างการลง log ค่า formData
+    // console.log(formData, "formData"); // ตัวอย่างการลง log ค่า formData
     setFormData((prevData) => ({
       ...prevData,
       HN: HNCustomer,
@@ -183,7 +182,7 @@ function Appointments() {
   };
 
   useEffect(() => {
-    console.log("fetchedClinics", fetchedClinics);
+    // console.log("fetchedClinics", fetchedClinics);
     if (fetchedClinics && Array.isArray(fetchedClinics)) {
       setClinics(fetchedClinics);
     }
@@ -193,7 +192,7 @@ function Appointments() {
       const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
       const data = await response.json();
       setDoctor(data);
-      console.log(data, "data");
+      // console.log(data, "data");
     } catch (error) {
       console.error("Error fetching Doctors:", error);
     }

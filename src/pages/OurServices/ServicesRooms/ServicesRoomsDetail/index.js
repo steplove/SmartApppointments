@@ -34,7 +34,6 @@ function ServicesRoomsDetail() {
   const { t } = useTranslation();
   const { code } = useParams();
   const [selectedService, setSelectedService] = useState("");
-  console.log(selectedService, "fetchDatafetchDatafetchData");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +43,6 @@ function ServicesRoomsDetail() {
           throw new Error("Error fetching data");
         }
         const data = await response.json();
-        console.log(data, "datadatadata");
         // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
         if (data && Array.isArray(data)) {
           // ให้ setSelectedService แสดงทั้งหมดที่ได้จาก data

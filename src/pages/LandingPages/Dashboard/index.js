@@ -63,7 +63,6 @@ function Dashboard() {
   const { t } = useTranslation();
 
   const [, HN] = useTokenCheck();
-  console.log(HN, "IdenNumber", "HN");
   const { data: fetchAllAppointment = [] } = useFetch(
     `${BASE_URL}/api/AllAppointmentsLastDay7/${HN}`
   );
