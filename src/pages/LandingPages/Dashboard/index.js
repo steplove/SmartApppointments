@@ -377,7 +377,7 @@ function Dashboard() {
                                         color="primary"
                                         style={{ verticalAlign: "middle" }}
                                       />{" "}
-                                      คลินิก: {booking.Clinic_Name}
+                                      {t("clinic")}: {booking.Clinic_Name}
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={6}>
@@ -387,7 +387,7 @@ function Dashboard() {
                                         color="primary"
                                         style={{ verticalAlign: "middle" }}
                                       />{" "}
-                                      แพทย์: {booking.Doctor_Name}
+                                      {t("doctor")}: {booking.Doctor_Name}
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={6}>
@@ -418,7 +418,7 @@ function Dashboard() {
                                   </Grid>
                                   <Grid item xs={6} sx={{ textAlign: "center" }}>
                                     <Button onClick={() => handleOpenDialog(booking.UID)}>
-                                      ดูรายละเอียด
+                                      {t("view_details")}
                                     </Button>
                                     <Dialog
                                       open={openDialog}
@@ -429,20 +429,21 @@ function Dashboard() {
                                       <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
                                       <DialogContent style={{ textAlign: "center" }}>
                                         <Grid>
-                                          ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
+                                          {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
                                         </Grid>
                                         <Grid>
-                                          วันที่นัด:{" "}
+                                          {t("appointment_date")}:{" "}
                                           {new Date(
                                             dialogShow.Appointment_Date
                                           ).toLocaleDateString()}
                                         </Grid>
                                         {dialogShow.Appointment_Time ? (
                                           <span>
-                                            เวลา: {dialogShow.Appointment_Time.substring(11, 16)}
+                                            {t("time")}:{" "}
+                                            {dialogShow.Appointment_Time.substring(11, 16)}
                                           </span>
                                         ) : (
-                                          <span>ไม่มีข้อมูลเวลาการนัดหมาย</span>
+                                          <span>ไม่มีข้อมูล{t("time")}การนัดหมาย</span>
                                         )}
 
                                         {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
@@ -803,7 +804,7 @@ function Dashboard() {
                                 </Grid>
                                 <Grid item xs={6} sx={{ textAlign: "center" }}>
                                   <Button onClick={() => handleOpenDialog(booking.UID)}>
-                                    ดูรายละเอียด
+                                    {t("view_details")}
                                   </Button>
                                   <Dialog
                                     open={openDialog}
@@ -814,18 +815,19 @@ function Dashboard() {
                                     <DialogTitle>รายละเอียดเพิ่มเติม</DialogTitle>
                                     <DialogContent style={{ textAlign: "center" }}>
                                       <Grid>
-                                        ชื่อ: {dialogShow.FirstName} {dialogShow.LastName}
+                                        {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
                                       </Grid>
                                       <Grid>
-                                        วันที่นัด:{" "}
+                                        {t("appointment_date")}:{" "}
                                         {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
                                       </Grid>
                                       {dialogShow.Appointment_Time ? (
                                         <span>
-                                          เวลา: {dialogShow.Appointment_Time.substring(11, 16)}
+                                          {t("time")}:{" "}
+                                          {dialogShow.Appointment_Time.substring(11, 16)}
                                         </span>
                                       ) : (
-                                        <span>ไม่มีข้อมูลเวลาการนัดหมาย</span>
+                                        <span>ไม่มีข้อมูล{t("time")}การนัดหมาย</span>
                                       )}
 
                                       {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
