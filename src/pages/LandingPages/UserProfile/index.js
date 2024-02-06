@@ -515,7 +515,7 @@ function UserProfile() {
                     sx={{ marginLeft: "10px", marginBottom: "10px", marginRight: "10px" }}
                   >
                     {fetchedCustomerAddress && (
-                      <Grid>
+                      <>
                         <TextField
                           label={`${t("email")}`}
                           variant="outlined"
@@ -545,7 +545,7 @@ function UserProfile() {
                             })
                           }
                         />
-                      </Grid>
+                      </>
                     )}
 
                     <TextField
