@@ -15,18 +15,18 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
 import "./userprofile.css";
 import MenuList from "../MenuLists";
-// import Img from "../../../assets/images/profile.png";
+import Img from "../../../assets/images/profile.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
 // import Foots from "components/Foot";
 import useTokenCheck from "hooks/useTokenCheck";
 import { BASE_URL } from "../../../constants/constants";
 import Swal from "sweetalert2";
-import useFetch from "../../../hooks/useFetch";
+// import useFetch from "../../../hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "LanguageSelector";
-import liff from "@line/liff";
+// import liff from "@line/liff";
 
 const theme = createTheme({
   breakpoints: {
@@ -50,18 +50,17 @@ const theme = createTheme({
 
 function UserProfile() {
   const { t } = useTranslation();
-  const [profile, setProfile] = useState(null);
-  console.log(profile);
-  useEffect(() => {
-    if (liff.isLoggedIn()) {
-      liff.getProfile().then((data) => setProfile(data));
-    }
-  }, []);
+  // const [profile, setProfile] = useState(null);
+  // console.log(profile);
+  // useEffect(() => {
+  //   if (liff.isLoggedIn()) {
+  //     liff.getProfile().then((data) => setProfile(data));
+  //   }
+  // }, []);
   const [IdenNumber, HN, FirstName, LastName, , ,] = useTokenCheck();
-  const { data: fetchedCustomerAddress = [] } = useFetch(
-    `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
-  );
-  console.log(fetchedCustomerAddress, "fetchedCustomerAddress");
+  // const { data: fetchedCustomerAddress = [] } = useFetch(
+  //   `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
+  // );
   // const hasData = true;
   const [isEditing, setIsEditing] = useState(false);
   const [fetchedCustomerAddres, setFetchedCustomerAddress] = useState({});
@@ -94,8 +93,6 @@ function UserProfile() {
 
   const handleSave = async () => {
     setIsEditing(false);
-    console.log("22");
-
     // สร้างตัวแปรสำหรับคำขอ PUT
     const requestOptions = {
       method: "POST",
@@ -125,9 +122,17 @@ function UserProfile() {
     localStorage.removeItem("token");
     window.location.href = "/";
   };
-  if (!fetchedCustomerAddress) {
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if ((IdenNumber, HN, FirstName, LastName)) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [IdenNumber, HN, FirstName, LastName]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
     return (
-      <Grid
+      <div
         style={{
           display: "flex",
           alignItems: "center",
@@ -135,13 +140,13 @@ function UserProfile() {
           height: "100vh",
         }}
       >
-        <Grid>
-          <Grid style={{ textAlign: "center" }}>
+        <div>
+          <div style={{ textAlign: "center" }}>
             <CircularProgress color="primary" />
-          </Grid>
-          <span style={{ margin: "10px", color: "#333" }}>Loading ...</span>
-        </Grid>
-      </Grid>
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
     );
   }
   return (
@@ -190,12 +195,12 @@ function UserProfile() {
                       marginBottom: "20px",
                     }}
                   >
-                    {/* <Avatar
+                    <Avatar
                       alt="Remy Sharp"
                       src="/static/images/avatar/1.jpg"
                       sx={{ width: 120, height: 120 }}
-                    /> */}
-                    {profile ? (
+                    />
+                    {/* {profile ? (
                       <Grid
                         style={{
                           width: 120,
@@ -220,7 +225,7 @@ function UserProfile() {
                         src="/static/images/avatar/1.jpg"
                         sx={{ width: 120, height: 120 }}
                       />
-                    )}
+                    )} */}
                   </Grid>
                   <TextField
                     label={`${t("name")}`}
@@ -329,39 +334,35 @@ function UserProfile() {
                   </Grid>
                 </Grid>
 
-                {fetchedCustomerAddress && (
-                  <Grid>
-                    <TextField
-                      label={`${t("email")}`}
-                      variant="outlined"
-                      fullWidth
-                      sx={{ marginBottom: "10px" }}
-                      disabled={!isEditing}
-                      value={fetchedCustomerAddres.Email}
-                      onChange={(e) =>
-                        setFetchedCustomerAddress({
-                          ...fetchedCustomerAddres,
-                          Email: e.target.value,
-                        })
-                      }
-                    />
+                <TextField
+                  label={`${t("email")}`}
+                  variant="outlined"
+                  fullWidth
+                  sx={{ marginBottom: "10px" }}
+                  disabled={!isEditing}
+                  value={`${fetchedCustomerAddres.Email}`}
+                  onChange={(e) =>
+                    setFetchedCustomerAddress({
+                      ...fetchedCustomerAddres,
+                      Email: e.target.value,
+                    })
+                  }
+                />
 
-                    <TextField
-                      label={`${t("telephone_numbe")}`}
-                      variant="outlined"
-                      fullWidth
-                      disabled={!isEditing}
-                      sx={{ marginBottom: "10px" }}
-                      value={fetchedCustomerAddres.MobileNo}
-                      onChange={(e) =>
-                        setFetchedCustomerAddress({
-                          ...fetchedCustomerAddres,
-                          MobileNo: e.target.value,
-                        })
-                      }
-                    />
-                  </Grid>
-                )}
+                <TextField
+                  label={`${t("telephone_numbe")}`}
+                  variant="outlined"
+                  fullWidth
+                  disabled={!isEditing}
+                  sx={{ marginBottom: "10px" }}
+                  value={`${fetchedCustomerAddres.MobileNo}`}
+                  onChange={(e) =>
+                    setFetchedCustomerAddress({
+                      ...fetchedCustomerAddres,
+                      MobileNo: e.target.value,
+                    })
+                  }
+                />
 
                 <TextField
                   label={`${t("address")}`}
@@ -389,7 +390,7 @@ function UserProfile() {
                 }}
               >
                 <Grid className="left" style={{ display: "flex", justifyContent: "center" }}>
-                  {/* <Avatar
+                  <Avatar
                     src={Img}
                     sx={{
                       width: 300,
@@ -397,8 +398,8 @@ function UserProfile() {
                       borderRadius: 0,
                       objectFit: "cover",
                     }}
-                  /> */}
-                  {profile ? (
+                  />
+                  {/* {profile ? (
                     <Grid
                       style={{
                         borderRadius: "50%",
@@ -422,7 +423,7 @@ function UserProfile() {
                       src="/static/images/avatar/1.jpg"
                       sx={{ width: 300, height: 300, borderRadius: 0, objectFit: "cover" }}
                     />
-                  )}
+                  )} */}
                 </Grid>
                 <CardContent sx={{ paddingBottom: 0 }}>
                   {" "}
@@ -514,39 +515,37 @@ function UserProfile() {
                     spacing={2}
                     sx={{ marginLeft: "10px", marginBottom: "10px", marginRight: "10px" }}
                   >
-                    {fetchedCustomerAddress && (
-                      <>
-                        <TextField
-                          label={`${t("email")}`}
-                          variant="outlined"
-                          fullWidth
-                          sx={{ marginBottom: "10px" }}
-                          disabled={!isEditing}
-                          value={fetchedCustomerAddres.Email}
-                          onChange={(e) =>
-                            setFetchedCustomerAddress({
-                              ...fetchedCustomerAddres,
-                              Email: e.target.value,
-                            })
-                          }
-                        />
+                    <>
+                      <TextField
+                        label={`${t("email")}`}
+                        variant="outlined"
+                        fullWidth
+                        sx={{ marginBottom: "10px" }}
+                        disabled={!isEditing}
+                        value={`${fetchedCustomerAddres.Email}`}
+                        onChange={(e) =>
+                          setFetchedCustomerAddress({
+                            ...fetchedCustomerAddres,
+                            Email: e.target.value,
+                          })
+                        }
+                      />
 
-                        <TextField
-                          label={`${t("telephone_numbe")}`}
-                          variant="outlined"
-                          fullWidth
-                          disabled={!isEditing}
-                          sx={{ marginBottom: "10px" }}
-                          value={fetchedCustomerAddres.MobileNo}
-                          onChange={(e) =>
-                            setFetchedCustomerAddress({
-                              ...fetchedCustomerAddres,
-                              MobileNo: e.target.value,
-                            })
-                          }
-                        />
-                      </>
-                    )}
+                      <TextField
+                        label={`${t("telephone_numbe")}`}
+                        variant="outlined"
+                        fullWidth
+                        disabled={!isEditing}
+                        sx={{ marginBottom: "10px" }}
+                        value={`${fetchedCustomerAddres.MobileNo}`}
+                        onChange={(e) =>
+                          setFetchedCustomerAddress({
+                            ...fetchedCustomerAddres,
+                            MobileNo: e.target.value,
+                          })
+                        }
+                      />
+                    </>
 
                     <TextField
                       label={`${t("address")}`}

@@ -8,6 +8,7 @@ import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CircularProgress from "@mui/material/CircularProgress";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -50,6 +51,33 @@ function HealthBlogListDetail() {
     fetchData();
   }, [code]);
 
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (selectedBlog) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [selectedBlog]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <Grid>
       <DefaultNavbar routes={routes} />

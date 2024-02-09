@@ -1,25 +1,35 @@
-import React from "react";
-import GoogleMapReact from "google-map-react";
-import { Grid } from "@mui/material";
+import "./map.css";
+import "leaflet/dist/leaflet.css";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Icon } from "leaflet";
 
-// eslint-disable-next-line react/prop-types
-const AnyReactComponent = ({ text }) => <Grid>{text}</Grid>;
+function MyMap() {
+  const position = [19.878138567119617, 99.8355366399488];
 
-export default function SimpleMap() {
-  const defaultProps = {
-    center: {
-      lat: 10.99835602,
-      lng: 77.01502627,
-    },
-    zoom: 11,
-  };
+  const customIcon = new Icon({
+    iconUrl: require("leaflet/dist/images/marker-icon.png"),
+    iconSize: [38, 38],
+  });
 
   return (
-    // Important! Always set the container height explicitly
-    <Grid style={{ height: "100vh", width: "100%" }}>
-      <GoogleMapReact defaultCenter={defaultProps.center} defaultZoom={defaultProps.zoom}>
-        <AnyReactComponent lat={59.955413} lng={30.337844} text="My Marker" />
-      </GoogleMapReact>
-    </Grid>
+    <MapContainer center={position} zoom={20} scrollWheelZoom={true}>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={position} icon={customIcon}>
+        <Popup>
+          <a
+            href="https://maps.app.goo.gl/rZdDtbmhGSeqEoQ17"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ดูแผนที่ขนาดใหญ่
+          </a>
+        </Popup>
+      </Marker>
+    </MapContainer>
   );
 }
+
+export default MyMap;

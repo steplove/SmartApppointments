@@ -10,6 +10,7 @@ import routes from "routes";
 import { useTranslation } from "react-i18next";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Carousel } from "react-responsive-carousel";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme({
   breakpoints: {
@@ -57,7 +58,33 @@ function ServicesRoomsDetail() {
 
     fetchData();
   }, [code]);
-
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (selectedService) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [selectedService]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <Grid>
       <DefaultNavbar routes={routes} />

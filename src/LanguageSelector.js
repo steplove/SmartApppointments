@@ -61,7 +61,7 @@ const LanguageSelector = () => {
           </span>{" "}
           {t("english")}
         </MenuItem>
-        <MenuItem onClick={() => changeLanguage("lo")}>
+        {/* <MenuItem onClick={() => changeLanguage("lo")}>
           <span role="img" aria-label="Laos Flag">
             🇱🇦
           </span>{" "}
@@ -72,7 +72,7 @@ const LanguageSelector = () => {
             🇨🇳
           </span>{" "}
           {t("Chinese")}
-        </MenuItem>
+        </MenuItem> */}
         {/* Add more MenuItem components for other languages */}
       </Menu>
     </Grid>

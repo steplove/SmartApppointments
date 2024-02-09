@@ -83,6 +83,7 @@ function DoctorList() {
       const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
       const data = await response.json();
       setDoctors(data);
+      window.location.reload();
     } catch (error) {
       console.error("Error fetching Doctors:", error);
     }
@@ -120,8 +121,15 @@ function DoctorList() {
   let dataToPaginate = doctors || defaultDoctor; // กำหนดตัวแปรเริ่มต้นให้มีข้อมูลจาก doctors
   const paginatedData = dataToPaginate.slice(currentPage * perPage, (currentPage + 1) * perPage);
   //------------------------------------------------------------------------------------//
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (fetchedDoctor && fetchedClinics) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [fetchedDoctor, fetchedClinics]);
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
-  if (!fetchedDoctor || !fetchedClinics) {
+  if (!openLoad) {
     return (
       <div
         style={{

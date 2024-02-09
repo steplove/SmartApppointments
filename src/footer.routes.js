@@ -35,26 +35,26 @@ export default {
     {
       name: "about",
       items: [
-        { name: "director", href: "/CEO" },
+        { name: "director", route: "/CEO" },
         {
           name: "message_from_the_director",
-          href: "/Message_From_Ceo",
+          route: "/Message_From_Ceo",
         },
         {
           name: "message_from_hospital_director",
-          href: "/Message_From_Hospital_Director",
+          route: "/Message_From_Hospital_Director",
         },
         {
           name: "hospital_history",
-          href: "/history",
+          route: "/history",
         },
         {
           name: "vision_and_mission",
-          href: "/Vision_And_Mission",
+          route: "/Vision_And_Mission",
         },
         {
           name: "accreditation",
-          href: "/Accreditation",
+          route: "/Accreditation",
         },
       ],
     },
@@ -63,7 +63,7 @@ export default {
       items: [
         // {
         //   name: "medical_service_center",
-        //   href: "/MedicalServiceCenter",
+        //   route: "/MedicalServiceCenter",
         // },
       ],
     },
@@ -72,26 +72,26 @@ export default {
       items: [
         {
           name: "room_services",
-          href: "/ServicesRooms",
+          route: "/ServicesRooms",
         },
         {
           name: "packages",
-          href: "/packages",
+          route: "/packages",
         },
         {
           name: "health_articles",
-          href: "/HealthBlogList",
+          route: "/HealthBlogList",
         },
-        // { name: "news", href: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
+        // { name: "news", route: "https://www.kasemrad.co.th/Sriburin/th/site/news" },
       ],
     },
     {
       name: "search_for_a_doctor",
-      items: [{ name: "search_for_a_doctor", href: "/doctorListHome" }],
+      items: [{ name: "search_for_a_doctor", route: "/doctorListHome" }],
     },
     {
       name: "contact",
-      items: [{ name: "contact", href: "/Contact" }],
+      items: [{ name: "contact", route: "/Contact" }],
     },
   ],
   copyright: (
@@ -99,9 +99,9 @@ export default {
       All rights reserved. Copyright &copy; {date} Kasemrad{" "}
       <MKTypography
         component="a"
-        href="#"
-        target="_blank"
-        rel="noreferrer"
+        route="#"
+        // target="_blank"
+        // rel="noreferrer"
         variant="button"
         fontWeight="regular"
       >

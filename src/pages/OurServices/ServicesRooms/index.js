@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 // import NavbarsAboutUs from "../Navbars";
 import { BASE_URL } from "constants/constants";
 import useFetch from "hooks/useFetch";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme({
   breakpoints: {
@@ -64,6 +65,33 @@ function ServicesRoom() {
   const servicesDetail = (code) => {
     window.location.href = `/ServicesRoomsDetail/${code}`;
   };
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (typeRoomData) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [typeRoomData]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <Grid>
       <DefaultNavbar routes={routes} sticky relative />
@@ -77,7 +105,7 @@ function ServicesRoom() {
               <Grid container spacing={2}>
                 <Grid item xs={6}>
                   <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
-                    หน้าแรก/
+                    {t("home")}/
                   </a>
                   <a href="/ServicesRooms" style={{ color: "#0bb288", fontSize: "1rem" }}>
                     <span>{t("room_services")}</span>

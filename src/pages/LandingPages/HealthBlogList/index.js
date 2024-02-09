@@ -10,6 +10,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const theme = createTheme({
   breakpoints: {
@@ -46,6 +47,34 @@ function HealthBlogList() {
   const blogDetail = (code) => {
     window.location.href = `/HealthBlogListDetail/${code}`;
   };
+
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (BlogData) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [BlogData]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <Grid>
       <DefaultNavbar routes={routes} sticky relative />

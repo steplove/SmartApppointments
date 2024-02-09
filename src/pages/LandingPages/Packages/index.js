@@ -10,6 +10,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { useTranslation } from "react-i18next";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CircularProgress from "@mui/material/CircularProgress";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -54,6 +55,34 @@ function Packages() {
   const packagesDetail = (code) => {
     window.location.href = `/packagesdetail/${code}`;
   };
+
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (packageData) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [packageData]);
+  // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
+  if (!openLoad) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
+        <div>
+          <div style={{ textAlign: "center" }}>
+            <CircularProgress color="primary" />
+          </div>
+          <p style={{ margin: "10px", color: "#333" }}>Loading ...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <Grid>
       <DefaultNavbar routes={routes} sticky relative />

@@ -85,8 +85,16 @@ function Dashboard() {
     setOpenDialog(false);
   };
   const [allAppointments, setAllAppointment] = useState([]);
+
+  const [openLoad, setopenLoad] = useState(false);
+  useEffect(() => {
+    if (fetchNotify && fetchAllAppointment) {
+      // ทำการ render หน้าเว็บใหม่
+      setopenLoad(true);
+    }
+  }, [fetchNotify, fetchAllAppointment]);
   // ตรวจสอบว่า fetchNotify มีข้อมูลหรือไม่
-  if (!fetchNotify || !fetchAllAppointment) {
+  if (!openLoad) {
     return (
       <Grid
         style={{
@@ -154,6 +162,7 @@ function Dashboard() {
                                   content = (
                                     <Grid>
                                       <ListItem
+                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -537,6 +546,7 @@ function Dashboard() {
                               content = (
                                 <Grid>
                                   <ListItem
+                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",

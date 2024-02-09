@@ -70,7 +70,7 @@ function Contact() {
                   </Typography>
                   <Card>
                     <CardContent>
-                      <Grid container spacing={2}>
+                      <Grid container spacing={0}>
                         <Typography
                           style={{
                             variant: "button",
@@ -95,10 +95,10 @@ function Contact() {
                             อ.เมือง จ. เชียงราย 57000 โทร : 0-5391-0999 โทรสาร : 0-5315-3233
                           </span>
                         </Grid>
-                        <MyMap />
                       </Grid>
                     </CardContent>
                   </Card>
+                  <MyMap />
                 </Grid>
               </Grid>
             </Grid>
@@ -130,13 +130,17 @@ function Contact() {
                   <Card>
                     <CardContent>
                       <Grid container spacing={2}>
-                        <Grid item lg={6}></Grid>
-                        <Grid item lg={6}>
-                          {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
+                        <Grid item lg={12}>
+                          <span>
+                            โรงพยาบาลเกษมราษฎร์ ศรีบุรินทร์ 111/5 ถนนเอเชีย 1 หมู่ 13 ต.สันทราย
+                            อ.เมือง จ. เชียงราย 57000 โทร : 0-5391-0999 โทรสาร : 0-5315-3233
+                          </span>
                         </Grid>
                       </Grid>
                     </CardContent>
                   </Card>
+
+                  <MyMap />
                 </Grid>
               </Grid>
             </Grid>
