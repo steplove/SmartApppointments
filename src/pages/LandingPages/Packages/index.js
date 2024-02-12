@@ -34,6 +34,7 @@ function Packages() {
   const { t } = useTranslation();
   const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showPackages`);
   const [packageData, setPackageData] = useState([]);
+  const [openLoad, setopenLoad] = useState(false);
 
   useEffect(() => {
     if (fetchedPackages && Array.isArray(fetchedPackages)) {
@@ -48,6 +49,7 @@ function Packages() {
       });
 
       setPackageData(updatedPackageData);
+      setopenLoad(true);
     } else {
       console.error("Error fetching packages");
     }
@@ -56,13 +58,6 @@ function Packages() {
     window.location.href = `/packagesdetail/${code}`;
   };
 
-  const [openLoad, setopenLoad] = useState(false);
-  useEffect(() => {
-    if (packageData) {
-      // ทำการ render หน้าเว็บใหม่
-      setopenLoad(true);
-    }
-  }, [packageData]);
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!openLoad) {
     return (

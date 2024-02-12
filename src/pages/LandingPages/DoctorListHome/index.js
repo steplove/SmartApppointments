@@ -57,6 +57,7 @@ function DoctorListHome() {
   const [clinics, setClinics] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState([]);
+  const [openLoad, setopenLoad] = useState(false);
   const [formData, setFormData] = useState({
     Clinic: "",
     Doctor: "",
@@ -66,6 +67,7 @@ function DoctorListHome() {
       setClinics(fetchedClinics);
       if (fetchedDoctor && Array.isArray(fetchedDoctor) && fetchDoctors !== null) {
         setDoctors(fetchedDoctor);
+        setopenLoad(true);
       } else {
         console.log("error");
       }
@@ -119,13 +121,7 @@ function DoctorListHome() {
   let dataToPaginate = doctors || defaultDoctor; // กำหนดตัวแปรเริ่มต้นให้มีข้อมูลจาก doctors
   const paginatedData = dataToPaginate.slice(currentPage * perPage, (currentPage + 1) * perPage);
   //------------------------------------------------------------------------------------//
-  const [openLoad, setopenLoad] = useState(false);
-  useEffect(() => {
-    if (fetchedDoctor && fetchedClinics) {
-      // ทำการ render หน้าเว็บใหม่
-      setopenLoad(true);
-    }
-  }, [fetchedDoctor, fetchedClinics]);
+
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!openLoad) {
     return (

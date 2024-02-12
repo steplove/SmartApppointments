@@ -36,10 +36,12 @@ function HealthBlogList() {
 
   const { data: fetchedBlogs = [] } = useFetch(`${BASE_URL}/api/blogShow`);
   const [BlogData, setBlogData] = useState([]);
+  const [openLoad, setopenLoad] = useState(false);
 
   useEffect(() => {
     if (fetchedBlogs && Array.isArray(fetchedBlogs)) {
       setBlogData(fetchedBlogs);
+      setopenLoad(true);
     } else {
       console.error("Error fetching packages");
     }
@@ -47,14 +49,6 @@ function HealthBlogList() {
   const blogDetail = (code) => {
     window.location.href = `/HealthBlogListDetail/${code}`;
   };
-
-  const [openLoad, setopenLoad] = useState(false);
-  useEffect(() => {
-    if (BlogData) {
-      // ทำการ render หน้าเว็บใหม่
-      setopenLoad(true);
-    }
-  }, [BlogData]);
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!openLoad) {
     return (
