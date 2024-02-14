@@ -83,7 +83,6 @@ function DoctorList() {
       const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
       const data = await response.json();
       setDoctors(data);
-      window.location.reload();
     } catch (error) {
       console.error("Error fetching Doctors:", error);
     }
