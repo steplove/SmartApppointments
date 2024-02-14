@@ -19,6 +19,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
+import useTokenCheck from "hooks/useTokenCheck";
 
 // import SettingsIcon from "@mui/icons-material/Settings";
 // import PersonIcon from "@mui/icons-material/Person";
@@ -31,6 +32,7 @@ import LanguageSelector from "LanguageSelector";
 
 export default function MenuList() {
   const { t } = useTranslation();
+  const [, HN] = useTokenCheck();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const theme = useTheme();
@@ -76,20 +78,25 @@ export default function MenuList() {
             to="/dashboard"
             value="/dashboard"
           />
-          <BottomNavigationAction
-            label={`${t("appointment")}`}
-            icon={<EventNoteIcon />}
-            component={Link}
-            to="/appointments"
-            value="/appointments"
-          />
-          <BottomNavigationAction
-            label={`${t("history")}`}
-            icon={<HistoryIcon />}
-            component={Link}
-            to="/bookinghistory"
-            value="/bookinghistory"
-          />
+          {HN && (
+            <>
+              <BottomNavigationAction
+                label={`${t("appointment")}`}
+                icon={<EventNoteIcon />}
+                component={Link}
+                to="/appointments"
+                value="/appointments"
+              />
+              <BottomNavigationAction
+                label={`${t("history")}`}
+                icon={<HistoryIcon />}
+                component={Link}
+                to="/bookinghistory"
+                value="/bookinghistory"
+              />
+            </>
+          )}
+
           <BottomNavigationAction
             label={`${t("doctor")}`}
             icon={<LocalHospitalIcon />}
@@ -122,12 +129,16 @@ export default function MenuList() {
             <MenuItem onClick={handleClose} component={Link} to="/dashboard">
               {t("home")}
             </MenuItem>
-            <MenuItem onClick={handleClose} component={Link} to="/appointments">
-              {t("appointment")}
-            </MenuItem>
-            <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
-              {t("history")}
-            </MenuItem>
+            {HN && (
+              <>
+                <MenuItem onClick={handleClose} component={Link} to="/appointments">
+                  {t("appointment")}
+                </MenuItem>
+                <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
+                  {t("history")}
+                </MenuItem>
+              </>
+            )}
             <MenuItem onClick={handleClose} component={Link} to="/doctorList">
               {t("doctor_list")}
             </MenuItem>
