@@ -62,11 +62,11 @@ const slides = [];
 function Dashboard() {
   const { t } = useTranslation();
 
-  const [, HN] = useTokenCheck();
+  const [IdenNumber] = useTokenCheck();
   const { data: fetchAllAppointment = [] } = useFetch(
-    `${BASE_URL}/api/AllAppointmentsLastDay7/${HN}`
+    `${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`
   );
-  const { data: fetchNotify = [] } = useFetch(`${BASE_URL}/api/NotifyAppointments/${HN}`);
+  const { data: fetchNotify = [] } = useFetch(`${BASE_URL}/api/NotifyAppointments/${IdenNumber}`);
   const [dialogShow, setDialogShow] = useState([]);
   useEffect(() => {
     if (fetchAllAppointment && Array.isArray(fetchAllAppointment)) {
