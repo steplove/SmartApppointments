@@ -53,11 +53,11 @@ const theme = createTheme({
 
 function BookingHistory() {
   const { t } = useTranslation();
-  const [IdenNumber] = useTokenCheck();
+  const [, HN] = useTokenCheck();
   const [allAppointments, setAllAppointment] = useState([]);
   const [dialogShow, setDialogShow] = useState([]);
   const { data: fetchAllAppointment = [] } = useFetch(
-    `${BASE_URL}/api/AllAppointmentsWhereHN/${IdenNumber}`
+    `${BASE_URL}/api/AllAppointmentsWhereHN/${HN}`
   );
   useEffect(() => {
     if (fetchAllAppointment && Array.isArray(fetchAllAppointment)) {
