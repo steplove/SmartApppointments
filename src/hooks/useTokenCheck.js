@@ -10,6 +10,7 @@ function useTokenCheck() {
     Email: "",
     MobileNo: "",
     Customer_Status: "",
+    UID: "",
   });
 
   useEffect(() => {

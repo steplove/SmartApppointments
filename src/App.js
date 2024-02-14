@@ -34,6 +34,7 @@ import ServicesRoomsDetail from "pages/OurServices/ServicesRooms/ServicesRoomsDe
 import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
 import Contact from "pages/Contact";
 import MyMap from "pages/Map";
+import OTP from "pages/OTP";
 import "./i18n";
 // Material Kit 2 React routes
 import routes from "routes";
@@ -101,6 +102,7 @@ export default function App() {
           <Route path="/MedicalServiceCenter" element={<MedicalServiceCenter />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyMap" element={<MyMap />} />
+          <Route path="/OTP" element={<OTP />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>

@@ -71,7 +71,7 @@ const StyledToggleButton = styled(ToggleButton)({
 });
 function Appointments() {
   const { t } = useTranslation();
-  const [, HN, FirstName, LastName] = useTokenCheck();
+  const [, HN, FirstName, LastName, , , UID] = useTokenCheck();
   const nameCustomer = `${FirstName} ${LastName}`;
   const HNCustomer = `${HN} `;
   const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
@@ -83,6 +83,7 @@ function Appointments() {
   // const [doctors, setDoctors] = useState([]);
   const [formData, setFormData] = useState({
     HN: HNCustomer,
+    Customer_UID: UID,
     Clinic: "",
     Doctor: "",
     Date: null, // เริ่มต้นเป็น null
@@ -114,6 +115,7 @@ function Appointments() {
         },
         body: JSON.stringify({
           HN: HNCustomer,
+          Customer_UID: UID,
           Clinic: formData.Clinic,
           Doctor: formData.Doctor,
           Appointment_Date: formData.Date,
