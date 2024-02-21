@@ -1,68 +1,112 @@
-import React, { useRef, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-const correctOTP = "123456"; // validate from your server
+import React, { useState, useEffect } from "react";
+import OtpInput from "react-otp-input";
+import { useParams } from "react-router-dom";
+import md5 from "md5";
+import { BASE_URL } from "constants/constants";
 
-function OtpInputWithValidation({ numberOfDigits }) {
-  const [otp, setOtp] = useState(new Array(numberOfDigits).fill(""));
-  const [otpError, setOtpError] = useState(null);
-  const otpBoxReference = useRef([]);
+function OTP() {
+  const { mobileNo, surveyid } = useParams();
+  // let surveyid1;
+  // console.log(mobileNo, surveyid);
+  const [verifiOtp, setVerifiOtp] = useState("");
+  const [isChecking, setIsChecking] = useState(false);
+  const [verificationStatus, setVerificationStatus] = useState(null);
 
-  function handleChange(value, index) {
-    let newArr = [...otp];
-    newArr[index] = value;
-    setOtp(newArr);
-
-    if (value && index < numberOfDigits - 1) {
-      otpBoxReference.current[index + 1].focus();
-    }
-  }
-
-  function handleBackspaceAndEnter(e, index) {
-    if (e.key === "Backspace" && !e.target.value && index > 0) {
-      otpBoxReference.current[index - 1].focus();
-    }
-    if (e.key === "Enter" && e.target.value && index < numberOfDigits - 1) {
-      otpBoxReference.current[index + 1].focus();
-    }
-  }
-
+  const MyConfig = {
+    refText: "BCH01",
+    otpSender: "BCHGROUP",
+    keyauth: "520038d76befc773f2e5cebfe0285945",
+    otpVarifyURL: "https://secure.etracker.cc/MobileOTPAPI/OTPVerifyAPI.aspx",
+    otpReqURL: "https://secure.etracker.cc/MobileOTPAPI/OTPGenerateAPI.aspx",
+    keyToken: "Bearer FC208BF8D7F6EE9B513B8B83EBC9BEB7B8205F1243529E6E8BB0539DF62D6C93",
+  };
   useEffect(() => {
-    if (otp.join("") !== "" && otp.join("") !== correctOTP) {
-      setOtpError("❌ Wrong OTP Please Check Again");
-    } else {
-      setOtpError(null);
+    if (verifiOtp.length === 6) {
+      setIsChecking(true);
+      // ทำการตรวจสอบ OTP ที่นี่
+      gotoVarifyOTP(mobileNo, verifiOtp);
     }
-  }, [otp]);
+  }, [verifiOtp]);
 
+  const generateMd5 = (input) => {
+    return md5(input);
+  };
+  const gotoVarifyOTP = async (mobileNo, otp) => {
+    const refCode = generateMd5(`${MyConfig.refText}${mobileNo}${otp}`);
+    const values = {
+      survey_id: surveyid,
+      refText: MyConfig.refText,
+      otpSender: MyConfig.otpSender,
+      phone_for_send: mobileNo,
+      receive_opt: otp,
+    };
+    // กำหนด URL และ XML
+    const url = MyConfig.otpVarifyURL;
+    const xml = `<?xml version="1.0" encoding="UTF-8"?><REQ_DATA><SesID>${surveyid}</SesID><KEYAUTHEN>${MyConfig.keyauth}</KEYAUTHEN><RefCode>${refCode}</RefCode></REQ_DATA>`;
+    const body = { xml, url, values };
+
+    try {
+      // ส่ง request ไปยัง API
+      const response = await fetch("https://apicon.bangkokchainhospital.com/varifyotp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: MyConfig.keyToken,
+        },
+
+        body: JSON.stringify(body),
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        const successStatus = responseData.success;
+        if (successStatus) {
+          setVerificationStatus("success");
+          await fetch(`${BASE_URL}/api/otpUpdateStatus`, {
+            method: "POST",
+            body: JSON.stringify(mobileNo),
+          });
+          setTimeout(() => {
+            window.location.href = `/signIn`;
+          }, 1500);
+        } else {
+          setVerificationStatus("error");
+        }
+      } else {
+        console.error("Error:", response.status);
+        setVerificationStatus("error");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setVerificationStatus("error");
+    } finally {
+      setIsChecking(false);
+    }
+  };
   return (
-    <article className="w-1/2">
-      <p className="text-2xl font-medium text-white mt-12">OTP Input With Validation</p>
-      <p className="text-base text-white mt-4 bg-[#323232] p-4 rounded-md">
-        A special type of input box where as user types, it checks if the otp is correct else it
-        shows an error message below with a shake animation.
-      </p>
-
-      <p className="text-base text-white mt-6 mb-4">One Time Password (OTP)</p>
-
-      <div className="flex items-center gap-4">
-        {otp.map((digit, index) => (
-          <input
-            key={index}
-            value={digit}
-            maxLength={1}
-            onChange={(e) => handleChange(e.target.value, index)}
-            onKeyUp={(e) => handleBackspaceAndEnter(e, index)}
-            ref={(reference) => (otpBoxReference.current[index] = reference)}
-            className={`border w-20 h-auto text-white p-3 rounded-md block bg-black focus:border-2 focus:outline-none appearance-none`}
-          />
-        ))}
-      </div>
-
-      <p className={`text-lg text-white mt-4 ${otpError ? "error-show" : ""}`}>{otpError}</p>
-    </article>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <p>ส่ง OTP ไปยังหมายเลข {mobileNo}</p>
+      <OtpInput
+        value={verifiOtp}
+        onChange={setVerifiOtp}
+        numInputs={6}
+        inputStyle={{ width: "3rem", height: "3rem", margin: "0 1rem" }} // ขยายขนาดของช่อง OTP
+        renderSeparator={<span>-</span>}
+        renderInput={(props) => <input {...props} />}
+      />
+      {isChecking && <p>กำลังตรวจสอบ OTP...</p>}
+      {verificationStatus === "success" && <p style={{ color: "green" }}>ยืนยันสำเร็จ!</p>}
+      {verificationStatus === "error" && <p style={{ color: "red" }}>รหัส OTP ไม่ถูกต้อง</p>}
+      {/* แสดงข้อความผิดพลาด */}
+    </div>
   );
 }
-OtpInputWithValidation.propTypes = {
-  numberOfDigits: PropTypes.number.isRequired,
-};
-export default OtpInputWithValidation;
+
+export default OTP;

@@ -86,7 +86,7 @@ export default function App() {
           <Route path="/doctorListHome" element={<DoctorListHome />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword/:UID" element={<ResetPassword />} />
+          <Route path="/resetpassword/:mobileNo/:surveyid" element={<ResetPassword />} />
           <Route path="/agree" element={<Agree />} />
           <Route path="/CEO" element={<CEO />} />
           <Route path="/history" element={<History />} />
@@ -102,7 +102,7 @@ export default function App() {
           <Route path="/MedicalServiceCenter" element={<MedicalServiceCenter />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyMap" element={<MyMap />} />
-          <Route path="/OTP" element={<OTP />} />
+          <Route path="/OTP/:mobileNo/:surveyid" element={<OTP />} />
           <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>

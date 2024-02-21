@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { BASE_URL } from "constants/constants";
+// import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 
 // Material Kit 2 React page layout routes
 import routes from "routes";
 import { Card } from "@mui/material";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/hospital.png";
 import Grid from "@mui/material/Grid";
@@ -17,6 +17,7 @@ import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 import SendIcon from "@mui/icons-material/Send";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 function ForgotPassword() {
   const { t } = useTranslation();
@@ -25,42 +26,105 @@ function ForgotPassword() {
   const handleSignUpClick = () => {
     window.location.href = "/agreement";
   };
-  const handleForgotPassword = async () => {
+
+  let surveyid, refText, otpSender, keyauth, phoneforsend;
+  const MyConfig = {
+    refText: "BCH01",
+    otpSender: "BCHGROUP",
+    keyauth: "520038d76befc773f2e5cebfe0285945",
+    otpVarifyURL: "https://secure.etracker.cc/MobileOTPAPI/OTPVerifyAPI.aspx",
+    otpReqURL: "https://secure.etracker.cc/MobileOTPAPI/OTPGenerateAPI.aspx",
+  };
+  const gotoOTP = async () => {
+    let countryCode = "66";
+
+    const telephoneForSend = email.replace(/^0/, countryCode);
+
+    const now = new Date();
+    const formatter =
+      now.getFullYear().toString() +
+      now.getMonth().toString() +
+      now.getDate().toString() +
+      now.getHours().toString() +
+      now.getMinutes().toString() +
+      now.getSeconds().toString();
+    console.log(formatter, "formatterformatter");
+    surveyid = formatter;
+    refText = MyConfig.refText;
+    otpSender = MyConfig.otpSender;
+    keyauth = MyConfig.keyauth;
+    phoneforsend = telephoneForSend;
+
+    const values = {
+      survey_id: surveyid,
+      refText: refText,
+      otpSender: otpSender,
+      phone_for_send: phoneforsend,
+    };
+
+    const url = MyConfig.otpReqURL;
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+      <REQ_DATA>
+        <TRANSID>${surveyid}</TRANSID>
+        <KEYAUTHEN>${keyauth}</KEYAUTHEN>
+        <RefText>${refText}</RefText>
+        <Sender>${otpSender}</Sender>
+        <Recipient>${phoneforsend}</Recipient>
+      </REQ_DATA>`;
+    console.log(xml, "xml");
+    const body = { xml: xml, url: url, values: values };
+
     try {
-      const response = await fetch(`${BASE_URL}/api/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
+      const response = await axios.post("https://apicon.bangkokchainhospital.com/sendotp", body, {
+        headers: { Authorization: MyConfig.keyToken },
       });
-      console.log(response);
-      if (response.ok) {
-        Swal.fire({
-          title: "ส่งอีเมลสำเร็จ",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        console.log("สำเร็จ");
-        setTimeout(() => {
-          window.location = "/presentation";
-        }, 1500);
-      } else if (response.status === 404) {
-        Swal.fire({
-          title: "ไม่พบข้อมูลอีเมลในระบบ",
-          text: "",
-          icon: "error",
-          confirmButtonText: "ตกลง",
-        });
-        // const errorData = await response.json();
-        // throw new Error(errorData.message);
+
+      if (response.status === 200) {
+        // routeToOTP(surveyid, phoneforsend);
+        console.log("success");
+        window.location.href = `/resetpassword/${telephoneForSend}/${surveyid}`;
       }
     } catch (error) {
-      console.error(error);
-      alert("Error sending password reset email");
+      console.error("Error:", error);
     }
   };
+  // const handleForgotPassword = async () => {
+  //   // try {
+  //   //   const response = await fetch(`${BASE_URL}/api/forgot-password`, {
+  //   //     method: "POST",
+  //   //     headers: {
+  //   //       "Content-Type": "application/json",
+  //   //     },
+  //   //     body: JSON.stringify({ email }),
+  //   //   });
+  //   //   console.log(response);
+  //   //   if (response.ok) {
+  //   //     Swal.fire({
+  //   //       title: "ส่งอีเมลสำเร็จ",
+  //   //       icon: "success",
+  //   //       showConfirmButton: false,
+  //   //       timer: 1500,
+  //   //     });
+  //   //     console.log("สำเร็จ");
+  //   //     setTimeout(() => {
+  //   //       window.location = "/presentation";
+  //   //     }, 1500);
+  //   //   } else if (response.status === 404) {
+  //   //     Swal.fire({
+  //   //       title: "ไม่พบข้อมูลอีเมลในระบบ",
+  //   //       text: "",
+  //   //       icon: "error",
+  //   //       confirmButtonText: "ตกลง",
+  //   //     });
+  //   //     // const errorData = await response.json();
+  //   //     // throw new Error(errorData.message);
+  //   //   }
+  //   // } catch (error) {
+  //   //   console.error(error);
+  //   //   alert("Error sending password reset email");
+  //   // }
+  // };
 
   return (
     <Grid>
@@ -115,13 +179,23 @@ function ForgotPassword() {
                     className="black-text"
                     sx={{ fontSize: "0.8rem", textAlign: "center" }}
                   >
-                    {t("reset_your_password_with_your_registered_email")}
+                    {t("reset_your_password_with_your_registered_mobileNo")}
                   </Typography>
                 </MKBox>
                 <MKBox mt={2}>
-                  <MKInput
+                  {/* <MKInput
                     type="email"
                     label={`${t("email")}`}
+                    id="identificationNumber"
+                    name="identificationNumber"
+                    autoComplete="identificationNumber"
+                    fullWidth
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  /> */}
+                  <MKInput
+                    type="mobileNo"
+                    label={`${t("mobileNo")}`}
                     id="identificationNumber"
                     name="identificationNumber"
                     autoComplete="identificationNumber"
@@ -135,7 +209,7 @@ function ForgotPassword() {
                     variant="gradient"
                     fullWidth
                     sx={{ background: "#2596be", color: "#ffffff" }}
-                    onClick={handleForgotPassword}
+                    onClick={gotoOTP}
                   >
                     <SendIcon style={{ marginRight: "8px" }} /> {t("reset_password")}
                   </MKButton>

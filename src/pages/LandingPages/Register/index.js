@@ -31,7 +31,7 @@ import { BASE_URL } from "constants/constants";
 import Swal from "sweetalert2";
 import Foots from "components/Foot";
 import { useTranslation } from "react-i18next";
-
+import axios from "axios";
 function Register() {
   const { t } = useTranslation();
 
@@ -58,7 +58,67 @@ function Register() {
   const [provinces, setProvinces] = useState([]);
   const [amphures, setAmphures] = useState([]);
   const [districts, setDistricts] = useState([]);
+  let surveyid, refText, otpSender, keyauth, phoneforsend;
+  const MyConfig = {
+    refText: "BCH01",
+    otpSender: "BCHGROUP",
+    keyauth: "520038d76befc773f2e5cebfe0285945",
+    otpVarifyURL: "https://secure.etracker.cc/MobileOTPAPI/OTPVerifyAPI.aspx",
+    otpReqURL: "https://secure.etracker.cc/MobileOTPAPI/OTPGenerateAPI.aspx",
+  };
+  const gotoOTP = async () => {
+    let countryCode = "66";
 
+    const telephoneForSend = formData.mobileNo.replace(/^0/, countryCode);
+
+    const now = new Date();
+    const formatter =
+      now.getFullYear().toString() +
+      now.getMonth().toString() +
+      now.getDate().toString() +
+      now.getHours().toString() +
+      now.getMinutes().toString() +
+      now.getSeconds().toString();
+    console.log(formatter, "formatterformatter");
+    surveyid = formatter;
+    refText = MyConfig.refText;
+    otpSender = MyConfig.otpSender;
+    keyauth = MyConfig.keyauth;
+    phoneforsend = telephoneForSend;
+
+    const values = {
+      survey_id: surveyid,
+      refText: refText,
+      otpSender: otpSender,
+      phone_for_send: phoneforsend,
+    };
+
+    const url = MyConfig.otpReqURL;
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+      <REQ_DATA>
+        <TRANSID>${surveyid}</TRANSID>
+        <KEYAUTHEN>${keyauth}</KEYAUTHEN>
+        <RefText>${refText}</RefText>
+        <Sender>${otpSender}</Sender>
+        <Recipient>${phoneforsend}</Recipient>
+      </REQ_DATA>`;
+    console.log(xml, "xml");
+    const body = { xml: xml, url: url, values: values };
+
+    try {
+      const response = await axios.post("https://apicon.bangkokchainhospital.com/sendotp", body, {
+        headers: { Authorization: MyConfig.keyToken },
+      });
+
+      if (response.status === 200) {
+        // routeToOTP(surveyid, phoneforsend);
+        console.log("success");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
@@ -225,8 +285,11 @@ function Register() {
                     showConfirmButton: false,
                     timer: 1500,
                   });
+                  let countryCode = "66";
+                  const telephoneForSend = formData.mobileNo.replace(/^0/, countryCode);
+                  gotoOTP();
                   setTimeout(() => {
-                    window.location = "/signIn";
+                    window.location.href = `/OTP/${telephoneForSend}/${surveyid}`;
                   }, 1500);
                 } else {
                   // การร้องขอล้มเหลว
@@ -615,7 +678,7 @@ function Register() {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={handleSubmit}
+                      onClick={() => handleSubmit(formData.mobileNo)}
                       style={{ color: "white" }}
                     >
                       {t("save")}

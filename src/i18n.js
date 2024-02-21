@@ -121,7 +121,8 @@ i18n.use(initReactI18next).init({
         error_updating_information: "เกิดข้อผิดพลาดในการอัปเดตข้อมูล",
         password_reset_successful: "รีเซ็ตรหัสผ่านสำเร็จ",
         reset_password: "รีเซ็ตรหัสผ่าน",
-        reset_your_password_with_your_registered_email: "รีเซ็ตรหัสผ่านด้วยอีเมลที่ลงทะเบียนไว้",
+        reset_your_password_with_your_registered_mobileNo:
+          "รีเซ็ตรหัสผ่านด้วยเบอร์โทรศัพท์ที่ลงทะเบียนไว้",
         notifications: "การแจ้งเตือน",
         make_an_appointment_with: "นัดหมายกับ",
         confirmed: "ถูกยืนยัน",
@@ -272,8 +273,8 @@ i18n.use(initReactI18next).init({
         error_updating_information: "There was an error updating information.",
         password_reset_successful: "Password reset successful",
         reset_password: "Reset password",
-        reset_your_password_with_your_registered_email:
-          "Reset your password with your registered email.",
+        reset_your_password_with_your_registered_mobileNo:
+          "Reset your password with your registered mobile No.",
         notifications: "Notifications",
         make_an_appointment_with: "Make an appointment with",
         confirmed: "Confirmed",
