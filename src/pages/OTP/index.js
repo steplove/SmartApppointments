@@ -3,6 +3,7 @@ import OtpInput from "react-otp-input";
 import { useParams } from "react-router-dom";
 import md5 from "md5";
 import { BASE_URL } from "constants/constants";
+import Swal from "sweetalert2";
 
 function OTP() {
   const { mobileNo, surveyid } = useParams();
@@ -46,6 +47,20 @@ function OTP() {
     const body = { xml, url, values };
 
     try {
+      Swal.fire({
+        title: "กำลังดำเนินการ...",
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+        timer: 10000, // 10 วินาที
+        didClose: () => {
+          // หาก SweetAlert ถูกปิดจากการเกินเวลา 10 วินาที
+          // ทำอะไรก็ตามที่คุณต้องการทำหลังจาก SweetAlert ถูกปิดจากการเกินเวลา
+          // เช่น นำผู้ใช้ไปยังหน้าอื่น ๆ, แสดงข้อความเตือน, ฯลฯ
+        },
+      });
       // ส่ง request ไปยัง API
       const response = await fetch("https://apicon.bangkokchainhospital.com/varifyotp", {
         method: "POST",
@@ -57,6 +72,7 @@ function OTP() {
         body: JSON.stringify(body),
       });
       if (response.ok) {
+        Swal.close();
         const responseData = await response.json();
         const successStatus = responseData.success;
         if (successStatus) {
@@ -93,6 +109,8 @@ function OTP() {
       }}
     >
       <p>ส่ง OTP ไปยังหมายเลข {mobileNo}</p>
+      <p style={{ color: "#FF0000", fontSize: "15px" }}>กรุณากรอกหมายเลข OTP ที่ช่องด้านล่าง</p>
+
       <OtpInput
         value={verifiOtp}
         onChange={setVerifiOtp}
