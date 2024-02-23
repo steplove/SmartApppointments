@@ -36,7 +36,7 @@ function Register() {
   const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
-    identificationType: "",
+    identificationType: "IDCard",
     identificationNumber: "",
     hospitalNumber: "",
     gender: "",
@@ -54,6 +54,7 @@ function Register() {
     email: "",
     password: "",
   });
+  console.log(formData.identificationType, "555555");
   // const [errors, setErrors] = useState({});
   const [provinces, setProvinces] = useState([]);
   const [amphures, setAmphures] = useState([]);
@@ -249,6 +250,20 @@ function Register() {
               confirmButtonText: `${t("ok")}`,
             });
           } else {
+            Swal.fire({
+              title: "กำลังดำเนินการ...",
+              allowOutsideClick: false,
+              showConfirmButton: false,
+              willOpen: () => {
+                Swal.showLoading();
+              },
+              timer: 10000, // 10 วินาที
+              didClose: () => {
+                // หาก SweetAlert ถูกปิดจากการเกินเวลา 10 วินาที
+                // ทำอะไรก็ตามที่คุณต้องการทำหลังจาก SweetAlert ถูกปิดจากการเกินเวลา
+                // เช่น นำผู้ใช้ไปยังหน้าอื่น ๆ, แสดงข้อความเตือน, ฯลฯ
+              },
+            });
             // ไม่พบข้อมูลที่ซ้ำ สามารถดำเนินการ insert ข้อมูลได้
             // ทำการส่งข้อมูลที่ป้อนจาก form เข้าไปใน API
             fetch(`${BASE_URL}/api/registerCustomer`, {
@@ -279,6 +294,7 @@ function Register() {
               .then((response) => {
                 if (response.status === 200) {
                   // แสดง sweetalert2 เพื่อแจ้งเตือนว่าเพิ่มข้อมูลพนักงานสำเร็จ
+                  Swal.close();
                   Swal.fire({
                     title: `${t("successfully_registered")}!`,
                     icon: "success",
@@ -363,7 +379,7 @@ function Register() {
                             aria-labelledby="id-passport-label"
                             name="identificationType"
                             onChange={handleInputChange}
-                            defaultValue={"IDCard"}
+                            value={formData.identificationType}
                           >
                             <FormControlLabel
                               value="IDCard"

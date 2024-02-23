@@ -70,6 +70,7 @@ function ResetPassword() {
 
         body: JSON.stringify(body),
       });
+      console.log(response);
       if (response.ok) {
         const responseData = await response.json();
         const successStatus = responseData.success;

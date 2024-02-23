@@ -77,7 +77,7 @@ i18n.use(initReactI18next).init({
         no_account: "ยังไม่มีบัญชี",
         terms_and_conditions_of_service: "ข้อกำหนดและเงื่อนไขการใช้บริการ นัดหมายออนไลน์",
         read_and_agreed_to_the_terms: "ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ",
-        unknown: "* ไม่ทราบให้กรอก - *",
+        unknown: "* ไม่ทราบให้กรอก - ",
         hospital_number: "เลขที่โรงพยาบาล",
         prefix: "คำนำหน้า",
         mr: "นาย",
@@ -111,8 +111,7 @@ i18n.use(initReactI18next).init({
         this_information_is_already_in_use: "ข้อมูลนี้ถูกใช้งานแล้ว",
         successfully_registered: "ลงทะเบียนสำเร็จ",
         unable_to_login: "ไม่สามารถเข้าสู่ระบบ",
-        please_contact_medical:
-          "กรุณาติดต่อเวชระเบียนที่ ศูนย์การแพทย์เฉพาะทาง เพื่อทำการยืนยันตัวตน",
+        please_contact_medical: "กรุณาทำการยืนยันตัวตนผ่าน OTP",
         login_successful: "เข้าสู่ระบบสำเร็จ",
         logout: "ออกจากระบบ",
         welcome_to: "ยินดีต้อนรับเข้าสู่ นัดหมายออนไลน์",
@@ -229,7 +228,7 @@ i18n.use(initReactI18next).init({
         terms_and_conditions_of_service: "Terms and conditions of online booking service",
         read_and_agreed_to_the_terms:
           "I have read and agreed to the terms and conditions of service.",
-        unknown: "* If you don't know, fill in - *",
+        unknown: "* If you don't know, fill in - ",
         hospital_number: "Hospital number",
         prefix: "Prefix",
         mr: "Mr.",
@@ -263,8 +262,7 @@ i18n.use(initReactI18next).init({
         this_information_is_already_in_use: "This information is already in use.",
         successfully_registered: "Successfully registered",
         unable_to_login: "Unable to login",
-        please_contact_medical:
-          "Please contact medical records at Specialized medical center to confirm your identity",
+        please_contact_medical: "Please verify your identity via OTP.",
         login_successful: "Login successful",
         logout: "Logout",
         welcome_to: "Welcome to Smart Apppointments",
