@@ -330,13 +330,13 @@ function BookingHistory() {
           </Grid>
         </Hidden>
       </ThemeProvider>
-      {/* <br />
       <br />
       <br />
       <br />
       <br />
       <br />
-      <Foots /> */}
+      <br />
+      {/* <Foots /> */}
     </Grid>
   );
 }
