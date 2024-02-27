@@ -553,7 +553,7 @@ function Register() {
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
                           <InputLabel id="province-label">{t("province")}</InputLabel>
-                          <Select
+                          <FormControl
                             labelId="province-label"
                             name="province"
                             value={formData.province}
@@ -567,7 +567,7 @@ function Register() {
                                   {province.name_th}{" "}
                                 </MenuItem>
                               ))}
-                          </Select>
+                          </FormControl>
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>

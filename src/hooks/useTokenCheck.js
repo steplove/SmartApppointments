@@ -10,6 +10,7 @@ function useTokenCheck() {
     Email: "",
     MobileNo: "",
     Customer_Status: "",
+    UID: "",
   });
 
   useEffect(() => {
@@ -32,6 +33,7 @@ function useTokenCheck() {
             Email: data.decoded.Email,
             MobileNo: data.decoded.MobileNo,
             Customer_Status: data.decoded.Customer_Status,
+            UID: data.decoded.UID,
           });
           console.log(data);
         } else {
@@ -53,6 +55,7 @@ function useTokenCheck() {
     userData.Email,
     userData.MobileNo,
     userData.Customer_Status,
+    userData.UID,
   ];
 }
 export default useTokenCheck;
