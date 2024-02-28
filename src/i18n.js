@@ -74,6 +74,7 @@ i18n.use(initReactI18next).init({
         passport: "พาสปอร์ต",
         password: "รหัสผ่าน",
         forgot_password: "ลืมรหัสผ่าน",
+        mobileNoOTP: "กรอกหมายเลขโทรศัพท์ เพื่อส่งOTP",
         no_account: "ยังไม่มีบัญชี",
         terms_and_conditions_of_service: "ข้อกำหนดและเงื่อนไขการใช้บริการ นัดหมายออนไลน์",
         read_and_agreed_to_the_terms: "ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ",
@@ -120,6 +121,10 @@ i18n.use(initReactI18next).init({
         error_updating_information: "เกิดข้อผิดพลาดในการอัปเดตข้อมูล",
         password_reset_successful: "รีเซ็ตรหัสผ่านสำเร็จ",
         reset_password: "รีเซ็ตรหัสผ่าน",
+        please_confirm_OTP: "กรุณายืนยัน OTP",
+        send_OTP: "ส่ง OTP",
+        enter_OTP: "กรอก OTP",
+        OTP_verified_successfully: "ยืนยัน OTP สำเร็จ",
         reset_your_password_with_your_registered_mobileNo:
           "รีเซ็ตรหัสผ่านด้วยเบอร์โทรศัพท์ที่ลงทะเบียนไว้",
         notifications: "การแจ้งเตือน",
@@ -224,6 +229,7 @@ i18n.use(initReactI18next).init({
         passport: "Passport",
         password: "Password",
         forgot_password: "Forgot your password?",
+        mobileNoOTP: "Enter your phone number to send OTP.",
         no_account: "No account",
         terms_and_conditions_of_service: "Terms and conditions of online booking service",
         read_and_agreed_to_the_terms:
@@ -271,6 +277,10 @@ i18n.use(initReactI18next).init({
         error_updating_information: "There was an error updating information.",
         password_reset_successful: "Password reset successful",
         reset_password: "Reset password",
+        please_confirm_OTP: "Please confirm OTP.",
+        send_OTP: "Send OTP",
+        enter_OTP: "Enter OTP",
+        OTP_verified_successfully: "OTP verified successfully.",
         reset_your_password_with_your_registered_mobileNo:
           "Reset your password with your registered mobile No.",
         notifications: "Notifications",

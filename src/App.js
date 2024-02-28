@@ -18,6 +18,8 @@ import DoctorListHome from "pages/LandingPages/DoctorListHome";
 import Main from "pages/LandingPages/Main";
 import Agree from "pages/LandingPages/Agree";
 import ForgotPassword from "pages/LandingPages/ForgotPassword";
+import ForgotOTP from "pages/OTP/ForGotOTP";
+import ConfOTP from "pages/OTP/ConfOTP";
 import Packages from "pages/LandingPages/Packages";
 import PackagesDetail from "pages/LandingPages/Packages/PackagesDetail";
 import HealthBlogListDetail from "pages/LandingPages/HealthBlogList/HealthBlogListDetail";
@@ -86,6 +88,8 @@ export default function App() {
           <Route path="/doctorListHome" element={<DoctorListHome />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/forgototp" element={<ForgotOTP />} />
+          <Route path="/confOTP/:mobileNo/:surveyid" element={<ConfOTP />} />
           <Route path="/resetpassword/:mobileNo/:surveyid" element={<ResetPassword />} />
           <Route path="/agree" element={<Agree />} />
           <Route path="/CEO" element={<CEO />} />

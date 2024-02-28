@@ -57,8 +57,10 @@ function SignInBasic() {
         Swal.fire({
           icon: "warning",
           title: `${t("unable_to_login")}`,
-          text: `${t("please_contact_medical")}`,
+          text: `${t("please_confirm_OTP")}`,
           showConfirmButton: true,
+        }).then(() => {
+          window.location.href = "/forgototp";
         });
       } else {
         Swal.fire({
