@@ -9,9 +9,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-import Select from "@mui/material/Select";
+import Select from "react-select";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 
 // Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -54,7 +53,7 @@ function Register() {
     email: "",
     password: "",
   });
-  console.log(formData.identificationType, "555555");
+  console.log(formData, "formData");
   // const [errors, setErrors] = useState({});
   const [provinces, setProvinces] = useState([]);
   const [amphures, setAmphures] = useState([]);
@@ -156,47 +155,61 @@ function Register() {
       console.error("Error fetching districts:", error);
     }
   };
-
-  const handleInputChange = (event) => {
+  const handleInputChange1 = (event) => {
     const { name, value } = event.target;
+    console.log(name, value);
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    if (name === "identificationType") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleInputChange = (selectedOption, { name }) => {
+    // const { name, value } = event.target;
     // 1. ถ้าเปลี่ยน "จังหวัด", รีเซ็ท "อำเภอ" และ "ตำบล"
     if (name === "province") {
       setFormData((prev) => ({
         ...prev,
-        [name]: value,
-        amphure: "", // รีเซ็ทค่าอำเภอ
-        district: "", // รีเซ็ทค่าตำบล
-        postalCode: "", // รีเซ็ทค่ารหัสไปรษณีย์
+        [name]: selectedOption,
+        amphure: "", // Reset amphure to null
+        district: "", // Reset district to null
+        postalCode: "", // Reset postalCode to null
       }));
-      fetchAmphures(value);
+      fetchAmphures(selectedOption.value);
     }
     // 2. ถ้าเปลี่ยน "อำเภอ", รีเซ็ท "ตำบล"
     else if (name === "amphure") {
       setFormData((prev) => ({
         ...prev,
-        [name]: value,
+        [name]: selectedOption,
         district: "", // รีเซ็ทค่าตำบล
       }));
-      fetchDistricts(value);
+      fetchDistricts(selectedOption.value);
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: selectedOption }));
     }
 
     if (name === "prefix") {
       let selectedGender = "";
-      if (value === "นาย") {
+      if (selectedOption.value === "นาย") {
         selectedGender = "2";
-      } else if (value === "นาง" || value === "นางสาว") {
+      } else if (selectedOption.value === "นาง" || selectedOption.value === "นางสาว") {
         selectedGender = "1";
       }
       setFormData((prev) => ({
         ...prev,
-        [name]: value,
+        [name]: selectedOption,
         gender: selectedGender,
       }));
     }
+    console.log(selectedOption.value);
   };
-
   const handleSubmit = async () => {
     try {
       // ทำการส่งข้อมูลที่ป้อนจาก form เข้าไปใน API
@@ -276,15 +289,15 @@ function Register() {
                 identificationNumber: formData.identificationNumber,
                 hospitalNumber: formData.hospitalNumber,
                 gender: formData.gender,
-                prefix: formData.prefix,
+                prefix: formData.prefix.value,
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 birthDate: formData.birthDate,
                 Address: formData.Address,
                 villageNumber: formData.villageNumber,
-                province: formData.province,
-                amphure: formData.amphure,
-                district: formData.district,
+                province: formData.province.value,
+                amphure: formData.amphure.value,
+                district: formData.district.value,
                 postalCode: formData.postalCode,
                 mobileNo: formData.mobileNo,
                 email: formData.email,
@@ -326,6 +339,24 @@ function Register() {
       console.error(error);
     }
   };
+  const prefixOptions = [
+    { value: "นาย", label: t("mr") },
+    { value: "นาง", label: t("mrs") },
+    { value: "นางสาว", label: t("miss") },
+  ];
+
+  const options = provinces.map((province) => ({
+    value: province.id,
+    label: province.name_th,
+  }));
+  const options2 = amphures.map((amphure) => ({
+    value: amphure.id,
+    label: amphure.name_th,
+  }));
+  const options3 = districts.map((district) => ({
+    value: district.id,
+    label: district.name_th,
+  }));
   return (
     <Grid>
       <DefaultNavbar routes={routes} sticky />
@@ -378,7 +409,7 @@ function Register() {
                             row
                             aria-labelledby="id-passport-label"
                             name="identificationType"
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                             value={formData.identificationType}
                           >
                             <FormControlLabel
@@ -405,7 +436,7 @@ function Register() {
                           name="identificationNumber"
                           variant="outlined"
                           value={formData.identificationNumber}
-                          onChange={handleInputChange}
+                          onChange={handleInputChange1}
                           style={{ marginBottom: "1rem" }}
                           inputProps={{ maxLength: 13 }}
                         />
@@ -420,44 +451,34 @@ function Register() {
                           name="hospitalNumber"
                           variant="outlined"
                           value={formData.hospitalNumber}
-                          onChange={handleInputChange}
+                          onChange={handleInputChange1}
                           style={{ marginBottom: "1rem" }}
                         />
                       </Grid>
 
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth>
-                          <InputLabel id="prefix-label">{t("prefix")}</InputLabel>
+                          {/* <InputLabel id="prefix-label">{t("prefix")}</InputLabel> */}
                           <Select
                             label="คำนำหน้า"
                             name="prefix"
                             value={formData.prefix}
                             onChange={handleInputChange}
-                            variant="outlined"
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            style={{ height: "40px", marginBottom: "1rem" }}
-                            MenuProps={{
-                              anchorOrigin: {
-                                vertical: "bottom",
-                                horizontal: "left",
-                              },
-                              transformOrigin: {
-                                vertical: "top",
-                                horizontal: "left",
-                              },
+                            options={prefixOptions}
+                            isSearchable={false} // Disable search
+                            placeholder="เลือกคำนำหน้า..."
+                            styles={{
+                              control: (provided) => ({
+                                ...provided,
+                                height: "40px",
+                                marginBottom: "1rem",
+                              }),
+                              menu: (provided) => ({
+                                ...provided,
+                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                              }),
                             }}
-                          >
-                            <MenuItem key="นาย" value="นาย">
-                              {t("mr")}
-                            </MenuItem>
-                            <MenuItem key="นาง" value="นาง">
-                              {t("mrs")}
-                            </MenuItem>
-                            <MenuItem key="นางสาว" value="นางสาว">
-                              {t("miss")}
-                            </MenuItem>
-                          </Select>
+                          />
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
@@ -490,7 +511,7 @@ function Register() {
                             variant="outlined"
                             name="firstName"
                             value={formData.firstName}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
@@ -502,7 +523,7 @@ function Register() {
                             variant="outlined"
                             name="lastName"
                             value={formData.lastName}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
@@ -534,7 +555,7 @@ function Register() {
                             variant="outlined"
                             name="Address"
                             value={formData.Address}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
@@ -546,68 +567,80 @@ function Register() {
                             variant="outlined"
                             name="villageNumber"
                             value={formData.villageNumber}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="province-label">{t("province")}</InputLabel>
-                          <FormControl
+                          {/* <InputLabel id="province-label">{t("province")}</InputLabel> */}
+                          <Select
                             labelId="province-label"
                             name="province"
                             value={formData.province}
-                            onChange={handleInputChange}
-                            style={{ height: "40px" }}
-                          >
-                            {provinces &&
-                              provinces.length > 0 &&
-                              provinces.map((province) => (
-                                <MenuItem key={province.id} value={province.id}>
-                                  {province.name_th}{" "}
-                                </MenuItem>
-                              ))}
-                          </FormControl>
+                            onChange={(selectedOption) =>
+                              handleInputChange(selectedOption, { name: "province" })
+                            }
+                            options={options}
+                            placeholder="จังหวัด..."
+                            styles={{
+                              // Use styles prop to customize the height
+                              control: (provided) => ({
+                                ...provided,
+                                height: "40px",
+                              }),
+                              menu: (provided) => ({
+                                ...provided,
+                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                              }),
+                            }}
+                          />
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="district-label">{t("district")}</InputLabel>
+                          {/* <InputLabel id="district-label">{t("district")}</InputLabel> */}
                           <Select
                             labelId="amphure-label"
                             name="amphure"
                             value={formData.amphure}
                             onChange={handleInputChange}
-                            style={{ height: "40px" }}
-                          >
-                            {amphures &&
-                              amphures.length > 0 &&
-                              amphures.map((amphure) => (
-                                <MenuItem key={amphure.id} value={amphure.id}>
-                                  {amphure.name_th}{" "}
-                                </MenuItem>
-                              ))}
-                          </Select>
+                            options={options2}
+                            placeholder="อำเภอ..."
+                            styles={{
+                              control: (provided) => ({
+                                ...provided,
+                                height: "40px",
+                              }),
+                              menu: (provided) => ({
+                                ...provided,
+                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                              }),
+                            }}
+                          />
                         </FormControl>
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <InputLabel id="district-label">{t("sub_district")}</InputLabel>
+                          {/* <InputLabel id="district-label">{t("sub_district")}</InputLabel> */}
                           <Select
                             labelId="district-label"
                             name="district"
                             value={formData.district}
                             onChange={handleInputChange}
-                            style={{ height: "40px" }}
-                          >
-                            {districts &&
-                              districts.length > 0 &&
-                              districts.map((district) => (
-                                <MenuItem key={district.id} value={district.id}>
-                                  {district.name_th}
-                                </MenuItem>
-                              ))}
-                          </Select>
+                            options={options3}
+                            placeholder="ตำบล..."
+                            styles={{
+                              control: (provided) => ({
+                                ...provided,
+                                height: "40px",
+                              }),
+                              menu: (provided) => ({
+                                ...provided,
+                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                              }),
+                            }}
+                          />
                         </FormControl>
                       </Grid>
 
@@ -636,7 +669,7 @@ function Register() {
                             variant="outlined"
                             name="mobileNo"
                             value={formData.mobileNo}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                             inputProps={{ maxLength: 10, inputMode: "numeric" }}
                             InputProps={{
                               inputMode: "numeric",
@@ -653,7 +686,7 @@ function Register() {
                             variant="outlined"
                             name="email"
                             value={formData.email}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
@@ -666,7 +699,7 @@ function Register() {
                             name="password"
                             type="password"
                             value={formData.password}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
@@ -678,7 +711,7 @@ function Register() {
                             name="confirmPassword"
                             type="password"
                             value={formData.confirmPassword}
-                            onChange={handleInputChange}
+                            onChange={handleInputChange1}
                           />
                           {formData.confirmPassword !== "" &&
                             formData.password !== formData.confirmPassword && (

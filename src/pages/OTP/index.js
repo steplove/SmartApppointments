@@ -46,6 +46,17 @@ function OTP() {
     otpReqURL: "https://secure.etracker.cc/MobileOTPAPI/OTPGenerateAPI.aspx",
     keyToken: "Bearer FC208BF8D7F6EE9B513B8B83EBC9BEB7B8205F1243529E6E8BB0539DF62D6C93",
   };
+
+  useEffect(() => {
+    fetch(BASE_URL + "/api/my-config")
+      .then((response) => response.json())
+      .then((data) => {
+        // ใช้ MyConfig ที่ได้จากการเรียก API
+        console.log(data, "datadatadata");
+      })
+      .catch((error) => console.error("Error:", error));
+  }, []);
+
   useEffect(() => {
     if (verifiOtp.length === 6) {
       setIsChecking(true);
@@ -97,8 +108,6 @@ function OTP() {
         timer: 10000, // 10 วินาที
         didClose: () => {
           // หาก SweetAlert ถูกปิดจากการเกินเวลา 10 วินาที
-          // ทำอะไรก็ตามที่คุณต้องการทำหลังจาก SweetAlert ถูกปิดจากการเกินเวลา
-          // เช่น นำผู้ใช้ไปยังหน้าอื่น ๆ, แสดงข้อความเตือน, ฯลฯ
         },
       });
       // ส่ง request ไปยัง API
@@ -115,19 +124,6 @@ function OTP() {
         Swal.close();
         setVerificationStatus("success");
         updateStatusOTP();
-        // if (response1) {
-        //   // Handle non-successful responses (HTTP status codes other than 2xx)
-        //   console.log(response1, "55555");
-        //   Swal.fire({
-        //     title: `OTP Success!`,
-        //     icon: "success",
-        //     showConfirmButton: false,
-        //     timer: 1500,
-        //   });
-        //   // setTimeout(() => {
-        //   //   window.location.href = `/signIn`;
-        //   // }, 1500);
-        // }
       } else {
         setVerificationStatus("error");
       }

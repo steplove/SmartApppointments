@@ -81,7 +81,7 @@ export default function MenuList() {
           {HN !== "-"
             ? (console.log("HN is truthy, rendering Appointment and History"),
               (
-                <>
+                <BottomNavigation showLabels>
                   <BottomNavigationAction
                     label={`${t("appointment")}`}
                     icon={<EventNoteIcon />}
@@ -96,7 +96,7 @@ export default function MenuList() {
                     to="/bookinghistory"
                     value="/bookinghistory"
                   />
-                </>
+                </BottomNavigation>
               ))
             : null}
 
