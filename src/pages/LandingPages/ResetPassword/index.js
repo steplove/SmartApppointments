@@ -275,7 +275,7 @@ function ResetPassword() {
                       value={verifiOtp}
                       onChange={setVerifiOtp}
                       numInputs={6}
-                      inputStyle={{ width: "2rem", height: "2rem", margin: "0 1rem" }}
+                      inputStyle={{ width: "2rem", height: "2rem", margin: "0.3rem" }}
                       renderSeparator={<span>-</span>}
                       renderInput={(props) => <input {...props} />}
                     />
