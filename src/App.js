@@ -7,9 +7,11 @@ import CssBaseline from "@mui/material/CssBaseline";
 import theme from "assets/theme";
 import Presentation from "layouts/pages/presentation";
 import SignInBasic from "pages/LandingPages/SignIn";
+import SigninCheckup from "pages/LandingPages/SigninCheckup";
 import Register from "pages/LandingPages/Register";
 import Agreement from "pages/LandingPages/Agreement";
 import Dashboard from "pages/LandingPages/Dashboard";
+import DashboardCheckup from "pages/LandingPages/DashboardCheckUp";
 import Appointments from "pages/LandingPages/Appointments";
 import BookingHistory from "pages/LandingPages/BookingHistory";
 import UserProfile from "pages/LandingPages/UserProfile";
@@ -74,9 +76,11 @@ export default function App() {
           {getRoutes(routes)}
           <Route path="/presentation" element={<Presentation />} />
           <Route path="/signInBasic" element={<SignInBasic />} />
+          <Route path="/signinCheckup" element={<SigninCheckup />} />
           <Route path="/register" element={<Register />} />
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboardcheckup" element={<DashboardCheckup />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/bookinghistory" element={<BookingHistory />} />
           <Route path="/userprofile" element={<UserProfile />} />

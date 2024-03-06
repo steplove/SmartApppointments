@@ -11,6 +11,9 @@ function MenuListHome() {
   const handleClickAppointment = () => {
     window.location.href = "/signIn";
   };
+  const hadleClickCheckUP = () => {
+    window.location.href = "/signInCheckup";
+  };
   const handleClickSearchDoctor = () => {
     window.location.href = "/doctorListHome"; // หรือ URL ที่คุณต้องการ
   };
@@ -21,6 +24,9 @@ function MenuListHome() {
   const menuStyles = [
     {
       backgroundColor: "#af976d",
+    },
+    {
+      backgroundColor: "#293242",
     },
     {
       backgroundColor: "#0bb288",
@@ -73,8 +79,10 @@ function MenuListHome() {
                 index === 0
                   ? handleClickAppointment
                   : index === 1
-                  ? handleClickSearchDoctor
+                  ? hadleClickCheckUP
                   : index === 2
+                  ? handleClickSearchDoctor
+                  : index === 3
                   ? handleClickContactUs
                   : ""
               }
@@ -86,9 +94,12 @@ function MenuListHome() {
                 <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               {index === 1 && (
-                <ContentPasteSearchIcon sx={{ color: "white !important" }} fontSize="large" />
+                <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               {index === 2 && (
+                <ContentPasteSearchIcon sx={{ color: "white !important" }} fontSize="large" />
+              )}
+              {index === 3 && (
                 <LocalHospitalIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               <Typography
@@ -96,16 +107,18 @@ function MenuListHome() {
                 sx={{ color: "white !important", marginTop: 1, fontSize: "14px" }}
               >
                 {index === 0 && t("appointment_with_doctor")}
-                {index === 1 && t("search_for_a_doctor")}
-                {index === 2 && t("contact_us")}
+                {index === 1 && t("sriburin_checkup_center")}
+                {index === 2 && t("search_for_a_doctor")}
+                {index === 3 && t("contact_us")}
               </Typography>
               <Typography
                 variant="caption"
                 sx={{ color: "white !important", marginTop: 1, fontSize: "12px" }}
               >
                 {index === 0 && t("book_an_appointment_online")}
-                {index === 1 && t("search_by_name_expertise_and_others")}
-                {index === 2 && t("ask_for_information_on_treatment_and_services")}
+                {index === 1 && t("")}
+                {index === 2 && t("search_by_name_expertise_and_others")}
+                {index === 3 && t("ask_for_information_on_treatment_and_services")}
               </Typography>
             </Grid>
           </Grid>
