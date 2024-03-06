@@ -51,6 +51,8 @@ const slides = [];
 function DashboardCheckup() {
   const { t } = useTranslation();
   const [, HN] = useTokenCheck();
+  const filename = HN;
+  console.log(filename);
   // const [openDialog, setOpenDialog] = useState(false);
 
   // const handleCloseDialog = () => {
@@ -64,15 +66,17 @@ function DashboardCheckup() {
     axios
       .get(BASE_URL + "/api/get-all-pdfs")
       .then((response) => {
-        // setFiles(response.data.files);
         // กรองไฟล์ที่ตรงกับเงื่อนไข
-        const filtered = response.data.files.filter((file) => file.startsWith(HN));
+        const filtered = response.data.files.filter((file) => {
+          // ตรวจสอบว่าไฟล์เริ่มต้นด้วย HN
+          return file.startsWith(`${filename}_`);
+        });
         setFilteredFiles(filtered);
       })
       .catch((error) => {
         console.error("Error fetching files:", error);
       });
-  }, []);
+  }, [filename]);
 
   const handleDownload = (filename) => {
     // สร้างลิงก์
