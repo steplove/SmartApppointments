@@ -124,7 +124,6 @@ function DashboardCheckup() {
 
     return (
       <div key={file} style={{ marginTop: 2 }}>
-        {file}{" "}
         <button
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -217,7 +216,7 @@ function DashboardCheckup() {
                             <tr className="text-center">
                               <th>{t("No")}</th>
                               <th>{t("date")}</th>
-                              <th>{t("file_name")}</th>
+                              <th>{t("Download")}</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -297,9 +296,9 @@ function DashboardCheckup() {
                     <table className="table table-striped">
                       <thead>
                         <tr className="text-center" style={{ fontSize: "0.8rem" }}>
-                          <th style={{ width: "20%" }}>รายการที่</th>
-                          <th>วันที่</th>
-                          <th>ไฟล์</th>
+                          <th>{t("No")}</th>
+                          <th>{t("date")}</th>
+                          <th>{t("Download")}</th>
                         </tr>
                       </thead>
                       <tbody>
