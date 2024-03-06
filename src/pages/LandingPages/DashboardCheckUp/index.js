@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 // import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import ListAltIcon from "@mui/icons-material/ListAlt";
+// import ListAltIcon from "@mui/icons-material/ListAlt";
 // import CalendarComponent from "components/CalendarComponent";
 // import Foots from "components/Foot";
 import MenuListCheckup from "../MenuListCheckup";
@@ -60,19 +60,33 @@ function DashboardCheckup() {
   // };
   // const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
-
+  const [listFile, setListFile] = useState([]);
+  console.log(listFile, "listFilelistFilelistFilelistFile");
   useEffect(() => {
     // เรียก API เพื่อดึงรายชื่อไฟล์ทั้งหมด
     axios
       .get(BASE_URL + "/api/get-all-pdfs")
       .then((response) => {
         // กรองไฟล์ที่ตรงกับเงื่อนไข
+        console.log(response.data.files, "response");
         const filtered = response.data.files.filter((file) => {
           // ตรวจสอบว่าไฟล์เริ่มต้นด้วย HN
           return file.startsWith(`${filename}_`);
         });
+        const listFile = filtered.map((file) => {
+          // ตัดคำด้วย "_" เพื่อแยกส่วนต่าง ๆ ของชื่อไฟล์
+          const parts = file.split("_");
+
+          // เลือกตำแหน่งที่ต้องการจาก parts
+          const datePart = parts[1];
+
+          return datePart;
+        });
+
         setFilteredFiles(filtered);
+        setListFile(listFile); // สมมติว่าคุณใช้ useState ตัวอื่น ๆ ชื่อว่า setListFile
       })
+
       .catch((error) => {
         console.error("Error fetching files:", error);
       });
@@ -109,13 +123,13 @@ function DashboardCheckup() {
     };
 
     return (
-      <li key={file} style={{ marginTop: 2 }}>
+      <div key={file} style={{ marginTop: 2 }}>
         {file}{" "}
         <button
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{
-            backgroundColor: hovered ? "purple" : "red",
+            backgroundColor: hovered ? "purple" : "#0bb288",
             color: "white",
             padding: "10px 15px",
             border: "none",
@@ -126,9 +140,9 @@ function DashboardCheckup() {
           }}
           onClick={() => handleDownload(file)}
         >
-          Download
+          {t("Download")}
         </button>
-      </li>
+      </div>
     );
   };
   ButtonWithHover.propTypes = {
@@ -176,7 +190,7 @@ function DashboardCheckup() {
                   </MKBox>
                 </Card>
               </Grid>
-              <Card sx={{ maxWidth: "100%", mx: "auto", marginTop: "10px" }}>
+              <Card sx={{ marginBottom: "0px", maxWidth: "70%", mx: "auto", width: "100%", mt: 3 }}>
                 <Grid
                   item
                   sx={{
@@ -187,39 +201,66 @@ function DashboardCheckup() {
                     justifyContent: "center",
                   }}
                 >
-                  <Grid item xs={12} md={12}>
-                    <Card style={{ backgroundColor: "#ffffff" }}>
-                      <CardContent>
-                        <Typography variant="h6" color="primary">
-                          {t("checkUP_result_transactions")}
+                  <Grid item sm={12} md={12} lg={12} sx={{ backgroundColor: "#ffffff" }}>
+                    <CardContent>
+                      <Typography variant="h6" color="primary">
+                        {t("checkUP_result_transactions")}
+                      </Typography>
+                      <Divider style={{ margin: "10px 0" }} />
+                      {filteredFiles.length === 0 ? (
+                        <Typography variant="h6" color="textSecondary">
+                          {t("no_information_found")}
                         </Typography>
-                        <Divider style={{ margin: "10px 0" }} />
-                        {filteredFiles.length === 0 ? (
-                          <Typography variant="body2" color="textSecondary">
-                            {t("no_information_found")}
-                          </Typography>
-                        ) : (
-                          <ul>
-                            {filteredFiles.map((file, index) => (
-                              <ButtonWithHover key={index} file={file} />
-                            ))}
-                          </ul>
-                        )}
-                      </CardContent>
-                    </Card>
+                      ) : (
+                        <table className="table table-striped">
+                          <thead>
+                            <tr className="text-center">
+                              <th>{t("No")}</th>
+                              <th>{t("date")}</th>
+                              <th>{t("file_name")}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {filteredFiles.map((file, index) => {
+                              const dateMatch = file.match(/_(\d{2})(\d{2})(\d{4})/); // ค้นหาวันที่ในรูปแบบ DDMMYYYY
+
+                              let listItemContent;
+                              if (dateMatch) {
+                                const day = dateMatch[1];
+                                const month = dateMatch[2];
+                                const year = dateMatch[3];
+
+                                // แปลงเป็นรูปแบบวันที่ไทย
+                                const thaiDate = `${day}/${month}/${parseInt(year, 10)}`;
+
+                                listItemContent = (
+                                  <React.Fragment>
+                                    <td className="text-center">{index + 1}</td>
+                                    <td className="text-center">{thaiDate}</td>
+                                    <td className="text-center">
+                                      <ButtonWithHover file={file} />
+                                    </td>
+                                  </React.Fragment>
+                                );
+                              } else {
+                                // กรณีไม่พบวันที่ที่ถูกต้องในชื่อไฟล์
+                                listItemContent = (
+                                  <React.Fragment>
+                                    <td colSpan="3">วันที่: ไม่สามารถระบุได้</td>
+                                  </React.Fragment>
+                                );
+                              }
+
+                              return <tr key={index}>{listItemContent}</tr>;
+                            })}
+                          </tbody>
+                        </table>
+                      )}
+                    </CardContent>
                   </Grid>
-                  {/* <Grid item xs={12} md={12}>
-                    <h1>{t("checkUP_result_transactions")}</h1>
-                    <ul>
-                      {filteredFiles.map((file, index) => (
-                        <ButtonWithHover key={index} file={file} />
-                      ))}
-                    </ul>
-                  </Grid> */}
                 </Grid>
               </Card>
             </Grid>
-            {/* <DownloadPDFButton /> */}
           </Box>
           <MKBox pt={6} px={1} mt={6}>
             <DefaultFooter content={footerRoutes} stiky />
@@ -237,34 +278,74 @@ function DashboardCheckup() {
               marginBottom: "0px",
             }}
           >
-            <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}></Typography>
+            <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}>
+              {t("checkUP_result_transactions")}
+            </Typography>
             <Grid item container spacing={2} mt={2}>
-              <Card>
-                <MKBox sx={{ marginBottom: "0px", maxWidth: "100%", mx: "auto" }}>
+              <Card sx={{ marginBottom: "0px", maxWidth: "100%", mx: "auto" }}>
+                <MKBox>
                   <Banner slides={slides} />
                 </MKBox>
               </Card>
-              <Grid item xs={12} md={6}>
-                <Card style={{ backgroundColor: "#ffffff" }}>
-                  <CardContent>
-                    <Typography variant="h6" color="primary">
-                      <ListAltIcon style={{ verticalAlign: "middle", marginRight: 10 }} />
-                      {t("latest_appointment_list")}
+              <Grid item xs={12} sx={{ backgroundColor: "#ffffff" }}>
+                <CardContent>
+                  {filteredFiles.length === 0 ? (
+                    <Typography variant="h6" color="textSecondary">
+                      {t("no_information_found")}
                     </Typography>
-                    <Divider style={{ margin: "10px 0" }} />
-                    {filteredFiles.length === 0 ? (
-                      <Typography variant="body2" color="textSecondary">
-                        {t("no_information_found")}
-                      </Typography>
-                    ) : (
-                      <ul>
-                        {filteredFiles.map((file, index) => (
-                          <ButtonWithHover key={index} file={file} />
-                        ))}
-                      </ul>
-                    )}
-                  </CardContent>
-                </Card>
+                  ) : (
+                    <table className="table table-striped">
+                      <thead>
+                        <tr className="text-center" style={{ fontSize: "0.8rem" }}>
+                          <th style={{ width: "20%" }}>รายการที่</th>
+                          <th>วันที่</th>
+                          <th>ไฟล์</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredFiles.map((file, index) => {
+                          const dateMatch = file.match(/_(\d{2})(\d{2})(\d{4})/); // ค้นหาวันที่ในรูปแบบ DDMMYYYY
+
+                          let listItemContent;
+                          if (dateMatch) {
+                            const day = dateMatch[1];
+                            const month = dateMatch[2];
+                            const year = dateMatch[3];
+
+                            // แปลงเป็นรูปแบบวันที่ไทย
+                            const thaiDate = `${day}/${month}/${parseInt(year, 10)}`;
+
+                            listItemContent = (
+                              <React.Fragment>
+                                <td
+                                  className="text-center"
+                                  style={{ fontSize: "0.8rem", width: "20%" }}
+                                >
+                                  {index + 1}
+                                </td>
+                                <td className="text-center" style={{ fontSize: "0.8rem" }}>
+                                  {thaiDate}
+                                </td>
+                                <td className="text-center" style={{ fontSize: "0.8rem" }}>
+                                  <ButtonWithHover file={file} />
+                                </td>
+                              </React.Fragment>
+                            );
+                          } else {
+                            // กรณีไม่พบวันที่ที่ถูกต้องในชื่อไฟล์
+                            listItemContent = (
+                              <React.Fragment>
+                                <td colSpan="3">วันที่: ไม่สามารถระบุได้</td>
+                              </React.Fragment>
+                            );
+                          }
+
+                          return <tr key={index}>{listItemContent}</tr>;
+                        })}
+                      </tbody>
+                    </table>
+                  )}
+                </CardContent>
               </Grid>
             </Grid>
           </Box>

@@ -15,9 +15,10 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
+import LogoutIcon from "@mui/icons-material/Logout";
 // import EventNoteIcon from "@mui/icons-material/EventNote";
 // import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import SettingsIcon from "@mui/icons-material/Settings";
+// import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 // import useTokenCheck from "hooks/useTokenCheck";
 
@@ -74,15 +75,14 @@ export default function MenuListCheckup() {
             label={`${t("home")}`}
             icon={<HomeIcon />}
             component={Link}
-            to="/dashboard"
-            value="/dashboard"
+            to="/dashboardCheckup"
+            value="/dashboardCheckup"
           />
           <BottomNavigationAction
-            label={`${t("setting")}`}
-            icon={<SettingsIcon />}
+            label={`${t("logout")}`}
+            icon={<LogoutIcon />}
             component={Link}
-            to="/userprofile"
-            value="/userprofile"
+            onClick={hadleLogout}
           />
         </BottomNavigation>
       ) : (
@@ -99,13 +99,10 @@ export default function MenuListCheckup() {
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to="/dashboard">
+            <MenuItem onClick={handleClose} component={Link} to="/dashboardCheckup">
               {t("home")}
             </MenuItem>
 
-            <MenuItem onClick={handleClose} component={Link} to="/userprofile">
-              {t("personal_information")}
-            </MenuItem>
             <MenuItem onClick={hadleLogout}>{t("logout")}</MenuItem>
           </Menu>
         </Grid>

@@ -66,7 +66,7 @@ function SigninCheckup() {
         Swal.fire({
           icon: "success",
           title: `${t("login_successful")}`,
-          text: `${t("welcome_to")}`,
+          text: `${t("welcome_to_checkup")}`,
           timer: 1500,
           showConfirmButton: false,
         }).then(() => {
