@@ -20,7 +20,6 @@ import { BASE_URL } from "constants/constants";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import CardSlideComponent from "components/Card";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
@@ -249,10 +248,20 @@ function DashboardCheckup() {
                       {t("latest_appointment_list")}
                     </Typography>
                     <Divider style={{ margin: "10px 0" }} />
+                    {filteredFiles.length === 0 ? (
+                      <Typography variant="body2" color="textSecondary">
+                        {t("no_information_found")}
+                      </Typography>
+                    ) : (
+                      <ul>
+                        {filteredFiles.map((file, index) => (
+                          <ButtonWithHover key={index} file={file} />
+                        ))}
+                      </ul>
+                    )}
                   </CardContent>
                 </Card>
               </Grid>
-              <CardSlideComponent />
             </Grid>
           </Box>
         </Hidden>
