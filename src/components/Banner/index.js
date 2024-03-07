@@ -12,7 +12,7 @@ function Banners() {
 
   useEffect(() => {
     if (!fetchedBanner || !Array.isArray(fetchedBanner)) {
-      console.warn("Invalid or missing data in fetchedBanner:", fetchedBanner);
+      console.warn("");
     } else {
       setImgBanner(fetchedBanner);
       setopenLoad(true);

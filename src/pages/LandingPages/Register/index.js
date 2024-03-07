@@ -53,7 +53,6 @@ function Register() {
     email: "",
     password: "",
   });
-  console.log(formData, "formData");
   // const [errors, setErrors] = useState({});
   const [provinces, setProvinces] = useState([]);
   const [amphures, setAmphures] = useState([]);
@@ -79,7 +78,6 @@ function Register() {
       now.getHours().toString() +
       now.getMinutes().toString() +
       now.getSeconds().toString();
-    console.log(formatter, "formatterformatter");
     surveyid = formatter;
     refText = MyConfig.refText;
     otpSender = MyConfig.otpSender;
@@ -103,7 +101,6 @@ function Register() {
         <Sender>${otpSender}</Sender>
         <Recipient>${phoneforsend}</Recipient>
       </REQ_DATA>`;
-    console.log(xml, "xml");
     const body = { xml: xml, url: url, values: values };
 
     try {
@@ -113,20 +110,20 @@ function Register() {
 
       if (response.status === 200) {
         // routeToOTP(surveyid, phoneforsend);
-        console.log("success");
+        console.log();
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error();
     }
   };
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await fetch(BASE_URL + "/api/provinces");
-        const data = await response.json();
+        const response = await axios.get(`${BASE_URL}/api/provinces`);
+        const data = response.data;
         setProvinces(data);
       } catch (error) {
-        console.error("Error fetching provinces:", error);
+        console.error();
       }
     };
 
@@ -134,30 +131,30 @@ function Register() {
   }, []);
   const fetchAmphures = async (province_id) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/amphurs/${province_id}`);
-      const data = await response.json();
+      const response = await axios.get(`${BASE_URL}/api/amphurs/${province_id}`);
+      const data = response.data;
       setAmphures(data);
     } catch (error) {
-      console.error("Error fetching amphures:", error);
+      console.error();
     }
   };
 
   const fetchDistricts = async (amphure_id) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/subdistricts/${amphure_id}`);
-      const data = await response.json();
+      const response = await axios.get(`${BASE_URL}/api/subdistricts/${amphure_id}`);
+      const data = response.data;
       setDistricts(data);
-      // ตั้งค่า postalCode ด้วย zip_code จาก data แรก (ถ้ามี)
+
+      // Set postalCode based on zip_code from the first item in data (if available)
       if (data && data[0]) {
         setFormData((prev) => ({ ...prev, postalCode: data[0].zip_code }));
       }
     } catch (error) {
-      console.error("Error fetching districts:", error);
+      console.error();
     }
   };
   const handleInputChange1 = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -208,7 +205,6 @@ function Register() {
         gender: selectedGender,
       }));
     }
-    console.log(selectedOption.value);
   };
   const handleSubmit = async () => {
     try {
@@ -247,12 +243,13 @@ function Register() {
       }
       // ทำการเช็คค่าที่ต้องการอย่างอื่น (เช่นคอลัมน์ที่ไม่ต้องการให้ซ้ำ)
 
-      fetch(`${BASE_URL}/api/CheckResultCustomer/${formData.identificationNumber}`)
+      await axios
+        .get(`${BASE_URL}/api/CheckResultCustomer/${formData.identificationNumber}`)
         .then((response) => {
-          if (!response.ok) {
+          if (!response.data) {
             throw new Error("Network response was not ok");
           }
-          return response.json();
+          return response.data;
         })
         .then((data) => {
           if (data.length > 0) {

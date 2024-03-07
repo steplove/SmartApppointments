@@ -10,6 +10,7 @@ import routes from "routes";
 import { useTranslation } from "react-i18next";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -37,17 +38,20 @@ function PackagesDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/searchPackageDetail/${code}`);
-        if (!response.ok) {
+        const response = await axios.get(`${BASE_URL}/api/searchPackageDetail/${code}`);
+
+        // Check if the status code is not in the range 200-299
+        if (response.status < 200 || response.status >= 300) {
           throw new Error("Error fetching data");
         }
-        const data = await response.json();
+
+        const data = response.data;
 
         const promoEndDate = new Date(data.promoEndDate).toLocaleDateString();
         const packagePriceInt = parseInt(data.packagePrice, 10);
         const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
 
-        // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
+        // Update state with the transformed data
         setSelectedPackage({ ...data, promoEndDate, formattedPackagePrice });
       } catch (error) {
         console.error("Error:", error.message);

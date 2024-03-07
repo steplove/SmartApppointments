@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Grid, CardMedia, Container, Hidden } from "@mui/material";
-import useFetch from "hooks/useFetch";
+import axios from "axios";
 import { BASE_URL } from "constants/constants";
 import MKTypography from "components/MKTypography";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -11,7 +11,7 @@ import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import Swal from "sweetalert2";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -34,18 +34,38 @@ const theme = createTheme({
 function HealthBlogList() {
   const { t } = useTranslation();
 
-  const { data: fetchedBlogs = [] } = useFetch(`${BASE_URL}/api/blogShow`);
   const [BlogData, setBlogData] = useState([]);
   const [openLoad, setopenLoad] = useState(false);
 
   useEffect(() => {
-    if (fetchedBlogs && Array.isArray(fetchedBlogs)) {
-      setBlogData(fetchedBlogs);
-      setopenLoad(true);
-    } else {
-      console.error("Error fetching packages");
-    }
-  }, [fetchedBlogs]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/blogShow`);
+        const fetchedBlogs = response.data;
+
+        if (fetchedBlogs && Array.isArray(fetchedBlogs)) {
+          setBlogData(fetchedBlogs);
+          setopenLoad(true);
+        } else {
+          console.error("Error fetching packages");
+          // Use Swal to show an error message and then reload the page
+          await Swal.fire({
+            icon: "error",
+            title: "Error fetching packages",
+            text: "An error occurred while fetching packages. Please try again.",
+          });
+
+          // Reload the page
+          window.location.reload();
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const blogDetail = (code) => {
     window.location.href = `/HealthBlogListDetail/${code}`;
   };
@@ -127,9 +147,8 @@ function HealthBlogList() {
                             whiteSpace: "normal",
                             maxWidth: "100%",
                           }}
-                        >
-                          <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
-                        </MKTypography>
+                          dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
+                        />
 
                         <MKTypography
                           sx={{
@@ -206,9 +225,10 @@ function HealthBlogList() {
                     <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
                       {blog.Blog_Name}
                     </MKTypography>
-                    <MKTypography sx={{ color: "#808080", fontSize: "15px" }}>
-                      <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
-                    </MKTypography>
+                    <MKTypography
+                      sx={{ color: "#808080", fontSize: "15px" }}
+                      dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
+                    />
                     <MKTypography
                       sx={{
                         color: "#0bb288",

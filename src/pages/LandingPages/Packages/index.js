@@ -4,7 +4,7 @@ import MKTypography from "components/MKTypography";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
 import footerRoutes from "footer.routes";
-import useFetch from "hooks/useFetch";
+import axios from "axios";
 import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
@@ -32,28 +32,37 @@ const theme = createTheme({
 });
 function Packages() {
   const { t } = useTranslation();
-  const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showPackages`);
   const [packageData, setPackageData] = useState([]);
   const [openLoad, setopenLoad] = useState(false);
 
   useEffect(() => {
-    if (fetchedPackages && Array.isArray(fetchedPackages)) {
-      const updatedPackageData = fetchedPackages.map((packageItem) => {
-        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
-        const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/showPackages`);
 
-        return {
-          ...packageItem,
-          formattedPackagePrice: formattedPackagePrice,
-        };
-      });
+        if (response.data && Array.isArray(response.data)) {
+          const updatedPackageData = response.data.map((packageItem) => {
+            const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+            const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
 
-      setPackageData(updatedPackageData);
-      setopenLoad(true);
-    } else {
-      console.error("Error fetching packages");
-    }
-  }, [fetchedPackages]);
+            return {
+              ...packageItem,
+              formattedPackagePrice: formattedPackagePrice,
+            };
+          });
+
+          setPackageData(updatedPackageData);
+          setopenLoad(true);
+        } else {
+          console.error("Error fetching packages");
+        }
+      } catch (error) {
+        console.error("Error fetching packages:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   const packagesDetail = (code) => {
     window.location.href = `/packagesdetail/${code}`;
   };

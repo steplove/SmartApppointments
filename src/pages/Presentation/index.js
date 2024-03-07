@@ -7,9 +7,6 @@ import Banner from "components/Banner";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import { Button, Stack, Container, Grid, Typography, Box } from "@mui/material";
-// import Link from "@mui/material/Link";
-// Material Kit 2 React components
-// Images
 import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
@@ -44,10 +41,11 @@ function Presentation() {
   const { t } = useTranslation();
 
   return (
-    <Grid>
+    <Grid item>
       {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
       <Box component="header" position="relative">
         <Grid
+          item
           style={{
             position: "absolute",
             right: 25,

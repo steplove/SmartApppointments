@@ -27,7 +27,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "LanguageSelector";
 // import liff from "@line/liff";
-
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -50,36 +50,23 @@ const theme = createTheme({
 
 function UserProfile() {
   const { t } = useTranslation();
-  // const [profile, setProfile] = useState(null);
-  // console.log(profile);
-  // useEffect(() => {
-  //   if (liff.isLoggedIn()) {
-  //     liff.getProfile().then((data) => setProfile(data));
-  //   }
-  // }, []);
   const [IdenNumber, HN, FirstName, LastName, , ,] = useTokenCheck();
-  // const { data: fetchedCustomerAddress = [] } = useFetch(
-  //   `${BASE_URL}/api/ShowCustomer/${IdenNumber}`
-  // );
-  // const hasData = true;
   const [isEditing, setIsEditing] = useState(false);
   const [fetchedCustomerAddres, setFetchedCustomerAddress] = useState({});
 
   useEffect(() => {
-    // ดึงข้อมูลเมื่อคอมโพเนนต์โหลดครั้งแรก
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/ShowCustomer/${IdenNumber}`);
-        if (response.ok) {
-          const data = await response.json();
-          if (data.length > 0) {
-            setFetchedCustomerAddress(data[0]);
-          }
+        const response = await axios.get(`${BASE_URL}/api/ShowCustomer/${IdenNumber}`);
+
+        if (response.data.length > 0) {
+          setFetchedCustomerAddress(response.data[0]);
         }
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
+
     fetchData();
   }, [IdenNumber]);
 

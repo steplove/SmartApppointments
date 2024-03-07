@@ -30,7 +30,7 @@ import { styled } from "@mui/system";
 import MKTypography from "components/MKTypography";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { BASE_URL } from "../../../constants/constants";
-import useFetch from "../../../hooks/useFetch";
+import axios from "axios";
 import useTokenCheck from "../../../hooks/useTokenCheck";
 import Swal from "sweetalert2";
 // import Foots from "components/Foot";
@@ -74,12 +74,25 @@ function Appointments() {
   const [, HN, FirstName, LastName] = useTokenCheck();
   const nameCustomer = `${FirstName} ${LastName}`;
   const HNCustomer = `${HN} `;
-  const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   //stateเก็บข้อมูลจากฐานข้อมูลเอามาแสดง
   const [clinics, setClinics] = useState([]);
   const [doctor, setDoctor] = useState([]);
   const [isChecked, setChecked] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/showClinics`);
 
+        if (response.data && Array.isArray(response.data)) {
+          setClinics(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching clinics:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   // const [doctors, setDoctors] = useState([]);
   const [formData, setFormData] = useState({
     HN: HNCustomer,
@@ -181,12 +194,6 @@ function Appointments() {
     }
   };
 
-  useEffect(() => {
-    // console.log("fetchedClinics", fetchedClinics);
-    if (fetchedClinics && Array.isArray(fetchedClinics)) {
-      setClinics(fetchedClinics);
-    }
-  }, [fetchedClinics]);
   const fetchDoctors = async (ClinicID) => {
     try {
       const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
@@ -212,7 +219,7 @@ function Appointments() {
   };
 
   // Add this function inside your component
-  if (!fetchedClinics) {
+  if (!clinics) {
     return (
       <Grid
         style={{
@@ -304,13 +311,14 @@ function Appointments() {
                     >
                       {clinics &&
                         clinics.length > 0 &&
-                        clinics.map((clinicName) => (
-                          <MenuItem key={clinicName.Clinic_ID} value={clinicName.Clinic_ID}>
-                            {clinicName.Clinic_Name}{" "}
+                        clinics.map((clinic) => (
+                          <MenuItem key={clinic.Clinic_ID} value={clinic.Clinic_ID}>
+                            {clinic.Clinic_Name}
                           </MenuItem>
                         ))}
                     </Select>
                   </FormControl>
+
                   {/* แพทย์ */}
                   <FormControl fullWidth variant="outlined" style={{ marginTop: "1rem" }}>
                     <InputLabel>{t("doctor")}</InputLabel>

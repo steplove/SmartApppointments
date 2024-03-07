@@ -9,6 +9,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -35,13 +36,15 @@ function HealthBlogListDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/searchBlogsDetail/${code}`);
-        if (!response.ok) {
+        const response = await axios.get(`${BASE_URL}/api/searchBlogsDetail/${code}`);
+        // Check if the status code is not in the range 200-299
+        if (response.status < 200 || response.status >= 300) {
           throw new Error("Error fetching data");
         }
-        const data = await response.json();
+        // Extract data from the response
+        const data = response.data;
 
-        // อัพเดต state ด้วยข้อมูลที่แปลงแล้ว
+        // Update state with the transformed data
         setSelectedBlog(data);
       } catch (error) {
         console.error("Error:", error.message);

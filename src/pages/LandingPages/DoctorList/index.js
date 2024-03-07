@@ -30,7 +30,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
-import useFetch from "../../../hooks/useFetch";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 const theme = createTheme({
@@ -56,8 +56,6 @@ const theme = createTheme({
 function DoctorList() {
   const { t } = useTranslation();
 
-  const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/doctors`);
-  const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   const [doctors, setDoctors] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
@@ -67,17 +65,29 @@ function DoctorList() {
     Doctor: "",
   });
   useEffect(() => {
-    if (fetchedClinics && Array.isArray(fetchedClinics)) {
-      setClinics(fetchedClinics);
-      if (fetchedDoctor && Array.isArray(fetchedDoctor) && fetchDoctors !== null) {
-        setDoctors(fetchedDoctor);
-      } else {
-        console.log("error");
+    const fetchData = async () => {
+      try {
+        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`);
+        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`);
+
+        if (responseClinics.data && Array.isArray(responseClinics.data)) {
+          setClinics(responseClinics.data);
+
+          if (responseDoctor.data && Array.isArray(responseDoctor.data)) {
+            setDoctors(responseDoctor.data);
+          } else {
+            console.error("Error fetching doctors");
+          }
+        } else {
+          console.error("Error fetching clinics");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
-    } else {
-      console.log("error");
-    }
-  }, [fetchedDoctor, fetchedClinics]);
+    };
+
+    fetchData();
+  }, []);
   const fetchDoctors = async (ClinicID) => {
     try {
       const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
@@ -103,7 +113,7 @@ function DoctorList() {
     }
   };
   const handleDialogOpen = (DoctorID, imageUrl) => {
-    const doctor = fetchedDoctor.find((doctor) => doctor.DoctorID === DoctorID);
+    const doctor = doctors.find((doctor) => doctor.DoctorID === DoctorID);
     setSelectedDoctor({
       ...doctor,
       Doctor_IMG: imageUrl, // เพิ่ม URL รูปภาพในข้อมูลที่จะแสดงในไดอล็อก
@@ -122,11 +132,11 @@ function DoctorList() {
   //------------------------------------------------------------------------------------//
   const [openLoad, setopenLoad] = useState(false);
   useEffect(() => {
-    if (fetchedDoctor && fetchedClinics) {
+    if (doctors && clinics) {
       // ทำการ render หน้าเว็บใหม่
       setopenLoad(true);
     }
-  }, [fetchedDoctor, fetchedClinics]);
+  }, [doctors, clinics]);
   // ตรวจสอบสถานะการโหลด หากกำลังโหลดข้อมูล แสดงข้อความ "Loading..."
   if (!openLoad) {
     return (
@@ -248,9 +258,7 @@ function DoctorList() {
                       </Grid>
                       <Grid item>
                         <Button
-                          onClick={() =>
-                            handleDialogOpen(doctor.DoctorID, `${BASE_URL}/${doctor.Doctor_IMG}`)
-                          }
+                          onClick={() => handleDialogOpen(doctor.DoctorID, `${doctor.Doctor_IMG}`)}
                           variant="contained"
                           color="primary"
                           style={{ borderRadius: "20px" }}

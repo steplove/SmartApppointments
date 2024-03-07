@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Grid, CardMedia, Button, Typography } from "@mui/material";
 import "./HealthBlog.css";
-import useFetch from "hooks/useFetch";
+import axios from "axios";
 import { BASE_URL } from "constants/constants";
 import { useTranslation } from "react-i18next";
 
@@ -11,21 +11,30 @@ const HealthBlog = () => {
   const HealthBlogAll = () => {
     window.location.href = "/HealthBlogList";
   };
-  const { data: fetchedBlogs = [] } = useFetch(`${BASE_URL}/api/showRandomBlogs`);
   const [BlogData, setBlogData] = useState([]);
 
   useEffect(() => {
-    if (fetchedBlogs && Array.isArray(fetchedBlogs)) {
-      setBlogData(fetchedBlogs);
-    } else {
-      console.error("Error fetching packages");
-    }
-  }, [fetchedBlogs]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/showRandomBlogs`);
+
+        if (response.data && Array.isArray(response.data)) {
+          setBlogData(response.data);
+        } else {
+          console.error("Error fetching blogs");
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
   const BlogsDetail = (codeID) => {
     window.location.href = `/HealthBlogListDetail/${codeID}`;
   };
   return (
-    <Grid>
+    <Grid item>
       <span
         style={{
           variant: "button",
@@ -88,14 +97,13 @@ const HealthBlog = () => {
                   overflow: "hidden",
                   display: "-webkit-box",
                   WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 4, // จำนวนบรรทัดที่ต้องการแสดง
+                  WebkitLineClamp: 4,
                   textOverflow: "ellipsis",
                   whiteSpace: "normal",
                   maxWidth: "100%",
                 }}
-              >
-                <Grid dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }} />
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
+              />
 
               <Typography
                 sx={{
@@ -113,7 +121,7 @@ const HealthBlog = () => {
           </Card>
         ))}
       </Grid>
-      <Grid style={{ textAlign: "center", marginTop: "20px" }}>
+      <Grid item style={{ textAlign: "center", marginTop: "20px" }}>
         <Button
           xs={12}
           sx={{

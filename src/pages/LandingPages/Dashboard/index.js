@@ -24,7 +24,6 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 // import Foots from "components/Foot";
 import MenuList from "../MenuLists";
 import { BASE_URL } from "constants/constants";
-import useFetch from "hooks/useFetch";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeIcon from "@mui/icons-material/Home";
@@ -38,7 +37,7 @@ import MKBox from "components/MKBox";
 import Banner from "components/Banner";
 import MKTypography from "components/MKTypography";
 import { useTranslation } from "react-i18next";
-
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -63,21 +62,37 @@ function Dashboard() {
   const { t } = useTranslation();
 
   const [IdenNumber, , , , , , , UID] = useTokenCheck();
-  console.log(UID, "UIDUIDUID");
-  const { data: fetchAllAppointment = [] } = useFetch(
-    `${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`
-  );
-  const { data: fetchNotify = [] } = useFetch(`${BASE_URL}/api/NotifyAppointments/${UID}`);
-  const [dialogShow, setDialogShow] = useState([]);
+  const [allAppointments, setAllAppointment] = useState([]);
+  const [fetchNotify, setFetchNotify] = useState([]);
+  const [openLoad, setOpenLoad] = useState(false);
   useEffect(() => {
-    if (fetchAllAppointment && Array.isArray(fetchAllAppointment)) {
-      setAllAppointment(fetchAllAppointment);
-    }
-  }, [fetchAllAppointment]);
+    const fetchData = async () => {
+      try {
+        // Fetch AllAppointmentsLastDay7
+        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`);
+        if (response.data && Array.isArray(response.data)) {
+          setAllAppointment(response.data);
+        }
+        // Fetch NotifyAppointments
+        const notifyResponse = await axios.get(`${BASE_URL}/api/NotifyAppointments/${UID}`);
+        if (notifyResponse.data && Array.isArray(notifyResponse.data)) {
+          setFetchNotify(notifyResponse.data);
+
+          // ทำการ render หน้าเว็บใหม่
+          setOpenLoad(true);
+        }
+      } catch (error) {
+        console.error();
+      }
+    };
+    fetchData();
+  }, [IdenNumber, UID]);
+  const [dialogShow, setDialogShow] = useState([]);
+
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = (UID) => {
-    const foundBooking = fetchAllAppointment.find((booking) => booking.UID === UID);
+    const foundBooking = allAppointments.find((booking) => booking.UID === UID);
     setDialogShow(foundBooking);
     setOpenDialog(true);
   };
@@ -85,15 +100,6 @@ function Dashboard() {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-  const [allAppointments, setAllAppointment] = useState([]);
-
-  const [openLoad, setopenLoad] = useState(false);
-  useEffect(() => {
-    if (fetchNotify && fetchAllAppointment) {
-      // ทำการ render หน้าเว็บใหม่
-      setopenLoad(true);
-    }
-  }, [fetchNotify, fetchAllAppointment]);
   // ตรวจสอบว่า fetchNotify มีข้อมูลหรือไม่
   if (!openLoad) {
     return (

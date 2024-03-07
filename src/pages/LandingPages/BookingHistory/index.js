@@ -22,7 +22,7 @@ import MenuList from "../MenuLists";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import { BASE_URL } from "constants/constants";
-import useFetch from "hooks/useFetch";
+import axios from "axios";
 import Barcode from "react-barcode";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
@@ -56,14 +56,22 @@ function BookingHistory() {
   const [, HN] = useTokenCheck();
   const [allAppointments, setAllAppointment] = useState([]);
   const [dialogShow, setDialogShow] = useState([]);
-  const { data: fetchAllAppointment = [] } = useFetch(
-    `${BASE_URL}/api/AllAppointmentsWhereHN/${HN}`
-  );
+
   useEffect(() => {
-    if (fetchAllAppointment && Array.isArray(fetchAllAppointment)) {
-      setAllAppointment(fetchAllAppointment);
-    }
-  }, [fetchAllAppointment]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsWhereHN/${HN}`);
+
+        if (response.data && Array.isArray(response.data)) {
+          setAllAppointment(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [HN]);
 
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -76,7 +84,7 @@ function BookingHistory() {
   const handleCloseDialog = () => {
     setOpenDialog(false);
   };
-  if (!fetchAllAppointment) {
+  if (!allAppointments) {
     return (
       <Grid
         style={{

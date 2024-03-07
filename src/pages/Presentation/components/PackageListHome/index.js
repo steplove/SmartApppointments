@@ -1,30 +1,39 @@
 import { Card, CardContent, CardMedia, Grid, Button, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import useFetch from "hooks/useFetch";
+import axios from "axios";
 import { BASE_URL } from "constants/constants";
 import { useTranslation } from "react-i18next";
 
 function PackageListHome() {
   const { t } = useTranslation();
-  const { data: fetchedPackages = [], error } = useFetch(`${BASE_URL}/api/showRandomPackages`);
   const [packageData, setPackageData] = useState([]);
   useEffect(() => {
-    if (fetchedPackages && Array.isArray(fetchedPackages)) {
-      const updatedPackageData = fetchedPackages.map((packageItem) => {
-        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
-        const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/showRandomPackages`);
 
-        return {
-          ...packageItem,
-          formattedPackagePrice: formattedPackagePrice,
-        };
-      });
+        if (response.data && Array.isArray(response.data)) {
+          const updatedPackageData = response.data.map((packageItem) => {
+            const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+            const formattedPackagePrice = packagePriceInt.toLocaleString("th-TH");
 
-      setPackageData(updatedPackageData);
-    } else {
-      console.error(error);
-    }
-  }, [fetchedPackages]);
+            return {
+              ...packageItem,
+              formattedPackagePrice: formattedPackagePrice,
+            };
+          });
+
+          setPackageData(updatedPackageData);
+        } else {
+          console.log();
+        }
+      } catch (error) {
+        console.log();
+      }
+    };
+
+    fetchData();
+  }, []);
   const packagesAll = () => {
     window.location.href = "/packages";
   };
@@ -33,7 +42,7 @@ function PackageListHome() {
   };
 
   return (
-    <Grid>
+    <Grid item>
       <span
         style={{
           variant: "button",
@@ -133,7 +142,7 @@ function PackageListHome() {
           </Card>
         ))}
       </Grid>
-      <Grid style={{ textAlign: "center", marginTop: "20px" }}>
+      <Grid item style={{ textAlign: "center", marginTop: "20px" }}>
         <Button
           xs={12}
           sx={{

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../constants/constants";
-
+import axios from "axios";
 function useTokenCheck() {
   const [userData, setUserData] = useState({
     IdenNumber: "",
@@ -14,16 +14,22 @@ function useTokenCheck() {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch(BASE_URL + "/api/authenCustomer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          `${BASE_URL}/api/authenCustomer`,
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = response.data;
+
         if (data.status === "ok") {
           setUserData({
             IdenNumber: data.decoded.IdenNumber,
@@ -35,17 +41,17 @@ function useTokenCheck() {
             Customer_Status: data.decoded.Customer_Status,
             UID: data.decoded.UID,
           });
-          console.log(data);
         } else {
-          console.log(data.status);
           alert("Token หมดอายุ");
           localStorage.removeItem("token");
           window.location = "/login";
         }
-      })
-      .catch((error) => {
-        console.log("Error", error);
-      });
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+
+    fetchData();
   }, []);
   return [
     userData.IdenNumber,

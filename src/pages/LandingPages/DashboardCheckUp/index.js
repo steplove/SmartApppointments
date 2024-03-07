@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  Card,
-  CardContent,
-  Typography,
-  Hidden,
-  Box,
-  Divider,
-  // Paper,
-} from "@mui/material";
+import { Grid, Card, CardContent, Typography, Hidden, Box, Divider } from "@mui/material";
 import PropTypes from "prop-types";
-// import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-// import ListAltIcon from "@mui/icons-material/ListAlt";
-// import CalendarComponent from "components/CalendarComponent";
-// import Foots from "components/Foot";
 import MenuListCheckup from "../MenuListCheckup";
 import { BASE_URL } from "constants/constants";
-// import useFetch from "hooks/useFetch";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -24,9 +10,8 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import Banner from "components/Banner";
-// import MKTypography from "components/MKTypography";
 import { useTranslation } from "react-i18next";
-// import DownloadPDFButton from "../DownloadPDFButton";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import axios from "axios";
 const theme = createTheme({
   breakpoints: {
@@ -52,44 +37,36 @@ function DashboardCheckup() {
   const { t } = useTranslation();
   const [, HN] = useTokenCheck();
   const filename = HN;
-  console.log(filename);
-  // const [openDialog, setOpenDialog] = useState(false);
-
-  // const handleCloseDialog = () => {
-  //   setOpenDialog(false);
-  // };
-  // const [files, setFiles] = useState([]);
   const [filteredFiles, setFilteredFiles] = useState([]);
-  const [listFile, setListFile] = useState([]);
-  console.log(listFile, "listFilelistFilelistFilelistFile");
   useEffect(() => {
-    // เรียก API เพื่อดึงรายชื่อไฟล์ทั้งหมด
-    axios
-      .get(BASE_URL + "/api/get-all-pdfs")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        // เรียก API เพื่อดึงรายชื่อไฟล์ทั้งหมด
+        const response = await axios.get(BASE_URL + "/api/get-all-pdfs", {
+          timeout: 10000, // 10 วินาที timeout (ปรับตามความเหมาะสม)
+        });
+
         // กรองไฟล์ที่ตรงกับเงื่อนไข
-        console.log(response.data.files, "response");
         const filtered = response.data.files.filter((file) => {
           // ตรวจสอบว่าไฟล์เริ่มต้นด้วย HN
           return file.startsWith(`${filename}_`);
         });
-        const listFile = filtered.map((file) => {
-          // ตัดคำด้วย "_" เพื่อแยกส่วนต่าง ๆ ของชื่อไฟล์
-          const parts = file.split("_");
-
-          // เลือกตำแหน่งที่ต้องการจาก parts
-          const datePart = parts[1];
-
-          return datePart;
-        });
 
         setFilteredFiles(filtered);
-        setListFile(listFile); // สมมติว่าคุณใช้ useState ตัวอื่น ๆ ชื่อว่า setListFile
-      })
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.error("คำขอถูกยกเลิก:", error.message);
+        } else {
+          console.error("ข้อผิดพลาด:", error.message);
+        }
+      }
+    };
 
-      .catch((error) => {
-        console.error("Error fetching files:", error);
-      });
+    fetchData();
+
+    return () => {
+      // ยกเลิกการร้องขอเมื่อ component unmount (ถ้าต้องการ)
+    };
   }, [filename]);
 
   const handleDownload = (filename) => {
@@ -139,7 +116,8 @@ function DashboardCheckup() {
           }}
           onClick={() => handleDownload(file)}
         >
-          {t("Download")}
+          <span style={{ marginRight: "5px" }}>{t("Download")}</span>
+          <CloudDownloadIcon />
         </button>
       </div>
     );
