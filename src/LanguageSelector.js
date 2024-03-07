@@ -56,11 +56,12 @@ const LanguageSelector = () => {
           {t("ไทย")}
         </MenuItem>
         <MenuItem onClick={() => changeLanguage("en")}>
-          <span role="img" aria-label="USA Flag">
-            🇺🇸
+          <span role="img" aria-label="UK Flag">
+            🇬🇧
           </span>{" "}
-          {t("english")}
+          {t("English")}
         </MenuItem>
+
         {/* <MenuItem onClick={() => changeLanguage("lo")}>
           <span role="img" aria-label="Laos Flag">
             🇱🇦
