@@ -156,7 +156,8 @@ function HealthBlogList() {
                             fontSize: "15px",
                             textAlign: "center",
                             textDecoration: "underline",
-                            alignSelf: "flex-end", // ทำให้อยู่ล่าง
+                            alignSelf: "flex-end",
+                            cursor: "pointer",
                           }}
                           onClick={() => blogDetail(blog.Blog_ID)}
                         >

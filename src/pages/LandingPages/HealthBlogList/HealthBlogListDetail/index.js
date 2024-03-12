@@ -111,11 +111,8 @@ function HealthBlogListDetail() {
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
-                            >
-                              <Grid
-                                dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
-                              />
-                            </Typography>
+                              dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
+                            />
                           </Grid>
                           <Grid item lg={6}>
                             {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}
@@ -158,11 +155,8 @@ function HealthBlogListDetail() {
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
-                            >
-                              <Grid
-                                dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
-                              />
-                            </Typography>
+                              dangerouslySetInnerHTML={{ __html: selectedBlog.Blog_Detail }}
+                            />
                           </Grid>
                           <Grid item lg={6}>
                             {/* ส่วนอื่น ๆ ที่ต้องการแสดง เช่น รายละเอียดเพิ่มเติม */}

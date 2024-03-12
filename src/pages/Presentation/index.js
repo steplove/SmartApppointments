@@ -11,11 +11,10 @@ import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
-import { Card } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LanguageSelector from "LanguageSelector";
 import { useTranslation } from "react-i18next";
-
+import { useSpring, animated } from "@react-spring/web";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -35,13 +34,25 @@ const theme = createTheme({
     },
   },
 });
+
 function Presentation() {
   const [showNavbar] = useState(false);
   const slides = [];
   const { t } = useTranslation();
-
+  const springs = useSpring({
+    from: { x: -100 },
+    to: { x: 0 },
+  });
+  const springs1 = useSpring({
+    from: { y: -100 },
+    to: { y: 0 },
+  });
+  const Cookie = useSpring({
+    from: { y: 100 },
+    to: { y: 0 },
+  });
   return (
-    <Grid item>
+    <>
       {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
       <Box component="header" position="relative">
         <Grid
@@ -77,38 +88,53 @@ function Presentation() {
           }}
         >
           <Container>
-            <Grid
-              container
-              item
-              xs={12}
-              md={7}
-              lg={6}
-              flexDirection="column"
-              justifyContent="center"
-            >
-              <Typography
-                variant="h1"
-                color="#FFFFFF"
-                mb={3}
-                sx={({ breakpoints, typography: { size } }) => ({
-                  [breakpoints.down("md")]: {
-                    fontSize: size["3xl"],
-                  },
-                })}
+            <Grid item xs={12} md={7} lg={6} flexDirection="column" justifyContent="center">
+              <animated.div
+                style={{
+                  ...springs1,
+                }}
               >
-                {t("kasemrad_sriburin")}
-              </Typography>
-              <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
-                Hospital You Can Trust.
-              </Typography>
-              <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
-                {t("hospital_you_trust")}
-              </Typography>
-
+                <Typography
+                  variant="h1"
+                  color="#FFFFFF"
+                  mb={3}
+                  sx={({ breakpoints, typography: { size } }) => ({
+                    [breakpoints.down("md")]: {
+                      fontSize: size["3xl"],
+                    },
+                  })}
+                >
+                  {t("kasemrad_sriburin")}
+                </Typography>
+              </animated.div>{" "}
+              <animated.div
+                style={{
+                  ...springs,
+                }}
+              >
+                <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
+                  Hospital You Can Trust.
+                </Typography>
+              </animated.div>{" "}
+              <animated.div
+                style={{
+                  ...springs,
+                }}
+              >
+                <Typography variant="body1" color="#FFFFFF" opacity={0.8} pr={6} mr={6}>
+                  {t("hospital_you_trust")}
+                </Typography>
+              </animated.div>{" "}
               <Stack direction="row" spacing={1} mt={3}>
-                <Button style={{ backgroundColor: "white" }} href="/signIn">
-                  {t("appointment")}
-                </Button>
+                <animated.div
+                  style={{
+                    ...springs,
+                  }}
+                >
+                  <Button style={{ backgroundColor: "white" }} href="/signIn">
+                    {t("appointment")}
+                  </Button>
+                </animated.div>{" "}
               </Stack>
             </Grid>
           </Container>
@@ -120,19 +146,21 @@ function Presentation() {
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Card style={{ maxWidth: "70%", margin: "auto" }}>
-            <Box sx={{ marginBottom: "20px", maxWidth: "100%" }}>
+          <Box sx={{ marginBottom: "20px", maxWidth: "70%", margin: "auto" }}>
+            <animated.div
+              style={{
+                ...springs,
+              }}
+            >
               <Banner slides={slides} />
-            </Box>
-          </Card>
+            </animated.div>{" "}
+          </Box>
         </Hidden>
         {/* Mobile View */}
         <Hidden smUp>
-          <Card style={{ maxWidth: "100%", margin: "auto" }}>
-            <Box sx={{ marginBottom: "20px", maxWidth: "100%" }}>
-              <Banner slides={slides} />
-            </Box>
-          </Card>
+          <Box sx={{ marginBottom: "20px", maxWidth: "100%", margin: "auto" }}>
+            <Banner slides={slides} />
+          </Box>
         </Hidden>
       </ThemeProvider>
       <Box sx={{ marginTop: "20px", marginBottom: "20px" }}>
@@ -142,19 +170,31 @@ function Presentation() {
         <HealthBlog />
       </Box>
       <Box pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
+        <animated.div
+          style={{
+            ...springs,
+          }}
+        >
+          <DefaultFooter content={footerRoutes} />
+        </animated.div>{" "}
       </Box>
-      <CookieConsent
-        location="bottom"
-        buttonText={t("allow_all_cookies")}
-        cookieName="myAwesomeCookieName2"
-        style={{ background: "#FFFFFF" }}
-        buttonStyle={{ color: "#FFFFFF", fontSize: "13px", background: "#0bb288" }}
-        expires={150}
+      <animated.div
+        style={{
+          ...Cookie,
+        }}
       >
-        <span style={{ fontSize: ".813rem", color: "#808080" }}>{t("cookies")}</span>
-      </CookieConsent>
-    </Grid>
+        <CookieConsent
+          location="bottom"
+          buttonText={t("allow_all_cookies")}
+          cookieName="myAwesomeCookieName2"
+          style={{ background: "#FFFFFF" }}
+          buttonStyle={{ color: "#FFFFFF", fontSize: "13px", background: "#0bb288" }}
+          expires={150}
+        >
+          <span style={{ fontSize: ".813rem", color: "#808080" }}>{t("cookies")}</span>
+        </CookieConsent>
+      </animated.div>{" "}
+    </>
   );
 }
 

@@ -90,8 +90,8 @@ function DoctorList() {
   }, []);
   const fetchDoctors = async (ClinicID) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
-      const data = await response.json();
+      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
+      const data = response.data;
       setDoctors(data);
     } catch (error) {
       console.error("Error fetching Doctors:", error);

@@ -10,9 +10,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 // import NavbarsAboutUs from "../Navbars";
 import { BASE_URL } from "constants/constants";
-import useFetch from "hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -34,34 +33,42 @@ const theme = createTheme({
 });
 function ServicesRoom() {
   const { t } = useTranslation();
-  const { data: fetchedTypeRoom = [] } = useFetch(`${BASE_URL}/api/showBannerTypeRoom`);
   const [typeRoomData, setTypeRoomData] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/showBannerTypeRoom`);
+      const fetchedTypeRoom = response.data;
+
+      if (Array.isArray(fetchedTypeRoom)) {
+        const filteredTypeRoomData = fetchedTypeRoom.filter(
+          (packageItem) =>
+            packageItem.Image_Room_Type !== null &&
+            packageItem.Image_Room_Type !== undefined &&
+            packageItem.Image_Room_Type !== ""
+        );
+
+        const updatedTypeRoomData = filteredTypeRoomData.map((packageItem) => {
+          const packagePriceInt = parseInt(packageItem.packagePrice, 10);
+          const formattedTypeRoomPrice = packagePriceInt.toLocaleString("th-TH");
+
+          return {
+            ...packageItem,
+            formattedTypeRoomPrice: formattedTypeRoomPrice,
+          };
+        });
+
+        setTypeRoomData(updatedTypeRoomData);
+      } else {
+        console.error("Error fetching packages");
+      }
+    } catch (error) {
+      console.error("Error fetching packages:", error.message);
+    }
+  };
 
   useEffect(() => {
-    if (fetchedTypeRoom && Array.isArray(fetchedTypeRoom)) {
-      // กรอง Room_Type ที่ไม่มีค่าว่าง
-      const filteredTypeRoomData = fetchedTypeRoom.filter(
-        (packageItem) =>
-          packageItem.Image_Room_Type !== null &&
-          packageItem.Image_Room_Type !== undefined &&
-          packageItem.Image_Room_Type !== ""
-      );
-
-      const updatedTypeRoomData = filteredTypeRoomData.map((packageItem) => {
-        const packagePriceInt = parseInt(packageItem.packagePrice, 10);
-        const formattedTypeRoomPrice = packagePriceInt.toLocaleString("th-TH");
-
-        return {
-          ...packageItem,
-          formattedTypeRoomPrice: formattedTypeRoomPrice,
-        };
-      });
-
-      setTypeRoomData(updatedTypeRoomData);
-    } else {
-      console.error("Error fetching packages");
-    }
-  }, [fetchedTypeRoom]);
+    fetchData();
+  }, []);
   const servicesDetail = (code) => {
     window.location.href = `/ServicesRoomsDetail/${code}`;
   };
@@ -93,7 +100,7 @@ function ServicesRoom() {
     );
   }
   return (
-    <Grid>
+    <>
       <DefaultNavbar routes={routes} sticky relative />
       {/* <NavbarsAboutUs /> */}
       <ThemeProvider theme={theme}>
@@ -153,11 +160,9 @@ function ServicesRoom() {
                           <CardContent>
                             <MKTypography
                               sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
-                            >
-                              <Grid
-                                dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }}
-                              />
-                            </MKTypography>
+                              dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }}
+                            />
+
                             <MKTypography
                               sx={{
                                 color: "#808080",
@@ -165,9 +170,9 @@ function ServicesRoom() {
                                 lineHeight: 0.5,
                                 marginTop: "10px",
                               }}
-                            >
-                              <Grid dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
-                            </MKTypography>
+                              dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }}
+                            />
+
                             <MKTypography
                               sx={{
                                 color: "#0bb288",
@@ -227,12 +232,13 @@ function ServicesRoom() {
                       <CardContent>
                         <MKTypography
                           sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
-                        >
-                          <Grid dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }} />
-                        </MKTypography>
-                        <MKTypography sx={{ color: "#808080", fontSize: "12px" }}>
-                          <Grid dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }} />
-                        </MKTypography>
+                          dangerouslySetInnerHTML={{ __html: typeItem.Image_Room_Type }}
+                        />
+                        <MKTypography
+                          sx={{ color: "#808080", fontSize: "12px" }}
+                          dangerouslySetInnerHTML={{ __html: typeItem.Room_Detail }}
+                        />
+
                         <MKTypography
                           sx={{
                             color: "#0bb288",
@@ -257,7 +263,7 @@ function ServicesRoom() {
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
-    </Grid>
+    </>
   );
 }
 

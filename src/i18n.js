@@ -164,6 +164,8 @@ i18n.use(initReactI18next).init({
         No: "ลำดับ",
         file_name: "ชื่อไฟล์",
         Download: "ดาวน์โหลด",
+        Logging_in: "กำลังเข้าสู่ระบบ",
+        Just_a_moment_please: "กรุณารอสักครู่...",
       },
     },
     en: {
@@ -328,6 +330,8 @@ i18n.use(initReactI18next).init({
         No: "No.",
         file_name: "File name",
         Download: "Download",
+        Logging_in: "Logging in",
+        Just_a_moment_please: "Just a moment please.",
       },
     },
     lo: {

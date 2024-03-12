@@ -137,13 +137,10 @@ function ServicesRoomsDetail() {
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, lineHeight: 0.8 }}
-                            >
-                              <Grid
-                                dangerouslySetInnerHTML={{
-                                  __html: selectedService[0].Room_Detail,
-                                }}
-                              />
-                            </Typography>
+                              dangerouslySetInnerHTML={{
+                                __html: selectedService[0].Room_Detail,
+                              }}
+                            />
                           </Grid>
                           <Grid item lg={4}>
                             <Typography
@@ -152,13 +149,13 @@ function ServicesRoomsDetail() {
                             >
                               อาหาร
                             </Typography>
-                            <Typography variant="subtitle1" sx={{ marginBottom: 2 }}>
-                              <Grid
-                                dangerouslySetInnerHTML={{
-                                  __html: selectedService[0].Food_Detail,
-                                }}
-                              />
-                            </Typography>
+                            <Typography
+                              variant="subtitle1"
+                              sx={{ marginBottom: 2 }}
+                              dangerouslySetInnerHTML={{
+                                __html: selectedService[0].Food_Detail,
+                              }}
+                            />
                           </Grid>
                           <Grid item lg={4}>
                             <Typography
@@ -167,11 +164,11 @@ function ServicesRoomsDetail() {
                             >
                               สิ่งอำนวยความสะดวก
                             </Typography>
-                            <Typography variant="subtitle1" sx={{ lineHeight: 0.8 }}>
-                              <Grid
-                                dangerouslySetInnerHTML={{ __html: selectedService[0].Property }}
-                              />
-                            </Typography>
+                            <Typography
+                              variant="subtitle1"
+                              sx={{ lineHeight: 0.8 }}
+                              dangerouslySetInnerHTML={{ __html: selectedService[0].Property }}
+                            />
                           </Grid>
                           {/* ตำแหน่งส่วนที่ต้องการแสดงเพิ่มเติม */}
                         </Grid>

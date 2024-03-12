@@ -25,7 +25,7 @@ import footerRoutes from "footer.routes";
 import CircularProgress from "@mui/material/CircularProgress";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
-import useFetch from "../../../hooks/useFetch";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 const theme = createTheme({
@@ -51,39 +51,60 @@ const theme = createTheme({
 function DoctorListHome() {
   const { t } = useTranslation();
 
-  const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/doctors`);
-  const { data: fetchedClinics = [] } = useFetch(`${BASE_URL}/api/showClinics`);
   const [doctors, setDoctors] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState([]);
-  const [openLoad, setopenLoad] = useState(false);
+  const [openLoad, setOpenLoad] = useState(false);
   const [formData, setFormData] = useState({
     Clinic: "",
     Doctor: "",
   });
   useEffect(() => {
-    if (fetchedClinics && Array.isArray(fetchedClinics)) {
-      setClinics(fetchedClinics);
-      if (fetchedDoctor && Array.isArray(fetchedDoctor) && fetchDoctors !== null) {
-        setDoctors(fetchedDoctor);
-        setopenLoad(true);
-      } else {
-        console.log("error");
+    const fetchData = async () => {
+      try {
+        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`);
+        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`);
+
+        const fetchedDoctor = responseDoctor.data || [];
+        const fetchedClinics = responseClinics.data || [];
+
+        if (Array.isArray(fetchedClinics)) {
+          setClinics(fetchedClinics);
+
+          if (Array.isArray(fetchedDoctor)) {
+            setDoctors(fetchedDoctor);
+            setOpenLoad(true); // แก้ชื่อตัวแปร setopenLoad เป็น setOpenLoad
+          } else {
+            console.log("error fetching doctors");
+          }
+        } else {
+          console.log("error fetching clinics");
+        }
+      } catch (error) {
+        console.error("An error occurred while fetching data", error);
       }
-    } else {
-      console.log("error");
-    }
-  }, [fetchedDoctor, fetchedClinics]);
+    };
+
+    fetchData();
+  }, []); // ลบ fetchDoctors ออกจาก dependencies เนื่องจากมันเป็น function และไม่มีการเปลี่ยนแปลง
+
   const fetchDoctors = async (ClinicID) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
-      if (!response.ok) {
+      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
+
+      // เช็คสถานะการตอบกลับ
+      if (response.status !== 200) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+
+      const data = response.data;
+
+      // ทำสิ่งที่คุณต้องการกับข้อมูลที่ได้รับ
       setDoctors(data);
-      window.location.reload();
+
+      // ไม่แนะนำให้ใช้ window.location.reload() ในที่นี้ เพราะมันจะทำให้หน้าเว็บโหลดใหม่ทั้งหน้า
+      // แทนนี้คุณสามารถทำการรีเฟรชข้อมูลที่ได้รับไปแสดงผลหน้าเว็บได้ตามที่คุณต้องการ
     } catch (error) {
       console.error("Error fetching Doctors:", error);
     }
@@ -104,7 +125,7 @@ function DoctorListHome() {
     }
   };
   const handleDialogOpen = (DoctorID, imageUrl) => {
-    const doctor = fetchedDoctor.find((doctor) => doctor.DoctorID === DoctorID);
+    const doctor = doctors.find((doctor) => doctor.DoctorID === DoctorID);
     setSelectedDoctor({
       ...doctor,
       Doctor_IMG: imageUrl, // เพิ่ม URL รูปภาพในข้อมูลที่จะแสดงในไดอล็อก
@@ -242,9 +263,7 @@ function DoctorListHome() {
                     </Grid>
                     <Grid item>
                       <Button
-                        onClick={() =>
-                          handleDialogOpen(doctor.DoctorID, `${BASE_URL}/${doctor.Doctor_IMG}`)
-                        }
+                        onClick={() => handleDialogOpen(doctor.DoctorID, `${doctor.Doctor_IMG}`)}
                         variant="contained"
                         color="primary"
                         style={{ borderRadius: "20px" }}
@@ -257,6 +276,33 @@ function DoctorListHome() {
               ))}
             </Grid>
           )}
+          <Dialog open={openDialog} onClose={handleDialogClose}>
+            <DialogTitle>{t("doctor_details")}</DialogTitle>
+            <DialogContent>
+              <img
+                src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
+                alt={selectedDoctor.Doctor_Name}
+                style={{
+                  width: "200px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
+                  height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
+                  display: "block",
+                  margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน
+                }}
+              />
+              <p>
+                {t("name")}: {selectedDoctor.Doctor_Name}
+              </p>
+              <p>
+                {" "}
+                {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
+              </p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose} color="primary">
+                {t("close")}
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Hidden>
 
         {/* Mobile View */}
@@ -353,34 +399,33 @@ function DoctorListHome() {
               </Card>
             ))
           )}
+          <Dialog open={openDialog} onClose={handleDialogClose}>
+            <DialogTitle>{t("doctor_details")}</DialogTitle>
+            <DialogContent>
+              <img
+                src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
+                alt={selectedDoctor.Doctor_Name}
+                style={{
+                  width: "200px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
+                  height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
+                  display: "block",
+                  margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน
+                }}
+              />
+              <p>
+                {t("name")}: {selectedDoctor.Doctor_Name}
+              </p>
+              <p>
+                {t("doctor_expertise")}: {selectedDoctor.Doctor_Specialty}
+              </p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleDialogClose} color="primary">
+                {t("close")}
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Hidden>
-        <Dialog open={openDialog} onClose={handleDialogClose}>
-          <DialogTitle>{t("doctor_details")}</DialogTitle>
-          <DialogContent>
-            <img
-              src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
-              alt={selectedDoctor.Doctor_Name}
-              style={{
-                width: "200px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
-                height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
-                display: "block",
-                margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน
-              }}
-            />
-
-            <p>
-              {t("name")}: {selectedDoctor.Doctor_Name}
-            </p>
-            <p>
-              {t("expertise")}: {selectedDoctor.Doctor_Specialty}
-            </p>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleDialogClose} color="primary">
-              {t("close")}
-            </Button>
-          </DialogActions>
-        </Dialog>
 
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Pagination

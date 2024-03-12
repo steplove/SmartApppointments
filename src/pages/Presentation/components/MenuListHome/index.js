@@ -1,4 +1,5 @@
 import React from "react";
+import { useSpring, animated } from "@react-spring/web";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import { Grid, Typography } from "@mui/material";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
@@ -8,15 +9,23 @@ import { useTranslation } from "react-i18next";
 function MenuListHome() {
   const { t } = useTranslation();
 
+  const springs = useSpring({
+    from: { opacity: 0, transform: "translateX(-100px)" },
+    to: { opacity: 1, transform: "translateX(0)" },
+  });
+
   const handleClickAppointment = () => {
     window.location.href = "/signIn";
   };
+
   const hadleClickCheckUP = () => {
     window.location.href = "/signInCheckup";
   };
+
   const handleClickSearchDoctor = () => {
-    window.location.href = "/doctorListHome"; // หรือ URL ที่คุณต้องการ
+    window.location.href = "/doctorListHome";
   };
+
   const handleClickContactUs = () => {
     window.location.href = "/Contact";
   };
@@ -73,7 +82,7 @@ function MenuListHome() {
       <Grid item container justifyContent="center" alignItems="center" spacing={2} mt={1}>
         {menuStyles.map((style, index) => (
           <Grid item key={index}>
-            <Grid
+            <animated.div
               id={`menu-item-${index}`}
               onClick={
                 index === 0
@@ -86,7 +95,7 @@ function MenuListHome() {
                   ? handleClickContactUs
                   : ""
               }
-              style={{ ...menuStyle, ...style }}
+              style={{ ...menuStyle, ...style, ...springs }}
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
             >
@@ -120,7 +129,7 @@ function MenuListHome() {
                 {index === 2 && t("search_by_name_expertise_and_others")}
                 {index === 3 && t("ask_for_information_on_treatment_and_services")}
               </Typography>
-            </Grid>
+            </animated.div>
           </Grid>
         ))}
       </Grid>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./card.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import useFetch from "hooks/useFetch";
 import { BASE_URL } from "constants/constants";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
@@ -15,7 +14,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
-
+import axios from "axios";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -37,17 +36,27 @@ const theme = createTheme({
 });
 const ReactCardSlider = () => {
   const { t } = useTranslation();
-  const { data: fetchedDoctor = [] } = useFetch(`${BASE_URL}/api/randomDoctors`);
   const [doctors, setDoctors] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState([]);
   useEffect(() => {
-    if (fetchedDoctor && Array.isArray(fetchedDoctor)) {
-      setDoctors(fetchedDoctor);
-    } else {
-      console.log("error");
-    }
-  }, [fetchedDoctor]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/api/randomDoctors`);
+        const fetchedDoctor = response.data;
+
+        if (fetchedDoctor && Array.isArray(fetchedDoctor)) {
+          setDoctors(fetchedDoctor);
+        } else {
+          console.log("error");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -59,7 +68,7 @@ const ReactCardSlider = () => {
     slider.scrollLeft = slider.scrollLeft + 500;
   };
   const handleDialogOpen = (DoctorID, imageUrl) => {
-    const doctor = fetchedDoctor.find((doctor) => doctor.DoctorID === DoctorID);
+    const doctor = doctors.find((doctor) => doctor.DoctorID === DoctorID);
     setSelectedDoctor({
       ...doctor,
       Doctor_IMG: imageUrl, // เพิ่ม URL รูปภาพในข้อมูลที่จะแสดงในไดอล็อก
@@ -70,7 +79,7 @@ const ReactCardSlider = () => {
   const handleDialogClose = () => {
     setOpenDialog(false);
   };
-  if (!fetchedDoctor) {
+  if (!doctors) {
     return (
       <div
         style={{

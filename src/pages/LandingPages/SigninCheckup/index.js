@@ -31,6 +31,14 @@ function SigninCheckup() {
   const handleSignInClick = async () => {
     try {
       // สมมติว่าคุณมี state สำหรับ username และ password
+      Swal.fire({
+        title: `${t("Logging_in")}`,
+        text: `${t("Just_a_moment_please")}`,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+          Swal.showLoading();
+        },
+      });
       const userData = {
         IdenNumber: identificationInput,
         Password: passwordInput,
@@ -53,6 +61,7 @@ function SigninCheckup() {
         // บันทึก token หรือทำอะไรที่ต้องการ
         localStorage.setItem("token", data.token);
       }
+      Swal.close();
       if (data.Customer_Status === 1) {
         Swal.fire({
           icon: "warning",

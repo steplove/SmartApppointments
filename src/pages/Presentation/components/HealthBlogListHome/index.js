@@ -12,22 +12,19 @@ const HealthBlog = () => {
     window.location.href = "/HealthBlogList";
   };
   const [BlogData, setBlogData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/showRandomBlogs`);
-
-        if (response.data && Array.isArray(response.data)) {
-          setBlogData(response.data);
-        } else {
-          console.error("Error fetching blogs");
-        }
-      } catch (error) {
-        console.error("Error fetching blogs:", error.message);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/showRandomBlogs`);
+      if (response.data && Array.isArray(response.data)) {
+        setBlogData(response.data);
+      } else {
+        console.error("Error: Unexpected response format", response);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching blogs:", error.message, error.response);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
   const BlogsDetail = (codeID) => {
@@ -112,6 +109,7 @@ const HealthBlog = () => {
                   textAlign: "center",
                   textDecoration: "underline",
                   alignSelf: "flex-end", // ทำให้อยู่ล่าง
+                  cursor: "pointer",
                 }}
                 onClick={() => BlogsDetail(blog.Blog_ID)}
               >

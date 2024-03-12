@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Card, CardContent, Typography, Hidden, Box, Divider } from "@mui/material";
-import PropTypes from "prop-types";
 import MenuListCheckup from "../MenuListCheckup";
 import { BASE_URL } from "constants/constants";
 import useTokenCheck from "hooks/useTokenCheck";
@@ -11,8 +10,8 @@ import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import Banner from "components/Banner";
 import { useTranslation } from "react-i18next";
-import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import axios from "axios";
+import ButtonWithHover from "./ButtonWithHover";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -69,18 +68,6 @@ function DashboardCheckup() {
     };
   }, [filename]);
 
-  const handleDownload = (filename) => {
-    // สร้างลิงก์
-    const downloadLink = document.createElement("a");
-    downloadLink.href = `${BASE_URL}/api/download-pdf/${filename}`;
-    downloadLink.target = "_blank"; // เปิดในแท็บใหม่
-    downloadLink.download = filename;
-
-    // โปรแกรมคลิกลิงก์
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  };
   const [openLoad, setopenLoad] = useState(false);
   useEffect(() => {
     // ทำการ render หน้าเว็บใหม่
@@ -88,43 +75,6 @@ function DashboardCheckup() {
       setopenLoad(true);
     }
   }, [HN]);
-  const ButtonWithHover = ({ file }) => {
-    const [hovered, setHovered] = useState(false);
-
-    const handleMouseEnter = () => {
-      setHovered(true);
-    };
-
-    const handleMouseLeave = () => {
-      setHovered(false);
-    };
-
-    return (
-      <div key={file} style={{ marginTop: 2 }}>
-        <button
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          style={{
-            backgroundColor: hovered ? "purple" : "#0bb288",
-            color: "white",
-            padding: "10px 15px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
-            transform: hovered ? "scale(1.05)" : "scale(1)",
-          }}
-          onClick={() => handleDownload(file)}
-        >
-          <span style={{ marginRight: "5px" }}>{t("Download")}</span>
-          <CloudDownloadIcon />
-        </button>
-      </div>
-    );
-  };
-  ButtonWithHover.propTypes = {
-    file: PropTypes.string.isRequired,
-  };
 
   if (!openLoad) {
     return (
@@ -266,7 +216,74 @@ function DashboardCheckup() {
               </Card>
               <Grid item xs={12} sx={{ backgroundColor: "#ffffff" }}>
                 <CardContent>
-                  {filteredFiles.length === 0 ? (
+                  <Grid>
+                    {filteredFiles.length > 0 ? (
+                      filteredFiles.map((booking) => (
+                        <Box
+                          key={booking.UID}
+                          sx={{
+                            marginBottom: "20px",
+                            border: `1px solid ${theme.palette.primary.main}`,
+                            borderRadius: "8px",
+                            padding: "12px",
+                            boxShadow: "0 4px 8px rgba(106, 13, 173, 0.1)",
+                          }}
+                        >
+                          {filteredFiles.map((file, index) => {
+                            const dateMatch = file.match(/_(\d{2})(\d{2})(\d{4})/); // ค้นหาวันที่ในรูปแบบ DDMMYYYY
+
+                            let listItemContent;
+                            if (dateMatch) {
+                              const day = dateMatch[1];
+                              const month = dateMatch[2];
+                              const year = dateMatch[3];
+
+                              // แปลงเป็นรูปแบบวันที่ไทย
+                              const thaiDate = `${day}/${month}/${parseInt(year, 10)}`;
+
+                              listItemContent = (
+                                <React.Fragment key={index}>
+                                  <div
+                                    style={{
+                                      fontSize: "0.8rem",
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                      alignItems: "flex-end",
+                                    }}
+                                  >
+                                    <div style={{ flex: "0 0 20%" }}>{index + 1}</div>
+                                    <div style={{ flex: "1" }}>{thaiDate}</div>
+                                    <div style={{ marginLeft: "auto" }}>
+                                      <ButtonWithHover file={file} />
+                                    </div>
+                                  </div>
+                                </React.Fragment>
+                              );
+                            } else {
+                              // กรณีไม่พบวันที่ที่ถูกต้องในชื่อไฟล์
+                              listItemContent = (
+                                <React.Fragment key={index}>
+                                  <div colSpan="3">วันที่: ไม่สามารถระบุได้</div>
+                                </React.Fragment>
+                              );
+                            }
+
+                            return listItemContent;
+                          })}
+                        </Box>
+                      ))
+                    ) : (
+                      <Typography
+                        variant="body1"
+                        style={{ fontWeight: 600, color: "#999", textAlign: "center" }}
+                      >
+                        {t("no_information_found")}
+                        {t("appointment_history")}
+                      </Typography>
+                    )}
+                  </Grid>
+
+                  {/* {filteredFiles.length === 0 ? (
                     <Typography variant="h6" color="textSecondary">
                       {t("no_information_found")}
                     </Typography>
@@ -321,7 +338,7 @@ function DashboardCheckup() {
                         })}
                       </tbody>
                     </table>
-                  )}
+                  )} */}
                 </CardContent>
               </Grid>
             </Grid>
