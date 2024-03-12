@@ -20,7 +20,7 @@ import logo from "assets/images/logosmartApppointments.png"; // Adjust the path 
 // Images
 import bgImage from "assets/images/hospital.png";
 import Swal from "sweetalert2";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import Foots from "components/Foot";
 import { useTranslation } from "react-i18next";
 
@@ -48,6 +48,7 @@ function SignInBasic() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(userData),
       });

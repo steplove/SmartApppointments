@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import { BASE_URL } from "../../constants/constants";
+import { BASE_URL, token } from "../../constants/constants";
 import axios from "axios";
 import { Grid } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -13,7 +13,12 @@ function Banners() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/showBanners`);
+        const response = await axios.get(`${BASE_URL}/api/showBanners`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const fetchedBanner = response.data;
 
         if (!fetchedBanner || !Array.isArray(fetchedBanner)) {

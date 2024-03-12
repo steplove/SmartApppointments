@@ -4,7 +4,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,12 @@ function ServicesRoomsDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/api/searchServiceDetail/${code}`);
+        const response = await fetch(`${BASE_URL}/api/searchServiceDetail/${code}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error("Error fetching data");
         }

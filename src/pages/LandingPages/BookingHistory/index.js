@@ -21,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuList from "../MenuLists";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import axios from "axios";
 import Barcode from "react-barcode";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -60,7 +60,12 @@ function BookingHistory() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsWhereHN/${HN}`);
+        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsWhereHN/${HN}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.data && Array.isArray(response.data)) {
           setAllAppointment(response.data);

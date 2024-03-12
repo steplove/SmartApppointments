@@ -5,7 +5,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
 import footerRoutes from "footer.routes";
 import useFetch from "hooks/useFetch";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { useTranslation } from "react-i18next";
@@ -31,7 +31,12 @@ const theme = createTheme({
 });
 function MedicalServiceCenter() {
   const { t } = useTranslation();
-  const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showPackages`);
+  const { data: fetchedPackages = [] } = useFetch(`${BASE_URL}/api/showPackages`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   const [packageData, setPackageData] = useState([]);
   console.log(packageData);
   useEffect(() => {

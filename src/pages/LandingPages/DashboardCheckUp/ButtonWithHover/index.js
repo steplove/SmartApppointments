@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import React, { useState } from "react";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import { useTranslation } from "react-i18next";
 
 const ButtonWithHover = ({ file }) => {
@@ -23,7 +23,13 @@ const ButtonWithHover = ({ file }) => {
     // หน่วงเวลา 2 วินาทีก่อนที่จะเริ่มดาวน์โหลด
     setTimeout(() => {
       const downloadLink = document.createElement("a");
-      downloadLink.href = `${BASE_URL}/api/download-pdf/${filename}`;
+      (downloadLink.href = `${BASE_URL}/api/download-pdf/${filename}`),
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
       downloadLink.target = "_blank";
       downloadLink.download = filename;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, Grid, CardMedia, Container, Hidden } from "@mui/material";
 import axios from "axios";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import MKTypography from "components/MKTypography";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
@@ -40,7 +40,12 @@ function HealthBlogList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/blogShow`);
+        const response = await axios.get(`${BASE_URL}/api/blogShow`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const fetchedBlogs = response.data;
 
         if (fetchedBlogs && Array.isArray(fetchedBlogs)) {

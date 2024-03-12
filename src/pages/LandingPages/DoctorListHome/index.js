@@ -17,7 +17,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BASE_URL } from "../../../constants/constants";
+import { BASE_URL, token } from "../../../constants/constants";
 import Pagination from "@mui/material/Pagination";
 import MKBox from "components/MKBox";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -63,8 +63,18 @@ function DoctorListHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`);
-        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`);
+        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         const fetchedDoctor = responseDoctor.data || [];
         const fetchedClinics = responseClinics.data || [];
@@ -91,7 +101,12 @@ function DoctorListHome() {
 
   const fetchDoctors = async (ClinicID) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
+      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       // เช็คสถานะการตอบกลับ
       if (response.status !== 200) {

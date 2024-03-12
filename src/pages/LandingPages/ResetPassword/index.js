@@ -10,7 +10,7 @@ import logo from "assets/images/logosmartApppointmentsnew.png"; // Adjust the pa
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import md5 from "md5";
@@ -124,9 +124,12 @@ function ResetPassword() {
       });
       const response = await fetch(`${BASE_URL}/api/reset-password/${telephoneForSend}`, {
         method: "POST",
+
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
+
         body: JSON.stringify({ password }),
       });
       if (response.ok) {

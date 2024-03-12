@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Card, CardContent, Typography, Hidden, Box, Divider } from "@mui/material";
 import MenuListCheckup from "../MenuListCheckup";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -41,9 +41,18 @@ function DashboardCheckup() {
     const fetchData = async () => {
       try {
         // เรียก API เพื่อดึงรายชื่อไฟล์ทั้งหมด
-        const response = await axios.get(BASE_URL + "/api/get-all-pdfs", {
-          timeout: 10000, // 10 วินาที timeout (ปรับตามความเหมาะสม)
-        });
+        const response = await axios.get(
+          BASE_URL + "/api/get-all-pdfs",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          },
+          {
+            timeout: 10000, // 10 วินาที timeout (ปรับตามความเหมาะสม)
+          }
+        );
 
         // กรองไฟล์ที่ตรงกับเงื่อนไข
         const filtered = response.data.files.filter((file) => {

@@ -18,15 +18,12 @@ import MenuList from "../MenuLists";
 import Img from "../../../assets/images/profile.png";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Barcode from "react-barcode";
-// import Foots from "components/Foot";
 import useTokenCheck from "hooks/useTokenCheck";
-import { BASE_URL } from "../../../constants/constants";
+import { BASE_URL, token } from "../../../constants/constants";
 import Swal from "sweetalert2";
-// import useFetch from "../../../hooks/useFetch";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "LanguageSelector";
-// import liff from "@line/liff";
 import axios from "axios";
 const theme = createTheme({
   breakpoints: {
@@ -57,7 +54,12 @@ function UserProfile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/ShowCustomer/${IdenNumber}`);
+        const response = await axios.get(`${BASE_URL}/api/ShowCustomer/${IdenNumber}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.data.length > 0) {
           setFetchedCustomerAddress(response.data[0]);

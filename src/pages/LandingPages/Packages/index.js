@@ -5,7 +5,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import MKBox from "components/MKBox";
 import footerRoutes from "footer.routes";
 import axios from "axios";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { useTranslation } from "react-i18next";
@@ -38,7 +38,12 @@ function Packages() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/showPackages`);
+        const response = await axios.get(`${BASE_URL}/api/showPackages`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.data && Array.isArray(response.data)) {
           const updatedPackageData = response.data.map((packageItem) => {

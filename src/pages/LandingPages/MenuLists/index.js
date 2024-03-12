@@ -6,7 +6,6 @@ import {
   Toolbar,
   IconButton,
   Typography,
-  // Button,
   Menu,
   MenuItem,
   BottomNavigation,
@@ -20,13 +19,8 @@ import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link } from "react-router-dom";
 import useTokenCheck from "hooks/useTokenCheck";
-
-// import SettingsIcon from "@mui/icons-material/Settings";
-// import PersonIcon from "@mui/icons-material/Person";
 import HistoryIcon from "@mui/icons-material/History";
-// import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Popover from "@mui/material/Popover";
-// import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import LanguageSelector from "LanguageSelector";
 
@@ -38,10 +32,6 @@ export default function MenuList() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorPopover, setAnchorPopover] = React.useState(null);
-
-  // const handleClickPopover = (event) => {
-  //   setAnchorPopover(event.currentTarget);
-  // };
 
   const handleClosePopover = () => {
     setAnchorPopover(null);
@@ -60,9 +50,6 @@ export default function MenuList() {
     localStorage.removeItem("token");
     window.location.href = "/";
   };
-  // const location = useLocation(); // <-- เพิ่ม hook นี้
-
-  // const isCurrentPage = (path) => location.pathname === path; // <-- ฟังก์ชันนี้จะเป็น true เมื่ออยู่ที่หน้านั้น
   return (
     <Grid>
       {isMobile ? (

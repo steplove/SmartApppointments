@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./card.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import CircularProgress from "@mui/material/CircularProgress";
 import {
   Button,
@@ -42,7 +42,12 @@ const ReactCardSlider = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/randomDoctors`);
+        const response = await axios.get(`${BASE_URL}/api/randomDoctors`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const fetchedDoctor = response.data;
 
         if (fetchedDoctor && Array.isArray(fetchedDoctor)) {

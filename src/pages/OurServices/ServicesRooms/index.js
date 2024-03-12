@@ -8,8 +8,7 @@ import MKTypography from "components/MKTypography";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
-// import NavbarsAboutUs from "../Navbars";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 const theme = createTheme({
@@ -36,7 +35,12 @@ function ServicesRoom() {
   const [typeRoomData, setTypeRoomData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/showBannerTypeRoom`);
+      const response = await axios.get(`${BASE_URL}/api/showBannerTypeRoom`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const fetchedTypeRoom = response.data;
 
       if (Array.isArray(fetchedTypeRoom)) {

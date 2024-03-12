@@ -26,7 +26,7 @@ import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import Button from "@mui/material/Button";
 import MKTypography from "components/MKTypography";
 import Divider from "@mui/material/Divider";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import Swal from "sweetalert2";
 import Foots from "components/Foot";
 import { useTranslation } from "react-i18next";
@@ -119,7 +119,12 @@ function Register() {
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/provinces`);
+        const response = await axios.get(`${BASE_URL}/api/provinces`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const data = response.data;
         setProvinces(data);
       } catch (error) {
@@ -131,7 +136,12 @@ function Register() {
   }, []);
   const fetchAmphures = async (province_id) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/amphurs/${province_id}`);
+      const response = await axios.get(`${BASE_URL}/api/amphurs/${province_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = response.data;
       setAmphures(data);
     } catch (error) {
@@ -141,7 +151,12 @@ function Register() {
 
   const fetchDistricts = async (amphure_id) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/subdistricts/${amphure_id}`);
+      const response = await axios.get(`${BASE_URL}/api/subdistricts/${amphure_id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = response.data;
       setDistricts(data);
 
@@ -244,7 +259,12 @@ function Register() {
       // ทำการเช็คค่าที่ต้องการอย่างอื่น (เช่นคอลัมน์ที่ไม่ต้องการให้ซ้ำ)
 
       await axios
-        .get(`${BASE_URL}/api/CheckResultCustomer/${formData.identificationNumber}`)
+        .get(`${BASE_URL}/api/CheckResultCustomer/${formData.identificationNumber}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           if (!response.data) {
             throw new Error("Network response was not ok");
@@ -280,6 +300,7 @@ function Register() {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
               },
               body: JSON.stringify({
                 identificationType: formData.identificationType,

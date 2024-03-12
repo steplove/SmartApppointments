@@ -23,7 +23,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 // import CalendarComponent from "components/CalendarComponent";
 // import Foots from "components/Foot";
 import MenuList from "../MenuLists";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import useTokenCheck from "hooks/useTokenCheck";
 import CircularProgress from "@mui/material/CircularProgress";
 import HomeIcon from "@mui/icons-material/Home";
@@ -69,12 +69,22 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         // Fetch AllAppointmentsLastDay7
-        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`);
+        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (response.data && Array.isArray(response.data)) {
           setAllAppointment(response.data);
         }
         // Fetch NotifyAppointments
-        const notifyResponse = await axios.get(`${BASE_URL}/api/NotifyAppointments/${UID}`);
+        const notifyResponse = await axios.get(`${BASE_URL}/api/NotifyAppointments/${UID}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (notifyResponse.data && Array.isArray(notifyResponse.data)) {
           setFetchNotify(notifyResponse.data);
 

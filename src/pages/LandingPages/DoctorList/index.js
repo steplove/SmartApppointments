@@ -21,7 +21,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MenuList from "../MenuLists";
 // import HomeIcon from "@mui/icons-material/Home";
 // import PersonIcon from "@mui/icons-material/Person";
-import { BASE_URL } from "../../../constants/constants";
+import { BASE_URL, token } from "../../../constants/constants";
 import Pagination from "@mui/material/Pagination";
 // import Foots from "components/Foot";
 
@@ -67,8 +67,18 @@ function DoctorList() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`);
-        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`);
+        const responseDoctor = await axios.get(`${BASE_URL}/api/doctors`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const responseClinics = await axios.get(`${BASE_URL}/api/showClinics`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (responseClinics.data && Array.isArray(responseClinics.data)) {
           setClinics(responseClinics.data);
@@ -90,7 +100,12 @@ function DoctorList() {
   }, []);
   const fetchDoctors = async (ClinicID) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
+      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = response.data;
       setDoctors(data);
     } catch (error) {

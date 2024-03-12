@@ -29,7 +29,7 @@ import MKBox from "components/MKBox";
 import { styled } from "@mui/system";
 import MKTypography from "components/MKTypography";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { BASE_URL } from "../../../constants/constants";
+import { BASE_URL, token } from "../../../constants/constants";
 import axios from "axios";
 import useTokenCheck from "../../../hooks/useTokenCheck";
 import Swal from "sweetalert2";
@@ -81,7 +81,12 @@ function Appointments() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/showClinics`);
+        const response = await axios.get(`${BASE_URL}/api/showClinics`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.data && Array.isArray(response.data)) {
           setClinics(response.data);

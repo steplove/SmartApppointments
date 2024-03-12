@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-// import { BASE_URL } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-
-// Material Kit 2 React page layout routes
 import routes from "routes";
 import { Card } from "@mui/material";
-// import Swal from "sweetalert2";
 import MKBox from "components/MKBox";
 import bgImage from "assets/images/hospital.png";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import logo from "assets/images/logosmartApppointmentsnew.png"; // Adjust the path to your actual logo location
+import logo from "assets/images/logosmartApppointmentsnew.png";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";

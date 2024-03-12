@@ -1,7 +1,7 @@
 import { Card, CardContent, CardMedia, Grid, Button, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import { useTranslation } from "react-i18next";
 
 function PackageListHome() {
@@ -10,7 +10,12 @@ function PackageListHome() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/showRandomPackages`);
+        const response = await axios.get(`${BASE_URL}/api/showRandomPackages`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
         if (response.data && Array.isArray(response.data)) {
           const updatedPackageData = response.data.map((packageItem) => {

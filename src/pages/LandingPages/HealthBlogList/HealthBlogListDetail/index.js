@@ -4,7 +4,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import MKBox from "components/MKBox";
 import { useParams } from "react-router-dom";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import routes from "routes";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -36,7 +36,12 @@ function HealthBlogListDetail() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/searchBlogsDetail/${code}`);
+        const response = await axios.get(`${BASE_URL}/api/searchBlogsDetail/${code}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         // Check if the status code is not in the range 200-299
         if (response.status < 200 || response.status >= 300) {
           throw new Error("Error fetching data");

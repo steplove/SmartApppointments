@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import OtpInput from "react-otp-input";
 import { useParams } from "react-router-dom";
 import md5 from "md5";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import Swal from "sweetalert2";
 import { Button, Grid, Hidden } from "@mui/material";
 import MKBox from "components/MKBox";
@@ -144,6 +144,7 @@ function OTP() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ telephoneForSend }),
     });

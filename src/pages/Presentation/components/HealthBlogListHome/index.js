@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, Grid, CardMedia, Button, Typography } from "@mui/material";
 import "./HealthBlog.css";
 import axios from "axios";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import { useTranslation } from "react-i18next";
 
 const HealthBlog = () => {
@@ -14,7 +14,12 @@ const HealthBlog = () => {
   const [BlogData, setBlogData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/showRandomBlogs`);
+      const response = await axios.get(`${BASE_URL}/api/showRandomBlogs`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       if (response.data && Array.isArray(response.data)) {
         setBlogData(response.data);
       } else {

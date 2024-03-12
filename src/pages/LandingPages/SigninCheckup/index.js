@@ -1,26 +1,19 @@
-// react-router-dom components
 import React, { useState } from "react";
-// @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-// Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-
-// Material Kit 2 React page layout routes
 import routes from "routes";
-import logo from "assets/images/logosmartApppointments.png"; // Adjust the path to your actual logo location
+import logo from "assets/images/logosmartApppointments.png";
 // Images
 import bgImage from "assets/images/hospital.png";
 import Swal from "sweetalert2";
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import Foots from "components/Foot";
 import { useTranslation } from "react-i18next";
 
@@ -48,6 +41,7 @@ function SigninCheckup() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(userData),
       });
