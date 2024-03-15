@@ -65,7 +65,7 @@ function Banners() {
     >
       {imgBanner.map((image) => (
         <Grid key={image.BannerID}>
-          <img src={`${BASE_URL}/${image.ImageName}`} alt="" />
+          <img src={`${image.ImageName}`} alt="" />
         </Grid>
       ))}
     </Carousel>

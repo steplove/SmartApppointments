@@ -125,7 +125,7 @@ function ServicesRoomsDetail() {
                         >
                           {selectedService.map((service) => (
                             <Grid key={service.UID}>
-                              <img src={`${BASE_URL}/${service.image}`} alt="" />
+                              <img src={`${service.image}`} alt="" />
                             </Grid>
                           ))}
                         </Carousel>
@@ -216,7 +216,7 @@ function ServicesRoomsDetail() {
                     >
                       {selectedService.map((service) => (
                         <Grid key={service.UID}>
-                          <img src={`${BASE_URL}/${service.image}`} alt="" />
+                          <img src={`${service.image}`} alt="" />
                         </Grid>
                       ))}
                     </Carousel>

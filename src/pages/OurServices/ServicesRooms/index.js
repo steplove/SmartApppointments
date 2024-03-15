@@ -159,7 +159,7 @@ function ServicesRoom() {
                             component="img"
                             height="150"
                             alt="รายละเอียดรูปภาพ"
-                            image={`${BASE_URL}/${typeItem.image}`}
+                            image={`${typeItem.image}`}
                           />
                           <CardContent>
                             <MKTypography
@@ -231,7 +231,7 @@ function ServicesRoom() {
                         component="img"
                         height="150"
                         alt="รายละเอียดรูปภาพ"
-                        image={`${BASE_URL}/${typeItem.image}`}
+                        image={`${typeItem.image}`}
                       />
                       <CardContent>
                         <MKTypography

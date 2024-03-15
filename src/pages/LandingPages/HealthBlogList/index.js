@@ -131,7 +131,7 @@ function HealthBlogList() {
                       <CardMedia
                         component="img"
                         height="150"
-                        image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
+                        image={`${blog.Blog_ImageBanner}`}
                         alt="รายละเอียดรูปภาพ"
                       />
                       <CardContent>
@@ -225,7 +225,7 @@ function HealthBlogList() {
                       height: "100%", // กำหนดความสูงของรูป
                       objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
                     }}
-                    image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
+                    image={`${blog.Blog_ImageBanner}`}
                   />
                   <CardContent>
                     <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>

@@ -86,7 +86,7 @@ const HealthBlog = () => {
                 height: "100%", // กำหนดความสูงของรูป
                 objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
               }}
-              image={`${BASE_URL}/${blog.Blog_ImageBanner}`}
+              image={`${blog.Blog_ImageBanner}`}
             />
             <CardContent>
               <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>

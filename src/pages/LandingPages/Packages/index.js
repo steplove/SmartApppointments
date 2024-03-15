@@ -130,7 +130,7 @@ function Packages() {
                     <CardMedia
                       component="img"
                       height="150"
-                      image={`${BASE_URL}/${packageItem.packageImgBanner}`}
+                      image={`${packageItem.packageImgBanner}`}
                       alt="รายละเอียดรูปภาพ"
                     />
                     <CardContent>
@@ -214,7 +214,7 @@ function Packages() {
                     <CardMedia
                       component="img"
                       height="150"
-                      image={`${BASE_URL}/${packageItem.packageImgBanner}`}
+                      image={`${packageItem.packageImgBanner}`}
                       alt="รายละเอียดรูปภาพ"
                     />
                     <CardContent>

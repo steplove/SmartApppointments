@@ -243,7 +243,7 @@ function DoctorList() {
                       }}
                     >
                       <Avatar
-                        src={`${BASE_URL}/${doctor.Doctor_IMG}`}
+                        src={`${doctor.Doctor_IMG}`}
                         alt={doctor.Doctor_Name}
                         style={{
                           width: "300px",
@@ -290,7 +290,7 @@ function DoctorList() {
               <DialogTitle>{t("doctor_details")}</DialogTitle>
               <DialogContent>
                 <img
-                  src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
+                  src={`${selectedDoctor.Doctor_IMG}`}
                   alt={selectedDoctor.Doctor_Name}
                   style={{
                     width: "200px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
@@ -392,7 +392,7 @@ function DoctorList() {
                 >
                   <Box display="flex" alignItems="center" p={2}>
                     <Avatar
-                      src={`${BASE_URL}/${doctor.Doctor_IMG}`}
+                      src={`${doctor.Doctor_IMG}`}
                       alt={doctor.Doctor_Name}
                       style={{
                         objectFit: "scale-down",
@@ -429,7 +429,7 @@ function DoctorList() {
               <DialogTitle>{t("doctor_details")}</DialogTitle>
               <DialogContent>
                 <img
-                  src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
+                  src={`${selectedDoctor.Doctor_IMG}`}
                   alt={selectedDoctor.Doctor_Name}
                   style={{
                     width: "200px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ

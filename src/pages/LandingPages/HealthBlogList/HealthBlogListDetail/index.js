@@ -104,7 +104,7 @@ function HealthBlogListDetail() {
                       <CardMedia
                         component="img"
                         height="auto"
-                        image={`${BASE_URL}/${selectedBlog.Blog_Image}`}
+                        image={`${selectedBlog.Blog_Image}`}
                         alt="รูปภาพแพ็คเกจ"
                       />
                       <CardContent>
@@ -148,7 +148,7 @@ function HealthBlogListDetail() {
                       <CardMedia
                         component="img"
                         height="auto"
-                        image={`${BASE_URL}/${selectedBlog.Blog_Image}`}
+                        image={`${selectedBlog.Blog_Image}`}
                         alt="รูปภาพแพ็คเกจ"
                       />
                       <CardContent>
