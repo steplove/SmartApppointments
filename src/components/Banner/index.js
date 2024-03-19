@@ -9,29 +9,27 @@ import CircularProgress from "@mui/material/CircularProgress";
 function Banners() {
   const [imgBanner, setImgBanner] = useState([]);
   const [openLoad, setopenLoad] = useState(false);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/showBanners`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const fetchedBanner = response.data;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/showBanners`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const fetchedBanner = response.data;
-
-        if (!fetchedBanner || !Array.isArray(fetchedBanner)) {
-          console.warn("");
-        } else {
-          setImgBanner(fetchedBanner);
-          setopenLoad(true);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      if (!fetchedBanner || !Array.isArray(fetchedBanner)) {
+        console.warn("");
+      } else {
+        setImgBanner(fetchedBanner);
+        setopenLoad(true);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
   if (!openLoad) {
@@ -63,8 +61,8 @@ function Banners() {
       infiniteLoop={true}
       showStatus={true}
     >
-      {imgBanner.map((image) => (
-        <Grid key={image.BannerID}>
+      {imgBanner.map((image, index) => (
+        <Grid key={index}>
           <img src={`${image.ImageName}`} alt="" />
         </Grid>
       ))}

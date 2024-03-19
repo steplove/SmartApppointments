@@ -18,10 +18,7 @@ import {
 } from "@mui/material";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { getStatusColor } from "components/StatusColor/getStatusColor";
-// import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ListAltIcon from "@mui/icons-material/ListAlt";
-// import CalendarComponent from "components/CalendarComponent";
-// import Foots from "components/Foot";
 import MenuList from "../MenuLists";
 import { BASE_URL, token } from "constants/constants";
 import useTokenCheck from "hooks/useTokenCheck";
@@ -60,41 +57,41 @@ const theme = createTheme({
 const slides = [];
 function Dashboard() {
   const { t } = useTranslation();
-
   const [IdenNumber, , , , , , , UID] = useTokenCheck();
   const [allAppointments, setAllAppointment] = useState([]);
   const [fetchNotify, setFetchNotify] = useState([]);
   const [openLoad, setOpenLoad] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch AllAppointmentsLastDay7
-        const response = await axios.get(`${BASE_URL}/api/AllAppointmentsLastDay7/${IdenNumber}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (response.data && Array.isArray(response.data)) {
-          setAllAppointment(response.data);
-        }
-        // Fetch NotifyAppointments
-        const notifyResponse = await axios.get(`${BASE_URL}/api/NotifyAppointments/${UID}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (notifyResponse.data && Array.isArray(notifyResponse.data)) {
-          setFetchNotify(notifyResponse.data);
-
-          // ทำการ render หน้าเว็บใหม่
-          setOpenLoad(true);
-        }
-      } catch (error) {
-        console.error();
+  const fetchData = async () => {
+    try {
+      // Fetch AllAppointmentsLastDay7
+      const response = await axios.get(`${BASE_URL}/api/AllAppointmentsLastDay7/${UID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.data && Array.isArray(response.data)) {
+        setAllAppointment(response.data);
       }
-    };
+      console.log(response.data, "responseresponse");
+      // Fetch NotifyAppointments
+      const notifyResponse = await axios.get(`${BASE_URL}/api/NotifyAppointments/${UID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (notifyResponse.data && Array.isArray(notifyResponse.data)) {
+        setFetchNotify(notifyResponse.data);
+
+        // ทำการ render หน้าเว็บใหม่
+        setOpenLoad(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, [IdenNumber, UID]);
   const [dialogShow, setDialogShow] = useState([]);
@@ -131,7 +128,7 @@ function Dashboard() {
     );
   }
   return (
-    <Grid>
+    <>
       <MenuList />
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
@@ -177,9 +174,8 @@ function Dashboard() {
                               if (notification.FinishStatus === 0) {
                                 if (notification.StatusFlag === "3") {
                                   content = (
-                                    <Grid>
+                                    <Grid key={notification.UID}>
                                       <ListItem
-                                        key={notification.UID}
                                         style={{
                                           display: "flex",
                                           flexDirection: "column",
@@ -219,7 +215,7 @@ function Dashboard() {
                                   );
                                 } else if (notification.StatusFlag === "4") {
                                   content = (
-                                    <Grid>
+                                    <Grid key={notification.UID}>
                                       <ListItem
                                         style={{
                                           display: "flex",
@@ -258,7 +254,7 @@ function Dashboard() {
                                   );
                                 } else if (notification.StatusFlag === "5") {
                                   content = (
-                                    <Grid>
+                                    <Grid key={notification.UID}>
                                       <ListItem
                                         style={{
                                           display: "flex",
@@ -302,7 +298,7 @@ function Dashboard() {
                                 }
                               } else if (notification.StatusFlag === "6") {
                                 content = (
-                                  <Grid>
+                                  <Grid key={notification.UID}>
                                     <ListItem
                                       style={{
                                         display: "flex",
@@ -561,9 +557,8 @@ function Dashboard() {
                           if (notification.FinishStatus === 0) {
                             if (notification.StatusFlag === "3") {
                               content = (
-                                <Grid>
+                                <Grid key={notification.UID}>
                                   <ListItem
-                                    key={notification.UID}
                                     style={{
                                       display: "flex",
                                       flexDirection: "column",
@@ -604,7 +599,7 @@ function Dashboard() {
                               );
                             } else if (notification.StatusFlag === "4") {
                               content = (
-                                <Grid>
+                                <Grid key={notification.UID}>
                                   <ListItem
                                     style={{
                                       display: "flex",
@@ -644,7 +639,7 @@ function Dashboard() {
                               );
                             } else if (notification.StatusFlag === "5") {
                               content = (
-                                <Grid>
+                                <Grid key={notification.UID}>
                                   <ListItem
                                     style={{
                                       display: "flex",
@@ -687,7 +682,7 @@ function Dashboard() {
                             }
                           } else if (notification.StatusFlag === "6") {
                             content = (
-                              <Grid>
+                              <Grid key={notification.UID}>
                                 <ListItem
                                   style={{
                                     display: "flex",
@@ -900,7 +895,7 @@ function Dashboard() {
       </ThemeProvider>
 
       {/* <Foots /> */}
-    </Grid>
+    </>
   );
 }
 

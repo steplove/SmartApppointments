@@ -65,27 +65,24 @@ export default function MenuList() {
             to="/dashboard"
             value="/dashboard"
           />
-          {HN !== "-"
-            ? (console.log("HN is truthy, rendering Appointment and History"),
-              (
-                <BottomNavigation showLabels>
-                  <BottomNavigationAction
-                    label={`${t("appointment")}`}
-                    icon={<EventNoteIcon />}
-                    component={Link}
-                    to="/appointments"
-                    value="/appointments"
-                  />
-                  <BottomNavigationAction
-                    label={`${t("history")}`}
-                    icon={<HistoryIcon />}
-                    component={Link}
-                    to="/bookinghistory"
-                    value="/bookinghistory"
-                  />
-                </BottomNavigation>
-              ))
-            : null}
+          {HN !== "-" ? (
+            <BottomNavigation showLabels>
+              <BottomNavigationAction
+                label={`${t("appointment")}`}
+                icon={<EventNoteIcon />}
+                component={Link}
+                to="/appointments"
+                value="/appointments"
+              />
+              <BottomNavigationAction
+                label={`${t("history")}`}
+                icon={<HistoryIcon />}
+                component={Link}
+                to="/bookinghistory"
+                value="/bookinghistory"
+              />
+            </BottomNavigation>
+          ) : null}
 
           <BottomNavigationAction
             label={`${t("doctor")}`}
@@ -120,17 +117,24 @@ export default function MenuList() {
               {t("home")}
             </MenuItem>
             {HN !== "-"
-              ? (console.log("HN is truthy, rendering Appointment and History"),
-                (
-                  <>
-                    <MenuItem onClick={handleClose} component={Link} to="/appointments">
-                      {t("appointment")}
-                    </MenuItem>
-                    <MenuItem onClick={handleClose} component={Link} to="/bookinghistory">
-                      {t("history")}
-                    </MenuItem>
-                  </>
-                ))
+              ? [
+                  <MenuItem
+                    key="appointments"
+                    onClick={handleClose}
+                    component={Link}
+                    to="/appointments"
+                  >
+                    {t("appointment")}
+                  </MenuItem>,
+                  <MenuItem
+                    key="history"
+                    onClick={handleClose}
+                    component={Link}
+                    to="/bookinghistory"
+                  >
+                    {t("history")}
+                  </MenuItem>,
+                ]
               : null}
             <MenuItem onClick={handleClose} component={Link} to="/doctorList">
               {t("doctor_list")}

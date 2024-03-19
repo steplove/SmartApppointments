@@ -124,7 +124,7 @@ const ReactCardSlider = () => {
                   onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
                 >
                   <img
-                    src={`${BASE_URL}/${slide.Doctor_IMG}`}
+                    src={`${slide.Doctor_IMG}`}
                     alt={slide.Doctor_Name}
                     className="slider-card-image"
                   />
@@ -155,7 +155,7 @@ const ReactCardSlider = () => {
                   onClick={() => handleDialogOpen(slide.DoctorID, `${slide.Doctor_IMG}`)}
                 >
                   <img
-                    src={`${BASE_URL}/${slide.Doctor_IMG}`}
+                    src={`${slide.Doctor_IMG}`}
                     alt={slide.Doctor_Name}
                     className="slider-card-image"
                   />
@@ -172,7 +172,7 @@ const ReactCardSlider = () => {
         <DialogTitle>{t("doctor_details")}</DialogTitle>
         <DialogContent>
           <img
-            src={`${BASE_URL}/${selectedDoctor.Doctor_IMG}`}
+            src={`${selectedDoctor.Doctor_IMG}`}
             alt={selectedDoctor.Doctor_Name}
             style={{
               width: "80%", // ปรับขนาดของรูปภาพตามที่คุณต้องการ

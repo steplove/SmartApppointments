@@ -184,19 +184,32 @@ function BookingHistory() {
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
                         <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
-                          <span>
-                            {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
-                          </span>
-                          <span>
-                            {t("appointment_date")}:{" "}
-                            {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                          </span>
-                          <span>
-                            {t("time")}:{" "}
-                            {new Date(dialogShow.Appointment_Time).toLocaleTimeString()}
-                          </span>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("appointment_date")}:{" "}
+                              {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("time")}:{" "}
+                              {dialogShow.Appointment_Time
+                                ? dialogShow.Appointment_Time.substring(11, 16)
+                                : ""}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("appointment_details")}: {dialogShow.Apm_Des}
+                            </span>
+                          </div>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
-                          {dialogShow.APM_No && <Barcode value={dialogShow.APM_No} />}
+                          {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
                         </DialogContent>
 
                         <DialogActions>
@@ -301,22 +314,30 @@ function BookingHistory() {
                       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
                         <DialogTitle>{t("more_details")}</DialogTitle>
                         <DialogContent style={{ textAlign: "center" }}>
-                          <span>
-                            {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
-                          </span>
-                          <span>
-                            {t("appointment_date")}:{" "}
-                            {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
-                          </span>
-                          <span>
-                            {t("time")}:{" "}
-                            {dialogShow.Appointment_Time
-                              ? dialogShow.Appointment_Time.substring(11, 16)
-                              : ""}
-                          </span>
-                          <span>
-                            {t("appointment_details")} : {dialogShow.Apm_Des}
-                          </span>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("name")}: {dialogShow.FirstName} {dialogShow.LastName}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("appointment_date")}:{" "}
+                              {new Date(dialogShow.Appointment_Date).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("time")}:{" "}
+                              {dialogShow.Appointment_Time
+                                ? dialogShow.Appointment_Time.substring(11, 16)
+                                : ""}
+                            </span>
+                          </div>
+                          <div style={{ marginBottom: "8px" }}>
+                            <span>
+                              {t("appointment_details")}: {dialogShow.Apm_Des}
+                            </span>
+                          </div>
                           {/* เพิ่มข้อมูลอื่น ๆ ตามที่คุณต้องการ */}
                           {dialogShow.StatusFlag > 3 ? <Barcode value={dialogShow.APM_No} /> : ""}
                         </DialogContent>

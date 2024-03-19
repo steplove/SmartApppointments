@@ -12,6 +12,7 @@ import Banner from "components/Banner";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import ButtonWithHover from "./ButtonWithHover";
+import iconPDF from "assets/images/iconPDF.png";
 const theme = createTheme({
   breakpoints: {
     values: {
@@ -153,6 +154,7 @@ function DashboardCheckup() {
                             <tr className="text-center">
                               <th>{t("No")}</th>
                               <th>{t("date")}</th>
+                              <th>ชนิดไฟล์</th>
                               <th>{t("Download")}</th>
                             </tr>
                           </thead>
@@ -173,6 +175,17 @@ function DashboardCheckup() {
                                   <React.Fragment>
                                     <td className="text-center">{index + 1}</td>
                                     <td className="text-center">{thaiDate}</td>
+                                    <td className="text-center">
+                                      <img
+                                        src={iconPDF}
+                                        alt="iconPDF"
+                                        style={{
+                                          width: "50px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
+                                          height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
+                                          margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน
+                                        }}
+                                      />
+                                    </td>
                                     <td className="text-center">
                                       <ButtonWithHover file={file} />
                                     </td>
@@ -214,7 +227,7 @@ function DashboardCheckup() {
               marginBottom: "0px",
             }}
           >
-            <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}>
+            <Typography variant="h6" style={{ margin: "0", color: "#3f51b5" }}>
               {t("checkUP_result_transactions")}
             </Typography>
             <Grid item container spacing={2} mt={2}>
@@ -253,16 +266,42 @@ function DashboardCheckup() {
                               listItemContent = (
                                 <React.Fragment key={index}>
                                   <div
+                                    className="container"
                                     style={{
                                       fontSize: "0.8rem",
                                       display: "flex",
+                                      flexWrap: "wrap",
                                       justifyContent: "space-between",
                                       alignItems: "flex-end",
                                     }}
                                   >
-                                    <div style={{ flex: "0 0 20%" }}>{index + 1}</div>
-                                    <div style={{ flex: "1" }}>{thaiDate}</div>
-                                    <div style={{ marginLeft: "auto" }}>
+                                    <Grid container spacing={1}>
+                                      <Grid item xs={12}>
+                                        <div style={{ flex: "0 0 20%" }}>
+                                          รายการที่ :<span>{index + 1}</span>
+                                        </div>
+                                      </Grid>
+                                      <Grid item xs={12}>
+                                        {" "}
+                                        <div style={{ flex: "1" }}>วันที่ :{thaiDate}</div>
+                                      </Grid>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                      <div style={{ flex: "1" }}>
+                                        ชนิดไฟล์ :
+                                        <img
+                                          src={iconPDF}
+                                          alt="iconPDF"
+                                          style={{
+                                            width: "50px", // ปรับขนาดของรูปภาพตามที่คุณต้องการ
+                                            height: "auto", // คุณสามารถปรับแต่งความสูงตามที่คุณต้องการ
+                                            margin: "0 auto", // จัดให้อยู่ตรงกลางแนวนอน
+                                          }}
+                                        />
+                                      </div>
+                                    </Grid>
+
+                                    <div style={{ margin: "auto" }}>
                                       <ButtonWithHover file={file} />
                                     </div>
                                   </div>
