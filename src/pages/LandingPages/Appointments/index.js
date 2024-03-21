@@ -78,24 +78,23 @@ function Appointments() {
   const [clinics, setClinics] = useState([]);
   const [doctor, setDoctor] = useState([]);
   const [isChecked, setChecked] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/showClinics`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/showClinics`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        if (response.data && Array.isArray(response.data)) {
-          setClinics(response.data);
-        }
-      } catch (error) {
-        console.error("Error fetching clinics:", error.message);
+      if (response.data && Array.isArray(response.data)) {
+        setClinics(response.data);
       }
-    };
-
+    } catch (error) {
+      console.error("Error fetching clinics:", error.message);
+    }
+  };
+  useEffect(() => {
     fetchData();
   }, []);
   // const [doctors, setDoctors] = useState([]);

@@ -3,7 +3,16 @@ import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import React, { useState } from "react";
 import { BASE_URL, token } from "constants/constants";
 import { useTranslation } from "react-i18next";
-
+import * as loadingData from "../../../../loading.json";
+import Lottie from "react-lottie";
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: loadingData.default,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 const ButtonWithHover = ({ file }) => {
   const [hovered, setHovered] = useState(false);
   const [isDownloading, setDownloading] = useState(false);
@@ -19,7 +28,6 @@ const ButtonWithHover = ({ file }) => {
 
   const handleDownload = (filename) => {
     setDownloading(true);
-
     // หน่วงเวลา 2 วินาทีก่อนที่จะเริ่มดาวน์โหลด
     setTimeout(() => {
       const downloadLink = document.createElement("a");
@@ -36,7 +44,6 @@ const ButtonWithHover = ({ file }) => {
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
-
       setDownloading(false);
     }, 2000);
   };
@@ -59,9 +66,15 @@ const ButtonWithHover = ({ file }) => {
         onClick={() => !isDownloading && handleDownload(file)}
       >
         <span style={{ marginRight: "5px" }}>
-          {isDownloading ? t("Downloading") : t("Download")}
+          {isDownloading ? (
+            <Lottie options={defaultOptions} height={52} width={152} />
+          ) : (
+            <>
+              <span style={{ display: "inline" }}>{t("Download")} </span>
+              <CloudDownloadIcon style={{ display: "inline" }} />
+            </>
+          )}
         </span>
-        <CloudDownloadIcon />
       </button>
     </div>
   );
