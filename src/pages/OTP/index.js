@@ -178,7 +178,7 @@ function OTP() {
       }, 1500);
     } else {
       // The request failed
-      console.error(`Request failed with status: ${response.status}`);
+      console.error(``);
 
       // Log the error message from the response body
       const errorData = await response.json();
