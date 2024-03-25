@@ -135,7 +135,7 @@ function OTP() {
   };
 
   const updateStatusOTP = async () => {
-    console.log(mobileOTP, "mobileOTPmobileOTP");
+    // console.log(mobileOTP, "mobileOTPmobileOTP");
     let countryCode = "0";
 
     const telephoneForSend = mobileOTP.replace(/^66/, countryCode);
@@ -149,33 +149,35 @@ function OTP() {
     });
     if (response.ok) {
       // The request was successful
-      console.log(response, "Request was successful");
+      // console.log(response, "Request was successful");
       const responseData = await response.json();
-      console.log("Response data:", responseData);
-      Swal.fire({
-        title: `OTP Success!`,
-        icon: "success",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      Swal.close();
-      Swal.fire({
-        title: " ยืนยันOTPสำเร็จ กำลังไปยังหน้าล็อคอิน",
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        willOpen: () => {
-          Swal.showLoading();
-        },
-        timer: 10000, // 10 วินาที
-        didClose: () => {
-          // หาก SweetAlert ถูกปิดจากการเกินเวลา 10 วินาที
-          // ทำอะไรก็ตามที่คุณต้องการทำหลังจาก SweetAlert ถูกปิดจากการเกินเวลา
-          // เช่น นำผู้ใช้ไปยังหน้าอื่น ๆ, แสดงข้อความเตือน, ฯลฯ
-        },
-      });
-      setTimeout(() => {
-        window.location.href = `/signIn`;
-      }, 1500);
+      // console.log("Response data:", responseData);
+      if (responseData) {
+        Swal.fire({
+          title: `OTP Success!`,
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        Swal.close();
+        Swal.fire({
+          title: " ยืนยันOTPสำเร็จ กำลังไปยังหน้าล็อคอิน",
+          allowOutsideClick: false,
+          showConfirmButton: false,
+          willOpen: () => {
+            Swal.showLoading();
+          },
+          timer: 10000, // 10 วินาที
+          didClose: () => {
+            // หาก SweetAlert ถูกปิดจากการเกินเวลา 10 วินาที
+            // ทำอะไรก็ตามที่คุณต้องการทำหลังจาก SweetAlert ถูกปิดจากการเกินเวลา
+            // เช่น นำผู้ใช้ไปยังหน้าอื่น ๆ, แสดงข้อความเตือน, ฯลฯ
+          },
+        });
+        setTimeout(() => {
+          window.location.href = `/signIn`;
+        }, 1500);
+      }
     } else {
       // The request failed
       console.error(``);

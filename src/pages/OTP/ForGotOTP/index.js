@@ -68,7 +68,7 @@ function ForGotOTP() {
         <Sender>${otpSender}</Sender>
         <Recipient>${phoneforsend}</Recipient>
       </REQ_DATA>`;
-    console.log(xml, "xml");
+    // console.log(xml, "xml");
     const body = { xml: xml, url: url, values: values };
 
     try {
@@ -78,7 +78,7 @@ function ForGotOTP() {
 
       if (response.status === 200) {
         // routeToOTP(surveyid, phoneforsend);
-        console.log("success");
+        // console.log("success");
         window.location.href = `/confOTP/${telephoneForSend}/${surveyid}`;
       }
     } catch (error) {

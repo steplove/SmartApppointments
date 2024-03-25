@@ -63,7 +63,7 @@ function ConfOTP() {
 
         body: JSON.stringify(body),
       });
-      console.log(response);
+      // console.log(response);
       if (response.ok) {
         const responseData = await response.json();
         const successStatus = responseData.success;
@@ -75,7 +75,7 @@ function ConfOTP() {
           setVerificationStatus("error");
         }
       } else {
-        console.error("Error:", response.status);
+        // console.error("Error:", response.status);
         setVerificationStatus("error");
       }
     } catch (error) {
@@ -90,7 +90,7 @@ function ConfOTP() {
       let countryCode = "0";
 
       const telephoneForSend = mobileNo.replace(/^66/, countryCode);
-      console.log(telephoneForSend, "telephoneForSendtelephoneForSend");
+      // console.log(telephoneForSend, "telephoneForSendtelephoneForSend");
       Swal.fire({
         title: "กำลังดำเนินการ...",
         allowOutsideClick: false,
