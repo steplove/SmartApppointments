@@ -6,7 +6,6 @@ import { BASE_URL, token } from "constants/constants";
 import Swal from "sweetalert2";
 import { Button, Grid, Hidden } from "@mui/material";
 import MKBox from "components/MKBox";
-
 import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
@@ -209,7 +208,7 @@ function OTP() {
         <Sender>${otpSender}</Sender>
         <Recipient>${phoneforsend}</Recipient>
       </REQ_DATA>`;
-    console.log(xml, "xml");
+    // console.log(xml, "xml");
     const body = { xml: xml, url: url, values: values };
 
     try {
