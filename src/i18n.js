@@ -82,7 +82,7 @@ i18n.use(initReactI18next).init({
         terms_and_conditions_of_service: "ข้อกำหนดและเงื่อนไขการใช้บริการ นัดหมายออนไลน์",
         read_and_agreed_to_the_terms: "ข้าพเจ้าได้อ่าน และยอมรับข้อกำหนด และเงื่อนไขการใช้บริการ",
         unknown: "* ไม่ทราบให้กรอก - ",
-        hospital_number: "เลขที่โรงพยาบาล",
+        hospital_number: "หมายเลข HN",
         prefix: "คำนำหน้า",
         mr: "นาย",
         mrs: "นาง",
