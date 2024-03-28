@@ -12,6 +12,7 @@ import {
   BottomNavigationAction,
   Grid,
 } from "@mui/material";
+import "./active.css";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import EventNoteIcon from "@mui/icons-material/EventNote";
@@ -59,11 +60,11 @@ export default function MenuList() {
           value={location.pathname}
         >
           <BottomNavigationAction
-            label={`${t("home")}`}
+            label={`${t("checkup")}`}
             icon={<HomeIcon />}
             component={Link}
-            to="/dashboard"
-            value="/dashboard"
+            to="/dashboardCheckup"
+            value="/dashboardCheckup"
           />
           {HN !== "-" ? (
             <BottomNavigation showLabels>
@@ -73,6 +74,11 @@ export default function MenuList() {
                 component={Link}
                 to="/appointments"
                 value="/appointments"
+                style={{
+                  fontSize: location.pathname === "/appointments" ? "1.2rem" : "1rem", // ปรับขนาดตัวอักษร
+                  color: location.pathname === "/appointments" ? "#ff0000" : "#6c757d;", // เปลี่ยนสีข้อความ
+                }}
+                className={location.pathname === "/appointments" ? "active-bottom-nav" : ""}
               />
               <BottomNavigationAction
                 label={`${t("history")}`}
@@ -80,6 +86,11 @@ export default function MenuList() {
                 component={Link}
                 to="/bookinghistory"
                 value="/bookinghistory"
+                style={{
+                  fontSize: location.pathname === "/bookinghistory" ? "1.2rem" : "1rem", // ปรับขนาดตัวอักษร
+                  color: location.pathname === "/bookinghistory" ? "#ff0000" : "#6c757d;", // เปลี่ยนสีข้อความ
+                }}
+                className={location.pathname === "/bookinghistory" ? "active-bottom-nav" : ""}
               />
             </BottomNavigation>
           ) : null}
@@ -113,33 +124,32 @@ export default function MenuList() {
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to="/dashboard">
-              {t("home")}
+            <MenuItem onClick={handleClose} component={Link} to="/dashboardCheckup">
+              {t("sriburin_checkup_center")}
             </MenuItem>
-            {HN !== "-"
-              ? [
-                  <MenuItem
-                    key="appointments"
-                    onClick={handleClose}
-                    component={Link}
-                    to="/appointments"
-                  >
-                    {t("appointment")}
-                  </MenuItem>,
-                  <MenuItem
-                    key="history"
-                    onClick={handleClose}
-                    component={Link}
-                    to="/bookinghistory"
-                  >
-                    {t("history")}
-                  </MenuItem>,
-                ]
-              : null}
-            <MenuItem onClick={handleClose} component={Link} to="/doctorList">
+            {HN !== "-" && (
+              <MenuItem
+                key="appointments"
+                onClick={handleClose}
+                component={Link}
+                to="/appointments"
+              >
+                {t("appointment")}
+              </MenuItem>
+            )}
+            {HN !== "-" && (
+              <MenuItem key="history" onClick={handleClose} component={Link} to="/bookinghistory">
+                {t("history")}
+              </MenuItem>
+            )}
+            <MenuItem
+              selected={window.location.pathname === "/doctorList"}
+              onClick={handleClose}
+              component={Link}
+              to="/doctorList"
+            >
               {t("doctor_list")}
             </MenuItem>
-
             <MenuItem onClick={handleClose} component={Link} to="/userprofile">
               {t("personal_information")}
             </MenuItem>

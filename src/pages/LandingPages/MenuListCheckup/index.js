@@ -13,6 +13,8 @@ import {
   BottomNavigationAction,
   Grid,
 } from "@mui/material";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import SettingsIcon from "@mui/icons-material/Settings";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -55,11 +57,25 @@ export default function MenuListCheckup() {
           value={location.pathname}
         >
           <BottomNavigationAction
-            label={`${t("home")}`}
+            label={`${t("appointment")}`}
             icon={<HomeIcon />}
             component={Link}
-            to="/dashboardCheckup"
-            value="/dashboardCheckup"
+            to="/dashboard"
+            value="/dashboard"
+          />
+          <BottomNavigationAction
+            label={`${t("doctor")}`}
+            icon={<LocalHospitalIcon />}
+            component={Link}
+            to="/DoctorListCheckUP"
+            value="/DoctorListCheckUP"
+          />
+          <BottomNavigationAction
+            label={`${t("setting")}`}
+            icon={<SettingsIcon />}
+            component={Link}
+            to="/userprofileCheckup"
+            value="/userprofileCheckup"
           />
           <BottomNavigationAction
             label={`${t("logout")}`}
@@ -82,10 +98,15 @@ export default function MenuListCheckup() {
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to="/dashboardCheckup">
-              {t("home")}
+            <MenuItem onClick={handleClose} component={Link} to="/dashboard">
+              {t("appointment")}
             </MenuItem>
-
+            <MenuItem onClick={handleClose} component={Link} to="/DoctorListCheckUP">
+              {t("doctor_list")}
+            </MenuItem>
+            <MenuItem onClick={handleClose} component={Link} to="/userprofileCheckup">
+              {t("personal_information")}
+            </MenuItem>
             <MenuItem onClick={hadleLogout}>{t("logout")}</MenuItem>
           </Menu>
         </Grid>

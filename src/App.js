@@ -15,8 +15,10 @@ import DashboardCheckup from "pages/LandingPages/DashboardCheckUp";
 import Appointments from "pages/LandingPages/Appointments";
 import BookingHistory from "pages/LandingPages/BookingHistory";
 import UserProfile from "pages/LandingPages/UserProfile";
+import UserProfileCheckup from "pages/LandingPages/UserProfileCheckup";
 import DoctorList from "pages/LandingPages/DoctorList";
 import DoctorListHome from "pages/LandingPages/DoctorListHome";
+import DoctorListCheckUP from "pages/LandingPages/DoctorListCheckUP";
 import Main from "pages/LandingPages/Main";
 import Agree from "pages/LandingPages/Agree";
 import ForgotPassword from "pages/LandingPages/ForgotPassword";
@@ -84,12 +86,14 @@ export default function App() {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/bookinghistory" element={<BookingHistory />} />
           <Route path="/userprofile" element={<UserProfile />} />
+          <Route path="/userprofileCheckup" element={<UserProfileCheckup />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/packagesdetail/:code" element={<PackagesDetail />} />
           <Route path="/HealthBlogListDetail/:code" element={<HealthBlogListDetail />} />
           <Route path="/healthblogList" element={<HealthBlogList />} />
           <Route path="/doctorList" element={<DoctorList />} />
           <Route path="/doctorListHome" element={<DoctorListHome />} />
+          <Route path="/DoctorListCheckUP" element={<DoctorListCheckUP />} />
           <Route path="/main" element={<Main />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/forgototp" element={<ForgotOTP />} />

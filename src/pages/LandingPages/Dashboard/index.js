@@ -535,7 +535,9 @@ function Dashboard() {
               marginBottom: "0px",
             }}
           >
-            <Typography variant="h4" style={{ margin: "0", color: "#3f51b5" }}></Typography>
+            <Typography variant="h6" style={{ margin: "0", color: "#3f51b5" }}>
+              Smart Apppointments
+            </Typography>
             <Grid item container spacing={2} mt={2}>
               <Card>
                 <MKBox sx={{ marginBottom: "0px", maxWidth: "100%", mx: "auto" }}>
