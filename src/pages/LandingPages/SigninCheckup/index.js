@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import MKBox from "components/MKBox";
@@ -21,6 +21,12 @@ function SigninCheckup() {
   const { t } = useTranslation();
   const [identificationInput, setIdentificationInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      // ถ้ามี token ให้ทำการ redirect ไปยังหน้า dashboard
+      window.location.href = "/dashboardCheckup";
+    }
+  }, []);
   const handleSignInClick = async () => {
     try {
       // สมมติว่าคุณมี state สำหรับ username และ password

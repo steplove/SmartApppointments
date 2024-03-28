@@ -57,6 +57,13 @@ export default function MenuListCheckup() {
           value={location.pathname}
         >
           <BottomNavigationAction
+            label={`${t("home")}`}
+            icon={<HomeIcon />}
+            component={Link}
+            to="/"
+            value="/"
+          />
+          <BottomNavigationAction
             label={`${t("appointment")}`}
             icon={<HomeIcon />}
             component={Link}
@@ -98,6 +105,9 @@ export default function MenuListCheckup() {
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+            <MenuItem onClick={handleClose} component={Link} to="/">
+              {t("home")}
+            </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/dashboard">
               {t("appointment")}
             </MenuItem>

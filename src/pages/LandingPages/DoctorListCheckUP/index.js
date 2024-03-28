@@ -32,6 +32,7 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import useTokenCheck from "../../../hooks/useTokenCheck";
 
 const theme = createTheme({
   breakpoints: {
@@ -55,7 +56,7 @@ const theme = createTheme({
 
 function DoctorListCheckUP() {
   const { t } = useTranslation();
-
+  useTokenCheck();
   const [doctors, setDoctors] = useState([]);
   const [clinics, setClinics] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
