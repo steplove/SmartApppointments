@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import logo from "assets/images/logosmartApppointmentsnew.png"; // Adjust the path to your actual logo location
-import { BASE_URL } from "constants/constants";
+import { BASE_URL, token } from "constants/constants";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import md5 from "md5";
@@ -109,6 +109,7 @@ function ConfOTP() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (response.ok) {
@@ -124,7 +125,6 @@ function ConfOTP() {
         }, 1500);
       } else {
         Swal.close();
-
         Swal.fire({
           title: "เกิดข้อผิดพลาด!",
           text: "ไม่สามารถดำเนินการได้",
