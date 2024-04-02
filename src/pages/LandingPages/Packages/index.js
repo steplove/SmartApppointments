@@ -34,7 +34,6 @@ function Packages() {
   const { t } = useTranslation();
   const [packageData, setPackageData] = useState([]);
   const [openLoad, setopenLoad] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -141,16 +140,18 @@ function Packages() {
                         {packageItem.packageNameEN}
                       </MKTypography>
                       <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-                      <MKTypography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
-                        {packageItem.packagesDetail}
-                      </MKTypography>
+                      <MKTypography
+                        sx={{ color: "#808080", fontSize: "10px" }}
+                        mt={0}
+                        dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                      />
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         {packageItem.packageContact}
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         {t("price")}:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.formattedPackagePrice}
+                          {packageItem.packagePrice}
                         </span>
                       </MKTypography>
 
@@ -225,16 +226,18 @@ function Packages() {
                         {packageItem.packageNameEN}
                       </MKTypography>
                       <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-                      <MKTypography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
-                        {packageItem.packagesDetail}
-                      </MKTypography>
+                      <MKTypography
+                        sx={{ color: "#808080", fontSize: "10px" }}
+                        mt={0}
+                        dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                      />
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         {packageItem.packageContact}
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                         {t("price")}:{" "}
                         <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.formattedPackagePrice}
+                          {packageItem.packagePrice} ฿
                         </span>
                       </MKTypography>
                       <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>

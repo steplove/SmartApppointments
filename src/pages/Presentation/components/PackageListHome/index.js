@@ -113,16 +113,19 @@ function PackageListHome() {
                 {packageItem.packageNameEN}
               </Typography>
               <Typography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-              <Typography sx={{ color: "#808080", fontSize: "10px" }} mt={0}>
-                {packageItem.packagesDetail}
-              </Typography>
+              <Typography
+                sx={{ color: "#808080", fontSize: "10px" }}
+                mt={0}
+                dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+              />
+
               <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 {packageItem.packageContact}
               </Typography>
               <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
                 {t("price")}:{" "}
                 <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                  {packageItem.formattedPackagePrice}
+                  {packageItem.packagePrice} ฿
                 </span>
               </Typography>
               <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>

@@ -122,11 +122,10 @@ function PackagesDetail() {
                             <Typography
                               variant="subtitle1"
                               sx={{ marginBottom: 2, color: "#808080" }}
-                            >
-                              {selectedPackage.packageDetails}
-                            </Typography>
+                              dangerouslySetInnerHTML={{ __html: selectedPackage.packageDetails }}
+                            />
                             <Typography variant="body1" sx={{ color: "#ff0000" }}>
-                              {t("price")}: {selectedPackage.formattedPackagePrice} บาท
+                              {t("price")}: {selectedPackage.packagePrice} ฿
                             </Typography>
 
                             <Typography variant="body1">
