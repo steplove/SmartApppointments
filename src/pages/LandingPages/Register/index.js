@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 function Register() {
   const { t } = useTranslation();
-
   const [formData, setFormData] = useState({
     identificationType: "IDCard",
     identificationNumber: "",
@@ -47,13 +46,16 @@ function Register() {
     villageNumber: "",
     district: "",
     amphure: "",
+    Country: "",
     province: "",
     postalCode: "",
     mobileNo: "",
     email: "",
     password: "",
+    OtherAddress: "",
   });
-  // const [errors, setErrors] = useState({});
+  console.log(formData, "formData.Country");
+  const [countrys, setCountrys] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [amphures, setAmphures] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -117,23 +119,37 @@ function Register() {
     }
   };
   useEffect(() => {
-    const fetchProvinces = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/provinces`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = response.data;
-        setProvinces(data);
-      } catch (error) {
-        console.error();
-      }
-    };
-
     fetchProvinces();
+    fetchCountry();
   }, []);
+  const fetchCountry = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/country`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
+      setCountrys(data);
+    } catch (error) {
+      console.error();
+    }
+  };
+  const fetchProvinces = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/provinces`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = response.data;
+      setProvinces(data);
+    } catch (error) {
+      console.error();
+    }
+  };
   const fetchAmphures = async (province_id) => {
     try {
       const response = await axios.get(`${BASE_URL}/api/amphurs/${province_id}`, {
@@ -185,6 +201,17 @@ function Register() {
   const handleInputChange = (selectedOption, { name }) => {
     // const { name, value } = event.target;
     // 1. ถ้าเปลี่ยน "จังหวัด", รีเซ็ท "อำเภอ" และ "ตำบล"
+    if (name === "Country") {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: selectedOption,
+        province: "",
+        amphure: "", // Reset amphure to null
+        district: "", // Reset district to null
+        postalCode: "", // Reset postalCode to null
+      }));
+    }
+
     if (name === "province") {
       setFormData((prev) => ({
         ...prev,
@@ -225,6 +252,17 @@ function Register() {
     try {
       // ทำการส่งข้อมูลที่ป้อนจาก form เข้าไปใน API
       for (let key in formData) {
+        if (
+          key === "province" ||
+          key === "amphure" ||
+          key === "district" ||
+          key === "Address" ||
+          key === "OtherAddress" ||
+          key === "postalCode" ||
+          key === "villageNumber"
+        ) {
+          continue;
+        }
         if (!formData[key]) {
           Swal.fire({
             title: t("incomplete_information"),
@@ -236,16 +274,16 @@ function Register() {
         }
       }
       // Check if the email is in a valid format
-      const emailRegex = /\S+@\S+\.\S+/;
-      if (!emailRegex.test(formData.email)) {
-        Swal.fire({
-          title: `${t("invalid_email_format")}!`,
-          text: `${t("please_enter_your_email_address_correctly")}!`,
-          icon: "warning",
-          confirmButtonText: `${t("ok")}`,
-        });
-        return;
-      }
+      // const emailRegex = /\S+@\S+\.\S+/;
+      // if (!emailRegex.test(formData.email)) {
+      //   Swal.fire({
+      //     title: `${t("invalid_email_format")}!`,
+      //     text: `${t("please_enter_your_email_address_correctly")}!`,
+      //     icon: "warning",
+      //     confirmButtonText: `${t("ok")}`,
+      //   });
+      //   return;
+      // }
 
       if (formData.password !== formData.confirmPassword) {
         Swal.fire({
@@ -313,6 +351,8 @@ function Register() {
                 birthDate: formData.birthDate,
                 Address: formData.Address,
                 villageNumber: formData.villageNumber,
+                Country: formData.Country.value,
+                OtherAddress: formData.OtherAddress,
                 province: formData.province.value,
                 amphure: formData.amphure.value,
                 district: formData.district.value,
@@ -323,6 +363,7 @@ function Register() {
               }),
             })
               .then((response) => {
+                console.log(response);
                 if (response.status === 200) {
                   // แสดง sweetalert2 เพื่อแจ้งเตือนว่าเพิ่มข้อมูลพนักงานสำเร็จ
                   Swal.close();
@@ -362,7 +403,10 @@ function Register() {
     { value: "นาง", label: t("mrs") },
     { value: "นางสาว", label: t("miss") },
   ];
-
+  const options0 = countrys.map((country) => ({
+    value: country.code,
+    label: country.ct_nameTHA,
+  }));
   const options = provinces.map((province) => ({
     value: province.id,
     label: province.name_th,
@@ -567,118 +611,163 @@ function Register() {
                       </Grid>
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <TextField
-                            fullWidth
-                            label={`${t("house_numbe")}`}
-                            variant="outlined"
-                            name="Address"
-                            value={formData.Address}
-                            onChange={handleInputChange1}
-                          />
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <TextField
-                            fullWidth
-                            label={`${t("village_no")}`}
-                            variant="outlined"
-                            name="villageNumber"
-                            value={formData.villageNumber}
-                            onChange={handleInputChange1}
-                          />
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          {/* <InputLabel id="province-label">{t("province")}</InputLabel> */}
                           <Select
-                            labelId="province-label"
-                            name="province"
-                            value={formData.province}
+                            labelId="Country-label"
+                            name="Country"
+                            value={formData.Country}
                             onChange={(selectedOption) =>
-                              handleInputChange(selectedOption, { name: "province" })
+                              handleInputChange(selectedOption, { name: "Country" })
                             }
-                            options={options}
-                            placeholder="จังหวัด..."
+                            options={options0}
+                            placeholder="ประเทศ..."
                             styles={{
                               // Use styles prop to customize the height
-                              control: (provided) => ({
-                                ...provided,
+                              control: (Countryed) => ({
+                                ...Countryed,
                                 height: "40px",
                               }),
-                              menu: (provided) => ({
-                                ...provided,
+                              menu: (Countryed) => ({
+                                ...Countryed,
                                 zIndex: 3, // Ensure the dropdown menu has a higher z-index
                               }),
                             }}
                           />
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          {/* <InputLabel id="district-label">{t("district")}</InputLabel> */}
-                          <Select
-                            labelId="amphure-label"
-                            name="amphure"
-                            value={formData.amphure}
-                            onChange={handleInputChange}
-                            options={options2}
-                            placeholder="อำเภอ..."
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                height: "40px",
-                              }),
-                              menu: (provided) => ({
-                                ...provided,
-                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
-                              }),
-                            }}
-                          />
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          {/* <InputLabel id="district-label">{t("sub_district")}</InputLabel> */}
-                          <Select
-                            labelId="district-label"
-                            name="district"
-                            value={formData.district}
-                            onChange={handleInputChange}
-                            options={options3}
-                            placeholder="ตำบล..."
-                            styles={{
-                              control: (provided) => ({
-                                ...provided,
-                                height: "40px",
-                              }),
-                              menu: (provided) => ({
-                                ...provided,
-                                zIndex: 3, // Ensure the dropdown menu has a higher z-index
-                              }),
-                            }}
-                          />
-                        </FormControl>
-                      </Grid>
+                      {formData.Country.value === "TH" && (
+                        <>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              <Select
+                                labelId="province-label"
+                                name="province"
+                                value={formData.province}
+                                onChange={(selectedOption) =>
+                                  handleInputChange(selectedOption, { name: "province" })
+                                }
+                                options={options}
+                                placeholder="จังหวัด..."
+                                styles={{
+                                  // Use styles prop to customize the height
+                                  control: (provided) => ({
+                                    ...provided,
+                                    height: "40px",
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                                  }),
+                                }}
+                              />
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              {/* <InputLabel id="district-label">{t("district")}</InputLabel> */}
+                              <Select
+                                labelId="amphure-label"
+                                name="amphure"
+                                value={formData.amphure}
+                                onChange={handleInputChange}
+                                options={options2}
+                                placeholder="อำเภอ..."
+                                styles={{
+                                  control: (provided) => ({
+                                    ...provided,
+                                    height: "40px",
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                                  }),
+                                }}
+                              />
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              {/* <InputLabel id="district-label">{t("sub_district")}</InputLabel> */}
+                              <Select
+                                labelId="district-label"
+                                name="district"
+                                value={formData.district}
+                                onChange={handleInputChange}
+                                options={options3}
+                                placeholder="ตำบล..."
+                                styles={{
+                                  control: (provided) => ({
+                                    ...provided,
+                                    height: "40px",
+                                  }),
+                                  menu: (provided) => ({
+                                    ...provided,
+                                    zIndex: 3, // Ensure the dropdown menu has a higher z-index
+                                  }),
+                                }}
+                              />
+                            </FormControl>
+                          </Grid>
 
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          {formData.postalCode !== "" && formData.postalCode !== "0" ? ( // เช็ครหัสไปรษณีย์เท่ากับ "0"
-                            <TextField
-                              label={`${t("postal_code")}`}
-                              value={formData.postalCode || ""}
-                              disabled
-                            />
-                          ) : (
-                            <TextField
-                              label={`${t("postal_code")}`}
-                              value={formData.postalCode || ""}
-                              // อื่น ๆ ที่คุณต้องการใส่ที่นี่
-                            />
-                          )}
-                        </FormControl>
-                      </Grid>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              {formData.postalCode !== "" && formData.postalCode !== "0" ? ( // เช็ครหัสไปรษณีย์เท่ากับ "0"
+                                <TextField
+                                  label={`${t("postal_code")}`}
+                                  value={formData.postalCode || ""}
+                                  disabled
+                                />
+                              ) : (
+                                <TextField
+                                  label={`${t("postal_code")}`}
+                                  value={formData.postalCode || ""}
+                                  // อื่น ๆ ที่คุณต้องการใส่ที่นี่
+                                />
+                              )}
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              <TextField
+                                fullWidth
+                                label={`${t("house_numbe")}`}
+                                variant="outlined"
+                                name="Address"
+                                value={formData.Address}
+                                onChange={handleInputChange1}
+                              />
+                            </FormControl>
+                          </Grid>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              <TextField
+                                fullWidth
+                                label={`${t("village_no")}`}
+                                variant="outlined"
+                                name="villageNumber"
+                                value={formData.villageNumber}
+                                onChange={handleInputChange1}
+                              />
+                            </FormControl>
+                          </Grid>
+                        </>
+                      )}
+                      {formData.Country.value !== "TH" && (
+                        <>
+                          <Grid item xs={12} md={6} lg={6} xl={6}>
+                            <FormControl fullWidth style={{ marginTop: "1rem" }}>
+                              <TextField
+                                fullWidth
+                                // label={`${t("house_numbe")}`}
+                                label="ที่อยู่อื่นๆ"
+                                variant="outlined"
+                                name="OtherAddress"
+                                value={formData.OtherAddress}
+                                onChange={handleInputChange1}
+                              />
+                            </FormControl>
+                          </Grid>
+                        </>
+                      )}
 
                       <Grid item xs={12} md={6} lg={6} xl={6}>
                         <FormControl fullWidth style={{ marginTop: "1rem" }}>
@@ -703,41 +792,50 @@ function Register() {
                             label={`${t("email")}`}
                             variant="outlined"
                             name="email"
+                            type="text"
                             value={formData.email}
                             onChange={handleInputChange1}
                           />
                         </FormControl>
                       </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}></Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <TextField
-                            label={`${t("password")}`}
-                            variant="outlined"
-                            name="password"
-                            type="password"
-                            value={formData.password}
-                            onChange={handleInputChange1}
-                          />
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} md={6} lg={6} xl={6}>
-                        <FormControl fullWidth style={{ marginTop: "1rem" }}>
-                          <TextField
-                            label={`${t("confirm_password")}`}
-                            variant="outlined"
-                            name="confirmPassword"
-                            type="password"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange1}
-                          />
-                          {formData.confirmPassword !== "" &&
-                            formData.password !== formData.confirmPassword && (
-                              <span style={{ color: "red" }}>
-                                <h6>{t("passwords_dont_match")}</h6>
-                              </span>
-                            )}
-                        </FormControl>
+                      {/* <Grid item xs={12} md={6} lg={6} xl={6}></Grid> */}
+                      <Grid container spacing={2}>
+                        <Grid item xs={11.3} md={6} lg={5} xl={5.8} mt={2}>
+                          <FormControl
+                            fullWidth
+                            style={{ marginTop: "1rem", marginLeft: "1.5rem" }}
+                          >
+                            <TextField
+                              label={`${t("password")}`}
+                              variant="outlined"
+                              name="password"
+                              type="password"
+                              value={formData.password}
+                              onChange={handleInputChange1}
+                            />
+                          </FormControl>
+                        </Grid>
+                        <Grid item xs={11.3} md={6} lg={6} xl={5.8} mt={2}>
+                          <FormControl
+                            fullWidth
+                            style={{ marginTop: "1rem", marginLeft: "1.5rem" }}
+                          >
+                            <TextField
+                              label={`${t("confirm_password")}`}
+                              variant="outlined"
+                              name="confirmPassword"
+                              type="password"
+                              value={formData.confirmPassword}
+                              onChange={handleInputChange1}
+                            />
+                            {formData.confirmPassword !== "" &&
+                              formData.password !== formData.confirmPassword && (
+                                <span style={{ color: "red" }}>
+                                  <h6>{t("passwords_dont_match")}</h6>
+                                </span>
+                              )}
+                          </FormControl>
+                        </Grid>
                       </Grid>
                     </Grid>
                   </MKBox>
