@@ -38,7 +38,7 @@ const ButtonWithHover = ({ file }) => {
             Authorization: `Bearer ${token}`,
           },
         };
-      downloadLink.target = "_blank";
+      // downloadLink.target = "_blank";
       downloadLink.download = filename;
 
       document.body.appendChild(downloadLink);
