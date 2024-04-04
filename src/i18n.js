@@ -167,6 +167,7 @@ i18n.use(initReactI18next).init({
         Download: "ดาวน์โหลด",
         Logging_in: "กำลังเข้าสู่ระบบ",
         Just_a_moment_please: "กรุณารอสักครู่...",
+        recommend: "ข้อแนะนำในการปฏิบัติตัว",
       },
     },
     en: {
@@ -334,6 +335,7 @@ i18n.use(initReactI18next).init({
         Download: "Download",
         Logging_in: "Logging in",
         Just_a_moment_please: "Just a moment please.",
+        recommend: "CheckUP Result Advice",
       },
     },
     lo: {

@@ -54,7 +54,7 @@ function Banners() {
   return (
     <Carousel
       autoPlay={true}
-      interval={1800}
+      interval={3000}
       showArrows={true}
       showThumbs={false}
       centerMode={false}
