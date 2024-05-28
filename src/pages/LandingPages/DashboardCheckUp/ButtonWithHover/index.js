@@ -47,36 +47,86 @@ const ButtonWithHover = ({ file }) => {
       setDownloading(false);
     }, 2000);
   };
+  // const handleDownloadPDF = (filename) => {
+  //   setDownloading(true);
+  //   // หน่วงเวลา 2 วินาทีก่อนที่จะเริ่มดาวน์โหลด
+  //   setTimeout(() => {
+  //     const downloadLink = document.createElement("a");
+  //     (downloadLink.href = `${BASE_URL}/api/download-pdf/${filename}`),
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       };
+  //     // downloadLink.target = "_blank";
+  //     downloadLink.download = filename;
 
+  //     document.body.appendChild(downloadLink);
+  //     downloadLink.click();
+  //     document.body.removeChild(downloadLink);
+  //     setDownloading(false);
+  //   }, 2000);
+  // };
   return (
-    <div key={file} style={{ marginTop: 2 }}>
-      <button
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          backgroundColor: isDownloading ? "#ccc" : hovered ? "purple" : "#0bb288",
-          color: "white",
-          padding: "10px 15px",
-          border: "none",
-          borderRadius: "5px",
-          cursor: isDownloading ? "not-allowed" : "pointer",
-          transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
-          transform: hovered && !isDownloading ? "scale(1.05)" : "scale(1)",
-        }}
-        onClick={() => !isDownloading && handleDownload(file)}
-      >
-        <span style={{ marginRight: "5px" }}>
-          {isDownloading ? (
-            <Lottie options={defaultOptions} height={52} width={152} />
-          ) : (
-            <>
-              <span style={{ display: "inline" }}>{t("Download")} </span>
-              <CloudDownloadIcon style={{ display: "inline" }} />
-            </>
-          )}
-        </span>
-      </button>
-    </div>
+    <>
+      <div key={file} style={{ marginTop: 2 }}>
+        <button
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            backgroundColor: isDownloading ? "#ccc" : hovered ? "purple" : "#0bb288",
+            color: "white",
+            padding: "10px 15px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: isDownloading ? "not-allowed" : "pointer",
+            transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
+            transform: hovered && !isDownloading ? "scale(1.05)" : "scale(1)",
+          }}
+          onClick={() => !isDownloading && handleDownload(file)}
+        >
+          <span style={{ marginRight: "5px" }}>
+            {isDownloading ? (
+              <Lottie options={defaultOptions} height={52} width={152} />
+            ) : (
+              <>
+                <span style={{ display: "inline" }}>{t("Download")} </span>
+                <CloudDownloadIcon style={{ display: "inline" }} />
+              </>
+            )}
+          </span>
+        </button>
+      </div>
+      {/* <div key={file} style={{ marginTop: 2 }}>
+        <button
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{
+            backgroundColor: isDownloading ? "#ccc" : hovered ? "purple" : "#0bb288",
+            color: "white",
+            padding: "10px 15px",
+            border: "none",
+            borderRadius: "5px",
+            cursor: isDownloading ? "not-allowed" : "pointer",
+            transition: "background-color 0.3s ease-in-out, transform 0.3s ease-in-out",
+            transform: hovered && !isDownloading ? "scale(1.05)" : "scale(1)",
+          }}
+          onClick={() => !isDownloading && handleDownloadPDF(file)}
+        >
+          <span style={{ marginRight: "5px" }}>
+            {isDownloading ? (
+              <Lottie options={defaultOptions} height={52} width={152} />
+            ) : (
+              <>
+                <span style={{ display: "inline" }}>{t("Download")} </span>
+                <CloudDownloadIcon style={{ display: "inline" }} />
+              </>
+            )}
+          </span>
+        </button>
+      </div> */}
+    </>
   );
 };
 

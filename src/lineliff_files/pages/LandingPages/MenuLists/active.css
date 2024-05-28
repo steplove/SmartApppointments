@@ -1,0 +1,8 @@
+.active-bottom-nav {
+  font-size: 1rem; /* ปรับขนาดตัวอักษร */
+  color: #d63384; /* สีข้อความ */
+}
+
+.active-bottom-nav:hover {
+  font-size: 1.2rem; /* ปรับขนาดตัวอักษรเมื่อโฮเวอร์ */
+}

@@ -1,0 +1,57 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* แบ่งคอลัมน์ออกเป็น 2 ส่วน */
+  grid-template-rows: 1fr 1fr; /* แบ่งแถวออกเป็น 2 ส่วน */
+  gap: 16px; /* ระยะห่างระหว่างคอมโพเนนต์ */
+  width: 100%;
+  height: 100%;
+}
+
+.left {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px; สูงของพื้นที่ที่คุณต้องการรูปอยู่ตรงกลาง
+  width: 100%; กว้างของพื้นที่ที่คุณต้องการรูปอยู่ตรงกลาง */
+}
+
+.left img {
+  /* max-width: 50%;
+  max-height: 100%; */
+  /* object-fit: cover;
+  margin-left: 50%; */
+}
+
+.left p {
+  margin: 10%; /* กำหนดระยะห่างขอบเพจของประการข้อความให้เท่ากับ 0 */
+}
+
+.right-top {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2; /* ตำแหน่งด้านขวาบน */
+}
+
+.right-bottom {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3; /* ตำแหน่งด้านขวาล่าง */
+}
+.container {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%; */
+}
+
+/* .left,
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.top,
+.bottom {
+  flex: 1;
+}
