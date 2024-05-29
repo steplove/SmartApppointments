@@ -44,7 +44,7 @@ function useTokenCheck() {
         } else {
           alert("Token หมดอายุ");
           localStorage.removeItem("token");
-          window.location = "/login";
+          window.location = "/presentation";
         }
       } catch (error) {
         console.error("Error", error);
