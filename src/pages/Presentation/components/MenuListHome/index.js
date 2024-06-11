@@ -53,7 +53,7 @@ function MenuListHome() {
   ];
 
   const menuStyle = {
-    padding: 2,
+    padding: 0,
     borderRadius: "10px",
     margin: "0 auto",
     display: "flex",
@@ -62,12 +62,12 @@ function MenuListHome() {
     justifyContent: "center",
     textAlign: "center",
     position: "relative",
-    width: "100%",
-    minWidth: "220px",
+    width: "90%",
+    minWidth: "100px",
     height: "100%",
     minHeight: "150px",
     transition: "background-color 0.3s", // Add a smooth transition effect
-    cursor: "pointer", // Add cursor style
+    cursor: "pointer",
   };
 
   const handleMouseEnter = (index) => {
@@ -88,7 +88,7 @@ function MenuListHome() {
     <Grid>
       <Grid item container justifyContent="center" alignItems="center" spacing={2} mt={1}>
         {menuStyles.map((style, index) => (
-          <Grid item xs={6} sm={4} md={2} key={index}>
+          <Grid item xs={6} sm={6} md={6} lg={2} key={index} sx={{ mb: 2 }}>
             <animated.div
               id={`menu-item-${index}`}
               onClick={

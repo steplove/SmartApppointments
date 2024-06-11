@@ -74,7 +74,7 @@ function Presentation() {
         <Box
           display="flex"
           alignItems="center"
-          minHeight="85vh"
+          minHeight="70vh"
           sx={{
             backgroundImage: ({ palette: { gradients }, functions: { linearGradient, rgba } }) =>
               `${linearGradient(

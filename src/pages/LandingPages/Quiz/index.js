@@ -265,7 +265,16 @@ function QuizDisplay() {
                 onChange={(e) => setEva_Email(e.target.value)}
                 placeholder="อีเมล"
               />
-              <button onClick={() => setStage(4)} style={{ background: "#76c7c0" }}>
+              <button
+                onClick={() => {
+                  if (Eva_Email === "") {
+                    alert("กรุณากรอกอีเมล");
+                  } else {
+                    setStage(4);
+                  }
+                }}
+                style={{ background: "#76c7c0" }}
+              >
                 ตกลง
               </button>
             </div>
