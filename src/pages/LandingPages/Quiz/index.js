@@ -139,7 +139,7 @@ function QuizDisplay() {
             <img
               src="https://images.squarespace-cdn.com/content/v1/5804e890b8a79b7fbfbc76bc/1567029993166-MF1LAVVGZT9Q0TALRBRV/AliceNightOne_inUseAsleep_0514_CKHiLg.jpg?format=2500w"
               alt="sleeptest"
-              style={{ width: "650px", height: "450px", marginTop: "-150px" }}
+              style={{ width: "100%", height: "450px", marginTop: "-150px" }}
             />
             <div style={{ color: "black", fontSize: "1rem", marginTop: "20px" }}>
               <h3>แบบประเมิน ก่อนการตรวจความผิดปกติขณะนอนหลับ</h3>
@@ -153,39 +153,59 @@ function QuizDisplay() {
         )}
         {stage === 1 && (
           <div
-            className="privacy-policy-screen centered card-body"
             style={{
-              maxWidth: "660px",
-              maxHeight: "400px",
-              margin: "auto",
-              color: "black",
-              fontSize: "1.2rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "60vh",
+              width: "100vw",
             }}
           >
-            <h1>นโยบายความเป็นส่วนตัว</h1>
-            <p>
-              ข้อมูลส่วนบุคคลของท่าน
-              จะได้รับความคุ้มครองตามรายละเอียดที่ปรากฏบนนโยบายความเป็นส่วนตัว
-              <p>
-                <a
-                  href="https://www.bangkokchainhospital.com/th/privacy-policy"
-                  target="_blank"
-                  rel="noopener noreferrer"
+            <div
+              className="privacy-policy-screen centered card-body"
+              style={{
+                maxWidth: "660px",
+                maxHeight: "400px",
+                minWidth: "200px",
+                margin: "auto",
+                color: "black",
+                fontSize: "1.2rem",
+                width: "100%",
+                padding: "20px",
+                boxSizing: "border-box",
+                backgroundColor: "white",
+                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                borderRadius: "10px",
+              }}
+            >
+              <div style={{ width: "100%" }}>
+                <h1>นโยบายความเป็นส่วนตัว</h1>
+                <p>
+                  ข้อมูลส่วนบุคคลของท่าน
+                  จะได้รับความคุ้มครองตามรายละเอียดที่ปรากฏบนนโยบายความเป็นส่วนตัว
+                  <p>
+                    <a
+                      href="https://www.bangkokchainhospital.com/th/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      https://www.bangkokchainhospital.com
+                    </a>
+                  </p>
+                </p>
+              </div>
+
+              <div className="button-group">
+                <button onClick={handleAgreeClick} style={{ background: "#76c7c0" }}>
+                  ยินยอม
+                </button>
+                <button
+                  onClick={() => alert("ท่านต้องยินยอมเพื่อนดำเนินการต่อ")}
+                  style={{ background: "#F898A4" }}
                 >
-                  https://www.bangkokchainhospital.com/th/privacy-policy
-                </a>
-              </p>
-            </p>
-            <div className="button-group">
-              <button onClick={handleAgreeClick} style={{ background: "#76c7c0" }}>
-                ยินยอม
-              </button>
-              <button
-                onClick={() => alert("ท่านต้องยินยอมเพื่อนดำเนินการต่อ")}
-                style={{ background: "#F898A4" }}
-              >
-                ไม่ยินยอม
-              </button>
+                  ไม่ยินยอม
+                </button>
+              </div>
             </div>
           </div>
         )}
