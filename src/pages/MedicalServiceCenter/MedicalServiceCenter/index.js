@@ -58,7 +58,7 @@ function MedicalServiceCenter() {
           <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
+                <a href="/presentation" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
@@ -140,7 +140,7 @@ function MedicalServiceCenter() {
           <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
+                <a href="/presentation" style={{ color: "#808080", fontSize: "0.8rem" }}>
                   {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "0.8rem" }}>

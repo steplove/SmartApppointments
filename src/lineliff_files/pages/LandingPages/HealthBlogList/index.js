@@ -103,10 +103,10 @@ function HealthBlogList() {
           <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
+                <a href="/liff/presentation" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   {t("home")} /
                 </a>
-                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
+                <a href="/liff/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
                   {t("all_articles")}
                 </a>
               </Grid>
@@ -182,10 +182,10 @@ function HealthBlogList() {
           <Container maxWidth="md" sx={{ paddingTop: "0%", paddingBottom: 4 }}>
             <Grid item container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
+                <a href="/liff/presentation" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   {t("home")} /
                 </a>
-                <a href="/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
+                <a href="/liff/HealthBlogList" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
                   {t("all_articles")}
                 </a>
               </Grid>

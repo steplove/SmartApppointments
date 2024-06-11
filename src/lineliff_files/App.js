@@ -41,6 +41,7 @@ import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCente
 import Contact from "pages/Contact";
 import MyMap from "pages/Map";
 import OTP from "pages/OTP";
+
 import "./i18n";
 // Material Kit 2 React routes
 import routes from "routes";

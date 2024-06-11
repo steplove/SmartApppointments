@@ -140,12 +140,12 @@ function Presentation() {
           </Container>
         </Box>
       </Box>
-      <Box sx={{ marginBottom: "20px" }}>
-        <MenuListHome />
-      </Box>
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
+          <Box sx={{ marginBottom: "20px" }}>
+            <MenuListHome />
+          </Box>
           <Box sx={{ marginBottom: "20px", maxWidth: "70%", margin: "auto" }}>
             <animated.div
               style={{
@@ -158,6 +158,9 @@ function Presentation() {
         </Hidden>
         {/* Mobile View */}
         <Hidden smUp>
+          <Box sx={{ marginBottom: "20px" }}>
+            <MenuListHome />
+          </Box>
           <Box sx={{ marginBottom: "20px", maxWidth: "100%", margin: "auto" }}>
             <Banner slides={slides} />
           </Box>

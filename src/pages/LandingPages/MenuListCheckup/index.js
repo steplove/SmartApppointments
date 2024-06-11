@@ -46,7 +46,7 @@ export default function MenuListCheckup() {
   };
   const hadleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+    window.location.href = "/presentation";
   };
   return (
     <Grid>

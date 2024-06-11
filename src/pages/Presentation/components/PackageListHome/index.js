@@ -78,77 +78,86 @@ function PackageListHome() {
           margin: "0 auto",
         }}
       >
-        {packageData.map((packageItem) => (
-          <Card
-            key={packageItem.packageCode}
-            sx={{
-              width: "100%", // ทำให้ Card มีความกว้างเต็มตาม container
-              height: "100%",
-              display: "flex", // ทำให้ Card เป็น flex container
-              flexDirection: "column", // ให้ข้อมูลภายใน Card เรียงตั้งฉาก
-              maxWidth: 450, // หากต้องการกำหนดขนาดมากสุดสำหรับ Card
-              minHeight: 400,
-              margin: "0 5px",
-              marginBottom: "20px", // เพิ่มขีดเส้นระหว่าง Card
-            }}
-          >
-            <CardMedia
-              component="img"
-              height="150"
-              image={`${packageItem.packageImgBanner}`}
-              alt="รายละเอียดรูปภาพ"
-            />
-            <CardContent>
-              <Typography
-                sx={{
-                  color: "#0bb288",
-                  fontSize: "17px",
-                  fontWeight: "bold",
-                }}
-                body1="span"
-              >
-                {packageItem.packageName}
-              </Typography>
-              <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                {packageItem.packageNameEN}
-              </Typography>
-              <Typography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-              <Typography
-                sx={{ color: "#808080", fontSize: "10px" }}
-                mt={0}
-                dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
-              />
+        {packageData.map((packageItem) => {
+          const promoEndDate = new Date(packageItem.promoEndDate);
+          const currentDate = new Date();
 
-              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                {packageItem.packageContact}
-              </Typography>
-              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                {t("price")}:{" "}
-                <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                  {packageItem.packagePrice} ฿
-                </span>
-              </Typography>
-              <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                {t("expiration_date")}:
-                <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                  {new Date(packageItem.promoEndDate).toLocaleDateString()}
-                </span>
-              </Typography>
-              <Typography
+          if (promoEndDate >= currentDate) {
+            return (
+              <Card
+                key={packageItem.packageCode}
                 sx={{
-                  color: "#0bb288",
-                  fontSize: "15px",
-                  textAlign: "center",
-                  textDecoration: "underline",
-                  cursor: "pointer",
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  maxWidth: 450,
+                  minHeight: 400,
+                  margin: "0 5px",
+                  marginBottom: "20px",
                 }}
-                onClick={() => packagesDetail(packageItem.packageCode)}
               >
-                {t("view_details")}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
+                <CardMedia
+                  component="img"
+                  height="150"
+                  image={`${packageItem.packageImgBanner}`}
+                  alt="รายละเอียดรูปภาพ"
+                />
+                <CardContent>
+                  <Typography
+                    sx={{
+                      color: "#0bb288",
+                      fontSize: "17px",
+                      fontWeight: "bold",
+                    }}
+                    body1="span"
+                  >
+                    {packageItem.packageName}
+                  </Typography>
+                  <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
+                    {packageItem.packageNameEN}
+                  </Typography>
+                  <Typography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
+                  <Typography
+                    sx={{ color: "#808080", fontSize: "10px" }}
+                    mt={0}
+                    dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                  />
+                  <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                    {packageItem.packageContact}
+                  </Typography>
+                  <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                    {t("price")}:{" "}
+                    <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                      {packageItem.packagePrice} ฿
+                    </span>
+                  </Typography>
+                  <Typography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
+                    {t("expiration_date")}:
+                    <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                      {new Date(packageItem.promoEndDate).toLocaleDateString()}
+                    </span>
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#0bb288",
+                      fontSize: "15px",
+                      textAlign: "center",
+                      textDecoration: "underline",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => packagesDetail(packageItem.packageCode)}
+                  >
+                    {t("view_details")}
+                  </Typography>
+                </CardContent>
+              </Card>
+            );
+          } else {
+            // ถ้า promoEndDate น้อยกว่าเวลาปัจจุบัน ไม่แสดงอะไรเลย
+            return null;
+          }
+        })}
       </Grid>
       <Grid item style={{ textAlign: "center", marginTop: "20px" }}>
         <Button

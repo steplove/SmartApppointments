@@ -44,7 +44,7 @@ function CEO() {
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
+                  <a href="/presentation" style={{ color: "#808080", fontSize: "1rem" }}>
                     {t("home")}/
                   </a>
                   <a href="/CEO" style={{ color: "#0bb288", fontSize: "1rem" }}>

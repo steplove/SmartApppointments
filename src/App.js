@@ -41,6 +41,7 @@ import ServicesRoomsDetail from "pages/OurServices/ServicesRooms/ServicesRoomsDe
 import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCenter";
 import Contact from "pages/Contact";
 import MyMap from "pages/Map";
+import Quiz from "pages/LandingPages/Quiz";
 import OTP from "pages/OTP";
 import PDFupload from "pages/LandingPages/Pdfupload";
 import "i18n";
@@ -153,6 +154,7 @@ export default function App() {
           <Route path="/MedicalServiceCenter" element={<MedicalServiceCenter />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyMap" element={<MyMap />} />
+          <Route path="/Quiz" element={<Quiz />} />
           <Route path="/OTP/:mobileNo/:surveyid" element={<OTP />} />
           {/* <-----> */}
           <Route path="/liff/presentation" element={<LIFFPresentation />} />

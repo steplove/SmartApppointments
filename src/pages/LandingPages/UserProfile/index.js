@@ -109,7 +109,7 @@ function UserProfile() {
   };
   const hadleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "/";
+    window.location.href = "/presentation";
   };
   const [openLoad, setopenLoad] = useState(false);
   useEffect(() => {

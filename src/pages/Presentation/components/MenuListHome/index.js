@@ -1,6 +1,7 @@
 import React from "react";
 import { useSpring, animated } from "@react-spring/web";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import AirlineSeatIndividualSuiteIcon from "@mui/icons-material/AirlineSeatIndividualSuite";
 import { Grid, Typography } from "@mui/material";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
@@ -21,6 +22,9 @@ function MenuListHome() {
   const hadleClickCheckUP = () => {
     window.location.href = "/signInCheckup";
   };
+  const hadleClickSleepTest = () => {
+    window.location.href = "/Quiz";
+  };
 
   const handleClickSearchDoctor = () => {
     window.location.href = "/doctorListHome";
@@ -39,6 +43,9 @@ function MenuListHome() {
     },
     {
       backgroundColor: "#0bb288",
+    },
+    {
+      backgroundColor: "#646569",
     },
     {
       backgroundColor: "#646569",
@@ -81,17 +88,19 @@ function MenuListHome() {
     <Grid>
       <Grid item container justifyContent="center" alignItems="center" spacing={2} mt={1}>
         {menuStyles.map((style, index) => (
-          <Grid item key={index}>
+          <Grid item xs={6} sm={4} md={2} key={index}>
             <animated.div
               id={`menu-item-${index}`}
               onClick={
                 index === 0
                   ? handleClickAppointment
                   : index === 1
-                  ? hadleClickCheckUP
+                  ? hadleClickSleepTest
                   : index === 2
-                  ? handleClickSearchDoctor
+                  ? hadleClickCheckUP
                   : index === 3
+                  ? handleClickSearchDoctor
+                  : index === 4
                   ? handleClickContactUs
                   : ""
               }
@@ -103,12 +112,18 @@ function MenuListHome() {
                 <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               {index === 1 && (
-                <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
+                <AirlineSeatIndividualSuiteIcon
+                  sx={{ color: "white !important" }}
+                  fontSize="large"
+                />
               )}
               {index === 2 && (
-                <ContentPasteSearchIcon sx={{ color: "white !important" }} fontSize="large" />
+                <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               {index === 3 && (
+                <ContentPasteSearchIcon sx={{ color: "white !important" }} fontSize="large" />
+              )}
+              {index === 4 && (
                 <LocalHospitalIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               <Typography
@@ -116,9 +131,10 @@ function MenuListHome() {
                 sx={{ color: "white !important", marginTop: 1, fontSize: "14px" }}
               >
                 {index === 0 && t("appointment_with_doctor")}
-                {index === 1 && t("sriburin_checkup_center")}
-                {index === 2 && t("search_for_a_doctor")}
-                {index === 3 && t("contact_us")}
+                {index === 1 && "แบบประเมิน Sleep Test"}
+                {index === 2 && t("sriburin_checkup_center")}
+                {index === 3 && t("search_for_a_doctor")}
+                {index === 4 && t("contact_us")}
               </Typography>
               <Typography
                 variant="caption"
@@ -126,8 +142,9 @@ function MenuListHome() {
               >
                 {index === 0 && t("book_an_appointment_online")}
                 {index === 1 && t("")}
-                {index === 2 && t("search_by_name_expertise_and_others")}
-                {index === 3 && t("ask_for_information_on_treatment_and_services")}
+                {index === 2 && t("")}
+                {index === 3 && t("search_by_name_expertise_and_others")}
+                {index === 4 && t("ask_for_information_on_treatment_and_services")}
               </Typography>
             </animated.div>
           </Grid>

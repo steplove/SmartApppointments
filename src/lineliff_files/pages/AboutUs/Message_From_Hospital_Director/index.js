@@ -44,11 +44,11 @@ function Message_From_Hospital_Director() {
               <Typography sx={{ marginBottom: 2, fontSize: "1.5rem" }}></Typography>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <a href="/" style={{ color: "#808080", fontSize: "1rem" }}>
+                  <a href="/liff/presentation" style={{ color: "#808080", fontSize: "1rem" }}>
                     {t("home")}/
                   </a>
                   <a
-                    href="/Message_From_Hospital_Director"
+                    href="/liff/Message_From_Hospital_Director"
                     style={{ color: "#0bb288", fontSize: "1rem" }}
                   >
                     {t("message_from_hospital_director")}

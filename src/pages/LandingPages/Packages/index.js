@@ -100,7 +100,7 @@ function Packages() {
           <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "1.0rem" }}>
+                <a href="/presentation" style={{ color: "#808080", fontSize: "1.0rem" }}>
                   {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "1.0rem" }}>
@@ -112,71 +112,85 @@ function Packages() {
               รายละเอียดแพ็คเกจ
             </Typography> */}
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
-              {packageData.map((packageItem) => (
-                <Grid item key={packageItem.id} xs={12} md={4}>
-                  <Card
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      maxWidth: 450,
-                      minHeight: 400,
-                      margin: "0 5px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="150"
-                      image={`${packageItem.packageImgBanner}`}
-                      alt="รายละเอียดรูปภาพ"
-                    />
-                    <CardContent>
-                      <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                        {packageItem.packageName}
-                      </MKTypography>
-                      <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                        {packageItem.packageNameEN}
-                      </MKTypography>
-                      <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-                      <MKTypography
-                        sx={{ color: "#808080", fontSize: "10px" }}
-                        mt={0}
-                        dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
-                      />
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        {packageItem.packageContact}
-                      </MKTypography>
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        {t("price")}:{" "}
-                        <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.packagePrice}
-                        </span>
-                      </MKTypography>
+              {packageData.map((packageItem) => {
+                const promoEndDate = new Date(packageItem.promoEndDate);
+                const currentDate = new Date();
 
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                        {t("expiration_date")}:
-                        <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {new Date(packageItem.promoEndDate).toLocaleDateString()}
-                        </span>
-                      </MKTypography>
-                      <MKTypography
+                if (promoEndDate >= currentDate) {
+                  return (
+                    <Grid item key={packageItem.id} xs={12} md={4}>
+                      <Card
                         sx={{
-                          color: "#0bb288",
-                          fontSize: "15px",
-                          textAlign: "center",
-                          textDecoration: "underline",
-                          cursor: "pointer",
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          maxWidth: 450,
+                          minHeight: 400,
+                          margin: "0 5px",
+                          marginBottom: "20px",
                         }}
-                        onClick={() => packagesDetail(packageItem.packageCode)}
                       >
-                        {t("view_details")}
-                      </MKTypography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+                        <CardMedia
+                          component="img"
+                          height="150"
+                          image={`${packageItem.packageImgBanner}`}
+                          alt="รายละเอียดรูปภาพ"
+                        />
+                        <CardContent>
+                          <MKTypography
+                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                          >
+                            {packageItem.packageName}
+                          </MKTypography>
+                          <MKTypography
+                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                          >
+                            {packageItem.packageNameEN}
+                          </MKTypography>
+                          <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
+                          <MKTypography
+                            sx={{ color: "#808080", fontSize: "10px" }}
+                            mt={0}
+                            dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                          />
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                            {packageItem.packageContact}
+                          </MKTypography>
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                            {t("price")}:{" "}
+                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                              {packageItem.packagePrice}
+                            </span>
+                          </MKTypography>
+
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
+                            {t("expiration_date")}:
+                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                              {new Date(packageItem.promoEndDate).toLocaleDateString()}
+                            </span>
+                          </MKTypography>
+                          <MKTypography
+                            sx={{
+                              color: "#0bb288",
+                              fontSize: "15px",
+                              textAlign: "center",
+                              textDecoration: "underline",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => packagesDetail(packageItem.packageCode)}
+                          >
+                            {t("view_details")}
+                          </MKTypography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                } else {
+                  // ถ้า promoEndDate น้อยกว่าเวลาปัจจุบัน ไม่แสดงอะไรเลย
+                  return null;
+                }
+              })}
             </Grid>
             <MKBox pt={6} px={1} mt={6}>
               <DefaultFooter content={footerRoutes} />
@@ -188,7 +202,7 @@ function Packages() {
           <Container maxWidth="md" sx={{ paddingTop: "1%", paddingBottom: 4 }}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <a href="/" style={{ color: "#808080", fontSize: "0.8rem" }}>
+                <a href="/presentation" style={{ color: "#808080", fontSize: "0.8rem" }}>
                   {t("home")}/
                 </a>
                 <a href="/packages" style={{ color: "#0bb288", fontSize: "0.8rem" }}>
@@ -198,70 +212,86 @@ function Packages() {
             </Grid>
 
             <Grid container spacing={2} style={{ margin: "0 auto" }}>
-              {packageData.map((packageItem) => (
-                <Grid item key={packageItem.id} xs={11} md={4}>
-                  <Card
-                    sx={{
-                      width: "100%",
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      maxWidth: 400,
-                      minHeight: 400,
-                      margin: "0 5px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <CardMedia
-                      component="img"
-                      height="150"
-                      image={`${packageItem.packageImgBanner}`}
-                      alt="รายละเอียดรูปภาพ"
-                    />
-                    <CardContent>
-                      <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                        {packageItem.packageName}
-                      </MKTypography>
-                      <MKTypography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                        {packageItem.packageNameEN}
-                      </MKTypography>
-                      <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-                      <MKTypography
-                        sx={{ color: "#808080", fontSize: "10px" }}
-                        mt={0}
-                        dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
-                      />
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        {packageItem.packageContact}
-                      </MKTypography>
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                        {t("price")}:{" "}
-                        <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {packageItem.packagePrice} ฿
-                        </span>
-                      </MKTypography>
-                      <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                        {t("expiration_date")}:
-                        <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                          {new Date(packageItem.promoEndDate).toLocaleDateString()}
-                        </span>
-                      </MKTypography>
-                      <MKTypography
+              {packageData.map((packageItem) => {
+                // แปลง promoEndDate ให้เป็นวันที่
+                const promoEndDate = new Date(packageItem.promoEndDate);
+                const currentDate = new Date();
+                console.log(promoEndDate, "promoEndDate", currentDate);
+                // ตรวจสอบว่า promoEndDate มากกว่าหรือเท่ากับ currentDate หรือไม่
+                if (promoEndDate >= currentDate) {
+                  return (
+                    <Grid item key={packageItem.id} xs={11} md={4}>
+                      <Card
                         sx={{
-                          color: "#0bb288",
-                          fontSize: "15px",
-                          textAlign: "center",
-                          textDecoration: "underline",
-                          cursor: "pointer",
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          maxWidth: 400,
+                          minHeight: 400,
+                          margin: "0 5px",
+                          marginBottom: "20px",
                         }}
-                        onClick={() => packagesDetail(packageItem.packageCode)}
                       >
-                        {t("view_details")}
-                      </MKTypography>
-                    </CardContent>
-                  </Card>
-                </Grid>
-              ))}
+                        <CardMedia
+                          component="img"
+                          height="150"
+                          image={`${packageItem.packageImgBanner}`}
+                          alt="รายละเอียดรูปภาพ"
+                        />
+                        <CardContent>
+                          <MKTypography
+                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                          >
+                            {packageItem.packageName}
+                          </MKTypography>
+                          <MKTypography
+                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                          >
+                            {packageItem.packageNameEN}
+                          </MKTypography>
+                          <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
+                          <MKTypography
+                            sx={{ color: "#808080", fontSize: "10px" }}
+                            mt={0}
+                            dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                          />
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                            {packageItem.packageContact}
+                          </MKTypography>
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                            {t("price")}:{" "}
+                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                              {packageItem.packagePrice} ฿
+                            </span>
+                          </MKTypography>
+                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
+                            {t("expiration_date")}:
+                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                              {new Date(packageItem.promoEndDate).toLocaleDateString()}
+                            </span>
+                          </MKTypography>
+                          <MKTypography
+                            sx={{
+                              color: "#0bb288",
+                              fontSize: "15px",
+                              textAlign: "center",
+                              textDecoration: "underline",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => packagesDetail(packageItem.packageCode)}
+                          >
+                            {t("view_details")}
+                          </MKTypography>
+                        </CardContent>
+                      </Card>
+                    </Grid>
+                  );
+                } else {
+                  // ถ้า promoEndDate น้อยกว่าเวลาปัจจุบัน ไม่แสดงอะไรเลย
+                  return null;
+                }
+              })}
             </Grid>
             <MKBox pt={6} px={1} mt={6}>
               <DefaultFooter content={footerRoutes} />

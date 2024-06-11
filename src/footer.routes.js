@@ -15,7 +15,7 @@ export default {
   brand: {
     name: "Smart Appointments",
     image: logoCT,
-    route: "/",
+    route: "/presentation",
   },
   socials: [
     {
