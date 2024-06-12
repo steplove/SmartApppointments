@@ -69,15 +69,12 @@ function QuizDisplay() {
     setEva_Agree("1");
     setStage(2);
   };
-  const handleNewQuiz = () => {
-    window.location.href = "/Quiz";
-  };
   const handleHome = () => {
     window.location.href = "/presentation";
   };
   // console.log("answers:", answers);
   // console.log("name:", Eva_fullname);
-  console.log("Eva_Agree:", Eva_Agree);
+  // console.log("Eva_Agree:", Eva_Agree);
   const sendResults = async () => {
     const totalScore = answers.reduce((acc, answer) => acc + (answer !== null ? answer : 0), 0);
     // console.log("totalScore:", totalScore);
@@ -119,7 +116,12 @@ function QuizDisplay() {
   return (
     <>
       <header
-        style={{ display: "flex", alignItems: "center", marginLeft: "5%", marginTop: "20px" }}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginLeft: "5%",
+          marginTop: "20px",
+        }}
       >
         <div className="logo">
           <a href="https://www.kasemrad.co.th/">
@@ -134,12 +136,23 @@ function QuizDisplay() {
         }}
       >
         {stage === 0 && (
-          <div className="initial-screen centered" style={{ maxWidth: "650px", margin: "auto" }}>
+          <div
+            className="initial-screen centered"
+            style={{
+              maxWidth: "650px",
+              margin: "auto",
+              marginTop: "10%",
+              maxHeight: "650px",
+              minHeight: "100px",
+              minWidth: "100px",
+              // position: "fixed",
+            }}
+          >
             {/* <img alt="Header" className="header-image" /> */}
             <img
               src="https://images.squarespace-cdn.com/content/v1/5804e890b8a79b7fbfbc76bc/1567029993166-MF1LAVVGZT9Q0TALRBRV/AliceNightOne_inUseAsleep_0514_CKHiLg.jpg?format=2500w"
               alt="sleeptest"
-              style={{ width: "100%", height: "450px", marginTop: "-150px" }}
+              style={{ width: "100%", height: "45%", marginTop: "-15%" }}
             />
             <div style={{ color: "black", fontSize: "1rem", marginTop: "20px" }}>
               <h3>แบบประเมิน ก่อนการตรวจความผิดปกติขณะนอนหลับ</h3>
@@ -275,6 +288,7 @@ function QuizDisplay() {
               <h2>กรุณากรอกเบอร์โทรศัพท์และอีเมลผู้ทำแบบประเมิน</h2>
               <input
                 type="tel"
+                maxLength={10}
                 value={Eva_Tel}
                 onChange={(e) => setEva_Tel(e.target.value)}
                 placeholder="เบอร์โทรศัพท์"
@@ -289,6 +303,8 @@ function QuizDisplay() {
                 onClick={() => {
                   if (Eva_Email === "") {
                     alert("กรุณากรอกอีเมล");
+                  } else if (!Eva_Email.includes("@")) {
+                    alert("รูปแบบอีเมลไม่ถูกต้อง");
                   } else {
                     setStage(4);
                   }
@@ -353,15 +369,8 @@ function QuizDisplay() {
               รพ.เกษมราษฎร์ศรีบุรินทร์ และห่วงใยให้ทุกคนมีสุขภาพที่ดี โดยการหมั่นออกกำลังกาย
               ทานอาหารที่มีประโยชน์ และไม่เครียดจนเกินไป
             </p>
-            <button
-              className="btn btn-secondary"
-              onClick={handleNewQuiz}
-              style={{ background: "#0caf69" }}
-            >
-              เริ่มใหม่
-            </button>
             <button onClick={handleHome} className="btn btn-secondary">
-              กลับหน้าหลัก
+              ขอบคุณสำหรับการประเมิน
             </button>
           </div>
         )}
