@@ -27,7 +27,9 @@ function QuizDisplay() {
     },
   ];
   const textResult =
-    "การแปลคะแนน <10 แสดงว่าไม่มีปัญหาง่วงนอน, คะแนน 10-14 แสดงว่าง่วงนอนเล็กน้อย, คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง, คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
+    "การแปลคะแนน <10 แสดงว่าไม่มีปัญหาง่วงนอน, คะแนน 10-14 แสดงว่าง่วงนอนเล็กน้อย, คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง,คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
+  // const textResult0 =
+  //   " คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
   const textResult1 = "กรณีที่ท่านมีปัญหาภาวะหยุดหายใจขณะนอนหลับ สนใจแพคเกจ sleep test ";
   const textResult2 = "สามารถติดต่อ แผนก หู คอ จมูก ชั้น 1 อาคารการแพทย์เฉพาะทาง";
   const textResult3 = "โทร 053-910-999 ต่อ 142-153";
@@ -373,16 +375,53 @@ function QuizDisplay() {
           </div>
         )}
         {submitted && (
-          <div className="quiz-result centered" style={{ color: "black", width: "50%" }}>
-            <h2>ผลคะแนนรวม: {totalScore}</h2>
-            <p>{resultMessage}</p>
-            <p>{textResult}</p>
+          <div className="quiz-result centered lg-8" style={{ color: "#138453", width: "100%" }}>
+            <h2>
+              <div style={{ color: "#138453" }}>ผลคะแนนรวม: {totalScore}</div>
+            </h2>
+            <h5>{resultMessage}</h5>
             <p></p>
-            <p>{textResult1}</p>
-            <p>{textResult2}</p>
-            <p>{textResult3}</p>
-            <p>{textResult4}</p>
-            <button onClick={handleHome} className="btn btn-secondary">
+
+            <p></p>
+            <div
+              style={{
+                background: "#3085db",
+                fontSize: "0.4rem",
+                color: "white",
+                width: "100%",
+                borderRadius: "30px",
+                maxWidth: 600,
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1rem",
+                  color: "white",
+                  width: "90%",
+                  justifyContent: "center",
+                  justifyItems: "center",
+                  alignContent: "center",
+                  alignItems: "center",
+                  textAlign: "center",
+                  margin: "auto",
+                  marginTop: "10px",
+                }}
+              >
+                <p>{textResult}</p>
+                {/* <p>{textResult0}</p> */}
+                <p>{textResult1}</p>
+                <p style={{ marginTop: "-20px" }}>{textResult2}</p>
+                <p style={{ marginTop: "-10px" }}>{textResult3}</p>
+                <p style={{ marginTop: "-20px" }}>{textResult4}</p>
+              </div>
+            </div>
+
+            <button
+              onClick={handleHome}
+              // className="btn btn-secondary"
+
+              style={{ marginTop: "30px", backgroundColor: "#F6C6C7", color: "black" }}
+            >
               ขอบคุณสำหรับการประเมิน
             </button>
           </div>
