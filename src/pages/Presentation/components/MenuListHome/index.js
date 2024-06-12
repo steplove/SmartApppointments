@@ -48,7 +48,7 @@ function MenuListHome() {
       backgroundColor: "#646569",
     },
     {
-      backgroundColor: "#646569",
+      backgroundColor: "#d9534f",
     },
   ];
 
