@@ -67,6 +67,8 @@ function Presentation() {
             borderRadius: 10,
             padding: 10,
             height: "6%",
+            minHeight: "45px",
+            maxHeight: "150px",
           }}
         >
           <LanguageSelector />
