@@ -210,88 +210,108 @@ function Packages() {
                 </a>
               </Grid>
             </Grid>
-
-            <Grid container spacing={2} style={{ margin: "0 auto" }}>
-              {packageData.map((packageItem) => {
-                // แปลง promoEndDate ให้เป็นวันที่
-                const promoEndDate = new Date(packageItem.promoEndDate);
-                const currentDate = new Date();
-                console.log(promoEndDate, "promoEndDate", currentDate);
-                // ตรวจสอบว่า promoEndDate มากกว่าหรือเท่ากับ currentDate หรือไม่
-                if (promoEndDate >= currentDate) {
-                  return (
-                    <Grid item key={packageItem.id} xs={11} md={4}>
-                      <Card
-                        sx={{
-                          width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          flexDirection: "column",
-                          maxWidth: 400,
-                          minHeight: 400,
-                          margin: "0 5px",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        <CardMedia
-                          component="img"
-                          height="150"
-                          image={`${packageItem.packageImgBanner}`}
-                          alt="รายละเอียดรูปภาพ"
-                        />
-                        <CardContent>
-                          <MKTypography
-                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
-                          >
-                            {packageItem.packageName}
-                          </MKTypography>
-                          <MKTypography
-                            sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
-                          >
-                            {packageItem.packageNameEN}
-                          </MKTypography>
-                          <MKTypography sx={{ borderBottom: "2px solid #0bb288", width: "40px" }} />
-                          <MKTypography
-                            sx={{ color: "#808080", fontSize: "10px" }}
-                            mt={0}
-                            dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
-                          />
-                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                            {packageItem.packageContact}
-                          </MKTypography>
-                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
-                            {t("price")}:{" "}
-                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                              {packageItem.packagePrice} ฿
-                            </span>
-                          </MKTypography>
-                          <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
-                            {t("expiration_date")}:
-                            <span style={{ color: "#ff0000", fontSize: "14px" }}>
-                              {new Date(packageItem.promoEndDate).toLocaleDateString()}
-                            </span>
-                          </MKTypography>
-                          <MKTypography
+            <Grid item>
+              <Grid
+                container
+                item
+                xs={12}
+                md={6}
+                lg={12}
+                spacing={2}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "5%",
+                }}
+              >
+                {packageData.map((packageItem) => {
+                  // แปลง promoEndDate ให้เป็นวันที่
+                  const promoEndDate = new Date(packageItem.promoEndDate);
+                  const currentDate = new Date();
+                  console.log(promoEndDate, "promoEndDate", currentDate);
+                  // ตรวจสอบว่า promoEndDate มากกว่าหรือเท่ากับ currentDate หรือไม่
+                  if (promoEndDate >= currentDate) {
+                    return (
+                      <Grid item key={packageItem.id} xs={11} md={4}>
+                        <Card
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            maxWidth: 450,
+                            minWidth: 100,
+                            minHeight: 400,
+                            margin: "0 5px",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          <CardMedia
+                            component="img"
+                            height="150"
+                            image={`${packageItem.packageImgBanner}`}
+                            alt="รายละเอียดรูปภาพ"
                             sx={{
-                              color: "#0bb288",
-                              fontSize: "15px",
-                              textAlign: "center",
-                              textDecoration: "underline",
-                              cursor: "pointer",
+                              objectFit: "fill",
                             }}
-                            onClick={() => packagesDetail(packageItem.packageCode)}
-                          >
-                            {t("view_details")}
-                          </MKTypography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  );
-                } else {
-                  // ถ้า promoEndDate น้อยกว่าเวลาปัจจุบัน ไม่แสดงอะไรเลย
-                  return null;
-                }
-              })}
+                          />
+                          <CardContent>
+                            <MKTypography
+                              sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                            >
+                              {packageItem.packageName}
+                            </MKTypography>
+                            <MKTypography
+                              sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}
+                            >
+                              {packageItem.packageNameEN}
+                            </MKTypography>
+                            <MKTypography
+                              sx={{ borderBottom: "2px solid #0bb288", width: "40px" }}
+                            />
+                            <MKTypography
+                              sx={{ color: "#808080", fontSize: "10px" }}
+                              mt={0}
+                              dangerouslySetInnerHTML={{ __html: packageItem.packagesDetail }}
+                            />
+                            <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                              {packageItem.packageContact}
+                            </MKTypography>
+                            <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={2}>
+                              {t("price")}:{" "}
+                              <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                                {packageItem.packagePrice} ฿
+                              </span>
+                            </MKTypography>
+                            <MKTypography sx={{ color: "#808080", fontSize: "12px" }} mt={1}>
+                              {t("expiration_date")}:
+                              <span style={{ color: "#ff0000", fontSize: "14px" }}>
+                                {new Date(packageItem.promoEndDate).toLocaleDateString()}
+                              </span>
+                            </MKTypography>
+                            <MKTypography
+                              sx={{
+                                color: "#0bb288",
+                                fontSize: "15px",
+                                textAlign: "center",
+                                textDecoration: "underline",
+                                cursor: "pointer",
+                              }}
+                              onClick={() => packagesDetail(packageItem.packageCode)}
+                            >
+                              {t("view_details")}
+                            </MKTypography>
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    );
+                  } else {
+                    // ถ้า promoEndDate น้อยกว่าเวลาปัจจุบัน ไม่แสดงอะไรเลย
+                    return null;
+                  }
+                })}
+              </Grid>
             </Grid>
             <MKBox pt={6} px={1} mt={6}>
               <DefaultFooter content={footerRoutes} />
