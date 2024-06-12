@@ -76,7 +76,7 @@ button {
 }
 
 button:hover {
-  background: #f0b6f3;
+  background: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
@@ -201,4 +201,16 @@ button:disabled {
 
 .card-body:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.quiz-answer {
+  transition: background-color 0.3s ease;
+}
+
+.quiz-answer.flashing {
+  animation: flash 0.5s;
+}
+
+@keyframes flash {
+  0%, 100% { background-color: white; }
+  50% { background-color: rgb(246, 104, 254); }
 }

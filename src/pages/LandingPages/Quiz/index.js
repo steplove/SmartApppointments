@@ -23,10 +23,15 @@ function QuizDisplay() {
     {
       min: 19,
       max: 24,
-      message: "คะแนนมากกว่า 18 แสดงว่ามีอาการง่วงนอนมาก ควรปรึกษาแพทย์เพื่อตรวจหาสาเหตุ",
+      message: "คะแนนมากกว่า 18 แสดงว่า คุณมีภาวะง่วงมากผิดปกติ",
     },
   ];
-
+  const textResult =
+    "การแปลคะแนน <10 แสดงว่าไม่มีปัญหาง่วงนอน, คะแนน 10-14 แสดงว่าง่วงนอนเล็กน้อย, คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง, คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
+  const textResult1 = "กรณีที่ท่านมีปัญหาภาวะหยุดหายใจขณะนอนหลับ สนใจแพคเกจ sleep test ";
+  const textResult2 = "สามารถติดต่อ แผนก หู คอ จมูก ชั้น 1 อาคารการแพทย์เฉพาะทาง";
+  const textResult3 = "โทร 053-910-999 ต่อ 142-153";
+  const textResult4 = "เวลา 08.00-16.00น. ทุกวันทำการ";
   const [stage, setStage] = useState(0);
   const [Eva_fullname, setEva_fullname] = useState("");
   const [Eva_Tel, setEva_Tel] = useState("");
@@ -35,15 +40,21 @@ function QuizDisplay() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const [submitted, setSubmitted] = useState(false);
-
+  const [isFlashing, setIsFlashing] = useState(false);
+  const [flashingIndex, setFlashingIndex] = useState(null);
   const handleAnswerChange = (value) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = value;
-    setAnswers(newAnswers);
-
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    }
+    setFlashingIndex(value);
+    setIsFlashing(true);
+    setTimeout(() => {
+      setIsFlashing(false);
+      setFlashingIndex(null);
+      const newAnswers = [...answers];
+      newAnswers[currentQuestion] = value;
+      setAnswers(newAnswers);
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+      }
+    }, 500);
   };
 
   const handleSubmit = () => {
@@ -351,7 +362,7 @@ function QuizDisplay() {
                     key={value}
                     className={`quiz-answer ${
                       answers[currentQuestion] === value ? "selected" : ""
-                    }`}
+                    } ${isFlashing && flashingIndex === value ? "flashing" : ""}`}
                     onClick={() => handleAnswerChange(value)}
                   >
                     <p style={{ marginTop: "15px" }}>{value}</p>
@@ -362,13 +373,15 @@ function QuizDisplay() {
           </div>
         )}
         {submitted && (
-          <div className="quiz-result centered" style={{ color: "black" }}>
+          <div className="quiz-result centered" style={{ color: "black", width: "50%" }}>
             <h2>ผลคะแนนรวม: {totalScore}</h2>
             <p>{resultMessage}</p>
-            <p>
-              รพ.เกษมราษฎร์ศรีบุรินทร์ และห่วงใยให้ทุกคนมีสุขภาพที่ดี โดยการหมั่นออกกำลังกาย
-              ทานอาหารที่มีประโยชน์ และไม่เครียดจนเกินไป
-            </p>
+            <p>{textResult}</p>
+            <p></p>
+            <p>{textResult1}</p>
+            <p>{textResult2}</p>
+            <p>{textResult3}</p>
+            <p>{textResult4}</p>
             <button onClick={handleHome} className="btn btn-secondary">
               ขอบคุณสำหรับการประเมิน
             </button>
