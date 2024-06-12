@@ -6,8 +6,8 @@ import routes from "routes";
 import Banner from "components/Banner";
 import DefaultFooter from "examples/Footers/DefaultFooter";
 import footerRoutes from "footer.routes";
-import { Button, Stack, Container, Grid, Typography, Box } from "@mui/material";
-import bgImage from "assets/images/hospital.png";
+import { Grid, Box } from "@mui/material";
+// import bgImage from "assets/images/hospital.png";
 import MenuListHome from "./components/MenuListHome";
 import PackageListHome from "./components/PackageListHome";
 import HealthBlog from "./components/HealthBlogListHome";
@@ -43,10 +43,10 @@ function Presentation() {
     from: { x: -100 },
     to: { x: 0 },
   });
-  const springs1 = useSpring({
-    from: { y: -100 },
-    to: { y: 0 },
-  });
+  // const springs1 = useSpring({
+  //   from: { y: -100 },
+  //   to: { y: 0 },
+  // });
   const Cookie = useSpring({
     from: { y: 100 },
     to: { y: 0 },
@@ -54,7 +54,7 @@ function Presentation() {
   return (
     <>
       {showNavbar && <DefaultNavbar routes={routes} sticky relative />}
-      <Box component="header" position="relative">
+      {/* <Box component="header" position="relative">
         <Grid
           item
           style={{
@@ -141,14 +141,30 @@ function Presentation() {
             </Grid>
           </Container>
         </Box>
-      </Box>
+      </Box> */}
       <ThemeProvider theme={theme}>
         {/* Desktop/Tablet View */}
         <Hidden smDown>
-          <Box sx={{ marginBottom: "20px" }}>
-            <MenuListHome />
-          </Box>
-          <Box sx={{ marginBottom: "20px", maxWidth: "70%", margin: "auto" }}>
+          <Grid
+            item
+            style={{
+              position: "absolute",
+              right: 25,
+              textAlign: "center",
+              alignItems: "center",
+              // marginTop: 10,
+              backgroundColor: "whitesmoke",
+              borderRadius: 10,
+              padding: 10,
+              height: "6%",
+              minHeight: "45px",
+              maxHeight: "150px",
+              zIndex: "1",
+            }}
+          >
+            <LanguageSelector />
+          </Grid>
+          <Box sx={{ marginBottom: "20px", maxWidth: "70%", margin: "auto", marginTop: "1%" }}>
             <animated.div
               style={{
                 ...springs,
@@ -157,14 +173,36 @@ function Presentation() {
               <Banner slides={slides} />
             </animated.div>{" "}
           </Box>
-        </Hidden>
-        {/* Mobile View */}
-        <Hidden smUp>
           <Box sx={{ marginBottom: "20px" }}>
             <MenuListHome />
           </Box>
-          <Box sx={{ marginBottom: "20px", maxWidth: "100%", margin: "auto" }}>
+        </Hidden>
+        {/* Mobile View */}
+        <Hidden smUp>
+          <Grid
+            item
+            style={{
+              position: "absolute",
+              right: 25,
+              textAlign: "center",
+              alignItems: "center",
+              marginTop: "-12%",
+              backgroundColor: "whitesmoke",
+              borderRadius: 10,
+              padding: 10,
+              height: "3%",
+              minHeight: "30px",
+              maxHeight: "150px",
+              zIndex: "1",
+            }}
+          >
+            <LanguageSelector />
+          </Grid>
+          <Box sx={{ marginBottom: "20px", maxWidth: "100%", margin: "auto", marginTop: "15%" }}>
             <Banner slides={slides} />
+          </Box>
+          <Box sx={{ marginBottom: "20px" }}>
+            <MenuListHome />
           </Box>
         </Hidden>
       </ThemeProvider>

@@ -168,6 +168,7 @@ i18n.use(initReactI18next).init({
         Logging_in: "กำลังเข้าสู่ระบบ",
         Just_a_moment_please: "กรุณารอสักครู่...",
         recommend: "ข้อแนะนำในการปฏิบัติตัว",
+        sleeptest: "แบบประเมิน Sleep Test",
       },
     },
     en: {
@@ -336,6 +337,7 @@ i18n.use(initReactI18next).init({
         Logging_in: "Logging in",
         Just_a_moment_please: "Just a moment please.",
         recommend: "CheckUP Result Advice",
+        sleeptest: "Sleep Test Assessment",
       },
     },
     lo: {

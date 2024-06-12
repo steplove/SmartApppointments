@@ -63,65 +63,68 @@ const HealthBlog = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          margin: "0 auto",
+          marginTop: "2%",
         }}
       >
         {BlogData.map((blog) => (
-          <Card
-            key={blog.Blog_ID}
-            sx={{
-              width: "100%", // ทำให้ Card มีความกว้างเต็มตาม container
-              height: "80%",
-              maxWidth: 450, // หากต้องการกำหนดขนาดมากสุดสำหรับ Card
-              minHeight: 400,
-              margin: "0 5px",
-              marginBottom: "20px", // เพิ่มขีดเส้นระหว่าง Card
-              flexDirection: "column",
-            }}
-          >
-            <CardMedia
-              component="img"
+          <Grid item key={BlogData.packageCode} xs={11} md={3}>
+            <Card
+              key={blog.Blog_ID}
               sx={{
-                width: "93%", // กำหนดความกว้างของรูป
-                height: "100%", // กำหนดความสูงของรูป
-                objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                maxWidth: 450,
+                minWidth: 100,
+                minHeight: 400,
+                margin: "0 5px",
+                marginBottom: "20px",
               }}
-              image={`${blog.Blog_ImageBanner}`}
-            />
-            <CardContent>
-              <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
-                {blog.Blog_Name}
-              </Typography>
-              <Typography
+            >
+              <CardMedia
+                component="img"
+                height="150"
                 sx={{
-                  color: "#808080",
-                  fontSize: "15px",
-                  overflow: "hidden",
-                  display: "-webkit-box",
-                  WebkitBoxOrient: "vertical",
-                  WebkitLineClamp: 4,
-                  textOverflow: "ellipsis",
-                  whiteSpace: "normal",
-                  maxWidth: "100%",
+                  objectFit: "fill",
                 }}
-                dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
+                image={`${blog.Blog_ImageBanner}`}
               />
+              <CardContent>
+                <Typography sx={{ color: "#0bb288", fontSize: "17px", fontWeight: "bold" }}>
+                  {blog.Blog_Name}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#808080",
+                    fontSize: "15px",
+                    overflow: "hidden",
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    WebkitLineClamp: 4,
+                    textOverflow: "ellipsis",
+                    whiteSpace: "normal",
+                    maxWidth: "100%",
+                  }}
+                  dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
+                />
 
-              <Typography
-                sx={{
-                  color: "#0bb288",
-                  fontSize: "15px",
-                  textAlign: "center",
-                  textDecoration: "underline",
-                  alignSelf: "flex-end", // ทำให้อยู่ล่าง
-                  cursor: "pointer",
-                }}
-                onClick={() => BlogsDetail(blog.Blog_ID)}
-              >
-                {t("read_more")}
-              </Typography>
-            </CardContent>
-          </Card>
+                <Typography
+                  sx={{
+                    color: "#0bb288",
+                    fontSize: "15px",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                    alignSelf: "flex-end", // ทำให้อยู่ล่าง
+                    cursor: "pointer",
+                  }}
+                  onClick={() => BlogsDetail(blog.Blog_ID)}
+                >
+                  {t("read_more")}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))}
       </Grid>
       <Grid item style={{ textAlign: "center", marginTop: "20px" }}>

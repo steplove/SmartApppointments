@@ -202,7 +202,7 @@ function HealthBlogList() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                margin: "0 auto",
+                marginTop: "5%",
               }}
             >
               {BlogData.map((blog) => (
@@ -223,7 +223,7 @@ function HealthBlogList() {
                     sx={{
                       width: "100%", // กำหนดความกว้างของรูป
                       height: "100%", // กำหนดความสูงของรูป
-                      objectFit: "cover", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
+                      objectFit: "fill", // ให้รูปทำการ scale เพื่อให้เต็มพื้นที่ที่กำหนด
                     }}
                     image={`${blog.Blog_ImageBanner}`}
                   />
@@ -232,7 +232,17 @@ function HealthBlogList() {
                       {blog.Blog_Name}
                     </MKTypography>
                     <MKTypography
-                      sx={{ color: "#808080", fontSize: "15px" }}
+                      sx={{
+                        color: "#808080",
+                        fontSize: "15px",
+                        overflow: "hidden",
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        WebkitLineClamp: 4, // จำนวนบรรทัดที่ต้องการแสดง
+                        textOverflow: "ellipsis",
+                        whiteSpace: "normal",
+                        maxWidth: "100%",
+                      }}
                       dangerouslySetInnerHTML={{ __html: blog.Blog_Detail }}
                     />
                     <MKTypography
@@ -241,10 +251,10 @@ function HealthBlogList() {
                         fontSize: "15px",
                         textAlign: "center",
                         textDecoration: "underline",
-                        alignSelf: "flex-end", // ทำให้อยู่ล่าง
+                        alignSelf: "flex-end",
                         cursor: "pointer",
                       }}
-                      onClick={() => blogDetail(blog.packageCode)}
+                      onClick={() => blogDetail(blog.Blog_ID)}
                     >
                       {t("read_more")}
                     </MKTypography>

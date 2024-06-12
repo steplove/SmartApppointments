@@ -131,7 +131,7 @@ function MenuListHome() {
                 sx={{ color: "white !important", marginTop: 1, fontSize: "14px" }}
               >
                 {index === 0 && t("appointment_with_doctor")}
-                {index === 1 && "แบบประเมิน Sleep Test"}
+                {index === 1 && t("sleeptest")}
                 {index === 2 && t("sriburin_checkup_center")}
                 {index === 3 && t("search_for_a_doctor")}
                 {index === 4 && t("contact_us")}
