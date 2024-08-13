@@ -169,6 +169,48 @@ i18n.use(initReactI18next).init({
         Just_a_moment_please: "กรุณารอสักครู่...",
         recommend: "ข้อแนะนำในการปฏิบัติตัว",
         sleeptest: "แบบประเมิน Sleep Test",
+        sub_sleep_1: "แบบประเมิน ก่อนการตรวจความผิดปกติขณะนอนหลับ",
+        sub_sleep_2: "โดยใช้แบบประเมิน Epworth sleepiness scale ซึ่งมีคำถาม 8 ข้อ ต่อไปนี้",
+        sub_sleep_start: "เริ่มการประเมิน",
+        sub_sleep_policy_1: "นโยบายความเป็นส่วนตัว",
+        sub_sleep_policy_2:
+          "ข้อมูลส่วนบุคคลของท่าน จะได้รับความคุ้มครองตามรายละเอียดที่ปรากฏบนนโยบายความเป็นส่วนตัว",
+        sub_sleep_policy_3: "ยินยอม",
+        sub_sleep_policy_4: "ไม่ยินยอม",
+        sub_sleep_fill_name: "กรุณากรอกชื่อผู้ทำแบบประเมิน",
+        sub_sleep_fill_phone: "กรุณากรอกเบอร์โทรศัพท์และอีเมลผู้ทำแบบประเมิน",
+        sub_sleep_fill_done: "ตกลง",
+        sub_sleep_scale:
+          "0 = ไม่เคยเลย, 1 = มีโอกาสเล็กน้อย, 2 = มีโอกาสปานกลาง, 3 = มีโอกาสสูงมาก",
+        sub_sleep_choose: "*เลือกหมายเลขที่ตรงกับที่คุณเลือก",
+        sub_sleep_ask_1: "ท่านจะงีบหรือเผลอหลับ ขณะนั่งอ่านหนังสือ",
+        sub_sleep_ask_2: "ท่านจะงีบหรือเผลอหลับ ขณะดูโทรทัศน์",
+        sub_sleep_ask_3:
+          "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเฉยๆ นอกบ้าน ในที่สาธารณะ เช่น ในห้องสมุด หรือโรงภาพยนตร์",
+        sub_sleep_ask_4:
+          "ท่านจะงีบหรือเผลอหลับ ขณะนั่งโดยสาร ในรถ เรือ เครื่องบิน ติดต่อกันเป็นเวลานาน",
+        sub_sleep_ask_5:
+          "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเงียบๆ หลังรับประทานอาหารกลางวัน โดยไม่ได้ดื่มแอลกอฮอล์",
+        sub_sleep_ask_6: "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเล่นและพูดคุยกับผู้อื่น",
+        sub_sleep_ask_7: "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเอนหลังพักผ่อนช่วงบ่ายตามโอกาส",
+        sub_sleep_ask_8:
+          "ท่านจะงีบหรือเผลอหลับ ขณะขับรถ และต้องหยุดนิ่ง 2-3 นาที ตามจังหวะการจราจร",
+        sub_sleep_score: "ผลคะแนนรวม",
+        sub_sleep_score_10: "คะแนนน้อยกว่า 10 แสดงว่าไม่มีปัญหาง่วงนอน",
+        sub_sleep_score_14: "คะแนน 10-14 แสดงว่ามีอาการง่วงนอนเล็กน้อย",
+        sub_sleep_score_15: "คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง",
+        sub_sleep_score_18: "คะแนนมากกว่า 18 แสดงว่า คุณมีภาวะง่วงมากผิดปกติ",
+        sub_sleep_score_detail1: "กรณีที่ท่านมีปัญหาภาวะหยุดหายใจขณะนอนหลับ สนใจแพคเกจ sleep test",
+        sub_sleep_score_detail2: "สามารถติดต่อ แผนก หู คอ จมูก ชั้น 1 อาคารการแพทย์เฉพาะทาง",
+        sub_sleep_score_detail3: "โทร 053-910-999 ต่อ 142-153",
+        sub_sleep_score_detail4: "เวลา 08.00-16.00น. ทุกวันทำการ",
+        sub_sleep_score_detail:
+          "การแปลคะแนน <10 แสดงว่าไม่มีปัญหาง่วงนอน, คะแนน 10-14 แสดงว่าง่วงนอนเล็กน้อย, คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง,คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น",
+        sub_sleep_score_t: "ขอบคุณสำหรับการประเมิน",
+        sub_sleep_Back: "กลับ",
+        sub_sleep_Next: "ถัดไป",
+        sub_sleep_Finish: "เสร็จสิ้น",
+        sub_sleep_Submit: "ส่งแบบทดสอบ",
       },
     },
     en: {
@@ -338,6 +380,51 @@ i18n.use(initReactI18next).init({
         Just_a_moment_please: "Just a moment please.",
         recommend: "CheckUP Result Advice",
         sleeptest: "Sleep Test Assessment",
+        sub_sleep_1: "The Epworth Sleepiness Scale is widely used in the field",
+        sub_sleep_2: "of sleep medicine as a subjective measure patient's sleepiness.",
+        sub_sleep_start: "Start testing",
+        sub_sleep_policy_1: "Privacy policy",
+        sub_sleep_policy_2:
+          "This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of your information when You use the Service and tells You about Your Personal data to provide and improve the Service.By using the Service,You agree to the collection and use of information in accordance with this Privacy Policy.",
+        sub_sleep_policy_3: "Agree",
+        sub_sleep_policy_4: "Not agree",
+        sub_sleep_fill_name: "please fill Name for sleeping test",
+        sub_sleep_fill_phone: "please fill phone number and e-mail address",
+        sub_sleep_fill_done: "Done",
+        sub_sleep_scale:
+          "0 = No chance of dozing, 1 = Slight chance of dozing, 2 = Moderate chance of dozing, 3 = High chance of dozing",
+        sub_sleep_choose: "*Choose down the number corresponding to your choice",
+        sub_sleep_ask_1: "Situation:How often do you doze ? Sitting and reading",
+        sub_sleep_ask_2: "Situation:How often do you doze ? Watching TV",
+        sub_sleep_ask_3:
+          "Situation:How often do you doze ? Sitting inactive in a public place (e.g., a theater of a meeting)",
+        sub_sleep_ask_4:
+          "Situation:How often do you doze ? As a passenger in a car for an hour without a break",
+        sub_sleep_ask_5:
+          "Situation:How often do you doze ? Sitting quietly after a lunch without alcohol",
+        sub_sleep_ask_6: "Situation:How often do you doze ? Sitting and talking to someone",
+        sub_sleep_ask_7:
+          "Situation:How often do you doze ? Lying down to rest in the afternoon when circumstances permit",
+        sub_sleep_ask_8:
+          "Situation:How often do you doze ? In a car,while stopped for a few minutes in trafficl",
+        sub_sleep_score: "Total score",
+        sub_sleep_score_10: "< 10 : Higher Normal Daytime Sleepiness",
+        sub_sleep_score_14: "10-14 : Mild Excessive Daytime Sleepiness",
+        sub_sleep_score_15: "15-18 : Moderate Excessive Daytime Sleepiness",
+        sub_sleep_score_18: "> 18 : Severe Excessive Daytime Sleepiness",
+        sub_sleep_score_detail1:
+          "The scale estimates whether you are experiencing excessive sleepiness that possibly requires medical attention",
+        sub_sleep_score_detail2:
+          "Ask more information about sleep test plese contact EYE EAR NOSE Center",
+        sub_sleep_score_detail3: "call 053-910-999 ext 142 or 153",
+        sub_sleep_score_detail4: "Dialy 08.00-16.00",
+        sub_sleep_score_detail:
+          "Interpretation: 0-7:It is unlikely that you are abnormally sleepy.8-9:You have an average amount of daytime sleepiness.10-15:You may be excessively sleepy depending on the situation. You may want to consider seeking medical attention. 16-24:You are excessively sleepy and should consider seeking medical attention.",
+        sub_sleep_score_t: "Thank you for doing sleep test",
+        sub_sleep_Back: "Back",
+        sub_sleep_Next: "Next",
+        sub_sleep_Finish: "Finish",
+        sub_sleep_Submit: "Submit a test",
       },
     },
     lo: {

@@ -214,3 +214,23 @@ button:disabled {
   0%, 100% { background-color: white; }
   50% { background-color: rgb(246, 104, 254); }
 }
+@media (max-width: 768px) {
+  .responsive-logo {
+    height: 50px;
+  }
+  header {
+    padding: 10px 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .responsive-logo {
+    height: 40px;
+  }
+  header {
+    padding: 10px 5%;
+  }
+  Grid {
+    margin-top: 10px;
+  }
+}

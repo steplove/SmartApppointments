@@ -50,16 +50,20 @@ const LanguageSelector = () => {
         // transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
         <MenuItem onClick={() => changeLanguage("th")}>
-          <span role="img" aria-label="Thai Flag">
-            🇹🇭
-          </span>
+          <img
+            src="https://img.freepik.com/free-vector/illustration-thailand-flag_53876-27145.jpg?t=st=1723088704~exp=1723092304~hmac=47bf31062a4812a1b34656e8d7f7e4b3359f3adfd7fe5676c590b4368778f348&w=1480"
+            alt="Thai Flag"
+            style={{ width: "20px", height: "auto" }}
+          />
           &nbsp;
           {t("ไทย")}
         </MenuItem>
         <MenuItem onClick={() => changeLanguage("en")}>
-          <span role="img" aria-label="USA Flag">
-            🇺🇸
-          </span>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Flag_of_the_United_States.png/800px-Flag_of_the_United_States.png"
+            alt="USA Flag"
+            style={{ width: "20px", height: "auto" }}
+          />
           &nbsp;
           {t("English")}
         </MenuItem>

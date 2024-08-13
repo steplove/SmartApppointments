@@ -3,37 +3,40 @@ import "./Quiz.css";
 // import headerImage from "../../../assets/images/rotating-card-bg-back.jpeg";
 // import questionImage from "../../../assets/images/bg-about-us.jpg"; // Update this path to your question image
 import { BASE_URL } from "constants/constants";
+import LanguageSelector from "LanguageSelector";
+import { Grid } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function QuizDisplay() {
+  const { t } = useTranslation();
   const questions = [
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งอ่านหนังสือ",
-    "ท่านจะงีบหรือเผลอหลับ ขณะดูโทรทัศน์",
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเฉยๆ นอกบ้าน ในที่สาธารณะ เช่น ในห้องสมุด หรือโรงภาพยนตร์",
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งโดยสาร ในรถ เรือ เครื่องบิน ติดต่อกันเป็นเวลานาน",
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเงียบๆ หลังรับประทานอาหารกลางวัน โดยไม่ได้ดื่มแอลกอฮอล์",
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเล่นและพูดคุยกับผู้อื่น",
-    "ท่านจะงีบหรือเผลอหลับ ขณะนั่งเอนหลังพักผ่อนช่วงบ่ายตามโอกาส",
-    "ท่านจะงีบหรือเผลอหลับ ขณะขับรถ และต้องหยุดนิ่ง 2-3 นาที ตามจังหวะการจราจร",
+    t("sub_sleep_ask_1"),
+    t("sub_sleep_ask_2"),
+    t("sub_sleep_ask_3"),
+    t("sub_sleep_ask_4"),
+    t("sub_sleep_ask_5"),
+    t("sub_sleep_ask_6"),
+    t("sub_sleep_ask_7"),
+    t("sub_sleep_ask_8"),
   ];
 
   const conditions = [
-    { min: 0, max: 10, message: "คะแนนน้อยกว่า 10 แสดงว่าไม่มีปัญหาง่วงนอน" },
-    { min: 11, max: 14, message: "คะแนน 10-14 แสดงว่ามีอาการง่วงนอนเล็กน้อย" },
-    { min: 15, max: 18, message: "คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง" },
+    { min: 0, max: 10, message: t("sub_sleep_score_10") },
+    { min: 11, max: 14, message: t("sub_sleep_score_14") },
+    { min: 15, max: 18, message: t("sub_sleep_score_15") },
     {
       min: 19,
       max: 24,
-      message: "คะแนนมากกว่า 18 แสดงว่า คุณมีภาวะง่วงมากผิดปกติ",
+      message: t("sub_sleep_score_18"),
     },
   ];
-  const textResult =
-    "การแปลคะแนน <10 แสดงว่าไม่มีปัญหาง่วงนอน, คะแนน 10-14 แสดงว่าง่วงนอนเล็กน้อย, คะแนน 15-18 แสดงว่าง่วง นอนปานกลาง,คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
+  const textResult = t("sub_sleep_score_detail");
   // const textResult0 =
   //   " คะแนน >18 แสดงว่าง่วงนอนมากคำแนะนำสำหรับการวินิจฉัยและการดูแลรักษา ภาวะหยุดหายใจขณะหลับจากการอุดกั้น";
-  const textResult1 = "กรณีที่ท่านมีปัญหาภาวะหยุดหายใจขณะนอนหลับ สนใจแพคเกจ sleep test ";
-  const textResult2 = "สามารถติดต่อ แผนก หู คอ จมูก ชั้น 1 อาคารการแพทย์เฉพาะทาง";
-  const textResult3 = "โทร 053-910-999 ต่อ 142-153";
-  const textResult4 = "เวลา 08.00-16.00น. ทุกวันทำการ";
+  const textResult1 = t("sub_sleep_score_detail1");
+  const textResult2 = t("sub_sleep_score_detail2");
+  const textResult3 = t("sub_sleep_score_detail3");
+  const textResult4 = t("sub_sleep_score_detail4");
   const [stage, setStage] = useState(0);
   const [Eva_fullname, setEva_fullname] = useState("");
   const [Eva_Tel, setEva_Tel] = useState("");
@@ -138,9 +141,32 @@ function QuizDisplay() {
       >
         <div className="logo">
           <a href="https://www.kasemrad.co.th/">
-            <img src="https://www.kasemrad.co.th/asset/site/images/logo.png" alt="Kasemrad Logo" />
+            <img
+              src="https://www.kasemrad.co.th/asset/site/images/logo.png"
+              alt="Kasemrad Logo"
+              className="responsive-logo"
+            />
           </a>
         </div>
+        <Grid
+          item
+          style={{
+            position: "absolute",
+            right: 25,
+            textAlign: "center",
+            alignItems: "center",
+            // marginTop: 10,
+            backgroundColor: "whitesmoke",
+            borderRadius: 10,
+            padding: 10,
+            height: "6%",
+            minHeight: "45px",
+            maxHeight: "150px",
+            zIndex: "1",
+          }}
+        >
+          <LanguageSelector />
+        </Grid>
       </header>
       <div
         className="quiz-container"
@@ -168,12 +194,12 @@ function QuizDisplay() {
               style={{ width: "100%", height: "45%", marginTop: "-15%" }}
             />
             <div style={{ color: "black", fontSize: "1rem", marginTop: "20px" }}>
-              <h3>แบบประเมิน ก่อนการตรวจความผิดปกติขณะนอนหลับ</h3>
-              <h5>โดยใช้แบบประเมิน Epworth sleepiness scale ซึ่งมีคำถาม 8 ข้อ ต่อไปนี้</h5>
+              <h4>{t("sub_sleep_1")}</h4>
+              <h5>{t("sub_sleep_2")}</h5>
             </div>
 
             <button onClick={() => setStage(1)} style={{ background: "#76c7c0" }}>
-              เริ่มการประเมิน
+              {t("sub_sleep_start")}
             </button>
           </div>
         )}
@@ -205,10 +231,9 @@ function QuizDisplay() {
               }}
             >
               <div style={{ width: "100%" }}>
-                <h1>นโยบายความเป็นส่วนตัว</h1>
+                <h1>{t("sub_sleep_policy_1")}</h1>
                 <p>
-                  ข้อมูลส่วนบุคคลของท่าน
-                  จะได้รับความคุ้มครองตามรายละเอียดที่ปรากฏบนนโยบายความเป็นส่วนตัว
+                  {t("sub_sleep_policy_2")}
                   <p>
                     <a
                       href="https://www.bangkokchainhospital.com/th/privacy-policy"
@@ -223,13 +248,13 @@ function QuizDisplay() {
 
               <div className="button-group">
                 <button onClick={handleAgreeClick} style={{ background: "#76c7c0" }}>
-                  ยินยอม
+                  {t("sub_sleep_policy_3")}
                 </button>
                 <button
                   onClick={() => alert("ท่านต้องยินยอมเพื่อนดำเนินการต่อ")}
                   style={{ background: "#F898A4" }}
                 >
-                  ไม่ยินยอม
+                  {t("sub_sleep_policy_4")}
                 </button>
               </div>
             </div>
@@ -260,7 +285,7 @@ function QuizDisplay() {
             >
               {" "}
               <div className="input-screen centered" style={{ color: "black" }}>
-                <h2>กรุณากรอกชื่อผู้ทำแบบประเมิน</h2>
+                <h2>{t("sub_sleep_fill_name")}</h2>
                 <input
                   type="text"
                   value={Eva_fullname}
@@ -268,7 +293,7 @@ function QuizDisplay() {
                   placeholder="ชื่อ"
                 />
                 <button onClick={() => setStage(3)} style={{ background: "#76c7c0" }}>
-                  ตกลง
+                  {t("sub_sleep_fill_done")}
                 </button>
               </div>
             </div>
@@ -298,33 +323,33 @@ function QuizDisplay() {
                 color: "black",
               }}
             >
-              <h2>กรุณากรอกเบอร์โทรศัพท์และอีเมลผู้ทำแบบประเมิน</h2>
+              <h2>{t("sub_sleep_fill_phone")}</h2>
               <input
                 type="tel"
                 maxLength={10}
                 value={Eva_Tel}
                 onChange={(e) => setEva_Tel(e.target.value)}
-                placeholder="เบอร์โทรศัพท์"
+                placeholder={t("mobileNo")}
               />
               <input
                 type="email"
                 value={Eva_Email}
                 onChange={(e) => setEva_Email(e.target.value)}
-                placeholder="อีเมล"
+                placeholder={t("email")}
               />
               <button
                 onClick={() => {
                   if (Eva_Email === "") {
-                    alert("กรุณากรอกอีเมล");
+                    alert(t("please_fill_in") + " " + t("email"));
                   } else if (!Eva_Email.includes("@")) {
-                    alert("รูปแบบอีเมลไม่ถูกต้อง");
+                    alert(t("invalid_email_format"));
                   } else {
                     setStage(4);
                   }
                 }}
                 style={{ background: "#76c7c0" }}
               >
-                ตกลง
+                {t("sub_sleep_fill_done")}
               </button>
             </div>
           </div>
@@ -357,7 +382,8 @@ function QuizDisplay() {
               <h3 style={{ marginTop: "20px" }}>
                 {currentQuestion + 1}. {questions[currentQuestion]}
               </h3>
-              <p>0-ไม่เคยเลย, 1-มีโอกาสเล็กน้อย, 2-มีโอกาสปานกลาง, 3-มีโอกาสสูงมาก</p>
+              <h6 style={{ color: "#FF0000" }}>{t("sub_sleep_choose")}</h6>
+              <h6>{t("sub_sleep_scale")}</h6>
               <div className="quiz-answers">
                 {[0, 1, 2, 3].map((value) => (
                   <button
@@ -377,7 +403,9 @@ function QuizDisplay() {
         {submitted && (
           <div className="quiz-result centered lg-8" style={{ color: "#138453", width: "100%" }}>
             <h2>
-              <div style={{ color: "#138453" }}>ผลคะแนนรวม: {totalScore}</div>
+              <div style={{ color: "#138453" }}>
+                {t("sub_sleep_score")}: {totalScore}
+              </div>
             </h2>
             <h5>{resultMessage}</h5>
             <p></p>
@@ -422,26 +450,28 @@ function QuizDisplay() {
 
               style={{ marginTop: "30px", backgroundColor: "#F6C6C7", color: "black" }}
             >
-              ขอบคุณสำหรับการประเมิน
+              {t("sub_sleep_score_t")}
             </button>
           </div>
         )}
         {submitted ? null : (
           <footer className="quiz-footer">
             <button onClick={handleBack} disabled={currentQuestion === 0}>
-              <h6 style={{ fontSize: "1rem" }}>กลับ</h6>
+              <h6 style={{ fontSize: "1rem" }}>{t("sub_sleep_Back")}</h6>
             </button>
             <div className="progress-bar">
               <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
             </div>
-            <span style={{ color: "black" }}>{progressPercentage}% เสร็จสิ้น</span>
+            <span style={{ color: "black" }}>
+              {progressPercentage}% {t("sub_sleep_Finish")}
+            </span>
             {currentQuestion < questions.length - 1 ? (
               <button onClick={handleNext}>
-                <h6 style={{ fontSize: "1rem" }}>ถัดไป</h6>
+                <h6 style={{ fontSize: "1rem" }}>{t("sub_sleep_Next")}</h6>
               </button>
             ) : (
               <button className="submit-button" onClick={handleSubmit}>
-                <h6 style={{ fontSize: "1rem" }}>ส่งแบบทดสอบ</h6>
+                <h6 style={{ fontSize: "1rem" }}>{t("sub_sleep_Submit")}</h6>
               </button>
             )}
           </footer>
