@@ -290,7 +290,7 @@ function QuizDisplay() {
                   type="text"
                   value={Eva_fullname}
                   onChange={(e) => setEva_fullname(e.target.value)}
-                  placeholder="ชื่อ"
+                  placeholder={t("name")}
                 />
                 <button onClick={() => setStage(3)} style={{ background: "#76c7c0" }}>
                   {t("sub_sleep_fill_done")}
