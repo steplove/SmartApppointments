@@ -211,6 +211,7 @@ i18n.use(initReactI18next).init({
         sub_sleep_Next: "ถัดไป",
         sub_sleep_Finish: "เสร็จสิ้น",
         sub_sleep_Submit: "ส่งแบบทดสอบ",
+        please_answer: "กรุณาตอบทุกคำถามก่อนส่ง",
       },
     },
     en: {
@@ -425,6 +426,7 @@ i18n.use(initReactI18next).init({
         sub_sleep_Next: "Next",
         sub_sleep_Finish: "Finish",
         sub_sleep_Submit: "Submit a test",
+        please_answer: "Please answer all questions completely.",
       },
     },
     lo: {

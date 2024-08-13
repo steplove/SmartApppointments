@@ -64,7 +64,7 @@ function QuizDisplay() {
 
   const handleSubmit = () => {
     if (answers.includes(null)) {
-      alert("กรุณาตอบทุกคำถามก่อนส่ง");
+      alert(t("please_answer"));
     } else {
       setSubmitted(true);
       sendResults();
