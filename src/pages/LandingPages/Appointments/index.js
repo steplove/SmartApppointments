@@ -200,7 +200,12 @@ function Appointments() {
 
   const fetchDoctors = async (ClinicID) => {
     try {
-      const response = await fetch(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`);
+      const response = await axios.get(`${BASE_URL}/api/searchDoctorClinic/${ClinicID}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       setDoctor(data);
       // console.log(data, "data");
