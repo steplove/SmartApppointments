@@ -78,6 +78,7 @@ function Appointments() {
   const [clinics, setClinics] = useState([]);
   const [doctor, setDoctor] = useState([]);
   const [isChecked, setChecked] = useState(false);
+  
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/showClinics`, {
@@ -128,6 +129,7 @@ function Appointments() {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "GET, POST",
           "Access-Control-Allow-Headers": "Content-Type",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           HN: HNCustomer,
@@ -206,7 +208,7 @@ function Appointments() {
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = await response.json();
+      const data = await response.data;
       setDoctor(data);
       // console.log(data, "data");
     } catch (error) {
