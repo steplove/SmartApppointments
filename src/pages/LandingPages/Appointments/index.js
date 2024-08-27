@@ -78,7 +78,6 @@ function Appointments() {
   const [clinics, setClinics] = useState([]);
   const [doctor, setDoctor] = useState([]);
   const [isChecked, setChecked] = useState(false);
-  
   const fetchData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/showClinics`, {
