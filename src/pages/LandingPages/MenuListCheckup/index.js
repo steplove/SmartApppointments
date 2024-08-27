@@ -60,8 +60,8 @@ export default function MenuListCheckup() {
             label={`${t("home")}`}
             icon={<HomeIcon />}
             component={Link}
-            to="/"
-            value="/"
+            to="/dashboardCheckup"
+            value="/dashboardCheckup"
           />
           <BottomNavigationAction
             label={`${t("appointment")}`}

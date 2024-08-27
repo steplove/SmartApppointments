@@ -63,8 +63,8 @@ export default function MenuList() {
             label={`${t("home")}`}
             icon={<HomeIcon />}
             component={Link}
-            to="/"
-            value="/"
+            to="/dashboard"
+            value="/dashboard"
           />
           <BottomNavigationAction
             label={`${t("checkup")}`}
