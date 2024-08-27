@@ -270,7 +270,7 @@ function Appointments() {
                   }}
                 >
                   <MKTypography variant="h5" style={{ color: "white" }}>
-                    <AddCircleOutlineIcon sx={{ marginRight: 1 }} /> {t("register")}{" "}
+                    <AddCircleOutlineIcon sx={{ marginRight: 1 }} /> {t("register1")}{" "}
                     {t("appointment")}
                   </MKTypography>
                 </MKBox>
