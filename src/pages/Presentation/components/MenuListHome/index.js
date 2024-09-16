@@ -154,7 +154,7 @@ function MenuListHome() {
               >
                 {index === 0 && t("book_an_appointment_online")}
                 {index === 1 && t("")}
-                {index === 2 && t("เป็นโรคหัวในและหลอดเลือด")}
+                {index === 2 && t("เป็นโรคหัวใจและหลอดเลือด")}
                 {index === 3 && t("")}
                 {index === 4 && t("search_by_name_expertise_and_others")}
                 {index === 5 && t("ask_for_information_on_treatment_and_services")}
