@@ -96,7 +96,7 @@ function QuizHeartRisk() {
     };
     console.log(resultData, "resultData");
     try {
-      const response = await fetch(BASE_URL + "/api/QuizResults", {
+      const response = await fetch(BASE_URL + "/api/QuizResults2", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
