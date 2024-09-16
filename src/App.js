@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, useLocation, Routes } from "react-router-dom";
+import { Route, useLocation, Routes, Navigate } from "react-router-dom";
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
@@ -42,48 +42,49 @@ import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCente
 import Contact from "pages/Contact";
 import MyMap from "pages/Map";
 import Quiz from "pages/LandingPages/Quiz";
+import QuizHeartRisk from "pages/LandingPages/QuizHeartRisk";
 import OTP from "pages/OTP";
 import PDFupload from "pages/LandingPages/Pdfupload";
 import "i18n";
 // Material Kit 2 React routes
 import routes from "routes";
 import "App.css";
-import LIFFPresentation from "lineliff_files/layouts/pages/presentation";
-import LIFFSignInBasic from "lineliff_files/pages/LandingPages/SignIn";
-import LIFFSigninCheckup from "lineliff_files/pages/LandingPages/SigninCheckup";
-import LIFFRegister from "lineliff_files/pages/LandingPages/Register";
-import LIFFAgreement from "lineliff_files/pages/LandingPages/Agreement";
-import LIFFDashboard from "lineliff_files/pages/LandingPages/Dashboard";
-import LIFFDashboardCheckup from "lineliff_files/pages/LandingPages/DashboardCheckUp";
-import LIFFAppointments from "lineliff_files/pages/LandingPages/Appointments";
-import LIFFBookingHistory from "lineliff_files/pages/LandingPages/BookingHistory";
-import LIFFUserProfile from "lineliff_files/pages/LandingPages/UserProfile";
-import LIFFUserProfileCheckup from "lineliff_files/pages/LandingPages/UserProfileCheckup";
-import LIFFDoctorList from "lineliff_files/pages/LandingPages/DoctorList";
-import LIFFDoctorListHome from "lineliff_files/pages/LandingPages/DoctorListHome";
-import LIFFDoctorListCheckUP from "lineliff_files/pages/LandingPages/DoctorListCheckUP";
-import LIFFMain from "lineliff_files/pages/LandingPages/Main";
-import LIFFAgree from "lineliff_files/pages/LandingPages/Agree";
-import LIFFForgotPassword from "lineliff_files/pages/LandingPages/ForgotPassword";
-import LIFFForgotOTP from "lineliff_files/pages/OTP/ForGotOTP";
-import LIFFConfOTP from "lineliff_files/pages/OTP/ConfOTP";
-import LIFFPackages from "lineliff_files/pages/LandingPages/Packages";
-import LIFFPackagesDetail from "lineliff_files/pages/LandingPages/Packages/PackagesDetail";
-import LIFFHealthBlogListDetail from "lineliff_files/pages/LandingPages/HealthBlogList/HealthBlogListDetail";
-import LIFFResetPassword from "lineliff_files/pages/LandingPages/ResetPassword";
-import LIFFHealthBlogList from "lineliff_files/pages/LandingPages/HealthBlogList";
-import LIFFCEO from "lineliff_files/pages/AboutUs/CEO";
-import LIFFMessage_From_Ceo from "lineliff_files/pages/AboutUs/Message_From_Ceo";
-import LIFFMessage_From_Hospital_Director from "lineliff_files/pages/AboutUs/Message_From_Hospital_Director";
-import LIFFHistory from "lineliff_files/pages/AboutUs/History";
-import LIFFVision_And_Mission from "lineliff_files/pages/AboutUs/Vision_And_Mission";
-import LIFFAccreditation from "lineliff_files/pages/AboutUs/Accreditation";
-import LIFFServicesRooms from "lineliff_files/pages/OurServices/ServicesRooms";
-import LIFFServicesRoomsDetail from "lineliff_files/pages/OurServices/ServicesRooms/ServicesRoomsDetail";
-import LIFFMedicalServiceCenter from "lineliff_files/pages/MedicalServiceCenter/MedicalServiceCenter";
-import LIFFContact from "lineliff_files/pages/Contact";
-import LIFFMyMap from "lineliff_files/pages/Map";
-import LIFFOTP from "lineliff_files/pages/OTP";
+// import LIFFPresentation from "lineliff_files/layouts/pages/presentation";
+// import LIFFSignInBasic from "lineliff_files/pages/LandingPages/SignIn";
+// import LIFFSigninCheckup from "lineliff_files/pages/LandingPages/SigninCheckup";
+// import LIFFRegister from "lineliff_files/pages/LandingPages/Register";
+// import LIFFAgreement from "lineliff_files/pages/LandingPages/Agreement";
+// import LIFFDashboard from "lineliff_files/pages/LandingPages/Dashboard";
+// import LIFFDashboardCheckup from "lineliff_files/pages/LandingPages/DashboardCheckUp";
+// import LIFFAppointments from "lineliff_files/pages/LandingPages/Appointments";
+// import LIFFBookingHistory from "lineliff_files/pages/LandingPages/BookingHistory";
+// import LIFFUserProfile from "lineliff_files/pages/LandingPages/UserProfile";
+// import LIFFUserProfileCheckup from "lineliff_files/pages/LandingPages/UserProfileCheckup";
+// import LIFFDoctorList from "lineliff_files/pages/LandingPages/DoctorList";
+// import LIFFDoctorListHome from "lineliff_files/pages/LandingPages/DoctorListHome";
+// import LIFFDoctorListCheckUP from "lineliff_files/pages/LandingPages/DoctorListCheckUP";
+// import LIFFMain from "lineliff_files/pages/LandingPages/Main";
+// import LIFFAgree from "lineliff_files/pages/LandingPages/Agree";
+// import LIFFForgotPassword from "lineliff_files/pages/LandingPages/ForgotPassword";
+// import LIFFForgotOTP from "lineliff_files/pages/OTP/ForGotOTP";
+// import LIFFConfOTP from "lineliff_files/pages/OTP/ConfOTP";
+// import LIFFPackages from "lineliff_files/pages/LandingPages/Packages";
+// import LIFFPackagesDetail from "lineliff_files/pages/LandingPages/Packages/PackagesDetail";
+// import LIFFHealthBlogListDetail from "lineliff_files/pages/LandingPages/HealthBlogList/HealthBlogListDetail";
+// import LIFFResetPassword from "lineliff_files/pages/LandingPages/ResetPassword";
+// import LIFFHealthBlogList from "lineliff_files/pages/LandingPages/HealthBlogList";
+// import LIFFCEO from "lineliff_files/pages/AboutUs/CEO";
+// import LIFFMessage_From_Ceo from "lineliff_files/pages/AboutUs/Message_From_Ceo";
+// import LIFFMessage_From_Hospital_Director from "lineliff_files/pages/AboutUs/Message_From_Hospital_Director";
+// import LIFFHistory from "lineliff_files/pages/AboutUs/History";
+// import LIFFVision_And_Mission from "lineliff_files/pages/AboutUs/Vision_And_Mission";
+// import LIFFAccreditation from "lineliff_files/pages/AboutUs/Accreditation";
+// import LIFFServicesRooms from "lineliff_files/pages/OurServices/ServicesRooms";
+// import LIFFServicesRoomsDetail from "lineliff_files/pages/OurServices/ServicesRooms/ServicesRoomsDetail";
+// import LIFFMedicalServiceCenter from "lineliff_files/pages/MedicalServiceCenter/MedicalServiceCenter";
+// import LIFFContact from "lineliff_files/pages/Contact";
+// import LIFFMyMap from "lineliff_files/pages/Map";
+// import LIFFOTP from "lineliff_files/pages/OTP";
 // import lineliff_files from "lineliff_files";
 export default function App() {
   const { pathname } = useLocation();
@@ -155,9 +156,10 @@ export default function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyMap" element={<MyMap />} />
           <Route path="/Quiz" element={<Quiz />} />
+          <Route path="/QuizHeartRisk" element={<QuizHeartRisk />} />
           <Route path="/OTP/:mobileNo/:surveyid" element={<OTP />} />
           {/* <-----> */}
-          <Route path="/liff/presentation" element={<LIFFPresentation />} />
+          {/*  <Route path="/liff/presentation" element={<LIFFPresentation />} />
           <Route path="/liff/signInBasic" element={<LIFFSignInBasic />} />
           <Route path="/liff/signinCheckup" element={<LIFFSigninCheckup />} />
           <Route path="/liff/register" element={<LIFFRegister />} />
@@ -195,8 +197,8 @@ export default function App() {
           <Route path="/liff/MedicalServiceCenter" element={<LIFFMedicalServiceCenter />} />
           <Route path="/liff/Contact" element={<LIFFContact />} />
           <Route path="/liff/MyMap" element={<LIFFMyMap />} />
-          <Route path="/liff/OTP/:mobileNo/:surveyid" element={<LIFFOTP />} />
-          {/* <Route path="*" element={<Navigate to="/presentation" />} /> */}
+          <Route path="/liff/OTP/:mobileNo/:surveyid" element={<LIFFOTP />} />*/}
+          <Route path="*" element={<Navigate to="/presentation" />} />
         </Routes>
       </ThemeProvider>
     </>

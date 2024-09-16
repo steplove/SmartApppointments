@@ -1,6 +1,8 @@
 import React from "react";
 import { useSpring, animated } from "@react-spring/web";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AirlineSeatIndividualSuiteIcon from "@mui/icons-material/AirlineSeatIndividualSuite";
 import { Grid, Typography } from "@mui/material";
 import ContentPasteSearchIcon from "@mui/icons-material/ContentPasteSearch";
@@ -19,11 +21,14 @@ function MenuListHome() {
     window.location.href = "/signIn";
   };
 
-  const hadleClickCheckUP = () => {
+  const handleClickCheckUP = () => {
     window.location.href = "/signInCheckup";
   };
-  const hadleClickSleepTest = () => {
+  const handleClickSleepTest = () => {
     window.location.href = "/Quiz";
+  };
+  const handleClickHeartRisk = () => {
+    window.location.href = "/QuizHeartRisk";
   };
 
   const handleClickSearchDoctor = () => {
@@ -50,6 +55,9 @@ function MenuListHome() {
     {
       backgroundColor: "#d9534f",
     },
+    {
+      backgroundColor: "#0d6efd",
+    },
   ];
 
   const menuStyle = {
@@ -66,21 +74,21 @@ function MenuListHome() {
     minWidth: "100px",
     height: "100%",
     minHeight: "150px",
-    transition: "background-color 0.3s", // Add a smooth transition effect
+    transition: "background-color 0.3s",
     cursor: "pointer",
   };
 
   const handleMouseEnter = (index) => {
     const Grid = document.getElementById(`menu-item-${index}`);
     if (Grid) {
-      Grid.style.backgroundColor = "#7b6a50"; // Change color on hover
+      Grid.style.backgroundColor = "#7b6a50";
     }
   };
 
   const handleMouseLeave = (index) => {
     const Grid = document.getElementById(`menu-item-${index}`);
     if (Grid) {
-      Grid.style.backgroundColor = menuStyles[index].backgroundColor; // Reset color on leave
+      Grid.style.backgroundColor = menuStyles[index].backgroundColor;
     }
   };
 
@@ -95,12 +103,14 @@ function MenuListHome() {
                 index === 0
                   ? handleClickAppointment
                   : index === 1
-                  ? hadleClickSleepTest
+                  ? handleClickSleepTest
                   : index === 2
-                  ? hadleClickCheckUP
+                  ? handleClickHeartRisk
                   : index === 3
-                  ? handleClickSearchDoctor
+                  ? handleClickCheckUP
                   : index === 4
+                  ? handleClickSearchDoctor
+                  : index === 5
                   ? handleClickContactUs
                   : ""
               }
@@ -118,12 +128,13 @@ function MenuListHome() {
                 />
               )}
               {index === 2 && (
-                <AssignmentIcon sx={{ color: "white !important" }} fontSize="large" />
+                <MonitorHeartIcon eIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
-              {index === 3 && (
+              {index === 3 && <FavoriteIcon sx={{ color: "white !important" }} fontSize="large" />}
+              {index === 4 && (
                 <ContentPasteSearchIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
-              {index === 4 && (
+              {index === 5 && (
                 <LocalHospitalIcon sx={{ color: "white !important" }} fontSize="large" />
               )}
               <Typography
@@ -132,9 +143,10 @@ function MenuListHome() {
               >
                 {index === 0 && t("appointment_with_doctor")}
                 {index === 1 && t("sleeptest")}
-                {index === 2 && t("sriburin_checkup_center")}
-                {index === 3 && t("search_for_a_doctor")}
-                {index === 4 && t("contact_us")}
+                {index === 2 && "แบบประเมินค้นหาความเสี่ยง"}
+                {index === 3 && t("sriburin_checkup_center")}
+                {index === 4 && t("search_for_a_doctor")}
+                {index === 5 && t("contact_us")}
               </Typography>
               <Typography
                 variant="caption"
@@ -142,9 +154,10 @@ function MenuListHome() {
               >
                 {index === 0 && t("book_an_appointment_online")}
                 {index === 1 && t("")}
-                {index === 2 && t("")}
-                {index === 3 && t("search_by_name_expertise_and_others")}
-                {index === 4 && t("ask_for_information_on_treatment_and_services")}
+                {index === 2 && t("เป็นโรคหัวในและหลอดเลือด")}
+                {index === 3 && t("")}
+                {index === 4 && t("search_by_name_expertise_and_others")}
+                {index === 5 && t("ask_for_information_on_treatment_and_services")}
               </Typography>
             </animated.div>
           </Grid>

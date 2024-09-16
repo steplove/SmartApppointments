@@ -173,7 +173,15 @@ function Presentation() {
               <Banner slides={slides} />
             </animated.div>{" "}
           </Box>
-          <Box sx={{ marginBottom: "20px" }}>
+          <Box
+            sx={{
+              marginBottom: "20px",
+              maxWidth: "80%",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "0 auto",
+            }}
+          >
             <MenuListHome />
           </Box>
         </Hidden>
