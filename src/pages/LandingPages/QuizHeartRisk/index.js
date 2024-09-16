@@ -366,7 +366,7 @@ function QuizHeartRisk() {
                     } ${isFlashing && flashingIndex === value ? "flashing" : ""}`}
                     onClick={() => handleAnswerChange(value)}
                   >
-                    <p style={{ marginTop: "15px" }}>{value === 0 ? "ไม่มี" : "มี"}</p>
+                    <p style={{ marginTop: "15px" }}>{value === 0 ? "ไม่ใช่" : "ใช่"}</p>
                   </button>
                 ))}
               </div>
@@ -430,7 +430,13 @@ function QuizHeartRisk() {
         {submitted ? null : (
           <footer className="quiz-footer">
             <button onClick={handleBack} disabled={currentQuestion === 0}>
-              <h6 style={{ fontSize: "1rem" }}>{t("sub_sleep_Back")}</h6>
+              <h6
+                style={{
+                  fontSize: "1rem",
+                }}
+              >
+                {t("sub_sleep_Back")}
+              </h6>
             </button>
             <div className="progress-bar">
               <div className="progress" style={{ width: `${progressPercentage}%` }}></div>
@@ -444,7 +450,14 @@ function QuizHeartRisk() {
               </button>
             ) : (
               <button className="submit-button" onClick={handleSubmit}>
-                <h6 style={{ fontSize: "1rem" }}>{t("sub_sleep_Submit")}</h6>
+                <h6
+                  style={{
+                    fontSize: "1rem",
+                    color: "#000000",
+                  }}
+                >
+                  {t("sub_sleep_Submit")}
+                </h6>
               </button>
             )}
           </footer>
