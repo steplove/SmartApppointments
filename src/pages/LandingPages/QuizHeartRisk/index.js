@@ -258,7 +258,7 @@ function QuizHeartRisk() {
             >
               {" "}
               <div className="input-screen centered" style={{ color: "black" }}>
-                <h2>{t("sub_sleep_fill_name")}</h2>
+                <h2>กรุณากรอกชื่อผู้ทำแบบประเมิน</h2>
                 <input
                   type="text"
                   value={Eva_fullname}
@@ -296,7 +296,7 @@ function QuizHeartRisk() {
                 color: "black",
               }}
             >
-              <h2>{t("sub_sleep_fill_phone")}</h2>
+              <h2>กรุณากรอกเบอร์โทรศัพท์และอีเมลผู้ทำแบบประเมิน</h2>
               <input
                 type="tel"
                 maxLength={10}
@@ -423,7 +423,7 @@ function QuizHeartRisk() {
 
               style={{ marginTop: "30px", backgroundColor: "#F6C6C7", color: "black" }}
             >
-              {t("sub_sleep_score_t")}
+              ขอบคุณสำหรับการประเมิน
             </button>
           </div>
         )}
