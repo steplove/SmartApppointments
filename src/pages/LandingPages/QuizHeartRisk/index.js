@@ -168,7 +168,7 @@ function QuizHeartRisk() {
               style={{ width: "100%", height: "45%", marginTop: "-15%" }}
             />
             <div style={{ color: "black", fontSize: "1rem", marginTop: "20px" }}>
-              <h4>แบบประเมินค้นหาความเสี่ยงเป็นโรคหัวใจและหลอดเหลือด</h4>
+              <h4>แบบประเมินค้นหาความเสี่ยงเป็นโรคหัวใจและหลอดเลือด</h4>
             </div>
 
             <button onClick={() => setStage(1)} style={{ background: "#76c7c0" }}>

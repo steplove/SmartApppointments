@@ -42,6 +42,7 @@ import MedicalServiceCenter from "pages/MedicalServiceCenter/MedicalServiceCente
 import Contact from "pages/Contact";
 import MyMap from "pages/Map";
 import Quiz from "pages/LandingPages/Quiz";
+import FileUpload from "pages/LandingPages/FileUpload";
 import QuizHeartRisk from "pages/LandingPages/QuizHeartRisk";
 import OTP from "pages/OTP";
 import PDFupload from "pages/LandingPages/Pdfupload";
@@ -156,6 +157,7 @@ export default function App() {
           <Route path="/Contact" element={<Contact />} />
           <Route path="/MyMap" element={<MyMap />} />
           <Route path="/Quiz" element={<Quiz />} />
+          <Route path="/FileUpload" element={<FileUpload />} />
           <Route path="/QuizHeartRisk" element={<QuizHeartRisk />} />
           <Route path="/OTP/:mobileNo/:surveyid" element={<OTP />} />
           {/* <-----> */}

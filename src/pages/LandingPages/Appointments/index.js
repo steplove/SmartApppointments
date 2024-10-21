@@ -71,10 +71,11 @@ const StyledToggleButton = styled(ToggleButton)({
 });
 function Appointments() {
   const { t } = useTranslation();
-  const [, HN, FirstName, LastName] = useTokenCheck();
+  const [, HN, FirstName, LastName, , , , UID] = useTokenCheck();
   const nameCustomer = `${FirstName} ${LastName}`;
   const HNCustomer = `${HN} `;
-  //stateเก็บข้อมูลจากฐานข้อมูลเอามาแสดง
+  const UIDCustomer = `${UID}`;
+
   const [clinics, setClinics] = useState([]);
   const [doctor, setDoctor] = useState([]);
   const [isChecked, setChecked] = useState(false);
@@ -137,6 +138,7 @@ function Appointments() {
           Appointment_Date: formData.Date,
           Appointment_Time: formData.timeSlot,
           APM_Des: formData.symptoms,
+          Customer_UID: UIDCustomer,
         }),
       });
 

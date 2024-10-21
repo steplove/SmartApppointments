@@ -105,7 +105,7 @@ export default function MenuListCheckup() {
             </Toolbar>
           </AppBar>
           <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose} component={Link} to="/">
+            <MenuItem onClick={handleClose} component={Link} to="/dashboardCheckup">
               {t("home")}
             </MenuItem>
             <MenuItem onClick={handleClose} component={Link} to="/dashboard">
